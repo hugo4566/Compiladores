@@ -22,3 +22,27 @@ Tokens
 
 Ignored Tokens
 	blank;
+
+Productions
+
+programa = "programa" ID "inicio" {declaracao} {comando} "fim"".";
+
+declaracao = tipo ":" {var ","} var";"
+				| "const" ID valor ";" ;
+
+tipo = "real" | "inteiro" | "caractere";
+
+
+# Desconsiderar é só para base!
+expr =
+	{factor} factor |
+	{plus} expr plus factor |
+	{minus} expr minus factor;
+factor =
+	{term} term |
+	{mult} factor mult term |
+	{div} factor div term |
+	{mod} factor mod term;
+term =
+	{number} number |
+	{expr} l_par expr r_par;

@@ -1,5 +1,12 @@
+Helpers
+	letter		 = [['a'..'z']+['A'..'Z']];
+	digit 		 = ['0'..'9'];
+
 Tokens
-	number 		 = ['0' .. '9']+;
+	ID 			 = ('_' | letter)('_'| letter | digit )*;
+	STRING 		 = letter+;
+	N_INT		 = digit+;
+	N_REAL		 = '-' ? digit+ '.' digit+;
 	plus 		 = '+';
 	minus 		 = '-';
 	mult         = '*';
@@ -24,25 +31,13 @@ Ignored Tokens
 	blank;
 
 Productions
+	programa = 'programa' ID 'inicio' {declaracao} {comando} 'fim''.';
 
-programa = "programa" ID "inicio" {declaracao} {comando} "fim"".";
+	declaracao = tipo ':' {var ','} var';'
+					| 'const' ID valor ';' ;
 
-declaracao = tipo ":" {var ","} var";"
-				| "const" ID valor ";" ;
+	tipo = 'real' | 'inteiro' | 'caractere';
 
-tipo = "real" | "inteiro" | "caractere";
+	var = ID | ID'['N_INT']';
 
-
-# Desconsiderar é só para base!
-expr =
-	{factor} factor |
-	{plus} expr plus factor |
-	{minus} expr minus factor;
-factor =
-	{term} term |
-	{mult} factor mult term |
-	{div} factor div term |
-	{mod} factor mod term;
-term =
-	{number} number |
-	{expr} l_par expr r_par;
+	valor = STRING | N_INT | N_REAL;

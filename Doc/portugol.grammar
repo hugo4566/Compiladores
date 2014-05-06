@@ -3,41 +3,68 @@ Helpers
 	digit 		 = ['0'..'9'];
 
 Tokens
-	ID 			 = ('_' | letter)('_'| letter | digit )*;
-	STRING 		 = letter+;
-	N_INT		 = digit+;
-	N_REAL		 = '-' ? digit+ '.' digit+;
-	plus 		 = '+';
-	minus 		 = '-';
-	mult         = '*';
-	div          = '/';
-	mod          = '%';
+	id 			 = ('_' | letter)('_'| letter | digit )*;
+	string 		 = letter+;
+	n_int		 = digit+;
+	n_real		 = '-' ? digit+ '.' digit+;
 	l_par        = '(';
 	r_par        = ')';
+	l_col		 = '[';
+	r_col		 = ']';
+	colon		 = ':';
+	semi_c		 = ';';
+	comma		 = ',';
+	dot			 = '.';
 	blank        = (' ' | 13 | 10)+;
 	is	  		 = '<-';
+
+	// operadores
+	not	  		 = 'nao';
+	and	  		 = 'e';
+	or	  		 = 'ou';
+	xor  		 = 'xor';
 	equal 		 = '=';
 	not_equal 	 = '<>';
 	menor_equal  = '<=';
 	maior_equal  = '>=';
 	menorq 		 = '<';
 	maiorq 		 = '>';
-	not	  		 = 'nao';
-	and	  		 = 'e';
-	or	  		 = 'ou';
-	xorl  		 = 'xor';
+	plus 		 = '+';
+	minus 		 = '-';
+	mult         = '*';
+	div          = '/';
+	mod          = '%';
+
+	// palavras reservadas
+
+	program 	= 'programa';
+	begin 		= 'inicio';
+	end 		= 'fim';
+	while		= 'enquanto';
+	if			= 'se';
+	else		= 'senao';
+	do			= 'faca';
+	real 		= 'real';
+	inteiro 	= 'inteiro';
+	char		= 'caractere';
+	const		= 'const';
+
 
 Ignored Tokens
 	blank;
 
-Productions
-	programa = 'programa' ID 'inicio' {declaracao} {comando} 'fim''.';
+//Productions
+	
+//	var = id | id l_col n_int r_col;
 
-	declaracao = tipo ':' {var ','} var';'
-					| 'const' ID valor ';' ;
+//	comando = var is valor semi_c ;
+	
+//	valor = string | n_int | n_real;
 
-	tipo = 'real' | 'inteiro' | 'caractere';
+//	tipo = real | inteiro | char;
 
-	var = ID | ID'['N_INT']';
+//	declaracao = tipo colon {var comma} var semi_c
+//					| const id valor semi_c ;
 
-	valor = STRING | N_INT | N_REAL;
+//	programa = program id begin {declaracao} {comando} end dot;
+

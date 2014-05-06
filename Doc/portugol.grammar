@@ -53,18 +53,39 @@ Tokens
 Ignored Tokens
 	blank;
 
-//Productions
-	
-//	var = id | id l_col n_int r_col;
+Productions
+	var = id | id l_col n_int r_col;
 
-//	comando = var is valor semi_c ;
-	
-//	valor = string | n_int | n_real;
+	comando = var is exp semi_c ;
 
-//	tipo = real | inteiro | char;
+	valor = string | n_int | n_real;
 
-//	declaracao = tipo colon {var comma} var semi_c
-//					| const id valor semi_c ;
+	tipo = real | inteiro | char;
 
-//	programa = program id begin {declaracao} {comando} end dot;
+	declaracao = tipo colon {var comma} var semi_c
+				| const id valor semi_c ;
 
+	programa = program id begin {declaracao} {comando} end dot;
+
+
+exp = valor
+	| var
+	| l_par exp r_par
+	| minus exp
+	| exp plus exp
+	| exp minus exp
+	| exp mult exp
+	| exp div exp
+	| exp-logica
+
+exp-logica =
+	| exp equal exp
+	| exp notequal exp
+	| exp menor_equal exp
+	| exp maior_equal exp
+	| exp menorq exp
+	| exp maiorq exp
+	| not exp-logica
+	| exp-logica and exp-logica
+	| exp-logica or exp-logica
+	| exp-logica xorl exp-logica

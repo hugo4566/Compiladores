@@ -11,6 +11,13 @@ public interface Analysis extends Switch
     Object getOut(Node node);
     void setOut(Node node, Object o);
 
+    void caseStart(Start node);
+    void caseAIdVar(AIdVar node);
+    void caseAMatrizVar(AMatrizVar node);
+    void caseAStringValor(AStringValor node);
+    void caseAInteiroValor(AInteiroValor node);
+    void caseARealValor(ARealValor node);
+
     void caseTId(TId node);
     void caseTString(TString node);
     void caseTNInt(TNInt node);
@@ -28,7 +35,7 @@ public interface Analysis extends Switch
     void caseTNot(TNot node);
     void caseTAnd(TAnd node);
     void caseTOr(TOr node);
-    void caseTXor(TXor node);
+    void caseTXorl(TXorl node);
     void caseTEqual(TEqual node);
     void caseTNotEqual(TNotEqual node);
     void caseTMenorEqual(TMenorEqual node);
@@ -44,13 +51,27 @@ public interface Analysis extends Switch
     void caseTBegin(TBegin node);
     void caseTEnd(TEnd node);
     void caseTWhile(TWhile node);
+    void caseTEndW(TEndW node);
+    void caseTFor(TFor node);
+    void caseTUntil(TUntil node);
+    void caseTFrom(TFrom node);
+    void caseTEndF(TEndF node);
     void caseTIf(TIf node);
     void caseTElse(TElse node);
+    void caseTEndIf(TEndIf node);
     void caseTDo(TDo node);
     void caseTReal(TReal node);
     void caseTInteiro(TInteiro node);
     void caseTChar(TChar node);
     void caseTConst(TConst node);
+    void caseTR(TR node);
+    void caseTW(TW node);
+    void caseTThen(TThen node);
+    void caseTCase(TCase node);
+    void caseTRepeat(TRepeat node);
+    void caseTPass(TPass node);
+    void caseTEvaluate(TEvaluate node);
+    void caseTEndE(TEndE node);
     void caseEOF(EOF node);
     void caseInvalidToken(InvalidToken node);
 }

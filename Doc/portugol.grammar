@@ -2,6 +2,7 @@ Helpers
 	letter		 = [['a'..'z']+['A'..'Z']];
 	digit 		 = ['0'..'9'];
 
+
 Tokens
 	id 			 = ('_' | letter)('_'| letter | digit )*;
 	string 		 = letter+;
@@ -22,7 +23,7 @@ Tokens
 	not	  		 = 'nao';
 	and	  		 = 'e';
 	or	  		 = 'ou';
-	xor  		 = 'xor';
+	xorl  		 = 'xor';
 	equal 		 = '=';
 	not_equal 	 = '<>';
 	menor_equal  = '<=';
@@ -41,24 +42,71 @@ Tokens
 	begin 		= 'inicio';
 	end 		= 'fim';
 	while		= 'enquanto';
+	end_w		= 'fim enquanto';
+	for			= 'para';
+	until		= 'ate';
+	from		= 'de';
+	end_f 		= 'fim para';
 	if			= 'se';
 	else		= 'senao';
+	end_if		= 'fim se';
 	do			= 'faca';
 	real 		= 'real';
 	inteiro 	= 'inteiro';
 	char		= 'caractere';
 	const		= 'const';
+	r 			= 'leia';
+	w 			= 'escreva';
+	then 		= 'entao';
+	case 		= 'caso';
+	repeat		= 'repita';
+	pass		= 'passo';
+	evaluate 	= 'avalie';
+	end_e		= 'fim avalie';
 
 
 Ignored Tokens
 	blank;
 
 Productions
-	var = id | id l_col n_int r_col;
+	var = {id} id 
+		| {matriz} id l_col n_int r_col;
 
-	comando = var is exp semi_c ;
+	valor = {string} string | {inteiro} n_int | {real} n_real;
+	
+	exp = {valor} 	valor
+	| {variavel} 	var
+	| {lexpr} 		l_par exp r_par
+	| {negativo}	minus exp
+	| {mais}		exp plus exp
+	| {menos}		exp minus exp
+	| {vezes}		exp mult exp
+	| {divisao}		exp div exp
+	| {explog}		exp_logica;
 
-	valor = string | n_int | n_real;
+	exp_logica ={igual} exp equal exp
+	|{diferente} 	exp not_equal exp
+	|{menorigual} 	exp menor_equal exp
+	|{maiorigual} 	exp maior_equal exp
+	|{menorq} 		exp menorq exp
+	|{maiorq}		exp maiorq exp
+	|{nao} 			not exp_logica
+	|{e} 			exp_logica and exp_logica
+	|{ou} 			exp_logica or exp_logica
+	|{xou} 			exp_logica xorl exp_logica;
+
+/*
+
+	comando = var is exp semi_c 
+	| r l_par {var comma} var r_par semi_c 
+	| w l_par {exp comma} exp r_par semi_c
+	| if l_par exp_logica r_par then {comando semi_c} comando semi_c [ else {comando semi_c} comando semi_c ] end_if semi_c
+	| evaluate l_par exp r_par { case valor colon {comando semi_c} comando semi_c} [else colon {comando semi_c} comando semi_c] end_e semi_c
+	| while l_par exp_logica r_par do {comando semi_c} comando semi_c end_w semi_c
+	| repeat { comando semi_c } comando semi_c until l_par exp_logica r_par semi_c
+	| for var from n_int until n_int do { comando semi_c} comando semi_c end_f semi_c
+	| for var from n_int pass n_int until n_int do {comando semi_c} comando semi_c end_f semi_c;
+
 
 	tipo = real | inteiro | char;
 
@@ -66,26 +114,4 @@ Productions
 				| const id valor semi_c ;
 
 	programa = program id begin {declaracao} {comando} end dot;
-
-
-exp = valor
-	| var
-	| l_par exp r_par
-	| minus exp
-	| exp plus exp
-	| exp minus exp
-	| exp mult exp
-	| exp div exp
-	| exp-logica
-
-exp-logica =
-	| exp equal exp
-	| exp notequal exp
-	| exp menor_equal exp
-	| exp maior_equal exp
-	| exp menorq exp
-	| exp maiorq exp
-	| not exp-logica
-	| exp-logica and exp-logica
-	| exp-logica or exp-logica
-	| exp-logica xorl exp-logica
+*/

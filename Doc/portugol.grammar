@@ -72,12 +72,12 @@ Ignored Tokens
 	blank;
 
 Productions
-	var = {id} id 
+	var = {id} id
 		| {matriz} id l_col n_int r_col;
 
 	valor = {string} string | {inteiro} n_int | {real} n_real;
-	
-	exp = 
+
+	exp =
 	  {val}		 	valor
 	| {variavel} 	var
 	| {lexpr} 		l_par exp r_par
@@ -101,22 +101,27 @@ Productions
 	|{xou} 			[pre]:exp_logica xorl [pos]:exp_logica;
 
 
+	variavel_comma 		= {varcom} var comma;
+	expr_comma 	   		= {expcom} exp comma;
+	comando_semi_c 		= {comandosemi} comando semi_c;
+	opcional_else  		= {elseopc} else comando_semi_c* comando semi_c;
+	case_estrela   		= {casestar} case valor colon comando_semi_c* comando semi_c;
+	opcional_else_colon = {elsecolonopc} else colon comando_semi_c* comando semi_c;
 
-	comando = {atrib} var is exp semi_c;
-/*	| {ler}			r l_par {[bloco]:var comma} var r_par semi_c 
-	| {escrever}	w l_par {exp comma} exp r_par semi_c
-	| {se}			if l_par exp_logica r_par then {comando semi_c} comando semi_c [ else {comando semi_c} comando semi_c ] end_if semi_c
-	| {avaliar}		evaluate l_par exp r_par { case valor colon {comando semi_c} comando semi_c} [else colon {comando semi_c} comando semi_c] end_e semi_c
-	| {enquanto}	while l_par exp_logica r_par do {comando semi_c} comando semi_c end_w semi_c
-	| {repetir}		repeat { comando semi_c } comando semi_c until l_par exp_logica r_par semi_c
-	| {paraumemum}	for var from n_int until n_int do { comando semi_c} comando semi_c end_f semi_c
-	| {parax}		for var from n_int pass n_int until n_int do {comando semi_c} comando semi_c end_f semi_c;
-
+	comando =
+	  {atrib} 		var is exp semi_c
+	| {ler}			r l_par variavel_comma* var r_par semi_c
+	| {escrever}	w l_par expr_comma* exp r_par semi_c
+	| {se}			if l_par exp_logica r_par then comando_semi_c* comando semi_c opcional_else? end_if semi_c
+	| {avaliar}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e semi_c
+	| {enquanto}	while l_par exp_logica r_par do comando_semi_c* comando semi_c end_w semi_c
+	| {repetir}		repeat comando_semi_c* comando semi_c until l_par exp_logica r_par semi_c
+	| {paraumemum}	for var from n_int until n_int do comando_semi_c* comando semi_c end_f semi_c
+	| {parax}		for var from n_int pass n_int until n_int do comando_semi_c* comando semi_c end_f semi_c;
 
 	tipo = real | inteiro | character;
-	declaracao = tipo colon {var comma} var semi_c
+
+	declaracao =  tipo colon variavel_comma* var semi_c
 				| constante d valor semi_c ;
 
-	programa = program id begin {declaracao} {comando} end dot;
-
-	*/
+	programa = program id begin declaracao* comando* end dot;

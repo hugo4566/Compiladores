@@ -36,7 +36,27 @@ public interface Analysis extends Switch
     void caseAEExpLogica(AEExpLogica node);
     void caseAOuExpLogica(AOuExpLogica node);
     void caseAXouExpLogica(AXouExpLogica node);
+    void caseAVarcomVariavelComma(AVarcomVariavelComma node);
+    void caseAExpcomExprComma(AExpcomExprComma node);
+    void caseAComandosemiComandoSemiC(AComandosemiComandoSemiC node);
+    void caseAElseopcOpcionalElse(AElseopcOpcionalElse node);
+    void caseACasestarCaseEstrela(ACasestarCaseEstrela node);
+    void caseAElsecolonopcOpcionalElseColon(AElsecolonopcOpcionalElseColon node);
     void caseAAtribComando(AAtribComando node);
+    void caseALerComando(ALerComando node);
+    void caseAEscreverComando(AEscreverComando node);
+    void caseASeComando(ASeComando node);
+    void caseAAvaliarComando(AAvaliarComando node);
+    void caseAEnquantoComando(AEnquantoComando node);
+    void caseARepetirComando(ARepetirComando node);
+    void caseAParaumemumComando(AParaumemumComando node);
+    void caseAParaxComando(AParaxComando node);
+    void caseARealTipo(ARealTipo node);
+    void caseAInteiroTipo(AInteiroTipo node);
+    void caseACharTipo(ACharTipo node);
+    void caseAVariavelDeclaracao(AVariavelDeclaracao node);
+    void caseAConstanteDeclaracao(AConstanteDeclaracao node);
+    void caseAPrograma(APrograma node);
 
     void caseTId(TId node);
     void caseTString(TString node);

@@ -116,12 +116,12 @@ Productions
 	| {avaliar}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e [pos]:semi_c
 	| {enquanto}	while l_par exp_logica r_par do comando_semi_c* comando [pre]:semi_c end_w [pos]:semi_c
 	| {repetir}		repeat comando_semi_c* comando [pre]:semi_c until l_par exp_logica r_par [pos]:semi_c
-	| {paraumemum}	for var from n_int until n_int do comando_semi_c* comando [pre]:semi_c end_f [pos]:semi_c
-	| {parax}		for var from n_int pass n_int until n_int do comando_semi_c* comando [pre]:semi_c end_f [pos]:semi_c;
+	| {paraumemum}	for var from [inicio]:n_int until [fim]:n_int do comando_semi_c* comando [pre]:semi_c end_f [pos]:semi_c
+	| {parax}		for var from [inicio]:n_int pass [quantidade]:n_int until [fim]:n_int do comando_semi_c* comando [pre]:semi_c end_f [pos]:semi_c;
 
-	tipo = real | inteiro | character;
+	tipo = {real} real |{inteiro} inteiro |{char} character;
 
-	declaracao =  tipo colon variavel_comma* var semi_c
-				| constante d valor semi_c ;
+	declaracao = {variavel} tipo colon variavel_comma* var semi_c
+				| {constante} constante id valor semi_c ;
 
 	programa = program id begin declaracao* comando* end dot;

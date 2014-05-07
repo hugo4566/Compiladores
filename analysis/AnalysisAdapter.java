@@ -219,7 +219,127 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAVarcomVariavelComma(AVarcomVariavelComma node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpcomExprComma(AExpcomExprComma node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandosemiComandoSemiC(AComandosemiComandoSemiC node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAElseopcOpcionalElse(AElseopcOpcionalElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACasestarCaseEstrela(ACasestarCaseEstrela node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAElsecolonopcOpcionalElseColon(AElsecolonopcOpcionalElseColon node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAAtribComando(AAtribComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALerComando(ALerComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEscreverComando(AEscreverComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASeComando(ASeComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAvaliarComando(AAvaliarComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEnquantoComando(AEnquantoComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseARepetirComando(ARepetirComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParaumemumComando(AParaumemumComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParaxComando(AParaxComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseARealTipo(ARealTipo node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAInteiroTipo(AInteiroTipo node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACharTipo(ACharTipo node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVariavelDeclaracao(AVariavelDeclaracao node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAConstanteDeclaracao(AConstanteDeclaracao node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAPrograma(APrograma node)
     {
         defaultCase(node);
     }

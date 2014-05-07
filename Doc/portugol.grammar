@@ -112,12 +112,12 @@ Productions
 	  {atrib} 		var is exp semi_c
 	| {ler}			r l_par variavel_comma* var r_par semi_c
 	| {escrever}	w l_par expr_comma* exp r_par semi_c
-	| {se}			if l_par exp_logica r_par then comando_semi_c* comando semi_c opcional_else? end_if semi_c
-	| {avaliar}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e semi_c
-	| {enquanto}	while l_par exp_logica r_par do comando_semi_c* comando semi_c end_w semi_c
-	| {repetir}		repeat comando_semi_c* comando semi_c until l_par exp_logica r_par semi_c
-	| {paraumemum}	for var from n_int until n_int do comando_semi_c* comando semi_c end_f semi_c
-	| {parax}		for var from n_int pass n_int until n_int do comando_semi_c* comando semi_c end_f semi_c;
+	| {se}			if l_par exp_logica r_par then comando_semi_c* comando [pre]:semi_c opcional_else? end_if [pos]:semi_c
+	| {avaliar}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e [pos]:semi_c
+	| {enquanto}	while l_par exp_logica r_par do comando_semi_c* comando [pre]:semi_c end_w [pos]:semi_c
+	| {repetir}		repeat comando_semi_c* comando [pre]:semi_c until l_par exp_logica r_par [pos]:semi_c
+	| {paraumemum}	for var from n_int until n_int do comando_semi_c* comando [pre]:semi_c end_f [pos]:semi_c
+	| {parax}		for var from n_int pass n_int until n_int do comando_semi_c* comando [pre]:semi_c end_f [pos]:semi_c;
 
 	tipo = real | inteiro | character;
 

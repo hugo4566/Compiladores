@@ -17,6 +17,26 @@ public interface Analysis extends Switch
     void caseAStringValor(AStringValor node);
     void caseAInteiroValor(AInteiroValor node);
     void caseARealValor(ARealValor node);
+    void caseAValExp(AValExp node);
+    void caseAVariavelExp(AVariavelExp node);
+    void caseALexprExp(ALexprExp node);
+    void caseANegativoExp(ANegativoExp node);
+    void caseAMaisExp(AMaisExp node);
+    void caseAMenosExp(AMenosExp node);
+    void caseAVezesExp(AVezesExp node);
+    void caseADivisaoExp(ADivisaoExp node);
+    void caseAExplogExp(AExplogExp node);
+    void caseAIgualExpLogica(AIgualExpLogica node);
+    void caseADiferenteExpLogica(ADiferenteExpLogica node);
+    void caseAMenorigualExpLogica(AMenorigualExpLogica node);
+    void caseAMaiorigualExpLogica(AMaiorigualExpLogica node);
+    void caseAMenorqExpLogica(AMenorqExpLogica node);
+    void caseAMaiorqExpLogica(AMaiorqExpLogica node);
+    void caseANaoExpLogica(ANaoExpLogica node);
+    void caseAEExpLogica(AEExpLogica node);
+    void caseAOuExpLogica(AOuExpLogica node);
+    void caseAXouExpLogica(AXouExpLogica node);
+    void caseAAtribComando(AAtribComando node);
 
     void caseTId(TId node);
     void caseTString(TString node);
@@ -62,8 +82,8 @@ public interface Analysis extends Switch
     void caseTDo(TDo node);
     void caseTReal(TReal node);
     void caseTInteiro(TInteiro node);
-    void caseTChar(TChar node);
-    void caseTConst(TConst node);
+    void caseTCharacter(TCharacter node);
+    void caseTConstante(TConstante node);
     void caseTR(TR node);
     void caseTW(TW node);
     void caseTThen(TThen node);

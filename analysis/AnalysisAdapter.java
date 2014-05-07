@@ -105,6 +105,126 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAValExp(AValExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVariavelExp(AVariavelExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALexprExp(ALexprExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANegativoExp(ANegativoExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMaisExp(AMaisExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMenosExp(AMenosExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVezesExp(AVezesExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADivisaoExp(ADivisaoExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExplogExp(AExplogExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIgualExpLogica(AIgualExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADiferenteExpLogica(ADiferenteExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMenorigualExpLogica(AMenorigualExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMaiorigualExpLogica(AMaiorigualExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMenorqExpLogica(AMenorqExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMaiorqExpLogica(AMaiorqExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANaoExpLogica(ANaoExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEExpLogica(AEExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOuExpLogica(AOuExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAXouExpLogica(AXouExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAtribComando(AAtribComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTId(TId node)
     {
         defaultCase(node);
@@ -369,13 +489,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTChar(TChar node)
+    public void caseTCharacter(TCharacter node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTConst(TConst node)
+    public void caseTConstante(TConstante node)
     {
         defaultCase(node);
     }

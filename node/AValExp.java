@@ -5,46 +5,46 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AExpr extends PExpr
+public final class AValExp extends PExp
 {
-    private TPlus _plus_;
+    private PValor _valor_;
 
-    public AExpr()
+    public AValExp()
     {
         // Constructor
     }
 
-    public AExpr(
-        @SuppressWarnings("hiding") TPlus _plus_)
+    public AValExp(
+        @SuppressWarnings("hiding") PValor _valor_)
     {
         // Constructor
-        setPlus(_plus_);
+        setValor(_valor_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AExpr(
-            cloneNode(this._plus_));
+        return new AValExp(
+            cloneNode(this._valor_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAExpr(this);
+        ((Analysis) sw).caseAValExp(this);
     }
 
-    public TPlus getPlus()
+    public PValor getValor()
     {
-        return this._plus_;
+        return this._valor_;
     }
 
-    public void setPlus(TPlus node)
+    public void setValor(PValor node)
     {
-        if(this._plus_ != null)
+        if(this._valor_ != null)
         {
-            this._plus_.parent(null);
+            this._valor_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AExpr extends PExpr
             node.parent(this);
         }
 
-        this._plus_ = node;
+        this._valor_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._plus_);
+            + toString(this._valor_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._plus_ == child)
+        if(this._valor_ == child)
         {
-            this._plus_ = null;
+            this._valor_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AExpr extends PExpr
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._plus_ == oldChild)
+        if(this._valor_ == oldChild)
         {
-            setPlus((TPlus) newChild);
+            setValor((PValor) newChild);
             return;
         }
 

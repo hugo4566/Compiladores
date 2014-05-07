@@ -5,14 +5,14 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class TChar extends Token
+public final class TCharacter extends Token
 {
-    public TChar()
+    public TCharacter()
     {
         super.setText("caractere");
     }
 
-    public TChar(int line, int pos)
+    public TCharacter(int line, int pos)
     {
         super.setText("caractere");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TChar extends Token
     @Override
     public Object clone()
     {
-      return new TChar(getLine(), getPos());
+      return new TCharacter(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTChar(this);
+        ((Analysis) sw).caseTCharacter(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TChar text.");
+        throw new RuntimeException("Cannot change TCharacter text.");
     }
 }

@@ -5,14 +5,14 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class TConst extends Token
+public final class TConstante extends Token
 {
-    public TConst()
+    public TConstante()
     {
         super.setText("const");
     }
 
-    public TConst(int line, int pos)
+    public TConstante(int line, int pos)
     {
         super.setText("const");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TConst extends Token
     @Override
     public Object clone()
     {
-      return new TConst(getLine(), getPos());
+      return new TConstante(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTConst(this);
+        ((Analysis) sw).caseTConstante(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TConst text.");
+        throw new RuntimeException("Cannot change TConstante text.");
     }
 }

@@ -268,13 +268,13 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTChar(@SuppressWarnings("unused") TChar node)
+    public void caseTCharacter(@SuppressWarnings("unused") TCharacter node)
     {
         this.index = 43;
     }
 
     @Override
-    public void caseTConst(@SuppressWarnings("unused") TConst node)
+    public void caseTConstante(@SuppressWarnings("unused") TConstante node)
     {
         this.index = 44;
     }

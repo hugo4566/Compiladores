@@ -15,7 +15,7 @@ public final class AAvaliarComando extends PComando
     private final LinkedList<PCaseEstrela> _caseEstrela_ = new LinkedList<PCaseEstrela>();
     private POpcionalElseColon _opcionalElseColon_;
     private TEndE _endE_;
-    private TSemiC _pos_;
+    private TSemiC _semiC_;
 
     public AAvaliarComando()
     {
@@ -30,7 +30,7 @@ public final class AAvaliarComando extends PComando
         @SuppressWarnings("hiding") List<?> _caseEstrela_,
         @SuppressWarnings("hiding") POpcionalElseColon _opcionalElseColon_,
         @SuppressWarnings("hiding") TEndE _endE_,
-        @SuppressWarnings("hiding") TSemiC _pos_)
+        @SuppressWarnings("hiding") TSemiC _semiC_)
     {
         // Constructor
         setEvaluate(_evaluate_);
@@ -47,7 +47,7 @@ public final class AAvaliarComando extends PComando
 
         setEndE(_endE_);
 
-        setPos(_pos_);
+        setSemiC(_semiC_);
 
     }
 
@@ -62,7 +62,7 @@ public final class AAvaliarComando extends PComando
             cloneList(this._caseEstrela_),
             cloneNode(this._opcionalElseColon_),
             cloneNode(this._endE_),
-            cloneNode(this._pos_));
+            cloneNode(this._semiC_));
     }
 
     @Override
@@ -247,16 +247,16 @@ public final class AAvaliarComando extends PComando
         this._endE_ = node;
     }
 
-    public TSemiC getPos()
+    public TSemiC getSemiC()
     {
-        return this._pos_;
+        return this._semiC_;
     }
 
-    public void setPos(TSemiC node)
+    public void setSemiC(TSemiC node)
     {
-        if(this._pos_ != null)
+        if(this._semiC_ != null)
         {
-            this._pos_.parent(null);
+            this._semiC_.parent(null);
         }
 
         if(node != null)
@@ -269,7 +269,7 @@ public final class AAvaliarComando extends PComando
             node.parent(this);
         }
 
-        this._pos_ = node;
+        this._semiC_ = node;
     }
 
     @Override
@@ -283,7 +283,7 @@ public final class AAvaliarComando extends PComando
             + toString(this._caseEstrela_)
             + toString(this._opcionalElseColon_)
             + toString(this._endE_)
-            + toString(this._pos_);
+            + toString(this._semiC_);
     }
 
     @Override
@@ -331,9 +331,9 @@ public final class AAvaliarComando extends PComando
             return;
         }
 
-        if(this._pos_ == child)
+        if(this._semiC_ == child)
         {
-            this._pos_ = null;
+            this._semiC_ = null;
             return;
         }
 
@@ -398,9 +398,9 @@ public final class AAvaliarComando extends PComando
             return;
         }
 
-        if(this._pos_ == oldChild)
+        if(this._semiC_ == oldChild)
         {
-            setPos((TSemiC) newChild);
+            setSemiC((TSemiC) newChild);
             return;
         }
 

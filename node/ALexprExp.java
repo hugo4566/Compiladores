@@ -5,18 +5,18 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class ALexprExp extends PExp
+public final class ALExpRExp extends PExp
 {
     private TLPar _lPar_;
     private PExp _exp_;
     private TRPar _rPar_;
 
-    public ALexprExp()
+    public ALExpRExp()
     {
         // Constructor
     }
 
-    public ALexprExp(
+    public ALExpRExp(
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TRPar _rPar_)
@@ -33,7 +33,7 @@ public final class ALexprExp extends PExp
     @Override
     public Object clone()
     {
-        return new ALexprExp(
+        return new ALExpRExp(
             cloneNode(this._lPar_),
             cloneNode(this._exp_),
             cloneNode(this._rPar_));
@@ -42,7 +42,7 @@ public final class ALexprExp extends PExp
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseALexprExp(this);
+        ((Analysis) sw).caseALExpRExp(this);
     }
 
     public TLPar getLPar()

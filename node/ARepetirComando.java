@@ -10,13 +10,11 @@ public final class ARepetirComando extends PComando
 {
     private TRepeat _repeat_;
     private final LinkedList<PComandoSemiC> _comandoSemiC_ = new LinkedList<PComandoSemiC>();
-    private PComando _comando_;
-    private TSemiC _pre_;
     private TUntil _until_;
     private TLPar _lPar_;
     private PExpLogica _expLogica_;
     private TRPar _rPar_;
-    private TSemiC _pos_;
+    private TSemiC _semiC_;
 
     public ARepetirComando()
     {
@@ -26,22 +24,16 @@ public final class ARepetirComando extends PComando
     public ARepetirComando(
         @SuppressWarnings("hiding") TRepeat _repeat_,
         @SuppressWarnings("hiding") List<?> _comandoSemiC_,
-        @SuppressWarnings("hiding") PComando _comando_,
-        @SuppressWarnings("hiding") TSemiC _pre_,
         @SuppressWarnings("hiding") TUntil _until_,
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") PExpLogica _expLogica_,
         @SuppressWarnings("hiding") TRPar _rPar_,
-        @SuppressWarnings("hiding") TSemiC _pos_)
+        @SuppressWarnings("hiding") TSemiC _semiC_)
     {
         // Constructor
         setRepeat(_repeat_);
 
         setComandoSemiC(_comandoSemiC_);
-
-        setComando(_comando_);
-
-        setPre(_pre_);
 
         setUntil(_until_);
 
@@ -51,7 +43,7 @@ public final class ARepetirComando extends PComando
 
         setRPar(_rPar_);
 
-        setPos(_pos_);
+        setSemiC(_semiC_);
 
     }
 
@@ -61,13 +53,11 @@ public final class ARepetirComando extends PComando
         return new ARepetirComando(
             cloneNode(this._repeat_),
             cloneList(this._comandoSemiC_),
-            cloneNode(this._comando_),
-            cloneNode(this._pre_),
             cloneNode(this._until_),
             cloneNode(this._lPar_),
             cloneNode(this._expLogica_),
             cloneNode(this._rPar_),
-            cloneNode(this._pos_));
+            cloneNode(this._semiC_));
     }
 
     @Override
@@ -125,56 +115,6 @@ public final class ARepetirComando extends PComando
             e.parent(this);
             this._comandoSemiC_.add(e);
         }
-    }
-
-    public PComando getComando()
-    {
-        return this._comando_;
-    }
-
-    public void setComando(PComando node)
-    {
-        if(this._comando_ != null)
-        {
-            this._comando_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._comando_ = node;
-    }
-
-    public TSemiC getPre()
-    {
-        return this._pre_;
-    }
-
-    public void setPre(TSemiC node)
-    {
-        if(this._pre_ != null)
-        {
-            this._pre_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._pre_ = node;
     }
 
     public TUntil getUntil()
@@ -277,16 +217,16 @@ public final class ARepetirComando extends PComando
         this._rPar_ = node;
     }
 
-    public TSemiC getPos()
+    public TSemiC getSemiC()
     {
-        return this._pos_;
+        return this._semiC_;
     }
 
-    public void setPos(TSemiC node)
+    public void setSemiC(TSemiC node)
     {
-        if(this._pos_ != null)
+        if(this._semiC_ != null)
         {
-            this._pos_.parent(null);
+            this._semiC_.parent(null);
         }
 
         if(node != null)
@@ -299,7 +239,7 @@ public final class ARepetirComando extends PComando
             node.parent(this);
         }
 
-        this._pos_ = node;
+        this._semiC_ = node;
     }
 
     @Override
@@ -308,13 +248,11 @@ public final class ARepetirComando extends PComando
         return ""
             + toString(this._repeat_)
             + toString(this._comandoSemiC_)
-            + toString(this._comando_)
-            + toString(this._pre_)
             + toString(this._until_)
             + toString(this._lPar_)
             + toString(this._expLogica_)
             + toString(this._rPar_)
-            + toString(this._pos_);
+            + toString(this._semiC_);
     }
 
     @Override
@@ -329,18 +267,6 @@ public final class ARepetirComando extends PComando
 
         if(this._comandoSemiC_.remove(child))
         {
-            return;
-        }
-
-        if(this._comando_ == child)
-        {
-            this._comando_ = null;
-            return;
-        }
-
-        if(this._pre_ == child)
-        {
-            this._pre_ = null;
             return;
         }
 
@@ -368,9 +294,9 @@ public final class ARepetirComando extends PComando
             return;
         }
 
-        if(this._pos_ == child)
+        if(this._semiC_ == child)
         {
-            this._pos_ = null;
+            this._semiC_ = null;
             return;
         }
 
@@ -405,18 +331,6 @@ public final class ARepetirComando extends PComando
             }
         }
 
-        if(this._comando_ == oldChild)
-        {
-            setComando((PComando) newChild);
-            return;
-        }
-
-        if(this._pre_ == oldChild)
-        {
-            setPre((TSemiC) newChild);
-            return;
-        }
-
         if(this._until_ == oldChild)
         {
             setUntil((TUntil) newChild);
@@ -441,9 +355,9 @@ public final class ARepetirComando extends PComando
             return;
         }
 
-        if(this._pos_ == oldChild)
+        if(this._semiC_ == oldChild)
         {
-            setPos((TSemiC) newChild);
+            setSemiC((TSemiC) newChild);
             return;
         }
 

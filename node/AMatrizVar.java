@@ -8,9 +8,9 @@ import analysis.*;
 public final class AMatrizVar extends PVar
 {
     private TId _id_;
-    private TLCol _lCol_;
+    private TLBra _lBra_;
     private TNInt _nInt_;
-    private TRCol _rCol_;
+    private TRBra _rBra_;
 
     public AMatrizVar()
     {
@@ -19,18 +19,18 @@ public final class AMatrizVar extends PVar
 
     public AMatrizVar(
         @SuppressWarnings("hiding") TId _id_,
-        @SuppressWarnings("hiding") TLCol _lCol_,
+        @SuppressWarnings("hiding") TLBra _lBra_,
         @SuppressWarnings("hiding") TNInt _nInt_,
-        @SuppressWarnings("hiding") TRCol _rCol_)
+        @SuppressWarnings("hiding") TRBra _rBra_)
     {
         // Constructor
         setId(_id_);
 
-        setLCol(_lCol_);
+        setLBra(_lBra_);
 
         setNInt(_nInt_);
 
-        setRCol(_rCol_);
+        setRBra(_rBra_);
 
     }
 
@@ -39,9 +39,9 @@ public final class AMatrizVar extends PVar
     {
         return new AMatrizVar(
             cloneNode(this._id_),
-            cloneNode(this._lCol_),
+            cloneNode(this._lBra_),
             cloneNode(this._nInt_),
-            cloneNode(this._rCol_));
+            cloneNode(this._rBra_));
     }
 
     @Override
@@ -75,16 +75,16 @@ public final class AMatrizVar extends PVar
         this._id_ = node;
     }
 
-    public TLCol getLCol()
+    public TLBra getLBra()
     {
-        return this._lCol_;
+        return this._lBra_;
     }
 
-    public void setLCol(TLCol node)
+    public void setLBra(TLBra node)
     {
-        if(this._lCol_ != null)
+        if(this._lBra_ != null)
         {
-            this._lCol_.parent(null);
+            this._lBra_.parent(null);
         }
 
         if(node != null)
@@ -97,7 +97,7 @@ public final class AMatrizVar extends PVar
             node.parent(this);
         }
 
-        this._lCol_ = node;
+        this._lBra_ = node;
     }
 
     public TNInt getNInt()
@@ -125,16 +125,16 @@ public final class AMatrizVar extends PVar
         this._nInt_ = node;
     }
 
-    public TRCol getRCol()
+    public TRBra getRBra()
     {
-        return this._rCol_;
+        return this._rBra_;
     }
 
-    public void setRCol(TRCol node)
+    public void setRBra(TRBra node)
     {
-        if(this._rCol_ != null)
+        if(this._rBra_ != null)
         {
-            this._rCol_.parent(null);
+            this._rBra_.parent(null);
         }
 
         if(node != null)
@@ -147,7 +147,7 @@ public final class AMatrizVar extends PVar
             node.parent(this);
         }
 
-        this._rCol_ = node;
+        this._rBra_ = node;
     }
 
     @Override
@@ -155,9 +155,9 @@ public final class AMatrizVar extends PVar
     {
         return ""
             + toString(this._id_)
-            + toString(this._lCol_)
+            + toString(this._lBra_)
             + toString(this._nInt_)
-            + toString(this._rCol_);
+            + toString(this._rBra_);
     }
 
     @Override
@@ -170,9 +170,9 @@ public final class AMatrizVar extends PVar
             return;
         }
 
-        if(this._lCol_ == child)
+        if(this._lBra_ == child)
         {
-            this._lCol_ = null;
+            this._lBra_ = null;
             return;
         }
 
@@ -182,9 +182,9 @@ public final class AMatrizVar extends PVar
             return;
         }
 
-        if(this._rCol_ == child)
+        if(this._rBra_ == child)
         {
-            this._rCol_ = null;
+            this._rBra_ = null;
             return;
         }
 
@@ -201,9 +201,9 @@ public final class AMatrizVar extends PVar
             return;
         }
 
-        if(this._lCol_ == oldChild)
+        if(this._lBra_ == oldChild)
         {
-            setLCol((TLCol) newChild);
+            setLBra((TLBra) newChild);
             return;
         }
 
@@ -213,9 +213,9 @@ public final class AMatrizVar extends PVar
             return;
         }
 
-        if(this._rCol_ == oldChild)
+        if(this._rBra_ == oldChild)
         {
-            setRCol((TRCol) newChild);
+            setRBra((TRBra) newChild);
             return;
         }
 

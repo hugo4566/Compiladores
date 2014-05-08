@@ -8,7 +8,7 @@ import analysis.*;
 public final class AXouExpLogica extends PExpLogica
 {
     private PExpLogica _pre_;
-    private TXorl _xorl_;
+    private TXor _xor_;
     private PExpLogica _pos_;
 
     public AXouExpLogica()
@@ -18,13 +18,13 @@ public final class AXouExpLogica extends PExpLogica
 
     public AXouExpLogica(
         @SuppressWarnings("hiding") PExpLogica _pre_,
-        @SuppressWarnings("hiding") TXorl _xorl_,
+        @SuppressWarnings("hiding") TXor _xor_,
         @SuppressWarnings("hiding") PExpLogica _pos_)
     {
         // Constructor
         setPre(_pre_);
 
-        setXorl(_xorl_);
+        setXor(_xor_);
 
         setPos(_pos_);
 
@@ -35,7 +35,7 @@ public final class AXouExpLogica extends PExpLogica
     {
         return new AXouExpLogica(
             cloneNode(this._pre_),
-            cloneNode(this._xorl_),
+            cloneNode(this._xor_),
             cloneNode(this._pos_));
     }
 
@@ -70,16 +70,16 @@ public final class AXouExpLogica extends PExpLogica
         this._pre_ = node;
     }
 
-    public TXorl getXorl()
+    public TXor getXor()
     {
-        return this._xorl_;
+        return this._xor_;
     }
 
-    public void setXorl(TXorl node)
+    public void setXor(TXor node)
     {
-        if(this._xorl_ != null)
+        if(this._xor_ != null)
         {
-            this._xorl_.parent(null);
+            this._xor_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class AXouExpLogica extends PExpLogica
             node.parent(this);
         }
 
-        this._xorl_ = node;
+        this._xor_ = node;
     }
 
     public PExpLogica getPos()
@@ -125,7 +125,7 @@ public final class AXouExpLogica extends PExpLogica
     {
         return ""
             + toString(this._pre_)
-            + toString(this._xorl_)
+            + toString(this._xor_)
             + toString(this._pos_);
     }
 
@@ -139,9 +139,9 @@ public final class AXouExpLogica extends PExpLogica
             return;
         }
 
-        if(this._xorl_ == child)
+        if(this._xor_ == child)
         {
-            this._xorl_ = null;
+            this._xor_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class AXouExpLogica extends PExpLogica
             return;
         }
 
-        if(this._xorl_ == oldChild)
+        if(this._xor_ == oldChild)
         {
-            setXorl((TXorl) newChild);
+            setXor((TXor) newChild);
             return;
         }
 

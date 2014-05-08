@@ -1,4 +1,5 @@
 Helpers
+	all			 = [0 .. 0xffff];
 	letter		 = [['a'..'z']+['A'..'Z']];
 	digit 		 = ['0'..'9'];
 
@@ -7,121 +8,139 @@ States
 	comment;
 
 Tokens
-	id 			 = ('_' | letter)('_'| letter | digit )*;
-	string 		 = letter+;
-	n_int		 = digit+;
-	n_real		 = '-' ? digit+ '.' digit+;
-	l_par        = '(';
-	r_par        = ')';
-	l_col		 = '[';
-	r_col		 = ']';
-	colon		 = ':';
-	semi_c		 = ';';
-	comma		 = ',';
-	dot			 = '.';
-	blank        = (' ' | 13 | 10)+;
-	is	  		 = '<-';
 
-	// operadores
-	not	  		 = 'nao';
-	and	  		 = 'e';
-	or	  		 = 'ou';
-	xorl  		 = 'xor';
-	equal 		 = '=';
-	not_equal 	 = '<>';
-	menor_equal  = '<=';
-	maior_equal  = '>=';
-	menorq 		 = '<';
-	maiorq 		 = '>';
-	plus 		 = '+';
-	minus 		 = '-';
-	mult         = '*';
-	div          = '/';
-	mod          = '%';
+	// Identificador
+	{normal}	id 			 = ('_' | letter)('_'| letter | digit )*;
 
-	// palavras reservadas
+	// Tipos de dados
+	{normal}	string 		 = letter+;
+	{normal}	n_int		 = digit+;
+	{normal}	n_real		 = '-' ? digit+ '.' digit+;
 
-	program 	= 'programa';
-	begin 		= 'inicio';
-	end 		= 'fim';
-	while		= 'enquanto';
-	end_w		= 'fim enquanto';
-	for			= 'para';
-	until		= 'ate';
-	from		= 'de';
-	end_f 		= 'fim para';
-	if			= 'se';
-	else		= 'senao';
-	end_if		= 'fim se';
-	do			= 'faca';
-	real 		= 'real';
-	inteiro 	= 'inteiro';
-	character	= 'caractere';
-	constante	= 'const';
-	r 			= 'leia';
-	w 			= 'escreva';
-	then 		= 'entao';
-	case 		= 'caso';
-	repeat		= 'repita';
-	pass		= 'passo';
-	evaluate 	= 'avalie';
-	end_e		= 'fim avalie';
+	// Símbolos
+	{normal}	l_par        = '(';
+	{normal}	r_par        = ')';
+	{normal}	l_bra		 = '[';
+	{normal}	r_bra		 = ']';
+	{normal}	colon		 = ':';
+	{normal}	semi_c		 = ';';
+	{normal}	comma		 = ',';
+	{normal}	dot			 = '.';
+	{normal}	blank        = (' ' | 13 | 10)+;
+	{normal}	is	  		 = '<-';
+
+	// Comentários
+	{normal->comment,comment}	block_comment 		= '/*';
+	{comment->normal}			end_block_comment 	= '*/';
+	{comment}					comment_body 		= [all - ['*' + '/']]*;
+
+	// Operadores
+	{normal}	not	  		 = 'nao';
+	{normal}	and	  		 = 'e';
+	{normal}	or	  		 = 'ou';
+	{normal}	xor  		 = 'xor';
+	{normal}	equal 		 = '=';
+	{normal}	not_equal 	 = '<>';
+	{normal}	less_eq 	 = '<=';
+	{normal}	greater_eq   = '>=';
+	{normal}	less 		 = '<';
+	{normal}	greater 	 = '>';
+	{normal}	plus 		 = '+';
+	{normal}	minus 		 = '-';
+	{normal}	mult         = '*';
+	{normal}	div          = '/';
+	{normal}	mod          = '%';
+
+	// Palavras reservadas
+	{normal}	program 	= 'programa';
+	{normal}	begin 		= 'inicio';
+	{normal}	end 		= 'fim';
+	{normal}	while		= 'enquanto';
+	{normal}	end_w		= 'fim enquanto';
+	{normal}	for			= 'para';
+	{normal}	until		= 'ate';
+	{normal}	from		= 'de';
+	{normal}	end_f 		= 'fim para';
+	{normal}	if			= 'se';
+	{normal}	else		= 'senao';
+	{normal}	end_if		= 'fim se';
+	{normal}	do			= 'faca';
+	{normal}	real 		= 'real';
+	{normal}	integer 	= 'inteiro';
+	{normal}	character	= 'caractere';
+	{normal}	constant	= 'const';
+	{normal}	read 		= 'leia';
+	{normal}	write 		= 'escreva';
+	{normal}	then 		= 'entao';
+	{normal}	case 		= 'caso';
+	{normal}	repeat		= 'repita';
+	{normal}	pass		= 'passo';
+	{normal}	evaluate 	= 'avalie';
+	{normal}	end_e		= 'fim avalie';
 
 
 Ignored Tokens
 	blank;
 
 Productions
-	var = {id} id
-		| {matriz} id l_col n_int r_col;
+	var = 
+		{id} 			id
+	| 	{matrix} 		id l_bra n_int r_bra;
 
-	valor = {string} string | {inteiro} n_int | {real} n_real;
+	valor = 
+		{string} 		string
+	|	{integer} 		n_int 
+	|	{real} 			n_real;
 
 	exp =
-	  {val}		 	valor
-	| {variavel} 	var
-	| {lexpr} 		l_par exp r_par
-	| {negativo}	minus exp
-	| {mais}		[pre]:exp plus [pos]:exp
-	| {menos}		[pre]:exp minus [pos]:exp
-	| {vezes}		[pre]:exp mult [pos]:exp
-	| {divisao}		[pre]:exp div [pos]:exp
-	| {explog}		exp_logica;
+	  	{value}		 	valor
+	| 	{variable} 		var
+	| 	{l_exp_r} 		l_par exp r_par
+	| 	{minus_exp}		minus exp
+	| 	{exp_p_exp}		[pre]:exp plus [pos]:exp
+	| 	{exp_m_exp}		[pre]:exp minus [pos]:exp
+	| 	{exp_x_exp}		[pre]:exp mult [pos]:exp
+	| 	{exp_div_exp}	[pre]:exp div [pos]:exp
+	| 	{explog}		exp_logica;
 
 	exp_logica =
-	 {igual} 		[pre]:exp equal [pos]:exp
-	|{diferente} 	[pre]:exp not_equal [pos]:exp
-	|{menorigual} 	[pre]:exp menor_equal [pos]:exp
-	|{maiorigual} 	[pre]:exp maior_equal [pos]:exp
-	|{menorq} 		[pre]:exp menorq [pos]:exp
-	|{maiorq}		[pre]:exp maiorq [pos]:exp
-	|{nao} 			not exp_logica
-	|{e} 			[pre]:exp_logica and [pos]:exp_logica
-	|{ou} 			[pre]:exp_logica or [pos]:exp_logica
-	|{xou} 			[pre]:exp_logica xorl [pos]:exp_logica;
+	 	{exp_eq_exp} 	[pre]:exp equal [pos]:exp
+	|	{exp_neq_exp} 	[pre]:exp not_equal [pos]:exp
+	|	{exp_leq_exp} 	[pre]:exp less_eq [pos]:exp
+	|	{exp_geq_exp} 	[pre]:exp greater_eq [pos]:exp
+	|	{exp_less_exp} 	[pre]:exp less [pos]:exp
+	|	{exp_great_exp}	[pre]:exp greater [pos]:exp
+	|	{not_exp} 		not exp_logica
+	|	{and_exp} 		[pre]:exp_logica and [pos]:exp_logica
+	|	{or_exp} 		[pre]:exp_logica or [pos]:exp_logica
+	|	{xor_exp} 		[pre]:exp_logica xor [pos]:exp_logica;
 
 
-	variavel_comma 		= {varcom} var comma;
-	expr_comma 	   		= {expcom} exp comma;
-	comando_semi_c 		= {comandosemi} comando semi_c;
-	opcional_else  		= {elseopc} else comando_semi_c* comando semi_c;
-	case_estrela   		= {casestar} case valor colon comando_semi_c* comando semi_c;
-	opcional_else_colon = {elsecolonopc} else colon comando_semi_c* comando semi_c;
+	variavel_comma 		= {var_com} var comma;
+	expr_comma 	   		= {exp_com} exp comma;
+	comando_semi_c 		= {comando_semic} comando semi_c;
+	opcional_else  		= {else_opc} else comando_semi_c+;
+	case_estrela   		= {case_star} case valor colon comando_semi_c+;
+	opcional_else_colon = {else_colon_opc} else colon comando_semi_c+;
 
 	comando =
-	  {atrib} 		var is exp semi_c
-	| {ler}			r l_par variavel_comma* var r_par semi_c
-	| {escrever}	w l_par expr_comma* exp r_par semi_c
-	| {se}			if l_par exp_logica r_par then comando_semi_c* comando [pre]:semi_c opcional_else? end_if [pos]:semi_c
-	| {avaliar}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e [pos]:semi_c
-	| {enquanto}	while l_par exp_logica r_par do comando_semi_c* comando [pre]:semi_c end_w [pos]:semi_c
-	| {repetir}		repeat comando_semi_c* comando [pre]:semi_c until l_par exp_logica r_par [pos]:semi_c
-	| {paraumemum}	for var from [inicio]:n_int until [fim]:n_int do comando_semi_c* comando [pre]:semi_c end_f [pos]:semi_c
-	| {parax}		for var from [inicio]:n_int pass [quantidade]:n_int until [fim]:n_int do comando_semi_c* comando [pre]:semi_c end_f [pos]:semi_c;
+	  	{atrib} 		var is exp semi_c
+	| 	{read}			read l_par variavel_comma* var r_par semi_c
+	| 	{write}			write l_par expr_comma* exp r_par semi_c
+	| 	{if}			if l_par exp_logica r_par then comando_semi_c+ opcional_else? end_if semi_c
+	| 	{evaluate}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e semi_c
+	| 	{while}			while l_par exp_logica r_par do comando_semi_c+ end_w semi_c
+	| 	{repeat}		repeat comando_semi_c+ until l_par exp_logica r_par semi_c
+	| 	{for_one}		for var from [start]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c
+	| 	{for_x}			for var from [start]:n_int pass [step]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c;
 
-	tipo = {real} real |{inteiro} inteiro |{char} character;
+	tipo = 
+		{real} 			real 
+	|	{integer} 		integer 
+	|	{char} 			character;
 
-	declaracao = {variavel} tipo colon variavel_comma* var semi_c
-				| {constante} constante id valor semi_c ;
+	declaracao = 
+		{variable} 		tipo colon variavel_comma* var semi_c
+	| 	{constant} 		constant id valor semi_c ;
 
 	programa = program id begin declaracao* comando* end dot;

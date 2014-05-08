@@ -8,7 +8,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class ALerComando extends PComando
 {
-    private TR _r_;
+    private TRead _read_;
     private TLPar _lPar_;
     private final LinkedList<PVariavelComma> _variavelComma_ = new LinkedList<PVariavelComma>();
     private PVar _var_;
@@ -21,7 +21,7 @@ public final class ALerComando extends PComando
     }
 
     public ALerComando(
-        @SuppressWarnings("hiding") TR _r_,
+        @SuppressWarnings("hiding") TRead _read_,
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") List<?> _variavelComma_,
         @SuppressWarnings("hiding") PVar _var_,
@@ -29,7 +29,7 @@ public final class ALerComando extends PComando
         @SuppressWarnings("hiding") TSemiC _semiC_)
     {
         // Constructor
-        setR(_r_);
+        setRead(_read_);
 
         setLPar(_lPar_);
 
@@ -47,7 +47,7 @@ public final class ALerComando extends PComando
     public Object clone()
     {
         return new ALerComando(
-            cloneNode(this._r_),
+            cloneNode(this._read_),
             cloneNode(this._lPar_),
             cloneList(this._variavelComma_),
             cloneNode(this._var_),
@@ -61,16 +61,16 @@ public final class ALerComando extends PComando
         ((Analysis) sw).caseALerComando(this);
     }
 
-    public TR getR()
+    public TRead getRead()
     {
-        return this._r_;
+        return this._read_;
     }
 
-    public void setR(TR node)
+    public void setRead(TRead node)
     {
-        if(this._r_ != null)
+        if(this._read_ != null)
         {
-            this._r_.parent(null);
+            this._read_.parent(null);
         }
 
         if(node != null)
@@ -83,7 +83,7 @@ public final class ALerComando extends PComando
             node.parent(this);
         }
 
-        this._r_ = node;
+        this._read_ = node;
     }
 
     public TLPar getLPar()
@@ -216,7 +216,7 @@ public final class ALerComando extends PComando
     public String toString()
     {
         return ""
-            + toString(this._r_)
+            + toString(this._read_)
             + toString(this._lPar_)
             + toString(this._variavelComma_)
             + toString(this._var_)
@@ -228,9 +228,9 @@ public final class ALerComando extends PComando
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._r_ == child)
+        if(this._read_ == child)
         {
-            this._r_ = null;
+            this._read_ = null;
             return;
         }
 
@@ -270,9 +270,9 @@ public final class ALerComando extends PComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._r_ == oldChild)
+        if(this._read_ == oldChild)
         {
-            setR((TR) newChild);
+            setRead((TRead) newChild);
             return;
         }
 

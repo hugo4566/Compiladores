@@ -6,27 +6,23 @@ import java.util.*;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class ACasestarCaseEstrela extends PCaseEstrela
+public final class ACaseStarCaseEstrela extends PCaseEstrela
 {
     private TCase _case_;
     private PValor _valor_;
     private TColon _colon_;
     private final LinkedList<PComandoSemiC> _comandoSemiC_ = new LinkedList<PComandoSemiC>();
-    private PComando _comando_;
-    private TSemiC _semiC_;
 
-    public ACasestarCaseEstrela()
+    public ACaseStarCaseEstrela()
     {
         // Constructor
     }
 
-    public ACasestarCaseEstrela(
+    public ACaseStarCaseEstrela(
         @SuppressWarnings("hiding") TCase _case_,
         @SuppressWarnings("hiding") PValor _valor_,
         @SuppressWarnings("hiding") TColon _colon_,
-        @SuppressWarnings("hiding") List<?> _comandoSemiC_,
-        @SuppressWarnings("hiding") PComando _comando_,
-        @SuppressWarnings("hiding") TSemiC _semiC_)
+        @SuppressWarnings("hiding") List<?> _comandoSemiC_)
     {
         // Constructor
         setCase(_case_);
@@ -37,28 +33,22 @@ public final class ACasestarCaseEstrela extends PCaseEstrela
 
         setComandoSemiC(_comandoSemiC_);
 
-        setComando(_comando_);
-
-        setSemiC(_semiC_);
-
     }
 
     @Override
     public Object clone()
     {
-        return new ACasestarCaseEstrela(
+        return new ACaseStarCaseEstrela(
             cloneNode(this._case_),
             cloneNode(this._valor_),
             cloneNode(this._colon_),
-            cloneList(this._comandoSemiC_),
-            cloneNode(this._comando_),
-            cloneNode(this._semiC_));
+            cloneList(this._comandoSemiC_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseACasestarCaseEstrela(this);
+        ((Analysis) sw).caseACaseStarCaseEstrela(this);
     }
 
     public TCase getCase()
@@ -162,56 +152,6 @@ public final class ACasestarCaseEstrela extends PCaseEstrela
         }
     }
 
-    public PComando getComando()
-    {
-        return this._comando_;
-    }
-
-    public void setComando(PComando node)
-    {
-        if(this._comando_ != null)
-        {
-            this._comando_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._comando_ = node;
-    }
-
-    public TSemiC getSemiC()
-    {
-        return this._semiC_;
-    }
-
-    public void setSemiC(TSemiC node)
-    {
-        if(this._semiC_ != null)
-        {
-            this._semiC_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._semiC_ = node;
-    }
-
     @Override
     public String toString()
     {
@@ -219,9 +159,7 @@ public final class ACasestarCaseEstrela extends PCaseEstrela
             + toString(this._case_)
             + toString(this._valor_)
             + toString(this._colon_)
-            + toString(this._comandoSemiC_)
-            + toString(this._comando_)
-            + toString(this._semiC_);
+            + toString(this._comandoSemiC_);
     }
 
     @Override
@@ -248,18 +186,6 @@ public final class ACasestarCaseEstrela extends PCaseEstrela
 
         if(this._comandoSemiC_.remove(child))
         {
-            return;
-        }
-
-        if(this._comando_ == child)
-        {
-            this._comando_ = null;
-            return;
-        }
-
-        if(this._semiC_ == child)
-        {
-            this._semiC_ = null;
             return;
         }
 
@@ -304,18 +230,6 @@ public final class ACasestarCaseEstrela extends PCaseEstrela
                 oldChild.parent(null);
                 return;
             }
-        }
-
-        if(this._comando_ == oldChild)
-        {
-            setComando((PComando) newChild);
-            return;
-        }
-
-        if(this._semiC_ == oldChild)
-        {
-            setSemiC((TSemiC) newChild);
-            return;
         }
 
         throw new RuntimeException("Not a child.");

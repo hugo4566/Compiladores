@@ -5,17 +5,17 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AExpcomExprComma extends PExprComma
+public final class AExpComExprComma extends PExprComma
 {
     private PExp _exp_;
     private TComma _comma_;
 
-    public AExpcomExprComma()
+    public AExpComExprComma()
     {
         // Constructor
     }
 
-    public AExpcomExprComma(
+    public AExpComExprComma(
         @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TComma _comma_)
     {
@@ -29,7 +29,7 @@ public final class AExpcomExprComma extends PExprComma
     @Override
     public Object clone()
     {
-        return new AExpcomExprComma(
+        return new AExpComExprComma(
             cloneNode(this._exp_),
             cloneNode(this._comma_));
     }
@@ -37,7 +37,7 @@ public final class AExpcomExprComma extends PExprComma
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAExpcomExprComma(this);
+        ((Analysis) sw).caseAExpComExprComma(this);
     }
 
     public PExp getExp()

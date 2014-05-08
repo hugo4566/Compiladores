@@ -8,7 +8,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class AEscreverComando extends PComando
 {
-    private TW _w_;
+    private TWrite _write_;
     private TLPar _lPar_;
     private final LinkedList<PExprComma> _exprComma_ = new LinkedList<PExprComma>();
     private PExp _exp_;
@@ -21,7 +21,7 @@ public final class AEscreverComando extends PComando
     }
 
     public AEscreverComando(
-        @SuppressWarnings("hiding") TW _w_,
+        @SuppressWarnings("hiding") TWrite _write_,
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") List<?> _exprComma_,
         @SuppressWarnings("hiding") PExp _exp_,
@@ -29,7 +29,7 @@ public final class AEscreverComando extends PComando
         @SuppressWarnings("hiding") TSemiC _semiC_)
     {
         // Constructor
-        setW(_w_);
+        setWrite(_write_);
 
         setLPar(_lPar_);
 
@@ -47,7 +47,7 @@ public final class AEscreverComando extends PComando
     public Object clone()
     {
         return new AEscreverComando(
-            cloneNode(this._w_),
+            cloneNode(this._write_),
             cloneNode(this._lPar_),
             cloneList(this._exprComma_),
             cloneNode(this._exp_),
@@ -61,16 +61,16 @@ public final class AEscreverComando extends PComando
         ((Analysis) sw).caseAEscreverComando(this);
     }
 
-    public TW getW()
+    public TWrite getWrite()
     {
-        return this._w_;
+        return this._write_;
     }
 
-    public void setW(TW node)
+    public void setWrite(TWrite node)
     {
-        if(this._w_ != null)
+        if(this._write_ != null)
         {
-            this._w_.parent(null);
+            this._write_.parent(null);
         }
 
         if(node != null)
@@ -83,7 +83,7 @@ public final class AEscreverComando extends PComando
             node.parent(this);
         }
 
-        this._w_ = node;
+        this._write_ = node;
     }
 
     public TLPar getLPar()
@@ -216,7 +216,7 @@ public final class AEscreverComando extends PComando
     public String toString()
     {
         return ""
-            + toString(this._w_)
+            + toString(this._write_)
             + toString(this._lPar_)
             + toString(this._exprComma_)
             + toString(this._exp_)
@@ -228,9 +228,9 @@ public final class AEscreverComando extends PComando
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._w_ == child)
+        if(this._write_ == child)
         {
-            this._w_ = null;
+            this._write_ = null;
             return;
         }
 
@@ -270,9 +270,9 @@ public final class AEscreverComando extends PComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._w_ == oldChild)
+        if(this._write_ == oldChild)
         {
-            setW((TW) newChild);
+            setWrite((TWrite) newChild);
             return;
         }
 

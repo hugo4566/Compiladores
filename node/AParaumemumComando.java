@@ -16,10 +16,8 @@ public final class AParaumemumComando extends PComando
     private TNInt _fim_;
     private TDo _do_;
     private final LinkedList<PComandoSemiC> _comandoSemiC_ = new LinkedList<PComandoSemiC>();
-    private PComando _comando_;
-    private TSemiC _pre_;
     private TEndF _endF_;
-    private TSemiC _pos_;
+    private TSemiC _semiC_;
 
     public AParaumemumComando()
     {
@@ -35,10 +33,8 @@ public final class AParaumemumComando extends PComando
         @SuppressWarnings("hiding") TNInt _fim_,
         @SuppressWarnings("hiding") TDo _do_,
         @SuppressWarnings("hiding") List<?> _comandoSemiC_,
-        @SuppressWarnings("hiding") PComando _comando_,
-        @SuppressWarnings("hiding") TSemiC _pre_,
         @SuppressWarnings("hiding") TEndF _endF_,
-        @SuppressWarnings("hiding") TSemiC _pos_)
+        @SuppressWarnings("hiding") TSemiC _semiC_)
     {
         // Constructor
         setFor(_for_);
@@ -57,13 +53,9 @@ public final class AParaumemumComando extends PComando
 
         setComandoSemiC(_comandoSemiC_);
 
-        setComando(_comando_);
-
-        setPre(_pre_);
-
         setEndF(_endF_);
 
-        setPos(_pos_);
+        setSemiC(_semiC_);
 
     }
 
@@ -79,10 +71,8 @@ public final class AParaumemumComando extends PComando
             cloneNode(this._fim_),
             cloneNode(this._do_),
             cloneList(this._comandoSemiC_),
-            cloneNode(this._comando_),
-            cloneNode(this._pre_),
             cloneNode(this._endF_),
-            cloneNode(this._pos_));
+            cloneNode(this._semiC_));
     }
 
     @Override
@@ -292,56 +282,6 @@ public final class AParaumemumComando extends PComando
         }
     }
 
-    public PComando getComando()
-    {
-        return this._comando_;
-    }
-
-    public void setComando(PComando node)
-    {
-        if(this._comando_ != null)
-        {
-            this._comando_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._comando_ = node;
-    }
-
-    public TSemiC getPre()
-    {
-        return this._pre_;
-    }
-
-    public void setPre(TSemiC node)
-    {
-        if(this._pre_ != null)
-        {
-            this._pre_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._pre_ = node;
-    }
-
     public TEndF getEndF()
     {
         return this._endF_;
@@ -367,16 +307,16 @@ public final class AParaumemumComando extends PComando
         this._endF_ = node;
     }
 
-    public TSemiC getPos()
+    public TSemiC getSemiC()
     {
-        return this._pos_;
+        return this._semiC_;
     }
 
-    public void setPos(TSemiC node)
+    public void setSemiC(TSemiC node)
     {
-        if(this._pos_ != null)
+        if(this._semiC_ != null)
         {
-            this._pos_.parent(null);
+            this._semiC_.parent(null);
         }
 
         if(node != null)
@@ -389,7 +329,7 @@ public final class AParaumemumComando extends PComando
             node.parent(this);
         }
 
-        this._pos_ = node;
+        this._semiC_ = node;
     }
 
     @Override
@@ -404,10 +344,8 @@ public final class AParaumemumComando extends PComando
             + toString(this._fim_)
             + toString(this._do_)
             + toString(this._comandoSemiC_)
-            + toString(this._comando_)
-            + toString(this._pre_)
             + toString(this._endF_)
-            + toString(this._pos_);
+            + toString(this._semiC_);
     }
 
     @Override
@@ -461,27 +399,15 @@ public final class AParaumemumComando extends PComando
             return;
         }
 
-        if(this._comando_ == child)
-        {
-            this._comando_ = null;
-            return;
-        }
-
-        if(this._pre_ == child)
-        {
-            this._pre_ = null;
-            return;
-        }
-
         if(this._endF_ == child)
         {
             this._endF_ = null;
             return;
         }
 
-        if(this._pos_ == child)
+        if(this._semiC_ == child)
         {
-            this._pos_ = null;
+            this._semiC_ = null;
             return;
         }
 
@@ -552,27 +478,15 @@ public final class AParaumemumComando extends PComando
             }
         }
 
-        if(this._comando_ == oldChild)
-        {
-            setComando((PComando) newChild);
-            return;
-        }
-
-        if(this._pre_ == oldChild)
-        {
-            setPre((TSemiC) newChild);
-            return;
-        }
-
         if(this._endF_ == oldChild)
         {
             setEndF((TEndF) newChild);
             return;
         }
 
-        if(this._pos_ == oldChild)
+        if(this._semiC_ == oldChild)
         {
-            setPos((TSemiC) newChild);
+            setSemiC((TSemiC) newChild);
             return;
         }
 

@@ -5,17 +5,17 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVarcomVariavelComma extends PVariavelComma
+public final class AVarComVariavelComma extends PVariavelComma
 {
     private PVar _var_;
     private TComma _comma_;
 
-    public AVarcomVariavelComma()
+    public AVarComVariavelComma()
     {
         // Constructor
     }
 
-    public AVarcomVariavelComma(
+    public AVarComVariavelComma(
         @SuppressWarnings("hiding") PVar _var_,
         @SuppressWarnings("hiding") TComma _comma_)
     {
@@ -29,7 +29,7 @@ public final class AVarcomVariavelComma extends PVariavelComma
     @Override
     public Object clone()
     {
-        return new AVarcomVariavelComma(
+        return new AVarComVariavelComma(
             cloneNode(this._var_),
             cloneNode(this._comma_));
     }
@@ -37,7 +37,7 @@ public final class AVarcomVariavelComma extends PVariavelComma
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVarcomVariavelComma(this);
+        ((Analysis) sw).caseAVarComVariavelComma(this);
     }
 
     public PVar getVar()

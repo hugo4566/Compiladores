@@ -14,10 +14,8 @@ public final class AEnquantoComando extends PComando
     private TRPar _rPar_;
     private TDo _do_;
     private final LinkedList<PComandoSemiC> _comandoSemiC_ = new LinkedList<PComandoSemiC>();
-    private PComando _comando_;
-    private TSemiC _pre_;
     private TEndW _endW_;
-    private TSemiC _pos_;
+    private TSemiC _semiC_;
 
     public AEnquantoComando()
     {
@@ -31,10 +29,8 @@ public final class AEnquantoComando extends PComando
         @SuppressWarnings("hiding") TRPar _rPar_,
         @SuppressWarnings("hiding") TDo _do_,
         @SuppressWarnings("hiding") List<?> _comandoSemiC_,
-        @SuppressWarnings("hiding") PComando _comando_,
-        @SuppressWarnings("hiding") TSemiC _pre_,
         @SuppressWarnings("hiding") TEndW _endW_,
-        @SuppressWarnings("hiding") TSemiC _pos_)
+        @SuppressWarnings("hiding") TSemiC _semiC_)
     {
         // Constructor
         setWhile(_while_);
@@ -49,13 +45,9 @@ public final class AEnquantoComando extends PComando
 
         setComandoSemiC(_comandoSemiC_);
 
-        setComando(_comando_);
-
-        setPre(_pre_);
-
         setEndW(_endW_);
 
-        setPos(_pos_);
+        setSemiC(_semiC_);
 
     }
 
@@ -69,10 +61,8 @@ public final class AEnquantoComando extends PComando
             cloneNode(this._rPar_),
             cloneNode(this._do_),
             cloneList(this._comandoSemiC_),
-            cloneNode(this._comando_),
-            cloneNode(this._pre_),
             cloneNode(this._endW_),
-            cloneNode(this._pos_));
+            cloneNode(this._semiC_));
     }
 
     @Override
@@ -232,56 +222,6 @@ public final class AEnquantoComando extends PComando
         }
     }
 
-    public PComando getComando()
-    {
-        return this._comando_;
-    }
-
-    public void setComando(PComando node)
-    {
-        if(this._comando_ != null)
-        {
-            this._comando_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._comando_ = node;
-    }
-
-    public TSemiC getPre()
-    {
-        return this._pre_;
-    }
-
-    public void setPre(TSemiC node)
-    {
-        if(this._pre_ != null)
-        {
-            this._pre_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._pre_ = node;
-    }
-
     public TEndW getEndW()
     {
         return this._endW_;
@@ -307,16 +247,16 @@ public final class AEnquantoComando extends PComando
         this._endW_ = node;
     }
 
-    public TSemiC getPos()
+    public TSemiC getSemiC()
     {
-        return this._pos_;
+        return this._semiC_;
     }
 
-    public void setPos(TSemiC node)
+    public void setSemiC(TSemiC node)
     {
-        if(this._pos_ != null)
+        if(this._semiC_ != null)
         {
-            this._pos_.parent(null);
+            this._semiC_.parent(null);
         }
 
         if(node != null)
@@ -329,7 +269,7 @@ public final class AEnquantoComando extends PComando
             node.parent(this);
         }
 
-        this._pos_ = node;
+        this._semiC_ = node;
     }
 
     @Override
@@ -342,10 +282,8 @@ public final class AEnquantoComando extends PComando
             + toString(this._rPar_)
             + toString(this._do_)
             + toString(this._comandoSemiC_)
-            + toString(this._comando_)
-            + toString(this._pre_)
             + toString(this._endW_)
-            + toString(this._pos_);
+            + toString(this._semiC_);
     }
 
     @Override
@@ -387,27 +325,15 @@ public final class AEnquantoComando extends PComando
             return;
         }
 
-        if(this._comando_ == child)
-        {
-            this._comando_ = null;
-            return;
-        }
-
-        if(this._pre_ == child)
-        {
-            this._pre_ = null;
-            return;
-        }
-
         if(this._endW_ == child)
         {
             this._endW_ = null;
             return;
         }
 
-        if(this._pos_ == child)
+        if(this._semiC_ == child)
         {
-            this._pos_ = null;
+            this._semiC_ = null;
             return;
         }
 
@@ -466,27 +392,15 @@ public final class AEnquantoComando extends PComando
             }
         }
 
-        if(this._comando_ == oldChild)
-        {
-            setComando((PComando) newChild);
-            return;
-        }
-
-        if(this._pre_ == oldChild)
-        {
-            setPre((TSemiC) newChild);
-            return;
-        }
-
         if(this._endW_ == oldChild)
         {
             setEndW((TEndW) newChild);
             return;
         }
 
-        if(this._pos_ == oldChild)
+        if(this._semiC_ == oldChild)
         {
-            setPos((TSemiC) newChild);
+            setSemiC((TSemiC) newChild);
             return;
         }
 

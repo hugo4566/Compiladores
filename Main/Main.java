@@ -21,16 +21,12 @@ public class Main {
 	        try {
 	            start_time = System.currentTimeMillis();// create lexer
 	            Lexer lexer = new Lexer (new PushbackReader(new BufferedReader(new FileReader(args[0])), 1024));
-	            Token t = lexer.next();
-	            while () { 
-	            	try{
+	            while (true) {
+	            	Token t = lexer.next();
+	            	if(t != null){
 	            		System.out.println(t.toString());
-	            		t = lexer.next();
-	            		
-	            	}catch(Exception e){
-	            		System.out.println("Pau!");
+	            	}else
 	            		break;
-	            	}
 	        	}
 //	            Parser parser = new Parser(lexer);
 //	            Start ast = parser.parse(); 

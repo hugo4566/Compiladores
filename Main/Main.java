@@ -1,11 +1,12 @@
-import parser.*;
-import lexer.*;
-import node.*;
+package Main;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PushbackReader;
+
+import lexer.Lexer;
+import node.Token;
 
 
 public class Main {
@@ -19,15 +20,17 @@ public class Main {
 		}else{
 
 	        try {
-	            start_time = System.currentTimeMillis();// create lexer
+	            start_time = System.currentTimeMillis();
 	            Lexer lexer = new Lexer (new PushbackReader(new BufferedReader(new FileReader(args[0])), 1024));
 	            while (true) {
 	            	Token t = lexer.next();
-	            	if(t != null){
-	            		System.out.println(t.toString());
-	            	}else
+	            	System.out.println(t.getText());
+	            	if(t.getText().isEmpty()){
 	            		break;
+	            	}
 	        	}
+	            stop_time = System.currentTimeMillis();
+	            System.out.println("Tempo de execução :"+( stop_time - start_time)+"ms");
 //	            Parser parser = new Parser(lexer);
 //	            Start ast = parser.parse(); 
 //	            ast.apply(new SemanticAnalyser());  

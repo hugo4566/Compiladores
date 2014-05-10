@@ -24,7 +24,8 @@ public class Main {
 	            Lexer lexer = new Lexer (new PushbackReader(new BufferedReader(new FileReader(args[0])), 1024));
 	            while (true) {
 	            	Token t = lexer.next();
-	            	System.out.println(t.getText());
+	            	String identificado = t.getClass().toString().replaceAll("class node.T?", "");
+	            	System.out.println(identificado);
 	            	if(t.getText().isEmpty()){
 	            		break;
 	            	}

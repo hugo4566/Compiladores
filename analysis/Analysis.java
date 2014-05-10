@@ -58,10 +58,6 @@ public interface Analysis extends Switch
     void caseAConstantDeclaracao(AConstantDeclaracao node);
     void caseAPrograma(APrograma node);
 
-    void caseTId(TId node);
-    void caseTString(TString node);
-    void caseTNInt(TNInt node);
-    void caseTNReal(TNReal node);
     void caseTLPar(TLPar node);
     void caseTRPar(TRPar node);
     void caseTLBra(TLBra node);
@@ -115,6 +111,10 @@ public interface Analysis extends Switch
     void caseTPass(TPass node);
     void caseTEvaluate(TEvaluate node);
     void caseTEndE(TEndE node);
+    void caseTId(TId node);
+    void caseTString(TString node);
+    void caseTNReal(TNReal node);
+    void caseTNInt(TNInt node);
     void caseEOF(EOF node);
     void caseInvalidToken(InvalidToken node);
 }

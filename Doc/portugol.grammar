@@ -9,14 +9,6 @@ States
 
 Tokens
 
-	// Identificador
-	{normal}	id 			 = ('_' | letter)('_'| letter | digit )*;
-
-	// Tipos de dados
-	{normal}	string 		 = letter+;
-	{normal}	n_int		 = digit+;
-	{normal}	n_real		 = '-' ? digit+ '.' digit+;
-
 	// Símbolos
 	{normal}	l_par        = '(';
 	{normal}	r_par        = ')';
@@ -78,6 +70,13 @@ Tokens
 	{normal}	evaluate 	= 'avalie';
 	{normal}	end_e		= 'fim avalie';
 
+	// Identificador
+	{normal}	id 			 = ('_' | letter)('_'| letter | digit )*;
+
+	// Tipos de dados
+	{normal}	string 		 = letter+;
+	{normal}	n_real		 = '-' ? digit+ '.' digit+;
+	{normal}	n_int		 = digit+;
 
 Ignored Tokens
 	blank;

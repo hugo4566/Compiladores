@@ -25,6 +25,7 @@ public class Main {
 	            while (true) {
 	            	Token t = lexer.next();
 	            	String identificado = t.getClass().toString().replaceAll("class node\\.T?", "");
+	            	if(!identificado.equals("EOF"))
 	            	System.out.println(identificado);
 	            	if(t.getText().isEmpty()){
 	            		break;

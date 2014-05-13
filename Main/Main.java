@@ -22,12 +22,20 @@ public class Main {
 	        try {
 	            start_time = System.currentTimeMillis();
 	            MyLexer lexer = new MyLexer (new PushbackReader(new BufferedReader(new FileReader(args[0])), 1024));
+	            System.out.println();
 	            while (true) {
 	            	Token t = lexer.next();
+	            	String newline = t.toString();
 	            	String identificado = t.getClass().toString().replaceAll("class node\\.T?", "");
-	            	if(!identificado.equals("EOF"))
-	            	System.out.println(identificado);
+	            	if(!identificado.equals("EOF")){
+	            		if (newline.contains("\n"))
+	            			System.out.println(identificado);
+	            		else
+	            			//System.out.print(newline);
+	            			System.out.print(identificado + " ");
+	            	}		
 	            	if(t.getText().isEmpty()){
+	            		System.out.println("\n");
 	            		break;
 	            	}
 	        	}

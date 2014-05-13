@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PushbackReader;
 
-import lexer.Lexer;
+import Main.MyLexer;
 import node.Token;
 
 
@@ -21,7 +21,7 @@ public class Main {
 
 	        try {
 	            start_time = System.currentTimeMillis();
-	            Lexer lexer = new Lexer (new PushbackReader(new BufferedReader(new FileReader(args[0])), 1024));
+	            MyLexer lexer = new MyLexer (new PushbackReader(new BufferedReader(new FileReader(args[0])), 1024));
 	            while (true) {
 	            	Token t = lexer.next();
 	            	String identificado = t.getClass().toString().replaceAll("class node\\.T?", "");

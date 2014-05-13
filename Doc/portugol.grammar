@@ -69,16 +69,17 @@ Tokens
 	{normal}	id 			 = ('_' | letter)('_'| letter | digit )*;
 
 	// Tipos de dados
-	{normal}	string 		 = letter+;
+	{normal}	string 		 = '''letter+''';
 	{normal}	n_real		 = '-' ? digit+ '.' digit+;
 	{normal}	n_int		 = digit+;
 
 	// Comentários
-	{normal->comment, comment}	comment 		= '/*';
-	{comment}				comment_end 		= '*/';
-	{comment} 				comment_body 		= [all - ['*' + '/']]*;
-	{comment}				star 				= '*';
-	{comment}				slash				= '/';
+	{normal->comment, comment}	comment 			= '/*';
+	{comment}					comment_end 		= '*/';
+	{comment} 					comment_body 		= [all - ['*' + '/']]*;
+	{comment}					star 				= '*';
+	{comment}					slash				= '/';
+	{normal}					line_comment		= '//'[all-10]*10;		
 
 Ignored Tokens
 	blank;

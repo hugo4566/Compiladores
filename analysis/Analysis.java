@@ -117,6 +117,7 @@ public interface Analysis extends Switch
     void caseTCommentBody(TCommentBody node);
     void caseTStar(TStar node);
     void caseTSlash(TSlash node);
+    void caseTLineComment(TLineComment node);
     void caseEOF(EOF node);
     void caseInvalidToken(InvalidToken node);
 }

@@ -5,16 +5,16 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class TLBrac extends Token
+public final class TSlash extends Token
 {
-    public TLBrac()
+    public TSlash()
     {
-        super.setText("{");
+        super.setText("/");
     }
 
-    public TLBrac(int line, int pos)
+    public TSlash(int line, int pos)
     {
-        super.setText("{");
+        super.setText("/");
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,18 @@ public final class TLBrac extends Token
     @Override
     public Object clone()
     {
-      return new TLBrac(getLine(), getPos());
+      return new TSlash(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTLBrac(this);
+        ((Analysis) sw).caseTSlash(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TLBrac text.");
+        throw new RuntimeException("Cannot change TSlash text.");
     }
 }

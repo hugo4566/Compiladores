@@ -26,12 +26,12 @@ public class Main {
 	            while (true) {
 	            	Token t = lexer.next();
 	            	String newline = t.toString();
+	            	//System.out.println(t.getClass().toString());
 	            	String identificado = t.getClass().toString().replaceAll("class node\\.T?", "");
 	            	if(!identificado.equals("EOF")){
 	            		if (newline.contains("\n"))
 	            			System.out.println(identificado);
 	            		else
-	            			//System.out.print(newline);
 	            			System.out.print(identificado + " ");
 	            	}		
 	            	if(t.getText().isEmpty()){

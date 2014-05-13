@@ -5,14 +5,14 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class TBlockComment extends Token
+public final class TComment extends Token
 {
-    public TBlockComment()
+    public TComment()
     {
         super.setText("/*");
     }
 
-    public TBlockComment(int line, int pos)
+    public TComment(int line, int pos)
     {
         super.setText("/*");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TBlockComment extends Token
     @Override
     public Object clone()
     {
-      return new TBlockComment(getLine(), getPos());
+      return new TComment(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTBlockComment(this);
+        ((Analysis) sw).caseTComment(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TBlockComment text.");
+        throw new RuntimeException("Cannot change TComment text.");
     }
 }

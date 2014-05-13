@@ -5,16 +5,16 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class TRBrak extends Token
+public final class TCommentEnd extends Token
 {
-    public TRBrak()
+    public TCommentEnd()
     {
-        super.setText("]");
+        super.setText("*/");
     }
 
-    public TRBrak(int line, int pos)
+    public TCommentEnd(int line, int pos)
     {
-        super.setText("]");
+        super.setText("*/");
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,18 @@ public final class TRBrak extends Token
     @Override
     public Object clone()
     {
-      return new TRBrak(getLine(), getPos());
+      return new TCommentEnd(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTRBrak(this);
+        ((Analysis) sw).caseTCommentEnd(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TRBrak text.");
+        throw new RuntimeException("Cannot change TCommentEnd text.");
     }
 }

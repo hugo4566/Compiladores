@@ -405,24 +405,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTBlockComment(TBlockComment node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTEndBlockComment(TEndBlockComment node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTCommentBody(TCommentBody node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseTNot(TNot node)
     {
         defaultCase(node);
@@ -682,6 +664,36 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTNInt(TNInt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTComment(TComment node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTCommentEnd(TCommentEnd node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTCommentBody(TCommentBody node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTStar(TStar node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTSlash(TSlash node)
     {
         defaultCase(node);
     }

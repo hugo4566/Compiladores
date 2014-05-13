@@ -4,12 +4,12 @@ Helpers
 	digit 		 = ['0'..'9'];
 
 States
-	normal,
-	comment;
+	normal, comment;
 
 Tokens
 
 	// Símbolos
+
 	{normal}	l_par        = '(';
 	{normal}	r_par        = ')';
 	{normal}	l_bra		 = '[';
@@ -20,12 +20,7 @@ Tokens
 	{normal}	dot			 = '.';
 	{normal}	blank        = (' '| 9 | 10 | 13)+;
 	{normal}	is	  		 = '<-';
-
-	// Comentários
-	{normal->comment,comment}	block_comment 		= '/*';
-	{comment->normal}			end_block_comment 	= '*/';
-	{comment}					comment_body 		= [all - ['*' + '/']]*;
-
+	
 	// Operadores
 	{normal}	not	  		 = 'nao';
 	{normal}	and	  		 = 'e';
@@ -77,6 +72,13 @@ Tokens
 	{normal}	string 		 = letter+;
 	{normal}	n_real		 = '-' ? digit+ '.' digit+;
 	{normal}	n_int		 = digit+;
+
+	// Comentários
+	{normal->comment, comment}	comment 		= '/*';
+	{comment}				comment_end 		= '*/';
+	{comment} 				comment_body 		= [all - ['*' + '/']]*;
+	{comment}				star 				= '*';
+	{comment}				slash				= '/';
 
 Ignored Tokens
 	blank;

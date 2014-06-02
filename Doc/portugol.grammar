@@ -20,7 +20,7 @@ Tokens
 	{normal}	dot			 = '.';
 	{normal}	blank        = (' '| 9 | 10 | 13)+;
 	{normal}	is	  		 = '<-';
-	
+
 	// Operadores
 	{normal}	not	  		 = 'nao';
 	{normal}	and	  		 = 'e';
@@ -79,39 +79,42 @@ Tokens
 	{comment} 					comment_body 		= [all - ['*' + '/']]*;
 	{comment}					star 				= '*';
 	{comment}					slash				= '/';
-	{normal}					line_comment		= '//'[all-10]*10;		
+	{normal}					line_comment		= '//'[all-10]*10;
 
 Ignored Tokens
 	blank;
 
 Productions
-	var = 
+	var =
 		{id} 			id
 	| 	{matrix} 		id l_bra n_int r_bra;
 
-	valor = 
+	valor =
 		{string} 		string
-	|	{integer} 		n_int 
+	|	{integer} 		n_int
 	|	{real} 			n_real;
 
-	exp =
-	  	{value}		 	valor
+	var_value_exp =
+		{value}		 	valor
 	| 	{variable} 		var
-	| 	{l_exp_r} 		l_par exp r_par
-	| 	{minus_exp}		minus exp
-	| 	{exp_p_exp}		[pre]:exp plus [pos]:exp
-	| 	{exp_m_exp}		[pre]:exp minus [pos]:exp
-	| 	{exp_x_exp}		[pre]:exp mult [pos]:exp
-	| 	{exp_div_exp}	[pre]:exp div [pos]:exp
 	| 	{explog}		exp_logica;
 
+	exp =
+		{vari_val_exp}  var_value_exp
+	| 	{l_exp_r} 		l_par exp r_par
+	| 	{minus_exp}		minus exp
+	| 	{exp_p_exp}		[pre]:exp plus var_value_exp
+	| 	{exp_m_exp}		[pre]:exp minus var_value_exp
+	| 	{exp_x_exp}		[pre]:exp mult var_value_exp
+	| 	{exp_div_exp}	[pre]:exp div var_value_exp;
+
 	exp_logica =
-	 	{exp_eq_exp} 	[pre]:exp equal [pos]:exp
-	|	{exp_neq_exp} 	[pre]:exp not_equal [pos]:exp
-	|	{exp_leq_exp} 	[pre]:exp less_eq [pos]:exp
-	|	{exp_geq_exp} 	[pre]:exp greater_eq [pos]:exp
-	|	{exp_less_exp} 	[pre]:exp less [pos]:exp
-	|	{exp_great_exp}	[pre]:exp greater [pos]:exp
+	 	{exp_eq_exp} 	[pre]:exp equal var_value_exp
+	|	{exp_neq_exp} 	[pre]:exp not_equal var_value_exp
+	|	{exp_leq_exp} 	[pre]:exp less_eq var_value_exp
+	|	{exp_geq_exp} 	[pre]:exp greater_eq var_value_exp
+	|	{exp_less_exp} 	[pre]:exp less var_value_exp
+	|	{exp_great_exp}	[pre]:exp greater var_value_exp
 	|	{not_exp} 		not exp_logica
 	|	{and_exp} 		[pre]:exp_logica and [pos]:exp_logica
 	|	{or_exp} 		[pre]:exp_logica or [pos]:exp_logica
@@ -136,12 +139,12 @@ Productions
 	| 	{for_one}		for var from [start]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c
 	| 	{for_x}			for var from [start]:n_int pass [step]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c;
 
-	tipo = 
-		{real} 			real 
-	|	{integer} 		integer 
+	tipo =
+		{real} 			real
+	|	{integer} 		integer
 	|	{char} 			character;
 
-	declaracao = 
+	declaracao =
 		{variable} 		tipo colon variavel_comma* var semi_c
 	| 	{constant} 		constant id valor semi_c ;
 

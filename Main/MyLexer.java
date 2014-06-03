@@ -1,8 +1,8 @@
 package Main;
 
 import lexer.Lexer;
-import lexer.Lexer.State;
-import node.*;
+import node.TComment;
+import node.TCommentEnd;
 
 public class MyLexer extends Lexer
 { private int count;

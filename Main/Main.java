@@ -5,7 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PushbackReader;
 
+import parser.Parser;
 import Main.MyLexer;
+import node.Start;
 import node.Token;
 
 
@@ -40,9 +42,10 @@ public class Main {
 	            	}
 	        	}
 	            stop_time = System.currentTimeMillis();
-	            System.out.println("Tempo de execução :"+( stop_time - start_time)+"ms");
-//	            Parser parser = new Parser(lexer);
-//	            Start ast = parser.parse(); 
+	            System.out.println("Tempo de execução :"+( stop_time - start_time)+"ms\n");
+			
+	            Parser parser = new Parser(lexer);
+	            Start ast = parser.parse(); 
 //	            ast.apply(new SemanticAnalyser());  
 //	            ast.apply(new ClassGenerator());
 	        }

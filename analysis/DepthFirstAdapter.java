@@ -153,46 +153,88 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outARealValor(node);
     }
 
-    public void inAValueExp(AValueExp node)
+    public void inAValueVarValueExp(AValueVarValueExp node)
     {
         defaultIn(node);
     }
 
-    public void outAValueExp(AValueExp node)
+    public void outAValueVarValueExp(AValueVarValueExp node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAValueExp(AValueExp node)
+    public void caseAValueVarValueExp(AValueVarValueExp node)
     {
-        inAValueExp(node);
+        inAValueVarValueExp(node);
         if(node.getValor() != null)
         {
             node.getValor().apply(this);
         }
-        outAValueExp(node);
+        outAValueVarValueExp(node);
     }
 
-    public void inAVariableExp(AVariableExp node)
+    public void inAVariableVarValueExp(AVariableVarValueExp node)
     {
         defaultIn(node);
     }
 
-    public void outAVariableExp(AVariableExp node)
+    public void outAVariableVarValueExp(AVariableVarValueExp node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAVariableExp(AVariableExp node)
+    public void caseAVariableVarValueExp(AVariableVarValueExp node)
     {
-        inAVariableExp(node);
+        inAVariableVarValueExp(node);
         if(node.getVar() != null)
         {
             node.getVar().apply(this);
         }
-        outAVariableExp(node);
+        outAVariableVarValueExp(node);
+    }
+
+    public void inAExplogVarValueExp(AExplogVarValueExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAExplogVarValueExp(AExplogVarValueExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAExplogVarValueExp(AExplogVarValueExp node)
+    {
+        inAExplogVarValueExp(node);
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        outAExplogVarValueExp(node);
+    }
+
+    public void inAVariValExpExp(AVariValExpExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVariValExpExp(AVariValExpExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVariValExpExp(AVariValExpExp node)
+    {
+        inAVariValExpExp(node);
+        if(node.getVarValueExp() != null)
+        {
+            node.getVarValueExp().apply(this);
+        }
+        outAVariValExpExp(node);
     }
 
     public void inALExpRExp(ALExpRExp node)
@@ -271,9 +313,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getPlus().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpPExpExp(node);
     }
@@ -300,9 +342,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getMinus().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpMExpExp(node);
     }
@@ -329,9 +371,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getMult().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpXExpExp(node);
     }
@@ -358,32 +400,11 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getDiv().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpDivExpExp(node);
-    }
-
-    public void inAExplogExp(AExplogExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAExplogExp(AExplogExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAExplogExp(AExplogExp node)
-    {
-        inAExplogExp(node);
-        if(node.getExpLogica() != null)
-        {
-            node.getExpLogica().apply(this);
-        }
-        outAExplogExp(node);
     }
 
     public void inAExpEqExpExpLogica(AExpEqExpExpLogica node)
@@ -408,9 +429,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getEqual().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpEqExpExpLogica(node);
     }
@@ -437,9 +458,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getNotEqual().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpNeqExpExpLogica(node);
     }
@@ -466,9 +487,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getLessEq().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpLeqExpExpLogica(node);
     }
@@ -495,9 +516,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getGreaterEq().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpGeqExpExpLogica(node);
     }
@@ -524,9 +545,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getLess().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpLessExpExpLogica(node);
     }
@@ -553,9 +574,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getGreater().apply(this);
         }
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         outAExpGreatExpExpLogica(node);
     }

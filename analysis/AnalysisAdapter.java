@@ -105,13 +105,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAValueExp(AValueExp node)
+    public void caseAValueVarValueExp(AValueVarValueExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAVariableExp(AVariableExp node)
+    public void caseAVariableVarValueExp(AVariableVarValueExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExplogVarValueExp(AExplogVarValueExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVariValExpExp(AVariValExpExp node)
     {
         defaultCase(node);
     }
@@ -148,12 +160,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAExpDivExpExp(AExpDivExpExp node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAExplogExp(AExplogExp node)
     {
         defaultCase(node);
     }

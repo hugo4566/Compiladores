@@ -153,46 +153,88 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outARealValor(node);
     }
 
-    public void inAValueExp(AValueExp node)
+    public void inAValueVarValueExp(AValueVarValueExp node)
     {
         defaultIn(node);
     }
 
-    public void outAValueExp(AValueExp node)
+    public void outAValueVarValueExp(AValueVarValueExp node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAValueExp(AValueExp node)
+    public void caseAValueVarValueExp(AValueVarValueExp node)
     {
-        inAValueExp(node);
+        inAValueVarValueExp(node);
         if(node.getValor() != null)
         {
             node.getValor().apply(this);
         }
-        outAValueExp(node);
+        outAValueVarValueExp(node);
     }
 
-    public void inAVariableExp(AVariableExp node)
+    public void inAVariableVarValueExp(AVariableVarValueExp node)
     {
         defaultIn(node);
     }
 
-    public void outAVariableExp(AVariableExp node)
+    public void outAVariableVarValueExp(AVariableVarValueExp node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAVariableExp(AVariableExp node)
+    public void caseAVariableVarValueExp(AVariableVarValueExp node)
     {
-        inAVariableExp(node);
+        inAVariableVarValueExp(node);
         if(node.getVar() != null)
         {
             node.getVar().apply(this);
         }
-        outAVariableExp(node);
+        outAVariableVarValueExp(node);
+    }
+
+    public void inAExplogVarValueExp(AExplogVarValueExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAExplogVarValueExp(AExplogVarValueExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAExplogVarValueExp(AExplogVarValueExp node)
+    {
+        inAExplogVarValueExp(node);
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        outAExplogVarValueExp(node);
+    }
+
+    public void inAVariValExpExp(AVariValExpExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVariValExpExp(AVariValExpExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVariValExpExp(AVariValExpExp node)
+    {
+        inAVariValExpExp(node);
+        if(node.getVarValueExp() != null)
+        {
+            node.getVarValueExp().apply(this);
+        }
+        outAVariValExpExp(node);
     }
 
     public void inALExpRExp(ALExpRExp node)
@@ -263,9 +305,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpPExpExp(AExpPExpExp node)
     {
         inAExpPExpExp(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getPlus() != null)
         {
@@ -292,9 +334,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpMExpExp(AExpMExpExp node)
     {
         inAExpMExpExp(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getMinus() != null)
         {
@@ -321,9 +363,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpXExpExp(AExpXExpExp node)
     {
         inAExpXExpExp(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getMult() != null)
         {
@@ -350,9 +392,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpDivExpExp(AExpDivExpExp node)
     {
         inAExpDivExpExp(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getDiv() != null)
         {
@@ -363,27 +405,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getPre().apply(this);
         }
         outAExpDivExpExp(node);
-    }
-
-    public void inAExplogExp(AExplogExp node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAExplogExp(AExplogExp node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAExplogExp(AExplogExp node)
-    {
-        inAExplogExp(node);
-        if(node.getExpLogica() != null)
-        {
-            node.getExpLogica().apply(this);
-        }
-        outAExplogExp(node);
     }
 
     public void inAExpEqExpExpLogica(AExpEqExpExpLogica node)
@@ -400,9 +421,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpEqExpExpLogica(AExpEqExpExpLogica node)
     {
         inAExpEqExpExpLogica(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getEqual() != null)
         {
@@ -429,9 +450,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpNeqExpExpLogica(AExpNeqExpExpLogica node)
     {
         inAExpNeqExpExpLogica(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getNotEqual() != null)
         {
@@ -458,9 +479,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpLeqExpExpLogica(AExpLeqExpExpLogica node)
     {
         inAExpLeqExpExpLogica(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getLessEq() != null)
         {
@@ -487,9 +508,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpGeqExpExpLogica(AExpGeqExpExpLogica node)
     {
         inAExpGeqExpExpLogica(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getGreaterEq() != null)
         {
@@ -516,9 +537,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpLessExpExpLogica(AExpLessExpExpLogica node)
     {
         inAExpLessExpExpLogica(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getLess() != null)
         {
@@ -545,9 +566,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAExpGreatExpExpLogica(AExpGreatExpExpLogica node)
     {
         inAExpGreatExpExpLogica(node);
-        if(node.getPos() != null)
+        if(node.getVarValueExp() != null)
         {
-            node.getPos().apply(this);
+            node.getVarValueExp().apply(this);
         }
         if(node.getGreater() != null)
         {

@@ -9,7 +9,7 @@ public final class AExpEqExpExpLogica extends PExpLogica
 {
     private PExp _pre_;
     private TEqual _equal_;
-    private PExp _pos_;
+    private PVarValueExp _varValueExp_;
 
     public AExpEqExpExpLogica()
     {
@@ -19,14 +19,14 @@ public final class AExpEqExpExpLogica extends PExpLogica
     public AExpEqExpExpLogica(
         @SuppressWarnings("hiding") PExp _pre_,
         @SuppressWarnings("hiding") TEqual _equal_,
-        @SuppressWarnings("hiding") PExp _pos_)
+        @SuppressWarnings("hiding") PVarValueExp _varValueExp_)
     {
         // Constructor
         setPre(_pre_);
 
         setEqual(_equal_);
 
-        setPos(_pos_);
+        setVarValueExp(_varValueExp_);
 
     }
 
@@ -36,7 +36,7 @@ public final class AExpEqExpExpLogica extends PExpLogica
         return new AExpEqExpExpLogica(
             cloneNode(this._pre_),
             cloneNode(this._equal_),
-            cloneNode(this._pos_));
+            cloneNode(this._varValueExp_));
     }
 
     @Override
@@ -95,16 +95,16 @@ public final class AExpEqExpExpLogica extends PExpLogica
         this._equal_ = node;
     }
 
-    public PExp getPos()
+    public PVarValueExp getVarValueExp()
     {
-        return this._pos_;
+        return this._varValueExp_;
     }
 
-    public void setPos(PExp node)
+    public void setVarValueExp(PVarValueExp node)
     {
-        if(this._pos_ != null)
+        if(this._varValueExp_ != null)
         {
-            this._pos_.parent(null);
+            this._varValueExp_.parent(null);
         }
 
         if(node != null)
@@ -117,7 +117,7 @@ public final class AExpEqExpExpLogica extends PExpLogica
             node.parent(this);
         }
 
-        this._pos_ = node;
+        this._varValueExp_ = node;
     }
 
     @Override
@@ -126,7 +126,7 @@ public final class AExpEqExpExpLogica extends PExpLogica
         return ""
             + toString(this._pre_)
             + toString(this._equal_)
-            + toString(this._pos_);
+            + toString(this._varValueExp_);
     }
 
     @Override
@@ -145,9 +145,9 @@ public final class AExpEqExpExpLogica extends PExpLogica
             return;
         }
 
-        if(this._pos_ == child)
+        if(this._varValueExp_ == child)
         {
-            this._pos_ = null;
+            this._varValueExp_ = null;
             return;
         }
 
@@ -170,9 +170,9 @@ public final class AExpEqExpExpLogica extends PExpLogica
             return;
         }
 
-        if(this._pos_ == oldChild)
+        if(this._varValueExp_ == oldChild)
         {
-            setPos((PExp) newChild);
+            setVarValueExp((PVarValueExp) newChild);
             return;
         }
 

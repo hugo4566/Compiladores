@@ -2,7 +2,6 @@
 
 package node;
 
-import java.util.*;
 import analysis.*;
 
 @SuppressWarnings("nls")
@@ -11,10 +10,7 @@ public final class APrograma extends PPrograma
     private TProgram _program_;
     private TId _id_;
     private TBegin _begin_;
-    private final LinkedList<PDeclaracao> _declaracao_ = new LinkedList<PDeclaracao>();
-    private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
     private TEnd _end_;
-    private TDot _dot_;
 
     public APrograma()
     {
@@ -25,10 +21,7 @@ public final class APrograma extends PPrograma
         @SuppressWarnings("hiding") TProgram _program_,
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TBegin _begin_,
-        @SuppressWarnings("hiding") List<?> _declaracao_,
-        @SuppressWarnings("hiding") List<?> _comando_,
-        @SuppressWarnings("hiding") TEnd _end_,
-        @SuppressWarnings("hiding") TDot _dot_)
+        @SuppressWarnings("hiding") TEnd _end_)
     {
         // Constructor
         setProgram(_program_);
@@ -37,13 +30,7 @@ public final class APrograma extends PPrograma
 
         setBegin(_begin_);
 
-        setDeclaracao(_declaracao_);
-
-        setComando(_comando_);
-
         setEnd(_end_);
-
-        setDot(_dot_);
 
     }
 
@@ -54,10 +41,7 @@ public final class APrograma extends PPrograma
             cloneNode(this._program_),
             cloneNode(this._id_),
             cloneNode(this._begin_),
-            cloneList(this._declaracao_),
-            cloneList(this._comando_),
-            cloneNode(this._end_),
-            cloneNode(this._dot_));
+            cloneNode(this._end_));
     }
 
     @Override
@@ -141,58 +125,6 @@ public final class APrograma extends PPrograma
         this._begin_ = node;
     }
 
-    public LinkedList<PDeclaracao> getDeclaracao()
-    {
-        return this._declaracao_;
-    }
-
-    public void setDeclaracao(List<?> list)
-    {
-        for(PDeclaracao e : this._declaracao_)
-        {
-            e.parent(null);
-        }
-        this._declaracao_.clear();
-
-        for(Object obj_e : list)
-        {
-            PDeclaracao e = (PDeclaracao) obj_e;
-            if(e.parent() != null)
-            {
-                e.parent().removeChild(e);
-            }
-
-            e.parent(this);
-            this._declaracao_.add(e);
-        }
-    }
-
-    public LinkedList<PComando> getComando()
-    {
-        return this._comando_;
-    }
-
-    public void setComando(List<?> list)
-    {
-        for(PComando e : this._comando_)
-        {
-            e.parent(null);
-        }
-        this._comando_.clear();
-
-        for(Object obj_e : list)
-        {
-            PComando e = (PComando) obj_e;
-            if(e.parent() != null)
-            {
-                e.parent().removeChild(e);
-            }
-
-            e.parent(this);
-            this._comando_.add(e);
-        }
-    }
-
     public TEnd getEnd()
     {
         return this._end_;
@@ -218,31 +150,6 @@ public final class APrograma extends PPrograma
         this._end_ = node;
     }
 
-    public TDot getDot()
-    {
-        return this._dot_;
-    }
-
-    public void setDot(TDot node)
-    {
-        if(this._dot_ != null)
-        {
-            this._dot_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._dot_ = node;
-    }
-
     @Override
     public String toString()
     {
@@ -250,10 +157,7 @@ public final class APrograma extends PPrograma
             + toString(this._program_)
             + toString(this._id_)
             + toString(this._begin_)
-            + toString(this._declaracao_)
-            + toString(this._comando_)
-            + toString(this._end_)
-            + toString(this._dot_);
+            + toString(this._end_);
     }
 
     @Override
@@ -278,25 +182,9 @@ public final class APrograma extends PPrograma
             return;
         }
 
-        if(this._declaracao_.remove(child))
-        {
-            return;
-        }
-
-        if(this._comando_.remove(child))
-        {
-            return;
-        }
-
         if(this._end_ == child)
         {
             this._end_ = null;
-            return;
-        }
-
-        if(this._dot_ == child)
-        {
-            this._dot_ = null;
             return;
         }
 
@@ -325,51 +213,9 @@ public final class APrograma extends PPrograma
             return;
         }
 
-        for(ListIterator<PDeclaracao> i = this._declaracao_.listIterator(); i.hasNext();)
-        {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((PDeclaracao) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
-
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
-        }
-
-        for(ListIterator<PComando> i = this._comando_.listIterator(); i.hasNext();)
-        {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((PComando) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
-
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
-        }
-
         if(this._end_ == oldChild)
         {
             setEnd((TEnd) newChild);
-            return;
-        }
-
-        if(this._dot_ == oldChild)
-        {
-            setDot((TDot) newChild);
             return;
         }
 

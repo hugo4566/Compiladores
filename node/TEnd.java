@@ -9,12 +9,12 @@ public final class TEnd extends Token
 {
     public TEnd()
     {
-        super.setText("fim");
+        super.setText("fim.");
     }
 
     public TEnd(int line, int pos)
     {
-        super.setText("fim");
+        super.setText("fim.");
         setLine(line);
         setPos(pos);
     }

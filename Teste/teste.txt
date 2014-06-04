@@ -1,6 +1,3 @@
 programa p1
 inicio
-	inteiro i;
-	i <- 2;
-	escreva i;
 fim.

@@ -25,7 +25,7 @@ public class Main {
 	            start_time = System.currentTimeMillis();
 	            MyLexer lexer = new MyLexer (new PushbackReader(new BufferedReader(new FileReader(args[0])), 1024));
 	            System.out.println();
-	            while (true) {
+	            /*while (true) {
 	            	Token t = lexer.next();
 	            	String newline = t.toString();
 	            	//System.out.println(t.getClass().toString());
@@ -40,7 +40,7 @@ public class Main {
 	            		System.out.println("\n");
 	            		break;
 	            	}
-	        	}
+	        	}*/
 	            stop_time = System.currentTimeMillis();
 	            System.out.println("Tempo de execução :"+( stop_time - start_time)+"ms\n");
 			

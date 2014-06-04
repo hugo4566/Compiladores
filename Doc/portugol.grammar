@@ -41,7 +41,7 @@ Tokens
 	// Palavras reservadas
 	{normal}	program 	= 'programa';
 	{normal}	begin 		= 'inicio';
-	{normal}	end 		= 'fim';
+	{normal}	end 		= 'fim.';
 	{normal}	while		= 'enquanto';
 	{normal}	end_w		= 'fim enquanto';
 	{normal}	for			= 'para';
@@ -85,7 +85,7 @@ Ignored Tokens
 	blank;
 
 Productions
-	var =
+/*	var =
 		{id} 			id
 	| 	{matrix} 		id l_bra n_int r_bra;
 
@@ -147,5 +147,6 @@ Productions
 	declaracao =
 		{variable} 		tipo colon variavel_comma* var semi_c
 	| 	{constant} 		constant id valor semi_c ;
+*/
 
-	programa = program id begin declaracao* comando* end dot;
+	programa = program id begin end;

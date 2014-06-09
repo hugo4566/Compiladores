@@ -2,25 +2,28 @@
 
 package node;
 
+import java.util.*;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class APrograma extends PPrograma
+public final class AStartPrograma extends PPrograma
 {
     private TProgram _program_;
     private TId _id_;
     private TBegin _begin_;
+    private final LinkedList<PDeclaracao> _declaracao_ = new LinkedList<PDeclaracao>();
     private TEnd _end_;
 
-    public APrograma()
+    public AStartPrograma()
     {
         // Constructor
     }
 
-    public APrograma(
+    public AStartPrograma(
         @SuppressWarnings("hiding") TProgram _program_,
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TBegin _begin_,
+        @SuppressWarnings("hiding") List<?> _declaracao_,
         @SuppressWarnings("hiding") TEnd _end_)
     {
         // Constructor
@@ -30,6 +33,8 @@ public final class APrograma extends PPrograma
 
         setBegin(_begin_);
 
+        setDeclaracao(_declaracao_);
+
         setEnd(_end_);
 
     }
@@ -37,17 +42,18 @@ public final class APrograma extends PPrograma
     @Override
     public Object clone()
     {
-        return new APrograma(
+        return new AStartPrograma(
             cloneNode(this._program_),
             cloneNode(this._id_),
             cloneNode(this._begin_),
+            cloneList(this._declaracao_),
             cloneNode(this._end_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAPrograma(this);
+        ((Analysis) sw).caseAStartPrograma(this);
     }
 
     public TProgram getProgram()
@@ -125,6 +131,32 @@ public final class APrograma extends PPrograma
         this._begin_ = node;
     }
 
+    public LinkedList<PDeclaracao> getDeclaracao()
+    {
+        return this._declaracao_;
+    }
+
+    public void setDeclaracao(List<?> list)
+    {
+        for(PDeclaracao e : this._declaracao_)
+        {
+            e.parent(null);
+        }
+        this._declaracao_.clear();
+
+        for(Object obj_e : list)
+        {
+            PDeclaracao e = (PDeclaracao) obj_e;
+            if(e.parent() != null)
+            {
+                e.parent().removeChild(e);
+            }
+
+            e.parent(this);
+            this._declaracao_.add(e);
+        }
+    }
+
     public TEnd getEnd()
     {
         return this._end_;
@@ -157,6 +189,7 @@ public final class APrograma extends PPrograma
             + toString(this._program_)
             + toString(this._id_)
             + toString(this._begin_)
+            + toString(this._declaracao_)
             + toString(this._end_);
     }
 
@@ -179,6 +212,11 @@ public final class APrograma extends PPrograma
         if(this._begin_ == child)
         {
             this._begin_ = null;
+            return;
+        }
+
+        if(this._declaracao_.remove(child))
+        {
             return;
         }
 
@@ -211,6 +249,24 @@ public final class APrograma extends PPrograma
         {
             setBegin((TBegin) newChild);
             return;
+        }
+
+        for(ListIterator<PDeclaracao> i = this._declaracao_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PDeclaracao) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         if(this._end_ == oldChild)

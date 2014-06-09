@@ -1,3 +1,4 @@
 programa p1
 inicio
+inteiro : x;
 fim.

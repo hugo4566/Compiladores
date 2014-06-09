@@ -303,6 +303,13 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getColon().apply(this);
         }
+        {
+            List<PVariavelComma> copy = new ArrayList<PVariavelComma>(node.getVariavelComma());
+            for(PVariavelComma e : copy)
+            {
+                e.apply(this);
+            }
+        }
         if(node.getVar() != null)
         {
             node.getVar().apply(this);

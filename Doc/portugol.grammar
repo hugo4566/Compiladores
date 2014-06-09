@@ -86,7 +86,35 @@ Ignored Tokens
 
 Productions
 
+	programa = {start} program id begin declaracao* end;
+
+	valor =
+		{string} 		string
+	|	{integer} 		n_int
+	|	{real} 			n_real;
+
+	tipo =
+		{real} 			real
+	|	{integer} 		integer
+	|	{char} 			character;
+
+	var =
+		{id} 			id
+	| 	{matrix} 		id l_bra n_int r_bra;
+
+	variavel_comma 		= {var_com} var comma;
+
+	declaracao =
+		{variable} 		tipo colon variavel_comma* var semi_c
+	| 	{constant} 		constant id valor semi_c ;
+
 /*
+	expr_comma 	   		= {exp_com} exp comma;
+	comando_semi_c 		= {comando_semic} comando semi_c;
+	opcional_else  		= {else_opc} else comando_semi_c+;
+	case_estrela   		= {case_star} case valor colon comando_semi_c+;
+	opcional_else_colon = {else_colon_opc} else colon comando_semi_c+;
+
 	var_value_exp =
 		{value}		 	valor
 	| 	{variable} 		var
@@ -124,34 +152,3 @@ Productions
 	| 	{for_one}		for var from [start]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c
 	| 	{for_x}			for var from [start]:n_int pass [step]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c;
 */
-
-
-/*	
-	expr_comma 	   		= {exp_com} exp comma;
-	comando_semi_c 		= {comando_semic} comando semi_c;
-	opcional_else  		= {else_opc} else comando_semi_c+;
-	case_estrela   		= {case_star} case valor colon comando_semi_c+;
-	opcional_else_colon = {else_colon_opc} else colon comando_semi_c+;
-*/
-
-	programa = {start} program id begin declaracao* end;
-
-	valor =
-		{string} 		string
-	|	{integer} 		n_int
-	|	{real} 			n_real;
-
-	tipo =
-		{real} 			real
-	|	{integer} 		integer
-	|	{char} 			character;
-
-	var =
-		{id} 			id
-	| 	{matrix} 		id l_bra n_int r_bra;
-
-	variavel_comma 		= {var_com} var comma;
-
-	declaracao =
-		{variable} 		tipo colon variavel_comma* var semi_c
-	| 	{constant} 		constant id valor semi_c ;

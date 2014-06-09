@@ -304,6 +304,14 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getVar().apply(this);
         }
+        {
+            List<PVariavelComma> copy = new ArrayList<PVariavelComma>(node.getVariavelComma());
+            Collections.reverse(copy);
+            for(PVariavelComma e : copy)
+            {
+                e.apply(this);
+            }
+        }
         if(node.getColon() != null)
         {
             node.getColon().apply(this);

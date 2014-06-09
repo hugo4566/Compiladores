@@ -264,28 +264,46 @@ public class Parser
                 push(goTo(4), list, false);
             }
             break;
-            case 11: /* reduce AVariableDeclaracao */
+            case 11: /* reduce AAvariabledeclaracao1Declaracao */
             {
                 ArrayList<Object> list = new11();
                 push(goTo(5), list, false);
             }
             break;
-            case 12: /* reduce AConstantDeclaracao */
+            case 12: /* reduce AAvariabledeclaracao2Declaracao */
             {
                 ArrayList<Object> list = new12();
                 push(goTo(5), list, false);
             }
             break;
-            case 13: /* reduce ATerminal$Declaracao */
+            case 13: /* reduce AConstantDeclaracao */
             {
                 ArrayList<Object> list = new13();
-                push(goTo(6), list, true);
+                push(goTo(5), list, false);
             }
             break;
-            case 14: /* reduce ANonTerminal$Declaracao */
+            case 14: /* reduce ATerminal$Declaracao */
             {
                 ArrayList<Object> list = new14();
                 push(goTo(6), list, true);
+            }
+            break;
+            case 15: /* reduce ANonTerminal$Declaracao */
+            {
+                ArrayList<Object> list = new15();
+                push(goTo(6), list, true);
+            }
+            break;
+            case 16: /* reduce ATerminal$VariavelComma */
+            {
+                ArrayList<Object> list = new16();
+                push(goTo(7), list, true);
+            }
+            break;
+            case 17: /* reduce ANonTerminal$VariavelComma */
+            {
+                ArrayList<Object> list = new17();
+                push(goTo(7), list, true);
             }
             break;
         }
@@ -559,7 +577,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new11() /* reduce AVariableDeclaracao */
+    ArrayList<Object> new11() /* reduce AAvariabledeclaracao1Declaracao */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -572,14 +590,18 @@ public class Parser
             // Block
         PTipo ptipoNode2;
         TColon tcolonNode3;
-        PVar pvarNode4;
-        TSemiC tsemicNode5;
+        LinkedList<Object> listNode4 = new LinkedList<Object>();
+        PVar pvarNode5;
+        TSemiC tsemicNode6;
         ptipoNode2 = (PTipo)nodeArrayList1.get(0);
         tcolonNode3 = (TColon)nodeArrayList2.get(0);
-        pvarNode4 = (PVar)nodeArrayList3.get(0);
-        tsemicNode5 = (TSemiC)nodeArrayList4.get(0);
+        {
+            // Block
+        }
+        pvarNode5 = (PVar)nodeArrayList3.get(0);
+        tsemicNode6 = (TSemiC)nodeArrayList4.get(0);
 
-        pdeclaracaoNode1 = new AVariableDeclaracao(ptipoNode2, tcolonNode3, pvarNode4, tsemicNode5);
+        pdeclaracaoNode1 = new AVariableDeclaracao(ptipoNode2, tcolonNode3, listNode4, pvarNode5, tsemicNode6);
         }
 	nodeList.add(pdeclaracaoNode1);
         return nodeList;
@@ -588,7 +610,47 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new12() /* reduce AConstantDeclaracao */
+    ArrayList<Object> new12() /* reduce AAvariabledeclaracao2Declaracao */
+    {
+        @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
+
+        @SuppressWarnings("unused") ArrayList<Object> nodeArrayList5 = pop();
+        @SuppressWarnings("unused") ArrayList<Object> nodeArrayList4 = pop();
+        @SuppressWarnings("unused") ArrayList<Object> nodeArrayList3 = pop();
+        @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
+        @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
+        PDeclaracao pdeclaracaoNode1;
+        {
+            // Block
+        PTipo ptipoNode2;
+        TColon tcolonNode3;
+        LinkedList<Object> listNode5 = new LinkedList<Object>();
+        PVar pvarNode6;
+        TSemiC tsemicNode7;
+        ptipoNode2 = (PTipo)nodeArrayList1.get(0);
+        tcolonNode3 = (TColon)nodeArrayList2.get(0);
+        {
+            // Block
+        LinkedList<Object> listNode4 = new LinkedList<Object>();
+        listNode4 = (LinkedList)nodeArrayList3.get(0);
+	if(listNode4 != null)
+	{
+	  listNode5.addAll(listNode4);
+	}
+        }
+        pvarNode6 = (PVar)nodeArrayList4.get(0);
+        tsemicNode7 = (TSemiC)nodeArrayList5.get(0);
+
+        pdeclaracaoNode1 = new AVariableDeclaracao(ptipoNode2, tcolonNode3, listNode5, pvarNode6, tsemicNode7);
+        }
+	nodeList.add(pdeclaracaoNode1);
+        return nodeList;
+    }
+
+
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    ArrayList<Object> new13() /* reduce AConstantDeclaracao */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -617,7 +679,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new13() /* reduce ATerminal$Declaracao */
+    ArrayList<Object> new14() /* reduce ATerminal$Declaracao */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -639,7 +701,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new14() /* reduce ANonTerminal$Declaracao */
+    ArrayList<Object> new15() /* reduce ANonTerminal$Declaracao */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -667,6 +729,57 @@ public class Parser
 
 
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    ArrayList<Object> new16() /* reduce ATerminal$VariavelComma */
+    {
+        @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
+
+        @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
+        LinkedList<Object> listNode2 = new LinkedList<Object>();
+        {
+            // Block
+        PVariavelComma pvariavelcommaNode1;
+        pvariavelcommaNode1 = (PVariavelComma)nodeArrayList1.get(0);
+	if(pvariavelcommaNode1 != null)
+	{
+	  listNode2.add(pvariavelcommaNode1);
+	}
+        }
+	nodeList.add(listNode2);
+        return nodeList;
+    }
+
+
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    ArrayList<Object> new17() /* reduce ANonTerminal$VariavelComma */
+    {
+        @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
+
+        @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
+        @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
+        LinkedList<Object> listNode3 = new LinkedList<Object>();
+        {
+            // Block
+        LinkedList<Object> listNode1 = new LinkedList<Object>();
+        PVariavelComma pvariavelcommaNode2;
+        listNode1 = (LinkedList)nodeArrayList1.get(0);
+        pvariavelcommaNode2 = (PVariavelComma)nodeArrayList2.get(0);
+	if(listNode1 != null)
+	{
+	  listNode3.addAll(listNode1);
+	}
+	if(pvariavelcommaNode2 != null)
+	{
+	  listNode3.add(pvariavelcommaNode2);
+	}
+        }
+	nodeList.add(listNode3);
+        return nodeList;
+    }
+
+
+
     private static int[][][] actionTable;
 /*      {
 			{{-1, ERROR, 0}, {24, SHIFT, 1}, },
@@ -680,22 +793,28 @@ public class Parser
 			{{-1, REDUCE, 7}, },
 			{{-1, ERROR, 9}, {49, SHIFT, 13}, },
 			{{-1, ERROR, 10}, {4, SHIFT, 14}, },
-			{{-1, REDUCE, 13}, },
+			{{-1, REDUCE, 14}, },
 			{{-1, ERROR, 12}, {26, SHIFT, 15}, {37, SHIFT, 6}, {38, SHIFT, 7}, {39, SHIFT, 8}, {40, SHIFT, 9}, },
 			{{-1, ERROR, 13}, {50, SHIFT, 17}, {51, SHIFT, 18}, {52, SHIFT, 19}, },
 			{{-1, ERROR, 14}, {49, SHIFT, 21}, },
 			{{-1, REDUCE, 1}, },
-			{{-1, REDUCE, 14}, },
+			{{-1, REDUCE, 15}, },
 			{{-1, REDUCE, 2}, },
 			{{-1, REDUCE, 4}, },
 			{{-1, REDUCE, 3}, },
-			{{-1, ERROR, 20}, {5, SHIFT, 23}, },
-			{{-1, REDUCE, 8}, {2, SHIFT, 24}, },
-			{{-1, ERROR, 22}, {5, SHIFT, 25}, },
-			{{-1, REDUCE, 12}, },
-			{{-1, ERROR, 24}, {52, SHIFT, 26}, },
+			{{-1, ERROR, 20}, {5, SHIFT, 25}, },
+			{{-1, REDUCE, 8}, {2, SHIFT, 26}, },
+			{{-1, ERROR, 22}, {5, SHIFT, 27}, {6, SHIFT, 28}, },
+			{{-1, REDUCE, 16}, },
+			{{-1, ERROR, 24}, {49, SHIFT, 21}, },
+			{{-1, REDUCE, 13}, },
+			{{-1, ERROR, 26}, {52, SHIFT, 31}, },
 			{{-1, REDUCE, 11}, },
-			{{-1, ERROR, 26}, {3, SHIFT, 27}, },
+			{{-1, REDUCE, 10}, },
+			{{-1, ERROR, 29}, {5, SHIFT, 32}, {6, SHIFT, 28}, },
+			{{-1, REDUCE, 17}, },
+			{{-1, ERROR, 31}, {3, SHIFT, 33}, },
+			{{-1, REDUCE, 12}, },
 			{{-1, REDUCE, 9}, },
         };*/
     private static int[][][] gotoTable;
@@ -703,10 +822,11 @@ public class Parser
 			{{-1, 2}, },
 			{{-1, 20}, },
 			{{-1, 10}, },
-			{{-1, 22}, },
-			{{-1, -1}, },
+			{{-1, 22}, {24, 29}, },
+			{{-1, 23}, {24, 30}, },
 			{{-1, 11}, {12, 16}, },
 			{{-1, 12}, },
+			{{-1, 24}, },
         };*/
     private static String[] errorMessages;
 /*      {
@@ -718,13 +838,14 @@ public class Parser
 			"expecting: ':'",
 			"expecting: string, n real, n int",
 			"expecting: ';'",
-			"expecting: '[', ';'",
+			"expecting: '[', ';', ','",
+			"expecting: ';', ','",
 			"expecting: n int",
 			"expecting: ']'",
         };*/
     private static int[] errors;
 /*      {
-			0, 1, 2, 3, 4, 2, 5, 5, 5, 1, 5, 4, 4, 6, 1, 2, 4, 7, 7, 7, 7, 8, 7, 4, 9, 4, 10, 7, 
+			0, 1, 2, 3, 4, 2, 5, 5, 5, 1, 5, 4, 4, 6, 1, 2, 4, 7, 7, 7, 7, 8, 9, 1, 1, 4, 10, 4, 1, 9, 1, 11, 4, 9, 
         };*/
 
     static 

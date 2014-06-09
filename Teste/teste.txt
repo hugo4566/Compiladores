@@ -1,4 +1,6 @@
 programa p1
 inicio
 inteiro : x;
+const y 'oi';
+real : z[9],k,t;
 fim.

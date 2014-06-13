@@ -86,7 +86,7 @@ Ignored Tokens
 
 Productions
 
-	programa = {start} program id begin declaracao* end;
+	programa = {start} program id begin declaracao* comando* end;
 
 	valor =
 		{string} 		string
@@ -102,53 +102,62 @@ Productions
 		{id} 			id
 	| 	{matrix} 		id l_bra n_int r_bra;
 
+
 	variavel_comma 		= {var_com} var comma;
 
 	declaracao =
 		{variable} 		tipo colon variavel_comma* var semi_c
 	| 	{constant} 		constant id valor semi_c ;
 
-/*
+
 	expr_comma 	   		= {exp_com} exp comma;
 	comando_semi_c 		= {comando_semic} comando semi_c;
 	opcional_else  		= {else_opc} else comando_semi_c+;
 	case_estrela   		= {case_star} case valor colon comando_semi_c+;
 	opcional_else_colon = {else_colon_opc} else colon comando_semi_c+;
 
-	var_value_exp =
+	var_value =
 		{value}		 	valor
-	| 	{variable} 		var
-	| 	{explog}		exp_logica;
+	| 	{variable} 		var;
 
-	exp =
-		{vari_val_exp}  var_value_exp
-	| 	{l_exp_r} 		l_par exp r_par
-	| 	{minus_exp}		minus exp
-	| 	{exp_p_exp}		[pre]:exp plus var_value_exp
-	| 	{exp_m_exp}		[pre]:exp minus var_value_exp
-	| 	{exp_x_exp}		[pre]:exp mult var_value_exp
-	| 	{exp_div_exp}	[pre]:exp div var_value_exp;
+	op1 = {op11} minus
+	| {op12} plus;
 
+	op2 = {op21} mult
+	| {op22} div;
+
+	exp = {exp_op1_fat}  exp op1 fator
+	| {fat} fator; 
+
+	fator = {fat_op2_ter} fator op2 termo
+	| {ter} termo;
+
+	termo = {l_exp_r} l_par exp r_par 
+	| {vari_val} var_value
+	| {minus_exp} minus exp; 
+//	|   {explog}		exp_logica;
+
+
+/*
 	exp_logica =
-	 	{exp_eq_exp} 	[pre]:exp equal var_value_exp
-	|	{exp_neq_exp} 	[pre]:exp not_equal var_value_exp
-	|	{exp_leq_exp} 	[pre]:exp less_eq var_value_exp
-	|	{exp_geq_exp} 	[pre]:exp greater_eq var_value_exp
-	|	{exp_less_exp} 	[pre]:exp less var_value_exp
-	|	{exp_great_exp}	[pre]:exp greater var_value_exp
+	 	{exp_eq_exp} 	[pre]:exp equal var_value
+	|	{exp_neq_exp} 	[pre]:exp not_equal var_value
+	|	{exp_leq_exp} 	[pre]:exp less_eq var_value
+	|	{exp_geq_exp} 	[pre]:exp greater_eq var_value
+	|	{exp_less_exp} 	[pre]:exp less var_value
+	|	{exp_great_exp}	[pre]:exp greater var_value
 	|	{not_exp} 		not exp_logica
 	|	{and_exp} 		[pre]:exp_logica and [pos]:exp_logica
 	|	{or_exp} 		[pre]:exp_logica or [pos]:exp_logica
 	|	{xor_exp} 		[pre]:exp_logica xor [pos]:exp_logica;
+*/
 
 	comando =
 	  	{atrib} 		var is exp semi_c
 	| 	{read}			read l_par variavel_comma* var r_par semi_c
 	| 	{write}			write l_par expr_comma* exp r_par semi_c
-	| 	{if}			if l_par exp_logica r_par then comando_semi_c+ opcional_else? end_if semi_c
+	| 	{if}			if l_par id r_par then comando_semi_c+ opcional_else? end_if semi_c
 	| 	{evaluate}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e semi_c
-	| 	{while}			while l_par exp_logica r_par do comando_semi_c+ end_w semi_c
-	| 	{repeat}		repeat comando_semi_c+ until l_par exp_logica r_par semi_c
-	| 	{for_one}		for var from [start]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c
-	| 	{for_x}			for var from [start]:n_int pass [step]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c;
-*/
+	| 	{while}			while l_par id r_par do comando_semi_c+ end_w semi_c
+	| 	{repeat}		repeat comando_semi_c+ until l_par id r_par semi_c
+	| 	{for_one}		for var from [start]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c;

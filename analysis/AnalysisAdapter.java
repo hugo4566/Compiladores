@@ -147,6 +147,162 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAExpComExprComma(AExpComExprComma node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandoSemicComandoSemiC(AComandoSemicComandoSemiC node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAElseOpcOpcionalElse(AElseOpcOpcionalElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACaseStarCaseEstrela(ACaseStarCaseEstrela node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAElseColonOpcOpcionalElseColon(AElseColonOpcOpcionalElseColon node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAValueVarValue(AValueVarValue node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVariableVarValue(AVariableVarValue node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp11Op1(AOp11Op1 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp12Op1(AOp12Op1 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp21Op2(AOp21Op2 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp22Op2(AOp22Op2 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpOp1FatExp(AExpOp1FatExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAFatExp(AFatExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAFatOp2TerFator(AFatOp2TerFator node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATerFator(ATerFator node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALExpRTermo(ALExpRTermo node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVariValTermo(AVariValTermo node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMinusExpTermo(AMinusExpTermo node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAtribComando(AAtribComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAReadComando(AReadComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAWriteComando(AWriteComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIfComando(AIfComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEvaluateComando(AEvaluateComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAWhileComando(AWhileComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseARepeatComando(ARepeatComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAForOneComando(AForOneComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTLPar(TLPar node)
     {
         defaultCase(node);

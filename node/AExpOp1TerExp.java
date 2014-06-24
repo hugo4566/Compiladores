@@ -5,69 +5,44 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class ALExpRTermo extends PTermo
+public final class AExpOp1TerExp extends PExp
 {
-    private TLPar _lPar_;
     private PExp _exp_;
-    private TRPar _rPar_;
+    private POp1 _op1_;
+    private PTermo _termo_;
 
-    public ALExpRTermo()
+    public AExpOp1TerExp()
     {
         // Constructor
     }
 
-    public ALExpRTermo(
-        @SuppressWarnings("hiding") TLPar _lPar_,
+    public AExpOp1TerExp(
         @SuppressWarnings("hiding") PExp _exp_,
-        @SuppressWarnings("hiding") TRPar _rPar_)
+        @SuppressWarnings("hiding") POp1 _op1_,
+        @SuppressWarnings("hiding") PTermo _termo_)
     {
         // Constructor
-        setLPar(_lPar_);
-
         setExp(_exp_);
 
-        setRPar(_rPar_);
+        setOp1(_op1_);
+
+        setTermo(_termo_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ALExpRTermo(
-            cloneNode(this._lPar_),
+        return new AExpOp1TerExp(
             cloneNode(this._exp_),
-            cloneNode(this._rPar_));
+            cloneNode(this._op1_),
+            cloneNode(this._termo_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseALExpRTermo(this);
-    }
-
-    public TLPar getLPar()
-    {
-        return this._lPar_;
-    }
-
-    public void setLPar(TLPar node)
-    {
-        if(this._lPar_ != null)
-        {
-            this._lPar_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._lPar_ = node;
+        ((Analysis) sw).caseAExpOp1TerExp(this);
     }
 
     public PExp getExp()
@@ -95,16 +70,16 @@ public final class ALExpRTermo extends PTermo
         this._exp_ = node;
     }
 
-    public TRPar getRPar()
+    public POp1 getOp1()
     {
-        return this._rPar_;
+        return this._op1_;
     }
 
-    public void setRPar(TRPar node)
+    public void setOp1(POp1 node)
     {
-        if(this._rPar_ != null)
+        if(this._op1_ != null)
         {
-            this._rPar_.parent(null);
+            this._op1_.parent(null);
         }
 
         if(node != null)
@@ -117,37 +92,62 @@ public final class ALExpRTermo extends PTermo
             node.parent(this);
         }
 
-        this._rPar_ = node;
+        this._op1_ = node;
+    }
+
+    public PTermo getTermo()
+    {
+        return this._termo_;
+    }
+
+    public void setTermo(PTermo node)
+    {
+        if(this._termo_ != null)
+        {
+            this._termo_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._termo_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._lPar_)
             + toString(this._exp_)
-            + toString(this._rPar_);
+            + toString(this._op1_)
+            + toString(this._termo_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._lPar_ == child)
-        {
-            this._lPar_ = null;
-            return;
-        }
-
         if(this._exp_ == child)
         {
             this._exp_ = null;
             return;
         }
 
-        if(this._rPar_ == child)
+        if(this._op1_ == child)
         {
-            this._rPar_ = null;
+            this._op1_ = null;
+            return;
+        }
+
+        if(this._termo_ == child)
+        {
+            this._termo_ = null;
             return;
         }
 
@@ -158,21 +158,21 @@ public final class ALExpRTermo extends PTermo
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._lPar_ == oldChild)
-        {
-            setLPar((TLPar) newChild);
-            return;
-        }
-
         if(this._exp_ == oldChild)
         {
             setExp((PExp) newChild);
             return;
         }
 
-        if(this._rPar_ == oldChild)
+        if(this._op1_ == oldChild)
         {
-            setRPar((TRPar) newChild);
+            setOp1((POp1) newChild);
+            return;
+        }
+
+        if(this._termo_ == oldChild)
+        {
+            setTermo((PTermo) newChild);
             return;
         }
 

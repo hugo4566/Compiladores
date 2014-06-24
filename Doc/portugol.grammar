@@ -120,21 +120,19 @@ Productions
 		{value}		 	valor
 	| 	{variable} 		var;
 
-	op1 = {op11} minus
-	| {op12} plus;
+	op1 = {op11} minus | {op12} plus;
 
-	op2 = {op21} mult
-	| {op22} div;
+	op2 = {op21} mult | {op22} div;
 
-	exp = {exp_op1_fat}  exp op1 fator
-	| {fat} fator; 
+	exp = {exp_op1_ter}  exp op1 termo
+	| {ter} termo; 
 
-	fator = {fat_op2_ter} fator op2 termo
-	| {ter} termo;
+	termo = {ter_op2_fat} termo op2 fator
+	| {fat} fator;
 
-	termo = {l_exp_r} l_par exp r_par 
-	| {vari_val} var_value
-	| {minus_exp} minus exp; 
+	fator = {l_exp_r} l_par exp r_par 
+	| {vari_val} var_value;
+//	| {minus_exp} minus exp;  O PROBLEMA É NESSA LINHA <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //	|   {explog}		exp_logica;
 
 
@@ -152,6 +150,8 @@ Productions
 	|	{xor_exp} 		[pre]:exp_logica xor [pos]:exp_logica;
 */
 
+	step = {passo} pass n_int;
+
 	comando =
 	  	{atrib} 		var is exp semi_c
 	| 	{read}			read l_par variavel_comma* var r_par semi_c
@@ -160,4 +160,4 @@ Productions
 	| 	{evaluate}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e semi_c
 	| 	{while}			while l_par id r_par do comando_semi_c+ end_w semi_c
 	| 	{repeat}		repeat comando_semi_c+ until l_par id r_par semi_c
-	| 	{for_one}		for var from [start]:n_int until [stop]:n_int do comando_semi_c+ end_f semi_c;
+	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando_semi_c+ end_f semi_c;

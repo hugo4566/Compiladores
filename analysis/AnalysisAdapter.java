@@ -213,43 +213,43 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAExpOp1FatExp(AExpOp1FatExp node)
+    public void caseAExpOp1TerExp(AExpOp1TerExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFatExp(AFatExp node)
+    public void caseATerExp(ATerExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFatOp2TerFator(AFatOp2TerFator node)
+    public void caseATerOp2FatTermo(ATerOp2FatTermo node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATerFator(ATerFator node)
+    public void caseAFatTermo(AFatTermo node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseALExpRTermo(ALExpRTermo node)
+    public void caseALExpRFator(ALExpRFator node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAVariValTermo(AVariValTermo node)
+    public void caseAVariValFator(AVariValFator node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAMinusExpTermo(AMinusExpTermo node)
+    public void caseAPassoStep(APassoStep node)
     {
         defaultCase(node);
     }

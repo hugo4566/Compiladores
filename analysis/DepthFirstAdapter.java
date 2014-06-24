@@ -633,20 +633,20 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAOp22Op2(node);
     }
 
-    public void inAExpOp1FatExp(AExpOp1FatExp node)
+    public void inAExpOp1TerExp(AExpOp1TerExp node)
     {
         defaultIn(node);
     }
 
-    public void outAExpOp1FatExp(AExpOp1FatExp node)
+    public void outAExpOp1TerExp(AExpOp1TerExp node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAExpOp1FatExp(AExpOp1FatExp node)
+    public void caseAExpOp1TerExp(AExpOp1TerExp node)
     {
-        inAExpOp1FatExp(node);
+        inAExpOp1TerExp(node);
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
@@ -655,98 +655,98 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getOp1().apply(this);
         }
-        if(node.getFator() != null)
+        if(node.getTermo() != null)
         {
-            node.getFator().apply(this);
+            node.getTermo().apply(this);
         }
-        outAExpOp1FatExp(node);
+        outAExpOp1TerExp(node);
     }
 
-    public void inAFatExp(AFatExp node)
+    public void inATerExp(ATerExp node)
     {
         defaultIn(node);
     }
 
-    public void outAFatExp(AFatExp node)
+    public void outATerExp(ATerExp node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAFatExp(AFatExp node)
+    public void caseATerExp(ATerExp node)
     {
-        inAFatExp(node);
-        if(node.getFator() != null)
+        inATerExp(node);
+        if(node.getTermo() != null)
         {
-            node.getFator().apply(this);
+            node.getTermo().apply(this);
         }
-        outAFatExp(node);
+        outATerExp(node);
     }
 
-    public void inAFatOp2TerFator(AFatOp2TerFator node)
+    public void inATerOp2FatTermo(ATerOp2FatTermo node)
     {
         defaultIn(node);
     }
 
-    public void outAFatOp2TerFator(AFatOp2TerFator node)
+    public void outATerOp2FatTermo(ATerOp2FatTermo node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAFatOp2TerFator(AFatOp2TerFator node)
+    public void caseATerOp2FatTermo(ATerOp2FatTermo node)
     {
-        inAFatOp2TerFator(node);
-        if(node.getFator() != null)
+        inATerOp2FatTermo(node);
+        if(node.getTermo() != null)
         {
-            node.getFator().apply(this);
+            node.getTermo().apply(this);
         }
         if(node.getOp2() != null)
         {
             node.getOp2().apply(this);
         }
-        if(node.getTermo() != null)
+        if(node.getFator() != null)
         {
-            node.getTermo().apply(this);
+            node.getFator().apply(this);
         }
-        outAFatOp2TerFator(node);
+        outATerOp2FatTermo(node);
     }
 
-    public void inATerFator(ATerFator node)
+    public void inAFatTermo(AFatTermo node)
     {
         defaultIn(node);
     }
 
-    public void outATerFator(ATerFator node)
+    public void outAFatTermo(AFatTermo node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATerFator(ATerFator node)
+    public void caseAFatTermo(AFatTermo node)
     {
-        inATerFator(node);
-        if(node.getTermo() != null)
+        inAFatTermo(node);
+        if(node.getFator() != null)
         {
-            node.getTermo().apply(this);
+            node.getFator().apply(this);
         }
-        outATerFator(node);
+        outAFatTermo(node);
     }
 
-    public void inALExpRTermo(ALExpRTermo node)
+    public void inALExpRFator(ALExpRFator node)
     {
         defaultIn(node);
     }
 
-    public void outALExpRTermo(ALExpRTermo node)
+    public void outALExpRFator(ALExpRFator node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseALExpRTermo(ALExpRTermo node)
+    public void caseALExpRFator(ALExpRFator node)
     {
-        inALExpRTermo(node);
+        inALExpRFator(node);
         if(node.getLPar() != null)
         {
             node.getLPar().apply(this);
@@ -759,53 +759,53 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRPar().apply(this);
         }
-        outALExpRTermo(node);
+        outALExpRFator(node);
     }
 
-    public void inAVariValTermo(AVariValTermo node)
+    public void inAVariValFator(AVariValFator node)
     {
         defaultIn(node);
     }
 
-    public void outAVariValTermo(AVariValTermo node)
+    public void outAVariValFator(AVariValFator node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAVariValTermo(AVariValTermo node)
+    public void caseAVariValFator(AVariValFator node)
     {
-        inAVariValTermo(node);
+        inAVariValFator(node);
         if(node.getVarValue() != null)
         {
             node.getVarValue().apply(this);
         }
-        outAVariValTermo(node);
+        outAVariValFator(node);
     }
 
-    public void inAMinusExpTermo(AMinusExpTermo node)
+    public void inAPassoStep(APassoStep node)
     {
         defaultIn(node);
     }
 
-    public void outAMinusExpTermo(AMinusExpTermo node)
+    public void outAPassoStep(APassoStep node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAMinusExpTermo(AMinusExpTermo node)
+    public void caseAPassoStep(APassoStep node)
     {
-        inAMinusExpTermo(node);
-        if(node.getMinus() != null)
+        inAPassoStep(node);
+        if(node.getPass() != null)
         {
-            node.getMinus().apply(this);
+            node.getPass().apply(this);
         }
-        if(node.getExp() != null)
+        if(node.getNInt() != null)
         {
-            node.getExp().apply(this);
+            node.getNInt().apply(this);
         }
-        outAMinusExpTermo(node);
+        outAPassoStep(node);
     }
 
     public void inAAtribComando(AAtribComando node)
@@ -1166,6 +1166,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         if(node.getStart() != null)
         {
             node.getStart().apply(this);
+        }
+        if(node.getStep() != null)
+        {
+            node.getStep().apply(this);
         }
         if(node.getUntil() != null)
         {

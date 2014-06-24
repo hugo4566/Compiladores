@@ -5,16 +5,16 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class ATerFator extends PFator
+public final class ATerExp extends PExp
 {
     private PTermo _termo_;
 
-    public ATerFator()
+    public ATerExp()
     {
         // Constructor
     }
 
-    public ATerFator(
+    public ATerExp(
         @SuppressWarnings("hiding") PTermo _termo_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class ATerFator extends PFator
     @Override
     public Object clone()
     {
-        return new ATerFator(
+        return new ATerExp(
             cloneNode(this._termo_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseATerFator(this);
+        ((Analysis) sw).caseATerExp(this);
     }
 
     public PTermo getTermo()

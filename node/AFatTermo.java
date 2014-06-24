@@ -5,16 +5,16 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AFatExp extends PExp
+public final class AFatTermo extends PTermo
 {
     private PFator _fator_;
 
-    public AFatExp()
+    public AFatTermo()
     {
         // Constructor
     }
 
-    public AFatExp(
+    public AFatTermo(
         @SuppressWarnings("hiding") PFator _fator_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class AFatExp extends PExp
     @Override
     public Object clone()
     {
-        return new AFatExp(
+        return new AFatTermo(
             cloneNode(this._fator_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAFatExp(this);
+        ((Analysis) sw).caseAFatTermo(this);
     }
 
     public PFator getFator()

@@ -5,16 +5,16 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVariValTermo extends PTermo
+public final class AVariValFator extends PFator
 {
     private PVarValue _varValue_;
 
-    public AVariValTermo()
+    public AVariValFator()
     {
         // Constructor
     }
 
-    public AVariValTermo(
+    public AVariValFator(
         @SuppressWarnings("hiding") PVarValue _varValue_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class AVariValTermo extends PTermo
     @Override
     public Object clone()
     {
-        return new AVariValTermo(
+        return new AVariValFator(
             cloneNode(this._varValue_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVariValTermo(this);
+        ((Analysis) sw).caseAVariValFator(this);
     }
 
     public PVarValue getVarValue()

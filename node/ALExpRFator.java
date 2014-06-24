@@ -5,51 +5,56 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AMinusExpTermo extends PTermo
+public final class ALExpRFator extends PFator
 {
-    private TMinus _minus_;
+    private TLPar _lPar_;
     private PExp _exp_;
+    private TRPar _rPar_;
 
-    public AMinusExpTermo()
+    public ALExpRFator()
     {
         // Constructor
     }
 
-    public AMinusExpTermo(
-        @SuppressWarnings("hiding") TMinus _minus_,
-        @SuppressWarnings("hiding") PExp _exp_)
+    public ALExpRFator(
+        @SuppressWarnings("hiding") TLPar _lPar_,
+        @SuppressWarnings("hiding") PExp _exp_,
+        @SuppressWarnings("hiding") TRPar _rPar_)
     {
         // Constructor
-        setMinus(_minus_);
+        setLPar(_lPar_);
 
         setExp(_exp_);
+
+        setRPar(_rPar_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AMinusExpTermo(
-            cloneNode(this._minus_),
-            cloneNode(this._exp_));
+        return new ALExpRFator(
+            cloneNode(this._lPar_),
+            cloneNode(this._exp_),
+            cloneNode(this._rPar_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAMinusExpTermo(this);
+        ((Analysis) sw).caseALExpRFator(this);
     }
 
-    public TMinus getMinus()
+    public TLPar getLPar()
     {
-        return this._minus_;
+        return this._lPar_;
     }
 
-    public void setMinus(TMinus node)
+    public void setLPar(TLPar node)
     {
-        if(this._minus_ != null)
+        if(this._lPar_ != null)
         {
-            this._minus_.parent(null);
+            this._lPar_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +67,7 @@ public final class AMinusExpTermo extends PTermo
             node.parent(this);
         }
 
-        this._minus_ = node;
+        this._lPar_ = node;
     }
 
     public PExp getExp()
@@ -90,27 +95,59 @@ public final class AMinusExpTermo extends PTermo
         this._exp_ = node;
     }
 
+    public TRPar getRPar()
+    {
+        return this._rPar_;
+    }
+
+    public void setRPar(TRPar node)
+    {
+        if(this._rPar_ != null)
+        {
+            this._rPar_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._rPar_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._minus_)
-            + toString(this._exp_);
+            + toString(this._lPar_)
+            + toString(this._exp_)
+            + toString(this._rPar_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._minus_ == child)
+        if(this._lPar_ == child)
         {
-            this._minus_ = null;
+            this._lPar_ = null;
             return;
         }
 
         if(this._exp_ == child)
         {
             this._exp_ = null;
+            return;
+        }
+
+        if(this._rPar_ == child)
+        {
+            this._rPar_ = null;
             return;
         }
 
@@ -121,15 +158,21 @@ public final class AMinusExpTermo extends PTermo
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._minus_ == oldChild)
+        if(this._lPar_ == oldChild)
         {
-            setMinus((TMinus) newChild);
+            setLPar((TLPar) newChild);
             return;
         }
 
         if(this._exp_ == oldChild)
         {
             setExp((PExp) newChild);
+            return;
+        }
+
+        if(this._rPar_ == oldChild)
+        {
+            setRPar((TRPar) newChild);
             return;
         }
 

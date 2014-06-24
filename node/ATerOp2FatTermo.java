@@ -5,94 +5,44 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AFatOp2TerFator extends PFator
+public final class ATerOp2FatTermo extends PTermo
 {
-    private PFator _fator_;
-    private POp2 _op2_;
     private PTermo _termo_;
+    private POp2 _op2_;
+    private PFator _fator_;
 
-    public AFatOp2TerFator()
+    public ATerOp2FatTermo()
     {
         // Constructor
     }
 
-    public AFatOp2TerFator(
-        @SuppressWarnings("hiding") PFator _fator_,
+    public ATerOp2FatTermo(
+        @SuppressWarnings("hiding") PTermo _termo_,
         @SuppressWarnings("hiding") POp2 _op2_,
-        @SuppressWarnings("hiding") PTermo _termo_)
+        @SuppressWarnings("hiding") PFator _fator_)
     {
         // Constructor
-        setFator(_fator_);
+        setTermo(_termo_);
 
         setOp2(_op2_);
 
-        setTermo(_termo_);
+        setFator(_fator_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AFatOp2TerFator(
-            cloneNode(this._fator_),
+        return new ATerOp2FatTermo(
+            cloneNode(this._termo_),
             cloneNode(this._op2_),
-            cloneNode(this._termo_));
+            cloneNode(this._fator_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAFatOp2TerFator(this);
-    }
-
-    public PFator getFator()
-    {
-        return this._fator_;
-    }
-
-    public void setFator(PFator node)
-    {
-        if(this._fator_ != null)
-        {
-            this._fator_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._fator_ = node;
-    }
-
-    public POp2 getOp2()
-    {
-        return this._op2_;
-    }
-
-    public void setOp2(POp2 node)
-    {
-        if(this._op2_ != null)
-        {
-            this._op2_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._op2_ = node;
+        ((Analysis) sw).caseATerOp2FatTermo(this);
     }
 
     public PTermo getTermo()
@@ -120,22 +70,72 @@ public final class AFatOp2TerFator extends PFator
         this._termo_ = node;
     }
 
+    public POp2 getOp2()
+    {
+        return this._op2_;
+    }
+
+    public void setOp2(POp2 node)
+    {
+        if(this._op2_ != null)
+        {
+            this._op2_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._op2_ = node;
+    }
+
+    public PFator getFator()
+    {
+        return this._fator_;
+    }
+
+    public void setFator(PFator node)
+    {
+        if(this._fator_ != null)
+        {
+            this._fator_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._fator_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._fator_)
+            + toString(this._termo_)
             + toString(this._op2_)
-            + toString(this._termo_);
+            + toString(this._fator_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._fator_ == child)
+        if(this._termo_ == child)
         {
-            this._fator_ = null;
+            this._termo_ = null;
             return;
         }
 
@@ -145,9 +145,9 @@ public final class AFatOp2TerFator extends PFator
             return;
         }
 
-        if(this._termo_ == child)
+        if(this._fator_ == child)
         {
-            this._termo_ = null;
+            this._fator_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class AFatOp2TerFator extends PFator
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._fator_ == oldChild)
+        if(this._termo_ == oldChild)
         {
-            setFator((PFator) newChild);
+            setTermo((PTermo) newChild);
             return;
         }
 
@@ -170,9 +170,9 @@ public final class AFatOp2TerFator extends PFator
             return;
         }
 
-        if(this._termo_ == oldChild)
+        if(this._fator_ == oldChild)
         {
-            setTermo((PTermo) newChild);
+            setFator((PFator) newChild);
             return;
         }
 

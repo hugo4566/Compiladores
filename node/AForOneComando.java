@@ -12,6 +12,7 @@ public final class AForOneComando extends PComando
     private PVar _var_;
     private TFrom _from_;
     private TNInt _start_;
+    private PStep _step_;
     private TUntil _until_;
     private TNInt _stop_;
     private TDo _do_;
@@ -29,6 +30,7 @@ public final class AForOneComando extends PComando
         @SuppressWarnings("hiding") PVar _var_,
         @SuppressWarnings("hiding") TFrom _from_,
         @SuppressWarnings("hiding") TNInt _start_,
+        @SuppressWarnings("hiding") PStep _step_,
         @SuppressWarnings("hiding") TUntil _until_,
         @SuppressWarnings("hiding") TNInt _stop_,
         @SuppressWarnings("hiding") TDo _do_,
@@ -44,6 +46,8 @@ public final class AForOneComando extends PComando
         setFrom(_from_);
 
         setStart(_start_);
+
+        setStep(_step_);
 
         setUntil(_until_);
 
@@ -67,6 +71,7 @@ public final class AForOneComando extends PComando
             cloneNode(this._var_),
             cloneNode(this._from_),
             cloneNode(this._start_),
+            cloneNode(this._step_),
             cloneNode(this._until_),
             cloneNode(this._stop_),
             cloneNode(this._do_),
@@ -179,6 +184,31 @@ public final class AForOneComando extends PComando
         }
 
         this._start_ = node;
+    }
+
+    public PStep getStep()
+    {
+        return this._step_;
+    }
+
+    public void setStep(PStep node)
+    {
+        if(this._step_ != null)
+        {
+            this._step_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._step_ = node;
     }
 
     public TUntil getUntil()
@@ -340,6 +370,7 @@ public final class AForOneComando extends PComando
             + toString(this._var_)
             + toString(this._from_)
             + toString(this._start_)
+            + toString(this._step_)
             + toString(this._until_)
             + toString(this._stop_)
             + toString(this._do_)
@@ -373,6 +404,12 @@ public final class AForOneComando extends PComando
         if(this._start_ == child)
         {
             this._start_ = null;
+            return;
+        }
+
+        if(this._step_ == child)
+        {
+            this._step_ = null;
             return;
         }
 
@@ -439,6 +476,12 @@ public final class AForOneComando extends PComando
         if(this._start_ == oldChild)
         {
             setStart((TNInt) newChild);
+            return;
+        }
+
+        if(this._step_ == oldChild)
+        {
+            setStep((PStep) newChild);
             return;
         }
 

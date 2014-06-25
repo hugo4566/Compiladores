@@ -249,12 +249,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAExplogFator(AExplogFator node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAOp31Op3(AOp31Op3 node)
     {
         defaultCase(node);

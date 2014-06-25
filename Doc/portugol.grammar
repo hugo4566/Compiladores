@@ -131,8 +131,8 @@ Productions
 	| {fat} fator;
 
 	fator = {l_exp_r} minus? l_par exp r_par 
-	| {vari_val} var_value
-	|   {explog}		exp_logica;
+	| {vari_val} var_value;
+//	|   {explog}		exp_logica;
 
 	op3 = {op31} less_eq
 		| {op32} less
@@ -142,12 +142,11 @@ Productions
 	op4 = {op41} equal
 		| {op42} not_equal;
 
-
 	exp_logica =
 		{or_exp} 		[pre]:exp_logica or [pos]:exp_logica
 	|	{xor_exp} 		[pre]:exp_logica xor [pos]:exp_logica
 	|	{and_exp} 		[pre]:exp_logica and [pos]:exp_logica
-	|	{not_exp} 		not exp_logica
+	|	{not_exp} 		not l_par exp_logica r_par
 	|	{exp_op4_exp} 	[pre]:exp op4 var_value
 	|	{exp_op3_exp} 	[pre]:exp op3 var_value;
 

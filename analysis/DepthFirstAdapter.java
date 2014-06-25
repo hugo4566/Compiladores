@@ -787,27 +787,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAVariValFator(node);
     }
 
-    public void inAExplogFator(AExplogFator node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAExplogFator(AExplogFator node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAExplogFator(AExplogFator node)
-    {
-        inAExplogFator(node);
-        if(node.getExpLogica() != null)
-        {
-            node.getExpLogica().apply(this);
-        }
-        outAExplogFator(node);
-    }
-
     public void inAOp31Op3(AOp31Op3 node)
     {
         defaultIn(node);
@@ -1039,9 +1018,17 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getNot().apply(this);
         }
+        if(node.getLPar() != null)
+        {
+            node.getLPar().apply(this);
+        }
         if(node.getExpLogica() != null)
         {
             node.getExpLogica().apply(this);
+        }
+        if(node.getRPar() != null)
+        {
+            node.getRPar().apply(this);
         }
         outANotExpExpLogica(node);
     }

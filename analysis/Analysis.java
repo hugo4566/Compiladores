@@ -41,7 +41,6 @@ public interface Analysis extends Switch
     void caseAFatTermo(AFatTermo node);
     void caseALExpRFator(ALExpRFator node);
     void caseAVariValFator(AVariValFator node);
-    void caseAExplogFator(AExplogFator node);
     void caseAOp31Op3(AOp31Op3 node);
     void caseAOp32Op3(AOp32Op3 node);
     void caseAOp33Op3(AOp33Op3 node);

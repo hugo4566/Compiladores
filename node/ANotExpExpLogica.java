@@ -8,7 +8,9 @@ import analysis.*;
 public final class ANotExpExpLogica extends PExpLogica
 {
     private TNot _not_;
+    private TLPar _lPar_;
     private PExpLogica _expLogica_;
+    private TRPar _rPar_;
 
     public ANotExpExpLogica()
     {
@@ -17,12 +19,18 @@ public final class ANotExpExpLogica extends PExpLogica
 
     public ANotExpExpLogica(
         @SuppressWarnings("hiding") TNot _not_,
-        @SuppressWarnings("hiding") PExpLogica _expLogica_)
+        @SuppressWarnings("hiding") TLPar _lPar_,
+        @SuppressWarnings("hiding") PExpLogica _expLogica_,
+        @SuppressWarnings("hiding") TRPar _rPar_)
     {
         // Constructor
         setNot(_not_);
 
+        setLPar(_lPar_);
+
         setExpLogica(_expLogica_);
+
+        setRPar(_rPar_);
 
     }
 
@@ -31,7 +39,9 @@ public final class ANotExpExpLogica extends PExpLogica
     {
         return new ANotExpExpLogica(
             cloneNode(this._not_),
-            cloneNode(this._expLogica_));
+            cloneNode(this._lPar_),
+            cloneNode(this._expLogica_),
+            cloneNode(this._rPar_));
     }
 
     @Override
@@ -65,6 +75,31 @@ public final class ANotExpExpLogica extends PExpLogica
         this._not_ = node;
     }
 
+    public TLPar getLPar()
+    {
+        return this._lPar_;
+    }
+
+    public void setLPar(TLPar node)
+    {
+        if(this._lPar_ != null)
+        {
+            this._lPar_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._lPar_ = node;
+    }
+
     public PExpLogica getExpLogica()
     {
         return this._expLogica_;
@@ -90,12 +125,39 @@ public final class ANotExpExpLogica extends PExpLogica
         this._expLogica_ = node;
     }
 
+    public TRPar getRPar()
+    {
+        return this._rPar_;
+    }
+
+    public void setRPar(TRPar node)
+    {
+        if(this._rPar_ != null)
+        {
+            this._rPar_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._rPar_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
             + toString(this._not_)
-            + toString(this._expLogica_);
+            + toString(this._lPar_)
+            + toString(this._expLogica_)
+            + toString(this._rPar_);
     }
 
     @Override
@@ -108,9 +170,21 @@ public final class ANotExpExpLogica extends PExpLogica
             return;
         }
 
+        if(this._lPar_ == child)
+        {
+            this._lPar_ = null;
+            return;
+        }
+
         if(this._expLogica_ == child)
         {
             this._expLogica_ = null;
+            return;
+        }
+
+        if(this._rPar_ == child)
+        {
+            this._rPar_ = null;
             return;
         }
 
@@ -127,9 +201,21 @@ public final class ANotExpExpLogica extends PExpLogica
             return;
         }
 
+        if(this._lPar_ == oldChild)
+        {
+            setLPar((TLPar) newChild);
+            return;
+        }
+
         if(this._expLogica_ == oldChild)
         {
             setExpLogica((PExpLogica) newChild);
+            return;
+        }
+
+        if(this._rPar_ == oldChild)
+        {
+            setRPar((TRPar) newChild);
             return;
         }
 

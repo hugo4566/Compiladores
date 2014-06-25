@@ -249,6 +249,84 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAExplogFator(AExplogFator node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp31Op3(AOp31Op3 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp32Op3(AOp32Op3 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp33Op3(AOp33Op3 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp34Op3(AOp34Op3 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp41Op4(AOp41Op4 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOp42Op4(AOp42Op4 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOrExpExpLogica(AOrExpExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAXorExpExpLogica(AXorExpExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAndExpExpLogica(AAndExpExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANotExpExpLogica(ANotExpExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpOp4ExpExpLogica(AExpOp4ExpExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpOp3ExpExpLogica(AExpOp3ExpExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAPassoStep(APassoStep node)
     {
         defaultCase(node);

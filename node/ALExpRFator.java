@@ -7,6 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class ALExpRFator extends PFator
 {
+    private TMinus _minus_;
     private TLPar _lPar_;
     private PExp _exp_;
     private TRPar _rPar_;
@@ -17,11 +18,14 @@ public final class ALExpRFator extends PFator
     }
 
     public ALExpRFator(
+        @SuppressWarnings("hiding") TMinus _minus_,
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TRPar _rPar_)
     {
         // Constructor
+        setMinus(_minus_);
+
         setLPar(_lPar_);
 
         setExp(_exp_);
@@ -34,6 +38,7 @@ public final class ALExpRFator extends PFator
     public Object clone()
     {
         return new ALExpRFator(
+            cloneNode(this._minus_),
             cloneNode(this._lPar_),
             cloneNode(this._exp_),
             cloneNode(this._rPar_));
@@ -43,6 +48,31 @@ public final class ALExpRFator extends PFator
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseALExpRFator(this);
+    }
+
+    public TMinus getMinus()
+    {
+        return this._minus_;
+    }
+
+    public void setMinus(TMinus node)
+    {
+        if(this._minus_ != null)
+        {
+            this._minus_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._minus_ = node;
     }
 
     public TLPar getLPar()
@@ -124,6 +154,7 @@ public final class ALExpRFator extends PFator
     public String toString()
     {
         return ""
+            + toString(this._minus_)
             + toString(this._lPar_)
             + toString(this._exp_)
             + toString(this._rPar_);
@@ -133,6 +164,12 @@ public final class ALExpRFator extends PFator
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._minus_ == child)
+        {
+            this._minus_ = null;
+            return;
+        }
+
         if(this._lPar_ == child)
         {
             this._lPar_ = null;
@@ -158,6 +195,12 @@ public final class ALExpRFator extends PFator
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._minus_ == oldChild)
+        {
+            setMinus((TMinus) newChild);
+            return;
+        }
+
         if(this._lPar_ == oldChild)
         {
             setLPar((TLPar) newChild);

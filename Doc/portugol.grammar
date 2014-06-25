@@ -130,25 +130,26 @@ Productions
 	termo = {ter_op2_fat} termo op2 fator
 	| {fat} fator;
 
-	fator = {l_exp_r} l_par exp r_par 
-	| {vari_val} var_value;
-//	| {minus_exp} minus exp;  O PROBLEMA É NESSA LINHA <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-//	|   {explog}		exp_logica;
+	fator = {l_exp_r} minus? l_par exp r_par 
+	| {vari_val} var_value
+	|   {explog}		exp_logica;
+
+	op3 = {op31} less_eq
+		| {op32} less
+		| {op33} greater_eq
+		| {op34} greater;
+
+	op4 = {op41} equal
+		| {op42} not_equal;
 
 
-/*
 	exp_logica =
-	 	{exp_eq_exp} 	[pre]:exp equal var_value
-	|	{exp_neq_exp} 	[pre]:exp not_equal var_value
-	|	{exp_leq_exp} 	[pre]:exp less_eq var_value
-	|	{exp_geq_exp} 	[pre]:exp greater_eq var_value
-	|	{exp_less_exp} 	[pre]:exp less var_value
-	|	{exp_great_exp}	[pre]:exp greater var_value
-	|	{not_exp} 		not exp_logica
+		{or_exp} 		[pre]:exp_logica or [pos]:exp_logica
+	|	{xor_exp} 		[pre]:exp_logica xor [pos]:exp_logica
 	|	{and_exp} 		[pre]:exp_logica and [pos]:exp_logica
-	|	{or_exp} 		[pre]:exp_logica or [pos]:exp_logica
-	|	{xor_exp} 		[pre]:exp_logica xor [pos]:exp_logica;
-*/
+	|	{not_exp} 		not exp_logica
+	|	{exp_op4_exp} 	[pre]:exp op4 var_value
+	|	{exp_op3_exp} 	[pre]:exp op3 var_value;
 
 	step = {passo} pass n_int;
 

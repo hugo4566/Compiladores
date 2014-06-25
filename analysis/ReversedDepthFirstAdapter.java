@@ -765,6 +765,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getLPar().apply(this);
         }
+        if(node.getMinus() != null)
+        {
+            node.getMinus().apply(this);
+        }
         outALExpRFator(node);
     }
 
@@ -787,6 +791,323 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getVarValue().apply(this);
         }
         outAVariValFator(node);
+    }
+
+    public void inAExplogFator(AExplogFator node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAExplogFator(AExplogFator node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAExplogFator(AExplogFator node)
+    {
+        inAExplogFator(node);
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        outAExplogFator(node);
+    }
+
+    public void inAOp31Op3(AOp31Op3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAOp31Op3(AOp31Op3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAOp31Op3(AOp31Op3 node)
+    {
+        inAOp31Op3(node);
+        if(node.getLessEq() != null)
+        {
+            node.getLessEq().apply(this);
+        }
+        outAOp31Op3(node);
+    }
+
+    public void inAOp32Op3(AOp32Op3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAOp32Op3(AOp32Op3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAOp32Op3(AOp32Op3 node)
+    {
+        inAOp32Op3(node);
+        if(node.getLess() != null)
+        {
+            node.getLess().apply(this);
+        }
+        outAOp32Op3(node);
+    }
+
+    public void inAOp33Op3(AOp33Op3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAOp33Op3(AOp33Op3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAOp33Op3(AOp33Op3 node)
+    {
+        inAOp33Op3(node);
+        if(node.getGreaterEq() != null)
+        {
+            node.getGreaterEq().apply(this);
+        }
+        outAOp33Op3(node);
+    }
+
+    public void inAOp34Op3(AOp34Op3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAOp34Op3(AOp34Op3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAOp34Op3(AOp34Op3 node)
+    {
+        inAOp34Op3(node);
+        if(node.getGreater() != null)
+        {
+            node.getGreater().apply(this);
+        }
+        outAOp34Op3(node);
+    }
+
+    public void inAOp41Op4(AOp41Op4 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAOp41Op4(AOp41Op4 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAOp41Op4(AOp41Op4 node)
+    {
+        inAOp41Op4(node);
+        if(node.getEqual() != null)
+        {
+            node.getEqual().apply(this);
+        }
+        outAOp41Op4(node);
+    }
+
+    public void inAOp42Op4(AOp42Op4 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAOp42Op4(AOp42Op4 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAOp42Op4(AOp42Op4 node)
+    {
+        inAOp42Op4(node);
+        if(node.getNotEqual() != null)
+        {
+            node.getNotEqual().apply(this);
+        }
+        outAOp42Op4(node);
+    }
+
+    public void inAOrExpExpLogica(AOrExpExpLogica node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAOrExpExpLogica(AOrExpExpLogica node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAOrExpExpLogica(AOrExpExpLogica node)
+    {
+        inAOrExpExpLogica(node);
+        if(node.getPos() != null)
+        {
+            node.getPos().apply(this);
+        }
+        if(node.getOr() != null)
+        {
+            node.getOr().apply(this);
+        }
+        if(node.getPre() != null)
+        {
+            node.getPre().apply(this);
+        }
+        outAOrExpExpLogica(node);
+    }
+
+    public void inAXorExpExpLogica(AXorExpExpLogica node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAXorExpExpLogica(AXorExpExpLogica node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAXorExpExpLogica(AXorExpExpLogica node)
+    {
+        inAXorExpExpLogica(node);
+        if(node.getPos() != null)
+        {
+            node.getPos().apply(this);
+        }
+        if(node.getXor() != null)
+        {
+            node.getXor().apply(this);
+        }
+        if(node.getPre() != null)
+        {
+            node.getPre().apply(this);
+        }
+        outAXorExpExpLogica(node);
+    }
+
+    public void inAAndExpExpLogica(AAndExpExpLogica node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAndExpExpLogica(AAndExpExpLogica node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAndExpExpLogica(AAndExpExpLogica node)
+    {
+        inAAndExpExpLogica(node);
+        if(node.getPos() != null)
+        {
+            node.getPos().apply(this);
+        }
+        if(node.getAnd() != null)
+        {
+            node.getAnd().apply(this);
+        }
+        if(node.getPre() != null)
+        {
+            node.getPre().apply(this);
+        }
+        outAAndExpExpLogica(node);
+    }
+
+    public void inANotExpExpLogica(ANotExpExpLogica node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANotExpExpLogica(ANotExpExpLogica node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANotExpExpLogica(ANotExpExpLogica node)
+    {
+        inANotExpExpLogica(node);
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        if(node.getNot() != null)
+        {
+            node.getNot().apply(this);
+        }
+        outANotExpExpLogica(node);
+    }
+
+    public void inAExpOp4ExpExpLogica(AExpOp4ExpExpLogica node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAExpOp4ExpExpLogica(AExpOp4ExpExpLogica node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAExpOp4ExpExpLogica(AExpOp4ExpExpLogica node)
+    {
+        inAExpOp4ExpExpLogica(node);
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
+        if(node.getOp4() != null)
+        {
+            node.getOp4().apply(this);
+        }
+        if(node.getPre() != null)
+        {
+            node.getPre().apply(this);
+        }
+        outAExpOp4ExpExpLogica(node);
+    }
+
+    public void inAExpOp3ExpExpLogica(AExpOp3ExpExpLogica node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAExpOp3ExpExpLogica(AExpOp3ExpExpLogica node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAExpOp3ExpExpLogica(AExpOp3ExpExpLogica node)
+    {
+        inAExpOp3ExpExpLogica(node);
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
+        if(node.getOp3() != null)
+        {
+            node.getOp3().apply(this);
+        }
+        if(node.getPre() != null)
+        {
+            node.getPre().apply(this);
+        }
+        outAExpOp3ExpExpLogica(node);
     }
 
     public void inAPassoStep(APassoStep node)

@@ -5,51 +5,51 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AComandoSemicComandoSemiC extends PComandoSemiC
+public final class AExplogComExprComma extends PExprComma
 {
-    private PComando _comando_;
-    private TSemiC _semiC_;
+    private PExpLogica _expLogica_;
+    private TComma _comma_;
 
-    public AComandoSemicComandoSemiC()
+    public AExplogComExprComma()
     {
         // Constructor
     }
 
-    public AComandoSemicComandoSemiC(
-        @SuppressWarnings("hiding") PComando _comando_,
-        @SuppressWarnings("hiding") TSemiC _semiC_)
+    public AExplogComExprComma(
+        @SuppressWarnings("hiding") PExpLogica _expLogica_,
+        @SuppressWarnings("hiding") TComma _comma_)
     {
         // Constructor
-        setComando(_comando_);
+        setExpLogica(_expLogica_);
 
-        setSemiC(_semiC_);
+        setComma(_comma_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AComandoSemicComandoSemiC(
-            cloneNode(this._comando_),
-            cloneNode(this._semiC_));
+        return new AExplogComExprComma(
+            cloneNode(this._expLogica_),
+            cloneNode(this._comma_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAComandoSemicComandoSemiC(this);
+        ((Analysis) sw).caseAExplogComExprComma(this);
     }
 
-    public PComando getComando()
+    public PExpLogica getExpLogica()
     {
-        return this._comando_;
+        return this._expLogica_;
     }
 
-    public void setComando(PComando node)
+    public void setExpLogica(PExpLogica node)
     {
-        if(this._comando_ != null)
+        if(this._expLogica_ != null)
         {
-            this._comando_.parent(null);
+            this._expLogica_.parent(null);
         }
 
         if(node != null)
@@ -62,19 +62,19 @@ public final class AComandoSemicComandoSemiC extends PComandoSemiC
             node.parent(this);
         }
 
-        this._comando_ = node;
+        this._expLogica_ = node;
     }
 
-    public TSemiC getSemiC()
+    public TComma getComma()
     {
-        return this._semiC_;
+        return this._comma_;
     }
 
-    public void setSemiC(TSemiC node)
+    public void setComma(TComma node)
     {
-        if(this._semiC_ != null)
+        if(this._comma_ != null)
         {
-            this._semiC_.parent(null);
+            this._comma_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +87,30 @@ public final class AComandoSemicComandoSemiC extends PComandoSemiC
             node.parent(this);
         }
 
-        this._semiC_ = node;
+        this._comma_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._comando_)
-            + toString(this._semiC_);
+            + toString(this._expLogica_)
+            + toString(this._comma_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comando_ == child)
+        if(this._expLogica_ == child)
         {
-            this._comando_ = null;
+            this._expLogica_ = null;
             return;
         }
 
-        if(this._semiC_ == child)
+        if(this._comma_ == child)
         {
-            this._semiC_ = null;
+            this._comma_ = null;
             return;
         }
 
@@ -121,15 +121,15 @@ public final class AComandoSemicComandoSemiC extends PComandoSemiC
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comando_ == oldChild)
+        if(this._expLogica_ == oldChild)
         {
-            setComando((PComando) newChild);
+            setExpLogica((PExpLogica) newChild);
             return;
         }
 
-        if(this._semiC_ == oldChild)
+        if(this._comma_ == oldChild)
         {
-            setSemiC((TSemiC) newChild);
+            setComma((TComma) newChild);
             return;
         }
 

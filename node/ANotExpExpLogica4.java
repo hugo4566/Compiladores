@@ -5,19 +5,19 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class ANotExpExpLogica extends PExpLogica
+public final class ANotExpExpLogica4 extends PExpLogica4
 {
     private TNot _not_;
     private TLPar _lPar_;
     private PExpLogica _expLogica_;
     private TRPar _rPar_;
 
-    public ANotExpExpLogica()
+    public ANotExpExpLogica4()
     {
         // Constructor
     }
 
-    public ANotExpExpLogica(
+    public ANotExpExpLogica4(
         @SuppressWarnings("hiding") TNot _not_,
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") PExpLogica _expLogica_,
@@ -37,7 +37,7 @@ public final class ANotExpExpLogica extends PExpLogica
     @Override
     public Object clone()
     {
-        return new ANotExpExpLogica(
+        return new ANotExpExpLogica4(
             cloneNode(this._not_),
             cloneNode(this._lPar_),
             cloneNode(this._expLogica_),
@@ -47,7 +47,7 @@ public final class ANotExpExpLogica extends PExpLogica
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseANotExpExpLogica(this);
+        ((Analysis) sw).caseANotExpExpLogica4(this);
     }
 
     public TNot getNot()

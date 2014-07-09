@@ -5,18 +5,18 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AExpOp4ExpExpLogica extends PExpLogica
+public final class AExpOp4ExpExpLogica4 extends PExpLogica4
 {
     private PExp _pre_;
     private POp4 _op4_;
     private PVarValue _varValue_;
 
-    public AExpOp4ExpExpLogica()
+    public AExpOp4ExpExpLogica4()
     {
         // Constructor
     }
 
-    public AExpOp4ExpExpLogica(
+    public AExpOp4ExpExpLogica4(
         @SuppressWarnings("hiding") PExp _pre_,
         @SuppressWarnings("hiding") POp4 _op4_,
         @SuppressWarnings("hiding") PVarValue _varValue_)
@@ -33,7 +33,7 @@ public final class AExpOp4ExpExpLogica extends PExpLogica
     @Override
     public Object clone()
     {
-        return new AExpOp4ExpExpLogica(
+        return new AExpOp4ExpExpLogica4(
             cloneNode(this._pre_),
             cloneNode(this._op4_),
             cloneNode(this._varValue_));
@@ -42,7 +42,7 @@ public final class AExpOp4ExpExpLogica extends PExpLogica
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAExpOp4ExpExpLogica(this);
+        ((Analysis) sw).caseAExpOp4ExpExpLogica4(this);
     }
 
     public PExp getPre()

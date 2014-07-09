@@ -11,7 +11,6 @@ public final class AWriteComando extends PComando
     private TWrite _write_;
     private TLPar _lPar_;
     private final LinkedList<PExprComma> _exprComma_ = new LinkedList<PExprComma>();
-    private PExp _exp_;
     private TRPar _rPar_;
     private TSemiC _semiC_;
 
@@ -24,7 +23,6 @@ public final class AWriteComando extends PComando
         @SuppressWarnings("hiding") TWrite _write_,
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") List<?> _exprComma_,
-        @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TRPar _rPar_,
         @SuppressWarnings("hiding") TSemiC _semiC_)
     {
@@ -34,8 +32,6 @@ public final class AWriteComando extends PComando
         setLPar(_lPar_);
 
         setExprComma(_exprComma_);
-
-        setExp(_exp_);
 
         setRPar(_rPar_);
 
@@ -50,7 +46,6 @@ public final class AWriteComando extends PComando
             cloneNode(this._write_),
             cloneNode(this._lPar_),
             cloneList(this._exprComma_),
-            cloneNode(this._exp_),
             cloneNode(this._rPar_),
             cloneNode(this._semiC_));
     }
@@ -137,31 +132,6 @@ public final class AWriteComando extends PComando
         }
     }
 
-    public PExp getExp()
-    {
-        return this._exp_;
-    }
-
-    public void setExp(PExp node)
-    {
-        if(this._exp_ != null)
-        {
-            this._exp_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._exp_ = node;
-    }
-
     public TRPar getRPar()
     {
         return this._rPar_;
@@ -219,7 +189,6 @@ public final class AWriteComando extends PComando
             + toString(this._write_)
             + toString(this._lPar_)
             + toString(this._exprComma_)
-            + toString(this._exp_)
             + toString(this._rPar_)
             + toString(this._semiC_);
     }
@@ -242,12 +211,6 @@ public final class AWriteComando extends PComando
 
         if(this._exprComma_.remove(child))
         {
-            return;
-        }
-
-        if(this._exp_ == child)
-        {
-            this._exp_ = null;
             return;
         }
 
@@ -298,12 +261,6 @@ public final class AWriteComando extends PComando
                 oldChild.parent(null);
                 return;
             }
-        }
-
-        if(this._exp_ == oldChild)
-        {
-            setExp((PExp) newChild);
-            return;
         }
 
         if(this._rPar_ == oldChild)

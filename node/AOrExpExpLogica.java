@@ -9,7 +9,7 @@ public final class AOrExpExpLogica extends PExpLogica
 {
     private PExpLogica _pre_;
     private TOr _or_;
-    private PExpLogica _pos_;
+    private PExpLogica2 _pos_;
 
     public AOrExpExpLogica()
     {
@@ -19,7 +19,7 @@ public final class AOrExpExpLogica extends PExpLogica
     public AOrExpExpLogica(
         @SuppressWarnings("hiding") PExpLogica _pre_,
         @SuppressWarnings("hiding") TOr _or_,
-        @SuppressWarnings("hiding") PExpLogica _pos_)
+        @SuppressWarnings("hiding") PExpLogica2 _pos_)
     {
         // Constructor
         setPre(_pre_);
@@ -95,12 +95,12 @@ public final class AOrExpExpLogica extends PExpLogica
         this._or_ = node;
     }
 
-    public PExpLogica getPos()
+    public PExpLogica2 getPos()
     {
         return this._pos_;
     }
 
-    public void setPos(PExpLogica node)
+    public void setPos(PExpLogica2 node)
     {
         if(this._pos_ != null)
         {
@@ -172,7 +172,7 @@ public final class AOrExpExpLogica extends PExpLogica
 
         if(this._pos_ == oldChild)
         {
-            setPos((PExpLogica) newChild);
+            setPos((PExpLogica2) newChild);
             return;
         }
 

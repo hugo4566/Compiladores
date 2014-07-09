@@ -6,50 +6,46 @@ import java.util.*;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AIfComando extends PComando
+public final class AEvaluateLogComando extends PComando
 {
-    private TIf _if_;
+    private TEvaluate _evaluate_;
     private TLPar _lPar_;
-    private TId _id_;
+    private PExpLogica _expLogica_;
     private TRPar _rPar_;
-    private TThen _then_;
-    private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
-    private POpcionalElse _opcionalElse_;
-    private TEndIf _endIf_;
+    private final LinkedList<PCaseEstrela> _caseEstrela_ = new LinkedList<PCaseEstrela>();
+    private POpcionalElseColon _opcionalElseColon_;
+    private TEndE _endE_;
     private TSemiC _semiC_;
 
-    public AIfComando()
+    public AEvaluateLogComando()
     {
         // Constructor
     }
 
-    public AIfComando(
-        @SuppressWarnings("hiding") TIf _if_,
+    public AEvaluateLogComando(
+        @SuppressWarnings("hiding") TEvaluate _evaluate_,
         @SuppressWarnings("hiding") TLPar _lPar_,
-        @SuppressWarnings("hiding") TId _id_,
+        @SuppressWarnings("hiding") PExpLogica _expLogica_,
         @SuppressWarnings("hiding") TRPar _rPar_,
-        @SuppressWarnings("hiding") TThen _then_,
-        @SuppressWarnings("hiding") List<?> _comando_,
-        @SuppressWarnings("hiding") POpcionalElse _opcionalElse_,
-        @SuppressWarnings("hiding") TEndIf _endIf_,
+        @SuppressWarnings("hiding") List<?> _caseEstrela_,
+        @SuppressWarnings("hiding") POpcionalElseColon _opcionalElseColon_,
+        @SuppressWarnings("hiding") TEndE _endE_,
         @SuppressWarnings("hiding") TSemiC _semiC_)
     {
         // Constructor
-        setIf(_if_);
+        setEvaluate(_evaluate_);
 
         setLPar(_lPar_);
 
-        setId(_id_);
+        setExpLogica(_expLogica_);
 
         setRPar(_rPar_);
 
-        setThen(_then_);
+        setCaseEstrela(_caseEstrela_);
 
-        setComando(_comando_);
+        setOpcionalElseColon(_opcionalElseColon_);
 
-        setOpcionalElse(_opcionalElse_);
-
-        setEndIf(_endIf_);
+        setEndE(_endE_);
 
         setSemiC(_semiC_);
 
@@ -58,34 +54,33 @@ public final class AIfComando extends PComando
     @Override
     public Object clone()
     {
-        return new AIfComando(
-            cloneNode(this._if_),
+        return new AEvaluateLogComando(
+            cloneNode(this._evaluate_),
             cloneNode(this._lPar_),
-            cloneNode(this._id_),
+            cloneNode(this._expLogica_),
             cloneNode(this._rPar_),
-            cloneNode(this._then_),
-            cloneList(this._comando_),
-            cloneNode(this._opcionalElse_),
-            cloneNode(this._endIf_),
+            cloneList(this._caseEstrela_),
+            cloneNode(this._opcionalElseColon_),
+            cloneNode(this._endE_),
             cloneNode(this._semiC_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAIfComando(this);
+        ((Analysis) sw).caseAEvaluateLogComando(this);
     }
 
-    public TIf getIf()
+    public TEvaluate getEvaluate()
     {
-        return this._if_;
+        return this._evaluate_;
     }
 
-    public void setIf(TIf node)
+    public void setEvaluate(TEvaluate node)
     {
-        if(this._if_ != null)
+        if(this._evaluate_ != null)
         {
-            this._if_.parent(null);
+            this._evaluate_.parent(null);
         }
 
         if(node != null)
@@ -98,7 +93,7 @@ public final class AIfComando extends PComando
             node.parent(this);
         }
 
-        this._if_ = node;
+        this._evaluate_ = node;
     }
 
     public TLPar getLPar()
@@ -126,16 +121,16 @@ public final class AIfComando extends PComando
         this._lPar_ = node;
     }
 
-    public TId getId()
+    public PExpLogica getExpLogica()
     {
-        return this._id_;
+        return this._expLogica_;
     }
 
-    public void setId(TId node)
+    public void setExpLogica(PExpLogica node)
     {
-        if(this._id_ != null)
+        if(this._expLogica_ != null)
         {
-            this._id_.parent(null);
+            this._expLogica_.parent(null);
         }
 
         if(node != null)
@@ -148,7 +143,7 @@ public final class AIfComando extends PComando
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._expLogica_ = node;
     }
 
     public TRPar getRPar()
@@ -176,67 +171,42 @@ public final class AIfComando extends PComando
         this._rPar_ = node;
     }
 
-    public TThen getThen()
+    public LinkedList<PCaseEstrela> getCaseEstrela()
     {
-        return this._then_;
+        return this._caseEstrela_;
     }
 
-    public void setThen(TThen node)
+    public void setCaseEstrela(List<?> list)
     {
-        if(this._then_ != null)
-        {
-            this._then_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._then_ = node;
-    }
-
-    public LinkedList<PComando> getComando()
-    {
-        return this._comando_;
-    }
-
-    public void setComando(List<?> list)
-    {
-        for(PComando e : this._comando_)
+        for(PCaseEstrela e : this._caseEstrela_)
         {
             e.parent(null);
         }
-        this._comando_.clear();
+        this._caseEstrela_.clear();
 
         for(Object obj_e : list)
         {
-            PComando e = (PComando) obj_e;
+            PCaseEstrela e = (PCaseEstrela) obj_e;
             if(e.parent() != null)
             {
                 e.parent().removeChild(e);
             }
 
             e.parent(this);
-            this._comando_.add(e);
+            this._caseEstrela_.add(e);
         }
     }
 
-    public POpcionalElse getOpcionalElse()
+    public POpcionalElseColon getOpcionalElseColon()
     {
-        return this._opcionalElse_;
+        return this._opcionalElseColon_;
     }
 
-    public void setOpcionalElse(POpcionalElse node)
+    public void setOpcionalElseColon(POpcionalElseColon node)
     {
-        if(this._opcionalElse_ != null)
+        if(this._opcionalElseColon_ != null)
         {
-            this._opcionalElse_.parent(null);
+            this._opcionalElseColon_.parent(null);
         }
 
         if(node != null)
@@ -249,19 +219,19 @@ public final class AIfComando extends PComando
             node.parent(this);
         }
 
-        this._opcionalElse_ = node;
+        this._opcionalElseColon_ = node;
     }
 
-    public TEndIf getEndIf()
+    public TEndE getEndE()
     {
-        return this._endIf_;
+        return this._endE_;
     }
 
-    public void setEndIf(TEndIf node)
+    public void setEndE(TEndE node)
     {
-        if(this._endIf_ != null)
+        if(this._endE_ != null)
         {
-            this._endIf_.parent(null);
+            this._endE_.parent(null);
         }
 
         if(node != null)
@@ -274,7 +244,7 @@ public final class AIfComando extends PComando
             node.parent(this);
         }
 
-        this._endIf_ = node;
+        this._endE_ = node;
     }
 
     public TSemiC getSemiC()
@@ -306,14 +276,13 @@ public final class AIfComando extends PComando
     public String toString()
     {
         return ""
-            + toString(this._if_)
+            + toString(this._evaluate_)
             + toString(this._lPar_)
-            + toString(this._id_)
+            + toString(this._expLogica_)
             + toString(this._rPar_)
-            + toString(this._then_)
-            + toString(this._comando_)
-            + toString(this._opcionalElse_)
-            + toString(this._endIf_)
+            + toString(this._caseEstrela_)
+            + toString(this._opcionalElseColon_)
+            + toString(this._endE_)
             + toString(this._semiC_);
     }
 
@@ -321,9 +290,9 @@ public final class AIfComando extends PComando
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._if_ == child)
+        if(this._evaluate_ == child)
         {
-            this._if_ = null;
+            this._evaluate_ = null;
             return;
         }
 
@@ -333,9 +302,9 @@ public final class AIfComando extends PComando
             return;
         }
 
-        if(this._id_ == child)
+        if(this._expLogica_ == child)
         {
-            this._id_ = null;
+            this._expLogica_ = null;
             return;
         }
 
@@ -345,26 +314,20 @@ public final class AIfComando extends PComando
             return;
         }
 
-        if(this._then_ == child)
-        {
-            this._then_ = null;
-            return;
-        }
-
-        if(this._comando_.remove(child))
+        if(this._caseEstrela_.remove(child))
         {
             return;
         }
 
-        if(this._opcionalElse_ == child)
+        if(this._opcionalElseColon_ == child)
         {
-            this._opcionalElse_ = null;
+            this._opcionalElseColon_ = null;
             return;
         }
 
-        if(this._endIf_ == child)
+        if(this._endE_ == child)
         {
-            this._endIf_ = null;
+            this._endE_ = null;
             return;
         }
 
@@ -381,9 +344,9 @@ public final class AIfComando extends PComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._if_ == oldChild)
+        if(this._evaluate_ == oldChild)
         {
-            setIf((TIf) newChild);
+            setEvaluate((TEvaluate) newChild);
             return;
         }
 
@@ -393,9 +356,9 @@ public final class AIfComando extends PComando
             return;
         }
 
-        if(this._id_ == oldChild)
+        if(this._expLogica_ == oldChild)
         {
-            setId((TId) newChild);
+            setExpLogica((PExpLogica) newChild);
             return;
         }
 
@@ -405,19 +368,13 @@ public final class AIfComando extends PComando
             return;
         }
 
-        if(this._then_ == oldChild)
-        {
-            setThen((TThen) newChild);
-            return;
-        }
-
-        for(ListIterator<PComando> i = this._comando_.listIterator(); i.hasNext();)
+        for(ListIterator<PCaseEstrela> i = this._caseEstrela_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
             {
                 if(newChild != null)
                 {
-                    i.set((PComando) newChild);
+                    i.set((PCaseEstrela) newChild);
                     newChild.parent(this);
                     oldChild.parent(null);
                     return;
@@ -429,15 +386,15 @@ public final class AIfComando extends PComando
             }
         }
 
-        if(this._opcionalElse_ == oldChild)
+        if(this._opcionalElseColon_ == oldChild)
         {
-            setOpcionalElse((POpcionalElse) newChild);
+            setOpcionalElseColon((POpcionalElseColon) newChild);
             return;
         }
 
-        if(this._endIf_ == oldChild)
+        if(this._endE_ == oldChild)
         {
-            setEndIf((TEndIf) newChild);
+            setEndE((TEndE) newChild);
             return;
         }
 

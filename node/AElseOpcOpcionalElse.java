@@ -9,7 +9,7 @@ import analysis.*;
 public final class AElseOpcOpcionalElse extends POpcionalElse
 {
     private TElse _else_;
-    private final LinkedList<PComandoSemiC> _comandoSemiC_ = new LinkedList<PComandoSemiC>();
+    private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
 
     public AElseOpcOpcionalElse()
     {
@@ -18,12 +18,12 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
 
     public AElseOpcOpcionalElse(
         @SuppressWarnings("hiding") TElse _else_,
-        @SuppressWarnings("hiding") List<?> _comandoSemiC_)
+        @SuppressWarnings("hiding") List<?> _comando_)
     {
         // Constructor
         setElse(_else_);
 
-        setComandoSemiC(_comandoSemiC_);
+        setComando(_comando_);
 
     }
 
@@ -32,7 +32,7 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
     {
         return new AElseOpcOpcionalElse(
             cloneNode(this._else_),
-            cloneList(this._comandoSemiC_));
+            cloneList(this._comando_));
     }
 
     @Override
@@ -66,29 +66,29 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
         this._else_ = node;
     }
 
-    public LinkedList<PComandoSemiC> getComandoSemiC()
+    public LinkedList<PComando> getComando()
     {
-        return this._comandoSemiC_;
+        return this._comando_;
     }
 
-    public void setComandoSemiC(List<?> list)
+    public void setComando(List<?> list)
     {
-        for(PComandoSemiC e : this._comandoSemiC_)
+        for(PComando e : this._comando_)
         {
             e.parent(null);
         }
-        this._comandoSemiC_.clear();
+        this._comando_.clear();
 
         for(Object obj_e : list)
         {
-            PComandoSemiC e = (PComandoSemiC) obj_e;
+            PComando e = (PComando) obj_e;
             if(e.parent() != null)
             {
                 e.parent().removeChild(e);
             }
 
             e.parent(this);
-            this._comandoSemiC_.add(e);
+            this._comando_.add(e);
         }
     }
 
@@ -97,7 +97,7 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
     {
         return ""
             + toString(this._else_)
-            + toString(this._comandoSemiC_);
+            + toString(this._comando_);
     }
 
     @Override
@@ -110,7 +110,7 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
             return;
         }
 
-        if(this._comandoSemiC_.remove(child))
+        if(this._comando_.remove(child))
         {
             return;
         }
@@ -128,13 +128,13 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
             return;
         }
 
-        for(ListIterator<PComandoSemiC> i = this._comandoSemiC_.listIterator(); i.hasNext();)
+        for(ListIterator<PComando> i = this._comando_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
             {
                 if(newChild != null)
                 {
-                    i.set((PComandoSemiC) newChild);
+                    i.set((PComando) newChild);
                     newChild.parent(this);
                     oldChild.parent(null);
                     return;

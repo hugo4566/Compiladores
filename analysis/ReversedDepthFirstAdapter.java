@@ -389,29 +389,29 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAExpComExprComma(node);
     }
 
-    public void inAComandoSemicComandoSemiC(AComandoSemicComandoSemiC node)
+    public void inAExplogComExprComma(AExplogComExprComma node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoSemicComandoSemiC(AComandoSemicComandoSemiC node)
+    public void outAExplogComExprComma(AExplogComExprComma node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoSemicComandoSemiC(AComandoSemicComandoSemiC node)
+    public void caseAExplogComExprComma(AExplogComExprComma node)
     {
-        inAComandoSemicComandoSemiC(node);
-        if(node.getSemiC() != null)
+        inAExplogComExprComma(node);
+        if(node.getComma() != null)
         {
-            node.getSemiC().apply(this);
+            node.getComma().apply(this);
         }
-        if(node.getComando() != null)
+        if(node.getExpLogica() != null)
         {
-            node.getComando().apply(this);
+            node.getExpLogica().apply(this);
         }
-        outAComandoSemicComandoSemiC(node);
+        outAExplogComExprComma(node);
     }
 
     public void inAElseOpcOpcionalElse(AElseOpcOpcionalElse node)
@@ -429,9 +429,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inAElseOpcOpcionalElse(node);
         {
-            List<PComandoSemiC> copy = new ArrayList<PComandoSemiC>(node.getComandoSemiC());
+            List<PComando> copy = new ArrayList<PComando>(node.getComando());
             Collections.reverse(copy);
-            for(PComandoSemiC e : copy)
+            for(PComando e : copy)
             {
                 e.apply(this);
             }
@@ -458,9 +458,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inACaseStarCaseEstrela(node);
         {
-            List<PComandoSemiC> copy = new ArrayList<PComandoSemiC>(node.getComandoSemiC());
+            List<PComando> copy = new ArrayList<PComando>(node.getComando());
             Collections.reverse(copy);
-            for(PComandoSemiC e : copy)
+            for(PComando e : copy)
             {
                 e.apply(this);
             }
@@ -495,9 +495,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inAElseColonOpcOpcionalElseColon(node);
         {
-            List<PComandoSemiC> copy = new ArrayList<PComandoSemiC>(node.getComandoSemiC());
+            List<PComando> copy = new ArrayList<PComando>(node.getComando());
             Collections.reverse(copy);
-            for(PComandoSemiC e : copy)
+            for(PComando e : copy)
             {
                 e.apply(this);
             }
@@ -948,20 +948,41 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAOrExpExpLogica(node);
     }
 
-    public void inAXorExpExpLogica(AXorExpExpLogica node)
+    public void inAExpLogica(AExpLogica node)
     {
         defaultIn(node);
     }
 
-    public void outAXorExpExpLogica(AXorExpExpLogica node)
+    public void outAExpLogica(AExpLogica node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAXorExpExpLogica(AXorExpExpLogica node)
+    public void caseAExpLogica(AExpLogica node)
     {
-        inAXorExpExpLogica(node);
+        inAExpLogica(node);
+        if(node.getExpLogica2() != null)
+        {
+            node.getExpLogica2().apply(this);
+        }
+        outAExpLogica(node);
+    }
+
+    public void inAXorExpExpLogica2(AXorExpExpLogica2 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAXorExpExpLogica2(AXorExpExpLogica2 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAXorExpExpLogica2(AXorExpExpLogica2 node)
+    {
+        inAXorExpExpLogica2(node);
         if(node.getPos() != null)
         {
             node.getPos().apply(this);
@@ -974,23 +995,44 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getPre().apply(this);
         }
-        outAXorExpExpLogica(node);
+        outAXorExpExpLogica2(node);
     }
 
-    public void inAAndExpExpLogica(AAndExpExpLogica node)
+    public void inAExpLogica2(AExpLogica2 node)
     {
         defaultIn(node);
     }
 
-    public void outAAndExpExpLogica(AAndExpExpLogica node)
+    public void outAExpLogica2(AExpLogica2 node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAndExpExpLogica(AAndExpExpLogica node)
+    public void caseAExpLogica2(AExpLogica2 node)
     {
-        inAAndExpExpLogica(node);
+        inAExpLogica2(node);
+        if(node.getExpLogica3() != null)
+        {
+            node.getExpLogica3().apply(this);
+        }
+        outAExpLogica2(node);
+    }
+
+    public void inAAndExpExpLogica3(AAndExpExpLogica3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAndExpExpLogica3(AAndExpExpLogica3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAndExpExpLogica3(AAndExpExpLogica3 node)
+    {
+        inAAndExpExpLogica3(node);
         if(node.getPos() != null)
         {
             node.getPos().apply(this);
@@ -1003,23 +1045,44 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getPre().apply(this);
         }
-        outAAndExpExpLogica(node);
+        outAAndExpExpLogica3(node);
     }
 
-    public void inANotExpExpLogica(ANotExpExpLogica node)
+    public void inAExpLogica3(AExpLogica3 node)
     {
         defaultIn(node);
     }
 
-    public void outANotExpExpLogica(ANotExpExpLogica node)
+    public void outAExpLogica3(AExpLogica3 node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseANotExpExpLogica(ANotExpExpLogica node)
+    public void caseAExpLogica3(AExpLogica3 node)
     {
-        inANotExpExpLogica(node);
+        inAExpLogica3(node);
+        if(node.getExpLogica4() != null)
+        {
+            node.getExpLogica4().apply(this);
+        }
+        outAExpLogica3(node);
+    }
+
+    public void inANotExpExpLogica4(ANotExpExpLogica4 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANotExpExpLogica4(ANotExpExpLogica4 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANotExpExpLogica4(ANotExpExpLogica4 node)
+    {
+        inANotExpExpLogica4(node);
         if(node.getRPar() != null)
         {
             node.getRPar().apply(this);
@@ -1036,23 +1099,23 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getNot().apply(this);
         }
-        outANotExpExpLogica(node);
+        outANotExpExpLogica4(node);
     }
 
-    public void inAExpOp4ExpExpLogica(AExpOp4ExpExpLogica node)
+    public void inAExpOp4ExpExpLogica4(AExpOp4ExpExpLogica4 node)
     {
         defaultIn(node);
     }
 
-    public void outAExpOp4ExpExpLogica(AExpOp4ExpExpLogica node)
+    public void outAExpOp4ExpExpLogica4(AExpOp4ExpExpLogica4 node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAExpOp4ExpExpLogica(AExpOp4ExpExpLogica node)
+    public void caseAExpOp4ExpExpLogica4(AExpOp4ExpExpLogica4 node)
     {
-        inAExpOp4ExpExpLogica(node);
+        inAExpOp4ExpExpLogica4(node);
         if(node.getVarValue() != null)
         {
             node.getVarValue().apply(this);
@@ -1065,23 +1128,23 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getPre().apply(this);
         }
-        outAExpOp4ExpExpLogica(node);
+        outAExpOp4ExpExpLogica4(node);
     }
 
-    public void inAExpOp3ExpExpLogica(AExpOp3ExpExpLogica node)
+    public void inAExpOp3ExpExpLogica4(AExpOp3ExpExpLogica4 node)
     {
         defaultIn(node);
     }
 
-    public void outAExpOp3ExpExpLogica(AExpOp3ExpExpLogica node)
+    public void outAExpOp3ExpExpLogica4(AExpOp3ExpExpLogica4 node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAExpOp3ExpExpLogica(AExpOp3ExpExpLogica node)
+    public void caseAExpOp3ExpExpLogica4(AExpOp3ExpExpLogica4 node)
     {
-        inAExpOp3ExpExpLogica(node);
+        inAExpOp3ExpExpLogica4(node);
         if(node.getVarValue() != null)
         {
             node.getVarValue().apply(this);
@@ -1094,7 +1157,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getPre().apply(this);
         }
-        outAExpOp3ExpExpLogica(node);
+        outAExpOp3ExpExpLogica4(node);
     }
 
     public void inAPassoStep(APassoStep node)
@@ -1155,6 +1218,39 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAAtribComando(node);
     }
 
+    public void inAAtribLogComando(AAtribLogComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAtribLogComando(AAtribLogComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAtribLogComando(AAtribLogComando node)
+    {
+        inAAtribLogComando(node);
+        if(node.getSemiC() != null)
+        {
+            node.getSemiC().apply(this);
+        }
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        if(node.getIs() != null)
+        {
+            node.getIs().apply(this);
+        }
+        if(node.getVar() != null)
+        {
+            node.getVar().apply(this);
+        }
+        outAAtribLogComando(node);
+    }
+
     public void inAReadComando(AReadComando node)
     {
         defaultIn(node);
@@ -1176,10 +1272,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         if(node.getRPar() != null)
         {
             node.getRPar().apply(this);
-        }
-        if(node.getVar() != null)
-        {
-            node.getVar().apply(this);
         }
         {
             List<PVariavelComma> copy = new ArrayList<PVariavelComma>(node.getVariavelComma());
@@ -1221,10 +1313,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         if(node.getRPar() != null)
         {
             node.getRPar().apply(this);
-        }
-        if(node.getExp() != null)
-        {
-            node.getExp().apply(this);
         }
         {
             List<PExprComma> copy = new ArrayList<PExprComma>(node.getExprComma());
@@ -1272,9 +1360,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getOpcionalElse().apply(this);
         }
         {
-            List<PComandoSemiC> copy = new ArrayList<PComandoSemiC>(node.getComandoSemiC());
+            List<PComando> copy = new ArrayList<PComando>(node.getComando());
             Collections.reverse(copy);
-            for(PComandoSemiC e : copy)
+            for(PComando e : copy)
             {
                 e.apply(this);
             }
@@ -1355,6 +1443,59 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAEvaluateComando(node);
     }
 
+    public void inAEvaluateLogComando(AEvaluateLogComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEvaluateLogComando(AEvaluateLogComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEvaluateLogComando(AEvaluateLogComando node)
+    {
+        inAEvaluateLogComando(node);
+        if(node.getSemiC() != null)
+        {
+            node.getSemiC().apply(this);
+        }
+        if(node.getEndE() != null)
+        {
+            node.getEndE().apply(this);
+        }
+        if(node.getOpcionalElseColon() != null)
+        {
+            node.getOpcionalElseColon().apply(this);
+        }
+        {
+            List<PCaseEstrela> copy = new ArrayList<PCaseEstrela>(node.getCaseEstrela());
+            Collections.reverse(copy);
+            for(PCaseEstrela e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        if(node.getRPar() != null)
+        {
+            node.getRPar().apply(this);
+        }
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        if(node.getLPar() != null)
+        {
+            node.getLPar().apply(this);
+        }
+        if(node.getEvaluate() != null)
+        {
+            node.getEvaluate().apply(this);
+        }
+        outAEvaluateLogComando(node);
+    }
+
     public void inAWhileComando(AWhileComando node)
     {
         defaultIn(node);
@@ -1378,9 +1519,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getEndW().apply(this);
         }
         {
-            List<PComandoSemiC> copy = new ArrayList<PComandoSemiC>(node.getComandoSemiC());
+            List<PComando> copy = new ArrayList<PComando>(node.getComando());
             Collections.reverse(copy);
-            for(PComandoSemiC e : copy)
+            for(PComando e : copy)
             {
                 e.apply(this);
             }
@@ -1443,9 +1584,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getUntil().apply(this);
         }
         {
-            List<PComandoSemiC> copy = new ArrayList<PComandoSemiC>(node.getComandoSemiC());
+            List<PComando> copy = new ArrayList<PComando>(node.getComando());
             Collections.reverse(copy);
-            for(PComandoSemiC e : copy)
+            for(PComando e : copy)
             {
                 e.apply(this);
             }
@@ -1480,9 +1621,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getEndF().apply(this);
         }
         {
-            List<PComandoSemiC> copy = new ArrayList<PComandoSemiC>(node.getComandoSemiC());
+            List<PComando> copy = new ArrayList<PComando>(node.getComando());
             Collections.reverse(copy);
-            for(PComandoSemiC e : copy)
+            for(PComando e : copy)
             {
                 e.apply(this);
             }

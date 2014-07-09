@@ -153,7 +153,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAComandoSemicComandoSemiC(AComandoSemicComandoSemiC node)
+    public void caseAExplogComExprComma(AExplogComExprComma node)
     {
         defaultCase(node);
     }
@@ -291,31 +291,49 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAXorExpExpLogica(AXorExpExpLogica node)
+    public void caseAExpLogica(AExpLogica node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAndExpExpLogica(AAndExpExpLogica node)
+    public void caseAXorExpExpLogica2(AXorExpExpLogica2 node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseANotExpExpLogica(ANotExpExpLogica node)
+    public void caseAExpLogica2(AExpLogica2 node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAExpOp4ExpExpLogica(AExpOp4ExpExpLogica node)
+    public void caseAAndExpExpLogica3(AAndExpExpLogica3 node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAExpOp3ExpExpLogica(AExpOp3ExpExpLogica node)
+    public void caseAExpLogica3(AExpLogica3 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANotExpExpLogica4(ANotExpExpLogica4 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpOp4ExpExpLogica4(AExpOp4ExpExpLogica4 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpOp3ExpExpLogica4(AExpOp3ExpExpLogica4 node)
     {
         defaultCase(node);
     }
@@ -328,6 +346,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAAtribComando(AAtribComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAtribLogComando(AAtribLogComando node)
     {
         defaultCase(node);
     }
@@ -352,6 +376,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAEvaluateComando(AEvaluateComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEvaluateLogComando(AEvaluateLogComando node)
     {
         defaultCase(node);
     }

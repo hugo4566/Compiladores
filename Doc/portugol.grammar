@@ -70,8 +70,8 @@ Tokens
 
 	// Tipos de dados
 	{normal}	string 		 = '''letter+''';
-	{normal}	n_real		 = '-' ? digit+ '.' digit+;
-	{normal}	n_int		 = digit+;
+	{normal}	n_real		 = '-' ? digit+ ',' digit+;
+	{normal}	n_int		 = '_' ? digit+;
 
 	// Comentários
 	{normal->comment, comment}	comment 			= '/*';
@@ -82,7 +82,11 @@ Tokens
 	{normal}					line_comment		= '//'[all-10]*10;
 
 Ignored Tokens
-	blank;
+	blank ,
+	comment ,
+	comment_end ,
+	comment_body ,
+	line_comment;
 
 Productions
 
@@ -110,11 +114,11 @@ Productions
 	| 	{constant} 		constant id valor semi_c ;
 
 
-	expr_comma 	   		= {exp_com} exp comma;
-	comando_semi_c 		= {comando_semic} comando semi_c;
-	opcional_else  		= {else_opc} else comando_semi_c+;
-	case_estrela   		= {case_star} case valor colon comando_semi_c+;
-	opcional_else_colon = {else_colon_opc} else colon comando_semi_c+;
+	expr_comma 	   		= {exp_com} exp comma
+							| {explog_com} exp_logica comma;
+	opcional_else  		= {else_opc} else comando+;
+	case_estrela   		= {case_star} case valor colon comando+;
+	opcional_else_colon = {else_colon_opc} else colon comando+;
 
 	var_value =
 		{value}		 	valor
@@ -132,7 +136,7 @@ Productions
 
 	fator = {l_exp_r} minus? l_par exp r_par 
 	| {vari_val} var_value;
-//	|   {explog}		exp_logica;
+//	| {explog} exp_logica;
 
 	op3 = {op31} less_eq
 		| {op32} less
@@ -142,22 +146,30 @@ Productions
 	op4 = {op41} equal
 		| {op42} not_equal;
 
-	exp_logica =
-		{or_exp} 		[pre]:exp_logica or [pos]:exp_logica
-	|	{xor_exp} 		[pre]:exp_logica xor [pos]:exp_logica
-	|	{and_exp} 		[pre]:exp_logica and [pos]:exp_logica
-	|	{not_exp} 		not l_par exp_logica r_par
-	|	{exp_op4_exp} 	[pre]:exp op4 var_value
-	|	{exp_op3_exp} 	[pre]:exp op3 var_value;
+	exp_logica = 	{or_exp} 		[pre]:exp_logica or [pos]:exp_logica2
+		| exp_logica2;
+
+	exp_logica2 =	{xor_exp} 		[pre]:exp_logica2 xor [pos]:exp_logica3
+		| exp_logica3;
+
+	exp_logica3 =	{and_exp} 		[pre]:exp_logica3 and [pos]:exp_logica4
+		| exp_logica4;
+
+
+	exp_logica4 =	{not_exp} 	not l_par exp_logica r_par
+		|	{exp_op4_exp} 	[pre]:exp op4 var_value
+		|	{exp_op3_exp} 	[pre]:exp op3 var_value;
 
 	step = {passo} pass n_int;
 
 	comando =
 	  	{atrib} 		var is exp semi_c
-	| 	{read}			read l_par variavel_comma* var r_par semi_c
-	| 	{write}			write l_par expr_comma* exp r_par semi_c
-	| 	{if}			if l_par id r_par then comando_semi_c+ opcional_else? end_if semi_c
+	|	{atrib_log}		var is exp_logica semi_c
+	| 	{read}			read l_par variavel_comma+ r_par semi_c
+	| 	{write}			write l_par expr_comma+ r_par semi_c
+	| 	{if}			if l_par id r_par then comando+ opcional_else? end_if semi_c
 	| 	{evaluate}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e semi_c
-	| 	{while}			while l_par id r_par do comando_semi_c+ end_w semi_c
-	| 	{repeat}		repeat comando_semi_c+ until l_par id r_par semi_c
-	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando_semi_c+ end_f semi_c;
+	|	{evaluate_log} 	evaluate l_par exp_logica r_par case_estrela* opcional_else_colon? end_e semi_c
+	| 	{while}			while l_par id r_par do comando+ end_w semi_c
+	| 	{repeat}		repeat comando+ until l_par id r_par semi_c
+	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando+ end_f semi_c;

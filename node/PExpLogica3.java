@@ -2,7 +2,7 @@
 
 package node;
 
-public abstract class PComandoSemiC extends Node
+public abstract class PExpLogica3 extends Node
 {
     // Empty body
 }

@@ -5,52 +5,52 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AXorExpExpLogica extends PExpLogica
+public final class AExpOp3ExpExpLogica4 extends PExpLogica4
 {
-    private PExpLogica _pre_;
-    private TXor _xor_;
-    private PExpLogica _pos_;
+    private PExp _pre_;
+    private POp3 _op3_;
+    private PVarValue _varValue_;
 
-    public AXorExpExpLogica()
+    public AExpOp3ExpExpLogica4()
     {
         // Constructor
     }
 
-    public AXorExpExpLogica(
-        @SuppressWarnings("hiding") PExpLogica _pre_,
-        @SuppressWarnings("hiding") TXor _xor_,
-        @SuppressWarnings("hiding") PExpLogica _pos_)
+    public AExpOp3ExpExpLogica4(
+        @SuppressWarnings("hiding") PExp _pre_,
+        @SuppressWarnings("hiding") POp3 _op3_,
+        @SuppressWarnings("hiding") PVarValue _varValue_)
     {
         // Constructor
         setPre(_pre_);
 
-        setXor(_xor_);
+        setOp3(_op3_);
 
-        setPos(_pos_);
+        setVarValue(_varValue_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AXorExpExpLogica(
+        return new AExpOp3ExpExpLogica4(
             cloneNode(this._pre_),
-            cloneNode(this._xor_),
-            cloneNode(this._pos_));
+            cloneNode(this._op3_),
+            cloneNode(this._varValue_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAXorExpExpLogica(this);
+        ((Analysis) sw).caseAExpOp3ExpExpLogica4(this);
     }
 
-    public PExpLogica getPre()
+    public PExp getPre()
     {
         return this._pre_;
     }
 
-    public void setPre(PExpLogica node)
+    public void setPre(PExp node)
     {
         if(this._pre_ != null)
         {
@@ -70,16 +70,16 @@ public final class AXorExpExpLogica extends PExpLogica
         this._pre_ = node;
     }
 
-    public TXor getXor()
+    public POp3 getOp3()
     {
-        return this._xor_;
+        return this._op3_;
     }
 
-    public void setXor(TXor node)
+    public void setOp3(POp3 node)
     {
-        if(this._xor_ != null)
+        if(this._op3_ != null)
         {
-            this._xor_.parent(null);
+            this._op3_.parent(null);
         }
 
         if(node != null)
@@ -92,19 +92,19 @@ public final class AXorExpExpLogica extends PExpLogica
             node.parent(this);
         }
 
-        this._xor_ = node;
+        this._op3_ = node;
     }
 
-    public PExpLogica getPos()
+    public PVarValue getVarValue()
     {
-        return this._pos_;
+        return this._varValue_;
     }
 
-    public void setPos(PExpLogica node)
+    public void setVarValue(PVarValue node)
     {
-        if(this._pos_ != null)
+        if(this._varValue_ != null)
         {
-            this._pos_.parent(null);
+            this._varValue_.parent(null);
         }
 
         if(node != null)
@@ -117,7 +117,7 @@ public final class AXorExpExpLogica extends PExpLogica
             node.parent(this);
         }
 
-        this._pos_ = node;
+        this._varValue_ = node;
     }
 
     @Override
@@ -125,8 +125,8 @@ public final class AXorExpExpLogica extends PExpLogica
     {
         return ""
             + toString(this._pre_)
-            + toString(this._xor_)
-            + toString(this._pos_);
+            + toString(this._op3_)
+            + toString(this._varValue_);
     }
 
     @Override
@@ -139,15 +139,15 @@ public final class AXorExpExpLogica extends PExpLogica
             return;
         }
 
-        if(this._xor_ == child)
+        if(this._op3_ == child)
         {
-            this._xor_ = null;
+            this._op3_ = null;
             return;
         }
 
-        if(this._pos_ == child)
+        if(this._varValue_ == child)
         {
-            this._pos_ = null;
+            this._varValue_ = null;
             return;
         }
 
@@ -160,19 +160,19 @@ public final class AXorExpExpLogica extends PExpLogica
         // Replace child
         if(this._pre_ == oldChild)
         {
-            setPre((PExpLogica) newChild);
+            setPre((PExp) newChild);
             return;
         }
 
-        if(this._xor_ == oldChild)
+        if(this._op3_ == oldChild)
         {
-            setXor((TXor) newChild);
+            setOp3((POp3) newChild);
             return;
         }
 
-        if(this._pos_ == oldChild)
+        if(this._varValue_ == oldChild)
         {
-            setPos((PExpLogica) newChild);
+            setVarValue((PVarValue) newChild);
             return;
         }
 

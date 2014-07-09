@@ -9,7 +9,7 @@ import analysis.*;
 public final class ARepeatComando extends PComando
 {
     private TRepeat _repeat_;
-    private final LinkedList<PComandoSemiC> _comandoSemiC_ = new LinkedList<PComandoSemiC>();
+    private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
     private TUntil _until_;
     private TLPar _lPar_;
     private TId _id_;
@@ -23,7 +23,7 @@ public final class ARepeatComando extends PComando
 
     public ARepeatComando(
         @SuppressWarnings("hiding") TRepeat _repeat_,
-        @SuppressWarnings("hiding") List<?> _comandoSemiC_,
+        @SuppressWarnings("hiding") List<?> _comando_,
         @SuppressWarnings("hiding") TUntil _until_,
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") TId _id_,
@@ -33,7 +33,7 @@ public final class ARepeatComando extends PComando
         // Constructor
         setRepeat(_repeat_);
 
-        setComandoSemiC(_comandoSemiC_);
+        setComando(_comando_);
 
         setUntil(_until_);
 
@@ -52,7 +52,7 @@ public final class ARepeatComando extends PComando
     {
         return new ARepeatComando(
             cloneNode(this._repeat_),
-            cloneList(this._comandoSemiC_),
+            cloneList(this._comando_),
             cloneNode(this._until_),
             cloneNode(this._lPar_),
             cloneNode(this._id_),
@@ -91,29 +91,29 @@ public final class ARepeatComando extends PComando
         this._repeat_ = node;
     }
 
-    public LinkedList<PComandoSemiC> getComandoSemiC()
+    public LinkedList<PComando> getComando()
     {
-        return this._comandoSemiC_;
+        return this._comando_;
     }
 
-    public void setComandoSemiC(List<?> list)
+    public void setComando(List<?> list)
     {
-        for(PComandoSemiC e : this._comandoSemiC_)
+        for(PComando e : this._comando_)
         {
             e.parent(null);
         }
-        this._comandoSemiC_.clear();
+        this._comando_.clear();
 
         for(Object obj_e : list)
         {
-            PComandoSemiC e = (PComandoSemiC) obj_e;
+            PComando e = (PComando) obj_e;
             if(e.parent() != null)
             {
                 e.parent().removeChild(e);
             }
 
             e.parent(this);
-            this._comandoSemiC_.add(e);
+            this._comando_.add(e);
         }
     }
 
@@ -247,7 +247,7 @@ public final class ARepeatComando extends PComando
     {
         return ""
             + toString(this._repeat_)
-            + toString(this._comandoSemiC_)
+            + toString(this._comando_)
             + toString(this._until_)
             + toString(this._lPar_)
             + toString(this._id_)
@@ -265,7 +265,7 @@ public final class ARepeatComando extends PComando
             return;
         }
 
-        if(this._comandoSemiC_.remove(child))
+        if(this._comando_.remove(child))
         {
             return;
         }
@@ -313,13 +313,13 @@ public final class ARepeatComando extends PComando
             return;
         }
 
-        for(ListIterator<PComandoSemiC> i = this._comandoSemiC_.listIterator(); i.hasNext();)
+        for(ListIterator<PComando> i = this._comando_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
             {
                 if(newChild != null)
                 {
-                    i.set((PComandoSemiC) newChild);
+                    i.set((PComando) newChild);
                     newChild.parent(this);
                     oldChild.parent(null);
                     return;

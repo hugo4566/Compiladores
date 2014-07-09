@@ -11,7 +11,6 @@ public final class AReadComando extends PComando
     private TRead _read_;
     private TLPar _lPar_;
     private final LinkedList<PVariavelComma> _variavelComma_ = new LinkedList<PVariavelComma>();
-    private PVar _var_;
     private TRPar _rPar_;
     private TSemiC _semiC_;
 
@@ -24,7 +23,6 @@ public final class AReadComando extends PComando
         @SuppressWarnings("hiding") TRead _read_,
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") List<?> _variavelComma_,
-        @SuppressWarnings("hiding") PVar _var_,
         @SuppressWarnings("hiding") TRPar _rPar_,
         @SuppressWarnings("hiding") TSemiC _semiC_)
     {
@@ -34,8 +32,6 @@ public final class AReadComando extends PComando
         setLPar(_lPar_);
 
         setVariavelComma(_variavelComma_);
-
-        setVar(_var_);
 
         setRPar(_rPar_);
 
@@ -50,7 +46,6 @@ public final class AReadComando extends PComando
             cloneNode(this._read_),
             cloneNode(this._lPar_),
             cloneList(this._variavelComma_),
-            cloneNode(this._var_),
             cloneNode(this._rPar_),
             cloneNode(this._semiC_));
     }
@@ -137,31 +132,6 @@ public final class AReadComando extends PComando
         }
     }
 
-    public PVar getVar()
-    {
-        return this._var_;
-    }
-
-    public void setVar(PVar node)
-    {
-        if(this._var_ != null)
-        {
-            this._var_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._var_ = node;
-    }
-
     public TRPar getRPar()
     {
         return this._rPar_;
@@ -219,7 +189,6 @@ public final class AReadComando extends PComando
             + toString(this._read_)
             + toString(this._lPar_)
             + toString(this._variavelComma_)
-            + toString(this._var_)
             + toString(this._rPar_)
             + toString(this._semiC_);
     }
@@ -242,12 +211,6 @@ public final class AReadComando extends PComando
 
         if(this._variavelComma_.remove(child))
         {
-            return;
-        }
-
-        if(this._var_ == child)
-        {
-            this._var_ = null;
             return;
         }
 
@@ -298,12 +261,6 @@ public final class AReadComando extends PComando
                 oldChild.parent(null);
                 return;
             }
-        }
-
-        if(this._var_ == oldChild)
-        {
-            setVar((PVar) newChild);
-            return;
         }
 
         if(this._rPar_ == oldChild)

@@ -5,21 +5,21 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAndExpExpLogica extends PExpLogica
+public final class AAndExpExpLogica3 extends PExpLogica3
 {
-    private PExpLogica _pre_;
+    private PExpLogica3 _pre_;
     private TAnd _and_;
-    private PExpLogica _pos_;
+    private PExpLogica4 _pos_;
 
-    public AAndExpExpLogica()
+    public AAndExpExpLogica3()
     {
         // Constructor
     }
 
-    public AAndExpExpLogica(
-        @SuppressWarnings("hiding") PExpLogica _pre_,
+    public AAndExpExpLogica3(
+        @SuppressWarnings("hiding") PExpLogica3 _pre_,
         @SuppressWarnings("hiding") TAnd _and_,
-        @SuppressWarnings("hiding") PExpLogica _pos_)
+        @SuppressWarnings("hiding") PExpLogica4 _pos_)
     {
         // Constructor
         setPre(_pre_);
@@ -33,7 +33,7 @@ public final class AAndExpExpLogica extends PExpLogica
     @Override
     public Object clone()
     {
-        return new AAndExpExpLogica(
+        return new AAndExpExpLogica3(
             cloneNode(this._pre_),
             cloneNode(this._and_),
             cloneNode(this._pos_));
@@ -42,15 +42,15 @@ public final class AAndExpExpLogica extends PExpLogica
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAndExpExpLogica(this);
+        ((Analysis) sw).caseAAndExpExpLogica3(this);
     }
 
-    public PExpLogica getPre()
+    public PExpLogica3 getPre()
     {
         return this._pre_;
     }
 
-    public void setPre(PExpLogica node)
+    public void setPre(PExpLogica3 node)
     {
         if(this._pre_ != null)
         {
@@ -95,12 +95,12 @@ public final class AAndExpExpLogica extends PExpLogica
         this._and_ = node;
     }
 
-    public PExpLogica getPos()
+    public PExpLogica4 getPos()
     {
         return this._pos_;
     }
 
-    public void setPos(PExpLogica node)
+    public void setPos(PExpLogica4 node)
     {
         if(this._pos_ != null)
         {
@@ -160,7 +160,7 @@ public final class AAndExpExpLogica extends PExpLogica
         // Replace child
         if(this._pre_ == oldChild)
         {
-            setPre((PExpLogica) newChild);
+            setPre((PExpLogica3) newChild);
             return;
         }
 
@@ -172,7 +172,7 @@ public final class AAndExpExpLogica extends PExpLogica
 
         if(this._pos_ == oldChild)
         {
-            setPos((PExpLogica) newChild);
+            setPos((PExpLogica4) newChild);
             return;
         }
 

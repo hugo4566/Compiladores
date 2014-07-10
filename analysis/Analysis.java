@@ -53,9 +53,9 @@ public interface Analysis extends Switch
     void caseAExpLogica2(AExpLogica2 node);
     void caseAAndExpExpLogica3(AAndExpExpLogica3 node);
     void caseAExpLogica3(AExpLogica3 node);
-    void caseANotExpExpLogica4(ANotExpExpLogica4 node);
     void caseAExpOp4ExpExpLogica4(AExpOp4ExpExpLogica4 node);
     void caseAExpOp3ExpExpLogica4(AExpOp3ExpExpLogica4 node);
+    void caseAParExpExpLogica4(AParExpExpLogica4 node);
     void caseAPassoStep(APassoStep node);
     void caseAAtribComando(AAtribComando node);
     void caseAAtribLogComando(AAtribLogComando node);

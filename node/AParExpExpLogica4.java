@@ -5,27 +5,23 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class ANotExpExpLogica4 extends PExpLogica4
+public final class AParExpExpLogica4 extends PExpLogica4
 {
-    private TNot _not_;
     private TLPar _lPar_;
     private PExpLogica _expLogica_;
     private TRPar _rPar_;
 
-    public ANotExpExpLogica4()
+    public AParExpExpLogica4()
     {
         // Constructor
     }
 
-    public ANotExpExpLogica4(
-        @SuppressWarnings("hiding") TNot _not_,
+    public AParExpExpLogica4(
         @SuppressWarnings("hiding") TLPar _lPar_,
         @SuppressWarnings("hiding") PExpLogica _expLogica_,
         @SuppressWarnings("hiding") TRPar _rPar_)
     {
         // Constructor
-        setNot(_not_);
-
         setLPar(_lPar_);
 
         setExpLogica(_expLogica_);
@@ -37,8 +33,7 @@ public final class ANotExpExpLogica4 extends PExpLogica4
     @Override
     public Object clone()
     {
-        return new ANotExpExpLogica4(
-            cloneNode(this._not_),
+        return new AParExpExpLogica4(
             cloneNode(this._lPar_),
             cloneNode(this._expLogica_),
             cloneNode(this._rPar_));
@@ -47,32 +42,7 @@ public final class ANotExpExpLogica4 extends PExpLogica4
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseANotExpExpLogica4(this);
-    }
-
-    public TNot getNot()
-    {
-        return this._not_;
-    }
-
-    public void setNot(TNot node)
-    {
-        if(this._not_ != null)
-        {
-            this._not_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._not_ = node;
+        ((Analysis) sw).caseAParExpExpLogica4(this);
     }
 
     public TLPar getLPar()
@@ -154,7 +124,6 @@ public final class ANotExpExpLogica4 extends PExpLogica4
     public String toString()
     {
         return ""
-            + toString(this._not_)
             + toString(this._lPar_)
             + toString(this._expLogica_)
             + toString(this._rPar_);
@@ -164,12 +133,6 @@ public final class ANotExpExpLogica4 extends PExpLogica4
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._not_ == child)
-        {
-            this._not_ = null;
-            return;
-        }
-
         if(this._lPar_ == child)
         {
             this._lPar_ = null;
@@ -195,12 +158,6 @@ public final class ANotExpExpLogica4 extends PExpLogica4
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._not_ == oldChild)
-        {
-            setNot((TNot) newChild);
-            return;
-        }
-
         if(this._lPar_ == oldChild)
         {
             setLPar((TLPar) newChild);

@@ -321,12 +321,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseANotExpExpLogica4(ANotExpExpLogica4 node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAExpOp4ExpExpLogica4(AExpOp4ExpExpLogica4 node)
     {
         defaultCase(node);
@@ -334,6 +328,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAExpOp3ExpExpLogica4(AExpOp3ExpExpLogica4 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParExpExpLogica4(AParExpExpLogica4 node)
     {
         defaultCase(node);
     }

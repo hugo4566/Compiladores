@@ -7,6 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class AExpLogica3 extends PExpLogica3
 {
+    private TNot _not_;
     private PExpLogica4 _expLogica4_;
 
     public AExpLogica3()
@@ -15,9 +16,12 @@ public final class AExpLogica3 extends PExpLogica3
     }
 
     public AExpLogica3(
+        @SuppressWarnings("hiding") TNot _not_,
         @SuppressWarnings("hiding") PExpLogica4 _expLogica4_)
     {
         // Constructor
+        setNot(_not_);
+
         setExpLogica4(_expLogica4_);
 
     }
@@ -26,6 +30,7 @@ public final class AExpLogica3 extends PExpLogica3
     public Object clone()
     {
         return new AExpLogica3(
+            cloneNode(this._not_),
             cloneNode(this._expLogica4_));
     }
 
@@ -33,6 +38,31 @@ public final class AExpLogica3 extends PExpLogica3
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAExpLogica3(this);
+    }
+
+    public TNot getNot()
+    {
+        return this._not_;
+    }
+
+    public void setNot(TNot node)
+    {
+        if(this._not_ != null)
+        {
+            this._not_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._not_ = node;
     }
 
     public PExpLogica4 getExpLogica4()
@@ -64,6 +94,7 @@ public final class AExpLogica3 extends PExpLogica3
     public String toString()
     {
         return ""
+            + toString(this._not_)
             + toString(this._expLogica4_);
     }
 
@@ -71,6 +102,12 @@ public final class AExpLogica3 extends PExpLogica3
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._not_ == child)
+        {
+            this._not_ = null;
+            return;
+        }
+
         if(this._expLogica4_ == child)
         {
             this._expLogica4_ = null;
@@ -84,6 +121,12 @@ public final class AExpLogica3 extends PExpLogica3
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._not_ == oldChild)
+        {
+            setNot((TNot) newChild);
+            return;
+        }
+
         if(this._expLogica4_ == oldChild)
         {
             setExpLogica4((PExpLogica4) newChild);

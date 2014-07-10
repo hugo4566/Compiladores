@@ -153,12 +153,12 @@ Productions
 		| exp_logica3;
 
 	exp_logica3 =	{and_exp} 		[pre]:exp_logica3 and [pos]:exp_logica4
-		| exp_logica4;
+		| not? exp_logica4;
 
 
-	exp_logica4 =	{not_exp} 	not? l_par exp_logica r_par
-		|	{exp_op4_exp} 	[pre]:exp op4 var_value
-		|	{exp_op3_exp} 	[pre]:exp op3 var_value;
+	exp_logica4 =	{exp_op4_exp} 	[pre]:exp op4 var_value
+		|	{exp_op3_exp} 	[pre]:exp op3 var_value
+		|  	{par_exp} l_par exp_logica r_par;
 
 	step = {passo} pass n_int;
 

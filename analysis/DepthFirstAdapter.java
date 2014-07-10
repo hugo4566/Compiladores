@@ -1056,44 +1056,15 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAExpLogica3(AExpLogica3 node)
     {
         inAExpLogica3(node);
+        if(node.getNot() != null)
+        {
+            node.getNot().apply(this);
+        }
         if(node.getExpLogica4() != null)
         {
             node.getExpLogica4().apply(this);
         }
         outAExpLogica3(node);
-    }
-
-    public void inANotExpExpLogica4(ANotExpExpLogica4 node)
-    {
-        defaultIn(node);
-    }
-
-    public void outANotExpExpLogica4(ANotExpExpLogica4 node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseANotExpExpLogica4(ANotExpExpLogica4 node)
-    {
-        inANotExpExpLogica4(node);
-        if(node.getNot() != null)
-        {
-            node.getNot().apply(this);
-        }
-        if(node.getLPar() != null)
-        {
-            node.getLPar().apply(this);
-        }
-        if(node.getExpLogica() != null)
-        {
-            node.getExpLogica().apply(this);
-        }
-        if(node.getRPar() != null)
-        {
-            node.getRPar().apply(this);
-        }
-        outANotExpExpLogica4(node);
     }
 
     public void inAExpOp4ExpExpLogica4(AExpOp4ExpExpLogica4 node)
@@ -1152,6 +1123,35 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getVarValue().apply(this);
         }
         outAExpOp3ExpExpLogica4(node);
+    }
+
+    public void inAParExpExpLogica4(AParExpExpLogica4 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAParExpExpLogica4(AParExpExpLogica4 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAParExpExpLogica4(AParExpExpLogica4 node)
+    {
+        inAParExpExpLogica4(node);
+        if(node.getLPar() != null)
+        {
+            node.getLPar().apply(this);
+        }
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        if(node.getRPar() != null)
+        {
+            node.getRPar().apply(this);
+        }
+        outAParExpExpLogica4(node);
     }
 
     public void inAPassoStep(APassoStep node)

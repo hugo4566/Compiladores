@@ -69,7 +69,7 @@ Tokens
 	{normal}	id 			 = ('_' | letter)('_'| letter | digit )*;
 
 	// Tipos de dados
-	{normal}	string 		 = '''letter+''';
+	{normal}	string 		 = '''(letter | ' ')*''';
 	{normal}	n_real		 = '-' ? digit+ ',' digit+;
 	{normal}	n_int		 = '_' ? digit+;
 
@@ -156,7 +156,7 @@ Productions
 		| exp_logica4;
 
 
-	exp_logica4 =	{not_exp} 	not l_par exp_logica r_par
+	exp_logica4 =	{not_exp} 	not? l_par exp_logica r_par
 		|	{exp_op4_exp} 	[pre]:exp op4 var_value
 		|	{exp_op3_exp} 	[pre]:exp op3 var_value;
 
@@ -167,9 +167,9 @@ Productions
 	|	{atrib_log}		var is exp_logica semi_c
 	| 	{read}			read l_par variavel_comma+ r_par semi_c
 	| 	{write}			write l_par expr_comma+ r_par semi_c
-	| 	{if}			if l_par id r_par then comando+ opcional_else? end_if semi_c
+	| 	{if}			if l_par exp_logica r_par then comando+ opcional_else? end_if semi_c
 	| 	{evaluate}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e semi_c
 	|	{evaluate_log} 	evaluate l_par exp_logica r_par case_estrela* opcional_else_colon? end_e semi_c
-	| 	{while}			while l_par id r_par do comando+ end_w semi_c
+	| 	{while}			while l_par exp_logica r_par do comando+ end_w semi_c
 	| 	{repeat}		repeat comando+ until l_par id r_par semi_c
 	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando+ end_f semi_c;

@@ -1375,9 +1375,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getRPar().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getExpLogica() != null)
         {
-            node.getId().apply(this);
+            node.getExpLogica().apply(this);
         }
         if(node.getLPar() != null)
         {
@@ -1534,9 +1534,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getRPar().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getExpLogica() != null)
         {
-            node.getId().apply(this);
+            node.getExpLogica().apply(this);
         }
         if(node.getLPar() != null)
         {

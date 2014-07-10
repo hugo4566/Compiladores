@@ -1347,9 +1347,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getLPar().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getExpLogica() != null)
         {
-            node.getId().apply(this);
+            node.getExpLogica().apply(this);
         }
         if(node.getRPar() != null)
         {
@@ -1507,9 +1507,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getLPar().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getExpLogica() != null)
         {
-            node.getId().apply(this);
+            node.getExpLogica().apply(this);
         }
         if(node.getRPar() != null)
         {

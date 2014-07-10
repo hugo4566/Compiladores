@@ -10,7 +10,7 @@ public final class AWhileComando extends PComando
 {
     private TWhile _while_;
     private TLPar _lPar_;
-    private TId _id_;
+    private PExpLogica _expLogica_;
     private TRPar _rPar_;
     private TDo _do_;
     private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
@@ -25,7 +25,7 @@ public final class AWhileComando extends PComando
     public AWhileComando(
         @SuppressWarnings("hiding") TWhile _while_,
         @SuppressWarnings("hiding") TLPar _lPar_,
-        @SuppressWarnings("hiding") TId _id_,
+        @SuppressWarnings("hiding") PExpLogica _expLogica_,
         @SuppressWarnings("hiding") TRPar _rPar_,
         @SuppressWarnings("hiding") TDo _do_,
         @SuppressWarnings("hiding") List<?> _comando_,
@@ -37,7 +37,7 @@ public final class AWhileComando extends PComando
 
         setLPar(_lPar_);
 
-        setId(_id_);
+        setExpLogica(_expLogica_);
 
         setRPar(_rPar_);
 
@@ -57,7 +57,7 @@ public final class AWhileComando extends PComando
         return new AWhileComando(
             cloneNode(this._while_),
             cloneNode(this._lPar_),
-            cloneNode(this._id_),
+            cloneNode(this._expLogica_),
             cloneNode(this._rPar_),
             cloneNode(this._do_),
             cloneList(this._comando_),
@@ -121,16 +121,16 @@ public final class AWhileComando extends PComando
         this._lPar_ = node;
     }
 
-    public TId getId()
+    public PExpLogica getExpLogica()
     {
-        return this._id_;
+        return this._expLogica_;
     }
 
-    public void setId(TId node)
+    public void setExpLogica(PExpLogica node)
     {
-        if(this._id_ != null)
+        if(this._expLogica_ != null)
         {
-            this._id_.parent(null);
+            this._expLogica_.parent(null);
         }
 
         if(node != null)
@@ -143,7 +143,7 @@ public final class AWhileComando extends PComando
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._expLogica_ = node;
     }
 
     public TRPar getRPar()
@@ -278,7 +278,7 @@ public final class AWhileComando extends PComando
         return ""
             + toString(this._while_)
             + toString(this._lPar_)
-            + toString(this._id_)
+            + toString(this._expLogica_)
             + toString(this._rPar_)
             + toString(this._do_)
             + toString(this._comando_)
@@ -302,9 +302,9 @@ public final class AWhileComando extends PComando
             return;
         }
 
-        if(this._id_ == child)
+        if(this._expLogica_ == child)
         {
-            this._id_ = null;
+            this._expLogica_ = null;
             return;
         }
 
@@ -356,9 +356,9 @@ public final class AWhileComando extends PComando
             return;
         }
 
-        if(this._id_ == oldChild)
+        if(this._expLogica_ == oldChild)
         {
-            setId((TId) newChild);
+            setExpLogica((PExpLogica) newChild);
             return;
         }
 

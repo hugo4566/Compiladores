@@ -1,6 +1,10 @@
 package Main;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import parser.ParserException;
 import lexer.Lexer;
+import node.EOF;
 import node.TComment;
 import node.TCommentEnd;
 
@@ -26,13 +30,28 @@ public class MyLexer extends Lexer
         token = null; // continue to scan the input.
       }
       else
-      { // we were already in the comment state
+      { 
+    	boolean no_exception = true;  
+    	// we were already in the comment state
         //text.append(token.getText()); // accumulate the text.
         if(token instanceof TComment)
           count++;
         else if(token instanceof TCommentEnd)
           count--;
-        if(count != 0)
+        else if(token instanceof EOF){
+        	if(count != 0){
+        		try {
+        			no_exception = false;
+        			token = comment;
+					throw  new parser.ParserException(token, "Parêntesis não balanceados!");
+				} catch (ParserException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}
+        }
+        
+        if(count != 0 && no_exception)
           token = null; // continue to scan the input.
         else
         { //comment.setText(text.toString());

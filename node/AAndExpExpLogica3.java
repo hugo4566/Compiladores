@@ -9,6 +9,7 @@ public final class AAndExpExpLogica3 extends PExpLogica3
 {
     private PExpLogica3 _pre_;
     private TAnd _and_;
+    private TNot _not_;
     private PExpLogica4 _pos_;
 
     public AAndExpExpLogica3()
@@ -19,12 +20,15 @@ public final class AAndExpExpLogica3 extends PExpLogica3
     public AAndExpExpLogica3(
         @SuppressWarnings("hiding") PExpLogica3 _pre_,
         @SuppressWarnings("hiding") TAnd _and_,
+        @SuppressWarnings("hiding") TNot _not_,
         @SuppressWarnings("hiding") PExpLogica4 _pos_)
     {
         // Constructor
         setPre(_pre_);
 
         setAnd(_and_);
+
+        setNot(_not_);
 
         setPos(_pos_);
 
@@ -36,6 +40,7 @@ public final class AAndExpExpLogica3 extends PExpLogica3
         return new AAndExpExpLogica3(
             cloneNode(this._pre_),
             cloneNode(this._and_),
+            cloneNode(this._not_),
             cloneNode(this._pos_));
     }
 
@@ -95,6 +100,31 @@ public final class AAndExpExpLogica3 extends PExpLogica3
         this._and_ = node;
     }
 
+    public TNot getNot()
+    {
+        return this._not_;
+    }
+
+    public void setNot(TNot node)
+    {
+        if(this._not_ != null)
+        {
+            this._not_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._not_ = node;
+    }
+
     public PExpLogica4 getPos()
     {
         return this._pos_;
@@ -126,6 +156,7 @@ public final class AAndExpExpLogica3 extends PExpLogica3
         return ""
             + toString(this._pre_)
             + toString(this._and_)
+            + toString(this._not_)
             + toString(this._pos_);
     }
 
@@ -142,6 +173,12 @@ public final class AAndExpExpLogica3 extends PExpLogica3
         if(this._and_ == child)
         {
             this._and_ = null;
+            return;
+        }
+
+        if(this._not_ == child)
+        {
+            this._not_ = null;
             return;
         }
 
@@ -167,6 +204,12 @@ public final class AAndExpExpLogica3 extends PExpLogica3
         if(this._and_ == oldChild)
         {
             setAnd((TAnd) newChild);
+            return;
+        }
+
+        if(this._not_ == oldChild)
+        {
+            setNot((TNot) newChild);
             return;
         }
 

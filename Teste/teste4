@@ -1,0 +1,16 @@
+programa teste
+inicio
+	inteiro : i;
+	const y 'hello world';
+
+	/*
+	i <- 2;
+	i <- i+1;
+	se (i = 3) entao
+		i <- 'HUE';
+	fim se;
+	se (nao(i=3) xor nao(i=3)) entao
+		z <- 2;
+	fim se;
+
+fim.

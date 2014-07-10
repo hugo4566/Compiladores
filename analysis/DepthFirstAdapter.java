@@ -1035,6 +1035,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getAnd().apply(this);
         }
+        if(node.getNot() != null)
+        {
+            node.getNot().apply(this);
+        }
         if(node.getPos() != null)
         {
             node.getPos().apply(this);

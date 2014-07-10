@@ -152,7 +152,7 @@ Productions
 	exp_logica2 =	{xor_exp} 		[pre]:exp_logica2 xor [pos]:exp_logica3
 		| exp_logica3;
 
-	exp_logica3 =	{and_exp} 		[pre]:exp_logica3 and [pos]:exp_logica4
+	exp_logica3 =	{and_exp} 		[pre]:exp_logica3 and not? [pos]:exp_logica4
 		| not? exp_logica4;
 
 

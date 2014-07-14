@@ -127,16 +127,17 @@ Productions
 	exp =
 	  {plus}  exp plus termo 	{-> New exp.plus(exp, termo.exp)  }
 	| {minus}  exp minus termo	{-> New exp.minus(exp, termo.exp)  }
-	| {termo} termo;			{-> termo.exp}
+	| {termo} termo {-> termo.exp};			
 
-	termo =
-	  {mult} termo mult fator	{-> New exp.div(termo.exp, fator.exp ) }
+	termo {-> exp} =
+	  {mult} termo mult fator	{-> New exp.mult(termo.exp, fator.exp ) }
 	| {div} termo div fator		{-> New exp.div(termo.exp, fator.exp ) }
-	| {fator} fator;			{-> fator.exp  }
+	| {fator} fator {-> fator.exp  };			
 
-	fator =
+	fator {-> exp} =
 	  {l_exp_r} minus? l_par exp r_par 	{-> exp}
-	| {var_value} var_value;			{-> New exp.var_value(var_value)}
+	| {value} var_value	{-> New exp.var_value(var_value)}
+	;
 
 	exp_logica =
 	  {or} [pre]:exp_logica or [pos]:exp_logica2
@@ -181,5 +182,5 @@ Abstract Syntax Tree
     | {minus}  [l]:exp [r]:exp
     | {div}    [l]:exp [r]:exp
     | {mult}   [l]:exp [r]:exp
-    | {var_value} var_value
+	| {var_value} var_value
     ;

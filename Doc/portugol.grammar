@@ -90,12 +90,55 @@ Ignored Tokens
 
 Productions
 
-	programa = {start} program id begin declaracao* comando* end;
+	programa {-> programa } = program id begin declaracao comando end {-> New programa(declaracao,comando)} ;
 
 	valor =
 		{string} 		string
 	|	{integer} 		n_int
 	|	{real} 			n_real;
+
+	tipo =
+		{real} 			real
+	|	{integer} 		integer
+	|	{char} 			character;
+
+	var =
+		{id} 			id
+	| 	{matrix} 		id l_bra n_int r_bra;
+
+	variavel_comma 		= {var_com} var comma;
+
+	declaracao  =
+		{variable} 		tipo colon variavel_comma* var semi_c
+	| 	{constant} 		constant id valor semi_c 
+	;
+
+	comando =
+	  	{atrib} 		var is exp semi_c	;
+
+	exp =
+	  {plus}  exp plus termo 	{-> New exp.plus(exp, termo.exp)  }
+	| {minus}  exp minus termo	{-> New exp.minus(exp, termo.exp)  }
+	| {termo} termo {-> termo.exp};			
+
+	termo {-> exp} =
+	  {mult} termo mult fator	{-> New exp.mult(termo.exp, fator.exp ) }
+	| {div} termo div fator		{-> New exp.div(termo.exp, fator.exp ) }
+	| {fator} fator {-> fator.exp  };			
+
+	fator {-> exp} =
+	  {l_exp_r} minus? l_par exp r_par 	{-> exp}
+	//| {value} var_value	{-> New exp.var_value(var_value)}
+	;
+
+//	programa = {start} program id begin declaracao* comando* end;
+
+/*
+	valor =
+		{string} 		string
+	|	{integer} 		n_int
+	|	{real} 			n_real;
+
 
 	tipo =
 		{real} 			real
@@ -175,7 +218,7 @@ Productions
 	| 	{repeat}		repeat comando+ until l_par id r_par semi_c
 	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando+ end_f semi_c;
 
-Abstract Syntax Tree
+//Abstract Syntax Tree
 
     exp =
       {plus}   [l]:exp [r]:exp
@@ -183,4 +226,43 @@ Abstract Syntax Tree
     | {div}    [l]:exp [r]:exp
     | {mult}   [l]:exp [r]:exp
 	| {var_value} var_value
+    ;
+
+*/
+
+Abstract Syntax Tree
+
+	programa =  declaracao comando;
+
+	valor =
+		{string} 		string
+	|	{integer} 		n_int
+	|	{real} 			n_real;
+
+	tipo =
+		{real} 			real
+	|	{integer} 		integer
+	|	{char} 			character;
+
+	var =
+		{id} 			id
+	| 	{matrix} 		id l_bra n_int r_bra;
+
+	variavel_comma 		= {var_com} var comma;
+
+	declaracao =
+		{variable} 		tipo colon variavel_comma* var semi_c
+	| 	{constant} 		constant id valor semi_c 
+	;
+
+	comando = 
+		{atrib} 		var is exp semi_c	
+	;
+
+	exp =
+      {plus}   [l]:exp [r]:exp
+    | {minus}  [l]:exp [r]:exp
+    | {div}    [l]:exp [r]:exp
+    | {mult}   [l]:exp [r]:exp
+	//| {var_value} var_value
     ;

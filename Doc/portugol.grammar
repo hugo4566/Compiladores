@@ -124,41 +124,41 @@ Productions
 		{value}		 	valor
 	| 	{variable} 		var;
 
-	op1 = {op11} minus | {op12} plus;
+	exp =
+	  {plus}  exp plus termo 	{-> New exp.plus(exp, termo.exp)  }
+	| {minus}  exp minus termo	{-> New exp.minus(exp, termo.exp)  }
+	| {termo} termo;			{-> termo.exp}
 
-	op2 = {op21} mult | {op22} div;
+	termo =
+	  {mult} termo mult fator	{-> New exp.div(termo.exp, fator.exp ) }
+	| {div} termo div fator		{-> New exp.div(termo.exp, fator.exp ) }
+	| {fator} fator;			{-> fator.exp  }
 
-	exp = {exp_op1_ter}  exp op1 termo
-	| {ter} termo; 
+	fator =
+	  {l_exp_r} minus? l_par exp r_par 	{-> exp}
+	| {var_value} var_value;			{-> New exp.var_value(var_value)}
 
-	termo = {ter_op2_fat} termo op2 fator
-	| {fat} fator;
+	exp_logica =
+	  {or} [pre]:exp_logica or [pos]:exp_logica2
+	| {exp_logica2} exp_logica2;
 
-	fator = {l_exp_r} minus? l_par exp r_par 
-	| {vari_val} var_value;
-//	| {explog} exp_logica;
+	exp_logica2 =
+	  {xor} [pre]:exp_logica2 xor [pos]:exp_logica3
+	| {exp_logica3} exp_logica3;
 
-	op3 = {op31} less_eq
-		| {op32} less
-		| {op33} greater_eq
-		| {op34} greater;
-
-	op4 = {op41} equal
-		| {op42} not_equal;
-
-	exp_logica = 	{or_exp} 		[pre]:exp_logica or [pos]:exp_logica2
-		| exp_logica2;
-
-	exp_logica2 =	{xor_exp} 		[pre]:exp_logica2 xor [pos]:exp_logica3
-		| exp_logica3;
-
-	exp_logica3 =	{and_exp} 		[pre]:exp_logica3 and not? [pos]:exp_logica4
-		| not? exp_logica4;
+	exp_logica3 =
+	  {and} [pre]:exp_logica3 and not? [pos]:exp_logica4
+	| {exp_logica4} not? exp_logica4;
 
 
-	exp_logica4 =	{exp_op4_exp} 	[pre]:exp op4 var_value
-		|	{exp_op3_exp} 	[pre]:exp op3 var_value
-		|  	{par_exp} l_par exp_logica r_par;
+	exp_logica4 =
+			{equal} 		[pre]:exp equal 	 var_value
+		|	{not_equal} 	[pre]:exp not_equal  var_value
+		|	{less_eq} 		[pre]:exp less_eq 	 var_value
+		|	{less} 			[pre]:exp less 		 var_value
+		|	{greater_eq} 	[pre]:exp greater_eq var_value
+		|	{greater} 		[pre]:exp greater    var_value
+		|  	{par_exp} 		l_par exp_logica r_par;
 
 	step = {passo} pass n_int;
 
@@ -173,3 +173,13 @@ Productions
 	| 	{while}			while l_par exp_logica r_par do comando+ end_w semi_c
 	| 	{repeat}		repeat comando+ until l_par id r_par semi_c
 	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando+ end_f semi_c;
+
+Abstract Syntax Tree
+
+    exp =
+      {plus}   [l]:exp [r]:exp
+    | {minus}  [l]:exp [r]:exp
+    | {div}    [l]:exp [r]:exp
+    | {mult}   [l]:exp [r]:exp
+    | {var_value} var_value
+    ;

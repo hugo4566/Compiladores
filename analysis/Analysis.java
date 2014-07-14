@@ -31,13 +31,11 @@ public interface Analysis extends Switch
     void caseAElseColonOpcOpcionalElseColon(AElseColonOpcOpcionalElseColon node);
     void caseAValueVarValue(AValueVarValue node);
     void caseAVariableVarValue(AVariableVarValue node);
-    void caseAOp11Op1(AOp11Op1 node);
-    void caseAOp12Op1(AOp12Op1 node);
-    void caseAOp21Op2(AOp21Op2 node);
-    void caseAOp22Op2(AOp22Op2 node);
-    void caseAExpOp1TerExp(AExpOp1TerExp node);
+    void caseAExpPlusTerExp(AExpPlusTerExp node);
+    void caseAExpMinusTerExp(AExpMinusTerExp node);
     void caseATerExp(ATerExp node);
-    void caseATerOp2FatTermo(ATerOp2FatTermo node);
+    void caseATerMultFatTermo(ATerMultFatTermo node);
+    void caseATerDivFatTermo(ATerDivFatTermo node);
     void caseAFatTermo(AFatTermo node);
     void caseALExpRFator(ALExpRFator node);
     void caseAVariValFator(AVariValFator node);

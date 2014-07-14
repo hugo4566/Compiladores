@@ -189,31 +189,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAOp11Op1(AOp11Op1 node)
+    public void caseAExpPlusTerExp(AExpPlusTerExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAOp12Op1(AOp12Op1 node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAOp21Op2(AOp21Op2 node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAOp22Op2(AOp22Op2 node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAExpOp1TerExp(AExpOp1TerExp node)
+    public void caseAExpMinusTerExp(AExpMinusTerExp node)
     {
         defaultCase(node);
     }
@@ -225,7 +207,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseATerOp2FatTermo(ATerOp2FatTermo node)
+    public void caseATerMultFatTermo(ATerMultFatTermo node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseATerDivFatTermo(ATerDivFatTermo node)
     {
         defaultCase(node);
     }

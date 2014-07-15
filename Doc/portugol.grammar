@@ -110,58 +110,16 @@ Productions
 
 	declaracao  =
 		{variable} 		tipo colon variavel_comma* var semi_c
-	| 	{constant} 		constant id valor semi_c 
+	| 	{constant} 		constant id valor semi_c
 	;
-
-	comando =
-	  	{atrib} 		var is exp semi_c	;
-
-	exp =
-	  {plus}  exp plus termo 	{-> New exp.plus(exp, termo.exp)  }
-	| {minus}  exp minus termo	{-> New exp.minus(exp, termo.exp)  }
-	| {termo} termo {-> termo.exp};			
-
-	termo {-> exp} =
-	  {mult} termo mult fator	{-> New exp.mult(termo.exp, fator.exp ) }
-	| {div} termo div fator		{-> New exp.div(termo.exp, fator.exp ) }
-	| {fator} fator {-> fator.exp  };			
-
-	fator {-> exp} =
-	  {l_exp_r} minus? l_par exp r_par 	{-> exp}
-	//| {value} var_value	{-> New exp.var_value(var_value)}
-	;
-
-//	programa = {start} program id begin declaracao* comando* end;
 
 /*
-	valor =
-		{string} 		string
-	|	{integer} 		n_int
-	|	{real} 			n_real;
-
-
-	tipo =
-		{real} 			real
-	|	{integer} 		integer
-	|	{char} 			character;
-
-	var =
-		{id} 			id
-	| 	{matrix} 		id l_bra n_int r_bra;
-
-
-	variavel_comma 		= {var_com} var comma;
-
-	declaracao =
-		{variable} 		tipo colon variavel_comma* var semi_c
-	| 	{constant} 		constant id valor semi_c ;
-
-
 	expr_comma 	   		= {exp_com} exp comma
 							| {explog_com} exp_logica comma;
 	opcional_else  		= {else_opc} else comando+;
 	case_estrela   		= {case_star} case valor colon comando+;
 	opcional_else_colon = {else_colon_opc} else colon comando+;
+*/
 
 	var_value =
 		{value}		 	valor
@@ -170,41 +128,55 @@ Productions
 	exp =
 	  {plus}  exp plus termo 	{-> New exp.plus(exp, termo.exp)  }
 	| {minus}  exp minus termo	{-> New exp.minus(exp, termo.exp)  }
-	| {termo} termo {-> termo.exp};			
+	| {termo} termo {-> termo.exp}
+	;
 
 	termo {-> exp} =
 	  {mult} termo mult fator	{-> New exp.mult(termo.exp, fator.exp ) }
 	| {div} termo div fator		{-> New exp.div(termo.exp, fator.exp ) }
-	| {fator} fator {-> fator.exp  };			
+	| {fator} fator {-> fator.exp  }
+	;
 
 	fator {-> exp} =
 	  {l_exp_r} minus? l_par exp r_par 	{-> exp}
-	| {value} var_value	{-> New exp.var_value(var_value)}
+	| {var_value} var_value	{-> New exp.var_value(var_value)}
 	;
 
 	exp_logica =
-	  {or} [pre]:exp_logica or [pos]:exp_logica2
-	| {exp_logica2} exp_logica2;
+	  {or} exp_logica or exp_logica2 {-> New exp_logica.or(exp_logica, exp_logica2.exp_logica)  }
+	| {exp_logica2} exp_logica2  {-> exp_logica2.exp_logica}
+	;
 
-	exp_logica2 =
-	  {xor} [pre]:exp_logica2 xor [pos]:exp_logica3
-	| {exp_logica3} exp_logica3;
+	exp_logica2 {-> exp_logica} =
+	  {xor} exp_logica2 xor exp_logica3 {-> New exp_logica.xor(exp_logica2.exp_logica, exp_logica3.exp_logica)  }
+	| {exp_logica3} exp_logica3  {-> exp_logica3.exp_logica}
+	;
 
-	exp_logica3 =
-	  {and} [pre]:exp_logica3 and not? [pos]:exp_logica4
-	| {exp_logica4} not? exp_logica4;
+	exp_logica3 {-> exp_logica} =
+	  {and} exp_logica3 and not? exp_logica4 {-> New exp_logica.and(exp_logica3.exp_logica, exp_logica4.exp_logica)  }
+	| {exp_logica4} not? exp_logica4	{-> exp_logica4.exp_logica}
+	;
 
 
-	exp_logica4 =
-			{equal} 		[pre]:exp equal 	 var_value
-		|	{not_equal} 	[pre]:exp not_equal  var_value
-		|	{less_eq} 		[pre]:exp less_eq 	 var_value
-		|	{less} 			[pre]:exp less 		 var_value
-		|	{greater_eq} 	[pre]:exp greater_eq var_value
-		|	{greater} 		[pre]:exp greater    var_value
-		|  	{par_exp} 		l_par exp_logica r_par;
+	exp_logica4 {-> exp_logica} =
+	  {equal} 			exp equal 		var_value		{-> New exp_logica.equal(exp, exp.var_value)  }
+	| {not_equal} 		exp not_equal	var_value		{-> New exp_logica.not_equal(exp, exp.var_value)  }
+	| {less_eq} 		exp less_eq		var_value		{-> New exp_logica.less_eq(exp, exp.var_value)  }
+	| {less} 			exp less 		var_value		{-> New exp_logica.less(exp, exp.var_value)  }
+	| {greater_eq} 		exp greater_eq  var_value		{-> New exp_logica.greater_eq(exp, exp.var_value)  }
+	| {greater} 		exp greater     var_value		{-> New exp_logica.greater(exp, exp.var_value)  }
+	| {par_exp} 		l_par exp_logica r_par			{-> exp_logica}
+	;
 
 	step = {passo} pass n_int;
+
+	comando =
+	  {atrib} 		var is exp semi_c
+	;
+
+//	programa = {start} program id begin declaracao* comando* end;
+
+/*
 
 	comando =
 	  	{atrib} 		var is exp semi_c
@@ -217,16 +189,6 @@ Productions
 	| 	{while}			while l_par exp_logica r_par do comando+ end_w semi_c
 	| 	{repeat}		repeat comando+ until l_par id r_par semi_c
 	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando+ end_f semi_c;
-
-//Abstract Syntax Tree
-
-    exp =
-      {plus}   [l]:exp [r]:exp
-    | {minus}  [l]:exp [r]:exp
-    | {div}    [l]:exp [r]:exp
-    | {mult}   [l]:exp [r]:exp
-	| {var_value} var_value
-    ;
 
 */
 
@@ -248,21 +210,41 @@ Abstract Syntax Tree
 		{id} 			id
 	| 	{matrix} 		id l_bra n_int r_bra;
 
-	variavel_comma 		= {var_com} var comma;
+	variavel_comma 		=
+		{var_com} var comma
+	;
 
 	declaracao =
 		{variable} 		tipo colon variavel_comma* var semi_c
-	| 	{constant} 		constant id valor semi_c 
+	| 	{constant} 		constant id valor semi_c
 	;
 
-	comando = 
-		{atrib} 		var is exp semi_c	
+	comando =
+		{atrib} 		var is exp semi_c
 	;
+
+	var_value =
+		{value}		 	valor
+	| 	{variable} 		var;
 
 	exp =
       {plus}   [l]:exp [r]:exp
     | {minus}  [l]:exp [r]:exp
     | {div}    [l]:exp [r]:exp
     | {mult}   [l]:exp [r]:exp
-	//| {var_value} var_value
+	| {var_value} var_value
     ;
+
+    exp_logica=
+      {or}			[l]:exp_logica [r]:exp_logica
+    | {xor}			[l]:exp_logica [r]:exp_logica
+    | {and}			[l]:exp_logica [r]:exp_logica
+    | {equal}		exp var_value
+	| {not_equal}	exp var_value
+	| {less_eq}		exp var_value
+	| {less}		exp var_value
+	| {greater_eq}	exp var_value
+	| {greater}		exp var_value
+	;
+
+	step = {passo} pass n_int;

@@ -1,16 +1,10 @@
 programa teste
 inicio
-	inteiro : i;
-	const y 'hello world';
+	inteiro: c;
+	real : a , b;
 
-	/*
-	i <- 2;
-	i <- i+1;
-	se (i = 3) entao
-		i <- 'HUE';
-	fim se;
-	se (nao(i=3) xor nao(i=3)) entao
-		z <- 2;
-	fim se;
+	c <- 2 ;
+	a <- c;
+	b <- 'foda se' ; // lembrar de corrigir `foda-se
 
 fim.

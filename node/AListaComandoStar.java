@@ -5,22 +5,22 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class APrograma extends PPrograma
+public final class AListaComandoStar extends PComandoStar
 {
-    private PDeclaracaoStar _declaracaoStar_;
+    private PComando _comando_;
     private PComandoStar _comandoStar_;
 
-    public APrograma()
+    public AListaComandoStar()
     {
         // Constructor
     }
 
-    public APrograma(
-        @SuppressWarnings("hiding") PDeclaracaoStar _declaracaoStar_,
+    public AListaComandoStar(
+        @SuppressWarnings("hiding") PComando _comando_,
         @SuppressWarnings("hiding") PComandoStar _comandoStar_)
     {
         // Constructor
-        setDeclaracaoStar(_declaracaoStar_);
+        setComando(_comando_);
 
         setComandoStar(_comandoStar_);
 
@@ -29,27 +29,27 @@ public final class APrograma extends PPrograma
     @Override
     public Object clone()
     {
-        return new APrograma(
-            cloneNode(this._declaracaoStar_),
+        return new AListaComandoStar(
+            cloneNode(this._comando_),
             cloneNode(this._comandoStar_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAPrograma(this);
+        ((Analysis) sw).caseAListaComandoStar(this);
     }
 
-    public PDeclaracaoStar getDeclaracaoStar()
+    public PComando getComando()
     {
-        return this._declaracaoStar_;
+        return this._comando_;
     }
 
-    public void setDeclaracaoStar(PDeclaracaoStar node)
+    public void setComando(PComando node)
     {
-        if(this._declaracaoStar_ != null)
+        if(this._comando_ != null)
         {
-            this._declaracaoStar_.parent(null);
+            this._comando_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +62,7 @@ public final class APrograma extends PPrograma
             node.parent(this);
         }
 
-        this._declaracaoStar_ = node;
+        this._comando_ = node;
     }
 
     public PComandoStar getComandoStar()
@@ -94,7 +94,7 @@ public final class APrograma extends PPrograma
     public String toString()
     {
         return ""
-            + toString(this._declaracaoStar_)
+            + toString(this._comando_)
             + toString(this._comandoStar_);
     }
 
@@ -102,9 +102,9 @@ public final class APrograma extends PPrograma
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._declaracaoStar_ == child)
+        if(this._comando_ == child)
         {
-            this._declaracaoStar_ = null;
+            this._comando_ = null;
             return;
         }
 
@@ -121,9 +121,9 @@ public final class APrograma extends PPrograma
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._declaracaoStar_ == oldChild)
+        if(this._comando_ == oldChild)
         {
-            setDeclaracaoStar((PDeclaracaoStar) newChild);
+            setComando((PComando) newChild);
             return;
         }
 

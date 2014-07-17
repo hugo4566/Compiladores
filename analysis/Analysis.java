@@ -13,6 +13,15 @@ public interface Analysis extends Switch
 
     void caseStart(Start node);
     void caseAPrograma(APrograma node);
+    void caseAListaDeclaracaoStar(AListaDeclaracaoStar node);
+    void caseAVaziaDeclaracaoStar(AVaziaDeclaracaoStar node);
+    void caseAListaComandoStar(AListaComandoStar node);
+    void caseAVazioComandoStar(AVazioComandoStar node);
+    void caseAExpComExprComma(AExpComExprComma node);
+    void caseAExplogComExprComma(AExplogComExprComma node);
+    void caseAElseOpcOpcionalElse(AElseOpcOpcionalElse node);
+    void caseACaseStarCaseEstrela(ACaseStarCaseEstrela node);
+    void caseAElseColonOpcOpcionalElseColon(AElseColonOpcOpcionalElseColon node);
     void caseAStringValor(AStringValor node);
     void caseAIntegerValor(AIntegerValor node);
     void caseARealValor(ARealValor node);
@@ -25,6 +34,15 @@ public interface Analysis extends Switch
     void caseAVariableDeclaracao(AVariableDeclaracao node);
     void caseAConstantDeclaracao(AConstantDeclaracao node);
     void caseAAtribComando(AAtribComando node);
+    void caseAAtribLogComando(AAtribLogComando node);
+    void caseAReadComando(AReadComando node);
+    void caseAWriteComando(AWriteComando node);
+    void caseAIfComando(AIfComando node);
+    void caseAEvaluateComando(AEvaluateComando node);
+    void caseAEvaluateLogComando(AEvaluateLogComando node);
+    void caseAWhileComando(AWhileComando node);
+    void caseARepeatComando(ARepeatComando node);
+    void caseAForOneComando(AForOneComando node);
     void caseAValueVarValue(AValueVarValue node);
     void caseAVariableVarValue(AVariableVarValue node);
     void caseAPlusExp(APlusExp node);
@@ -32,6 +50,16 @@ public interface Analysis extends Switch
     void caseADivExp(ADivExp node);
     void caseAMultExp(AMultExp node);
     void caseAVarValueExp(AVarValueExp node);
+    void caseAOrExpLogica(AOrExpLogica node);
+    void caseAXorExpLogica(AXorExpLogica node);
+    void caseAAndExpLogica(AAndExpLogica node);
+    void caseAEqualExpLogica(AEqualExpLogica node);
+    void caseANotEqualExpLogica(ANotEqualExpLogica node);
+    void caseALessEqExpLogica(ALessEqExpLogica node);
+    void caseALessExpLogica(ALessExpLogica node);
+    void caseAGreaterEqExpLogica(AGreaterEqExpLogica node);
+    void caseAGreaterExpLogica(AGreaterExpLogica node);
+    void caseAPassoStep(APassoStep node);
 
     void caseTLPar(TLPar node);
     void caseTRPar(TRPar node);

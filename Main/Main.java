@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.io.PushbackReader;
 
 import parser.Parser;
-import Main.MyLexer;
 import node.Start;
-import node.Token;
 
 
 public class Main {
@@ -45,7 +43,8 @@ public class Main {
 	            System.out.println("Tempo de execução :"+( stop_time - start_time)+"ms\n");
 			
 	            Parser parser = new Parser(lexer);
-	            Start ast = parser.parse(); 
+	            Start ast = parser.parse();
+                    ast.apply(new AstPrinter());
 //	            ast.apply(new SemanticAnalyser());  
 //	            ast.apply(new ClassGenerator());
 	        }

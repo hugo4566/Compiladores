@@ -1303,6 +1303,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAEqualExpLogica(AEqualExpLogica node)
     {
         inAEqualExpLogica(node);
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
@@ -1324,6 +1328,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseANotEqualExpLogica(ANotEqualExpLogica node)
     {
         inANotEqualExpLogica(node);
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
@@ -1345,6 +1353,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseALessEqExpLogica(ALessEqExpLogica node)
     {
         inALessEqExpLogica(node);
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
@@ -1366,6 +1378,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseALessExpLogica(ALessExpLogica node)
     {
         inALessExpLogica(node);
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
@@ -1387,6 +1403,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAGreaterEqExpLogica(AGreaterEqExpLogica node)
     {
         inAGreaterEqExpLogica(node);
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
@@ -1408,6 +1428,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAGreaterExpLogica(AGreaterExpLogica node)
     {
         inAGreaterExpLogica(node);
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
         if(node.getExp() != null)
         {
             node.getExp().apply(this);

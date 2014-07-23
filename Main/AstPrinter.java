@@ -1,7 +1,5 @@
 package Main;
 
- 
-import java.util.*; // for the Hashtable
 import node.*;
 import analysis.*;
  
@@ -17,6 +15,7 @@ public class AstPrinter extends DepthFirstAdapter {
 	public void printNode(Node node){
 		printIndent();
 		
+                System.out.print(node.getClass().toString().replaceAll("class node\\.T?", ""));
 		System.out.println(" "+node.toString() );
 	}
 	

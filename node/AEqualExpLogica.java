@@ -8,6 +8,7 @@ import analysis.*;
 public final class AEqualExpLogica extends PExpLogica
 {
     private PExp _exp_;
+    private PVarValue _varValue_;
 
     public AEqualExpLogica()
     {
@@ -15,10 +16,13 @@ public final class AEqualExpLogica extends PExpLogica
     }
 
     public AEqualExpLogica(
-        @SuppressWarnings("hiding") PExp _exp_)
+        @SuppressWarnings("hiding") PExp _exp_,
+        @SuppressWarnings("hiding") PVarValue _varValue_)
     {
         // Constructor
         setExp(_exp_);
+
+        setVarValue(_varValue_);
 
     }
 
@@ -26,7 +30,8 @@ public final class AEqualExpLogica extends PExpLogica
     public Object clone()
     {
         return new AEqualExpLogica(
-            cloneNode(this._exp_));
+            cloneNode(this._exp_),
+            cloneNode(this._varValue_));
     }
 
     @Override
@@ -60,11 +65,37 @@ public final class AEqualExpLogica extends PExpLogica
         this._exp_ = node;
     }
 
+    public PVarValue getVarValue()
+    {
+        return this._varValue_;
+    }
+
+    public void setVarValue(PVarValue node)
+    {
+        if(this._varValue_ != null)
+        {
+            this._varValue_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._varValue_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._exp_);
+            + toString(this._exp_)
+            + toString(this._varValue_);
     }
 
     @Override
@@ -74,6 +105,12 @@ public final class AEqualExpLogica extends PExpLogica
         if(this._exp_ == child)
         {
             this._exp_ = null;
+            return;
+        }
+
+        if(this._varValue_ == child)
+        {
+            this._varValue_ = null;
             return;
         }
 
@@ -87,6 +124,12 @@ public final class AEqualExpLogica extends PExpLogica
         if(this._exp_ == oldChild)
         {
             setExp((PExp) newChild);
+            return;
+        }
+
+        if(this._varValue_ == oldChild)
+        {
+            setVarValue((PVarValue) newChild);
             return;
         }
 

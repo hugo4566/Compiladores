@@ -6,6 +6,7 @@ import node.*;
 import analysis.*;
  
 public class MySemantic extends DepthFirstAdapter {
+   /*
     // stores the identifiers being defined
     Hashtable symbol_table = new Hashtable(); // create a new table
  
@@ -70,4 +71,5 @@ public class MySemantic extends DepthFirstAdapter {
             System.exit(0);
         }
     }
+    * */
 }

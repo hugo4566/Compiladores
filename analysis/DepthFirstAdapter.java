@@ -1295,6 +1295,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getExp().apply(this);
         }
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
         outAEqualExpLogica(node);
     }
 
@@ -1315,6 +1319,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
+        }
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
         }
         outANotEqualExpLogica(node);
     }
@@ -1337,6 +1345,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getExp().apply(this);
         }
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
         outALessEqExpLogica(node);
     }
 
@@ -1357,6 +1369,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
+        }
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
         }
         outALessExpLogica(node);
     }
@@ -1379,6 +1395,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getExp().apply(this);
         }
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
+        }
         outAGreaterEqExpLogica(node);
     }
 
@@ -1399,6 +1419,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         if(node.getExp() != null)
         {
             node.getExp().apply(this);
+        }
+        if(node.getVarValue() != null)
+        {
+            node.getVarValue().apply(this);
         }
         outAGreaterExpLogica(node);
     }

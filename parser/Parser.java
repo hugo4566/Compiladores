@@ -1576,9 +1576,11 @@ public class Parser
         {
             // Block
         PExp pexpNode2;
+        PVarValue pvarvalueNode3;
         pexpNode2 = (PExp)nodeArrayList1.get(0);
+        pvarvalueNode3 = (PVarValue)nodeArrayList3.get(0);
 
-        pexplogicaNode1 = new AEqualExpLogica(pexpNode2);
+        pexplogicaNode1 = new AEqualExpLogica(pexpNode2, pvarvalueNode3);
         }
 	nodeList.add(pexplogicaNode1);
         return nodeList;
@@ -1598,9 +1600,11 @@ public class Parser
         {
             // Block
         PExp pexpNode2;
+        PVarValue pvarvalueNode3;
         pexpNode2 = (PExp)nodeArrayList1.get(0);
+        pvarvalueNode3 = (PVarValue)nodeArrayList3.get(0);
 
-        pexplogicaNode1 = new ANotEqualExpLogica(pexpNode2);
+        pexplogicaNode1 = new ANotEqualExpLogica(pexpNode2, pvarvalueNode3);
         }
 	nodeList.add(pexplogicaNode1);
         return nodeList;
@@ -1620,9 +1624,11 @@ public class Parser
         {
             // Block
         PExp pexpNode2;
+        PVarValue pvarvalueNode3;
         pexpNode2 = (PExp)nodeArrayList1.get(0);
+        pvarvalueNode3 = (PVarValue)nodeArrayList3.get(0);
 
-        pexplogicaNode1 = new ALessEqExpLogica(pexpNode2);
+        pexplogicaNode1 = new ALessEqExpLogica(pexpNode2, pvarvalueNode3);
         }
 	nodeList.add(pexplogicaNode1);
         return nodeList;
@@ -1642,9 +1648,11 @@ public class Parser
         {
             // Block
         PExp pexpNode2;
+        PVarValue pvarvalueNode3;
         pexpNode2 = (PExp)nodeArrayList1.get(0);
+        pvarvalueNode3 = (PVarValue)nodeArrayList3.get(0);
 
-        pexplogicaNode1 = new ALessExpLogica(pexpNode2);
+        pexplogicaNode1 = new ALessExpLogica(pexpNode2, pvarvalueNode3);
         }
 	nodeList.add(pexplogicaNode1);
         return nodeList;
@@ -1664,9 +1672,11 @@ public class Parser
         {
             // Block
         PExp pexpNode2;
+        PVarValue pvarvalueNode3;
         pexpNode2 = (PExp)nodeArrayList1.get(0);
+        pvarvalueNode3 = (PVarValue)nodeArrayList3.get(0);
 
-        pexplogicaNode1 = new AGreaterEqExpLogica(pexpNode2);
+        pexplogicaNode1 = new AGreaterEqExpLogica(pexpNode2, pvarvalueNode3);
         }
 	nodeList.add(pexplogicaNode1);
         return nodeList;
@@ -1686,9 +1696,11 @@ public class Parser
         {
             // Block
         PExp pexpNode2;
+        PVarValue pvarvalueNode3;
         pexpNode2 = (PExp)nodeArrayList1.get(0);
+        pvarvalueNode3 = (PVarValue)nodeArrayList3.get(0);
 
-        pexplogicaNode1 = new AGreaterExpLogica(pexpNode2);
+        pexplogicaNode1 = new AGreaterExpLogica(pexpNode2, pvarvalueNode3);
         }
 	nodeList.add(pexplogicaNode1);
         return nodeList;

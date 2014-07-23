@@ -164,13 +164,13 @@ Productions
 	| {exp_logica4} not? exp_logica4 { -> exp_logica4.exp_logica}
 	;
 
-	exp_logica4 {-> exp_logica} =  
-	{equal} exp equal var_value {-> New exp_logica.equal(exp)}
-	| {not_equal} 		exp not_equal	var_value {-> New exp_logica.not_equal(exp)}
-	| {less_eq} 		exp less_eq		var_value {-> New exp_logica.less_eq(exp)}
-	| {less} 			exp less 		var_value {-> New exp_logica.less(exp)}
-	| {greater_eq} 		exp greater_eq  var_value {-> New exp_logica.greater_eq(exp)}
-	| {greater} 		exp greater     var_value {-> New exp_logica.greater(exp)}
+	exp_logica4 {-> exp_logica} =
+	  {equal} exp equal var_value {-> New exp_logica.equal(exp,var_value)}
+	| {not_equal} 		exp not_equal	var_value {-> New exp_logica.not_equal(exp,var_value)}
+	| {less_eq} 		exp less_eq		var_value {-> New exp_logica.less_eq(exp,var_value)}
+	| {less} 			exp less 		var_value {-> New exp_logica.less(exp,var_value)}
+	| {greater_eq} 		exp greater_eq  var_value {-> New exp_logica.greater_eq(exp,var_value)}
+	| {greater} 		exp greater     var_value {-> New exp_logica.greater(exp,var_value)}
 	|{par_exp} l_par exp_logica r_par {-> exp_logica}
 	;
 
@@ -258,12 +258,12 @@ Abstract Syntax Tree
       {or}			[l]:exp_logica [r]:exp_logica
     | {xor}			[l]:exp_logica [r]:exp_logica
     | {and}			[l]:exp_logica [r]:exp_logica
-    | {equal}		exp
-	| {not_equal}	exp //var_value
-	| {less_eq}		exp //var_value
-	| {less}		exp //var_value
-	| {greater_eq}	exp //var_value
-	| {greater}		exp //var_value
+    | {equal}		exp var_value
+	| {not_equal}	exp var_value
+	| {less_eq}		exp var_value
+	| {less}		exp var_value
+	| {greater_eq}	exp var_value
+	| {greater}		exp var_value
 	;
 
 	step = {passo} pass n_int;

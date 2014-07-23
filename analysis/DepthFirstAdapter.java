@@ -50,6 +50,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAPrograma(APrograma node)
     {
         inAPrograma(node);
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
         if(node.getDeclaracaoStar() != null)
         {
             node.getDeclaracaoStar().apply(this);
@@ -1277,6 +1281,31 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAAndExpLogica(node);
     }
 
+    public void inAAndNExpLogica(AAndNExpLogica node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAndNExpLogica(AAndNExpLogica node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAndNExpLogica(AAndNExpLogica node)
+    {
+        inAAndNExpLogica(node);
+        if(node.getL() != null)
+        {
+            node.getL().apply(this);
+        }
+        if(node.getR() != null)
+        {
+            node.getR().apply(this);
+        }
+        outAAndNExpLogica(node);
+    }
+
     public void inAEqualExpLogica(AEqualExpLogica node)
     {
         defaultIn(node);
@@ -1425,6 +1454,48 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getVarValue().apply(this);
         }
         outAGreaterExpLogica(node);
+    }
+
+    public void inANegationExpLogica(ANegationExpLogica node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANegationExpLogica(ANegationExpLogica node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANegationExpLogica(ANegationExpLogica node)
+    {
+        inANegationExpLogica(node);
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        outANegationExpLogica(node);
+    }
+
+    public void inAExpExpLogica(AExpExpLogica node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAExpExpLogica(AExpExpLogica node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAExpExpLogica(AExpExpLogica node)
+    {
+        inAExpExpLogica(node);
+        if(node.getExp() != null)
+        {
+            node.getExp().apply(this);
+        }
+        outAExpExpLogica(node);
     }
 
     public void inAPassoStep(APassoStep node)

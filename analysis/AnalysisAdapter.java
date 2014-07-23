@@ -321,6 +321,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAAndNExpLogica(AAndNExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAEqualExpLogica(AEqualExpLogica node)
     {
         defaultCase(node);
@@ -352,6 +358,18 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAGreaterExpLogica(AGreaterExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANegationExpLogica(ANegationExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpExpLogica(AExpExpLogica node)
     {
         defaultCase(node);
     }

@@ -7,6 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class APrograma extends PPrograma
 {
+    private TId _id_;
     private PDeclaracaoStar _declaracaoStar_;
     private PComandoStar _comandoStar_;
 
@@ -16,10 +17,13 @@ public final class APrograma extends PPrograma
     }
 
     public APrograma(
+        @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") PDeclaracaoStar _declaracaoStar_,
         @SuppressWarnings("hiding") PComandoStar _comandoStar_)
     {
         // Constructor
+        setId(_id_);
+
         setDeclaracaoStar(_declaracaoStar_);
 
         setComandoStar(_comandoStar_);
@@ -30,6 +34,7 @@ public final class APrograma extends PPrograma
     public Object clone()
     {
         return new APrograma(
+            cloneNode(this._id_),
             cloneNode(this._declaracaoStar_),
             cloneNode(this._comandoStar_));
     }
@@ -38,6 +43,31 @@ public final class APrograma extends PPrograma
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAPrograma(this);
+    }
+
+    public TId getId()
+    {
+        return this._id_;
+    }
+
+    public void setId(TId node)
+    {
+        if(this._id_ != null)
+        {
+            this._id_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._id_ = node;
     }
 
     public PDeclaracaoStar getDeclaracaoStar()
@@ -94,6 +124,7 @@ public final class APrograma extends PPrograma
     public String toString()
     {
         return ""
+            + toString(this._id_)
             + toString(this._declaracaoStar_)
             + toString(this._comandoStar_);
     }
@@ -102,6 +133,12 @@ public final class APrograma extends PPrograma
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._id_ == child)
+        {
+            this._id_ = null;
+            return;
+        }
+
         if(this._declaracaoStar_ == child)
         {
             this._declaracaoStar_ = null;
@@ -121,6 +158,12 @@ public final class APrograma extends PPrograma
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._id_ == oldChild)
+        {
+            setId((TId) newChild);
+            return;
+        }
+
         if(this._declaracaoStar_ == oldChild)
         {
             setDeclaracaoStar((PDeclaracaoStar) newChild);

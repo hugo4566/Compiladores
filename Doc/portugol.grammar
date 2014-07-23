@@ -90,7 +90,7 @@ Ignored Tokens
 
 Productions
 
-	programa {-> programa } = program id begin declaracao_star comando_star end {-> New programa(declaracao_star,comando_star)} ;
+	programa {-> programa } = program id begin declaracao_star comando_star end {-> New programa(id,declaracao_star,comando_star)} ;
 
 	declaracao_star = {lista} declaracao declaracao_star
 	| {vazia} ;
@@ -130,7 +130,8 @@ Productions
 
 	var_value =
 		{value}		 	valor
-	| 	{variable} 		var;
+	| 	{variable} 		var
+	;
 
 	exp =
 	  {plus}  exp plus termo 	{-> New exp.plus(exp, termo.exp)  }
@@ -160,8 +161,10 @@ Productions
 	;
 
 	exp_logica3 {-> exp_logica} =
-	  {and} exp_logica3 and not? exp_logica4 {-> New exp_logica.and(exp_logica3.exp_logica,exp_logica4.exp_logica)  }
-	| {exp_logica4} not? exp_logica4 { -> exp_logica4.exp_logica}
+	  {and} exp_logica3 and exp_logica4 {-> New exp_logica.and(exp_logica3.exp_logica,exp_logica4.exp_logica)}
+	| {and_n} exp_logica3 and not exp_logica4 {-> New exp_logica.and_n(exp_logica3.exp_logica,exp_logica4.exp_logica)}
+	| {exp_logica4} exp_logica4 { -> exp_logica4.exp_logica}
+	| {exp_logica4_n} not exp_logica4 { -> New exp_logica.negation(exp_logica4.exp_logica)}
 	;
 
 	exp_logica4 {-> exp_logica} =
@@ -191,7 +194,7 @@ Productions
 
 Abstract Syntax Tree
 
-	programa = declaracao_star comando_star;
+	programa = id declaracao_star comando_star;
 
 	declaracao_star = {lista} declaracao declaracao_star
 	| {vazia};
@@ -258,12 +261,15 @@ Abstract Syntax Tree
       {or}			[l]:exp_logica [r]:exp_logica
     | {xor}			[l]:exp_logica [r]:exp_logica
     | {and}			[l]:exp_logica [r]:exp_logica
+    | {and_n}		[l]:exp_logica [r]:exp_logica
     | {equal}		exp var_value
 	| {not_equal}	exp var_value
 	| {less_eq}		exp var_value
 	| {less}		exp var_value
 	| {greater_eq}	exp var_value
 	| {greater}		exp var_value
+	| {negation}	exp_logica
+	| {exp}			exp
 	;
 
 	step = {passo} pass n_int;

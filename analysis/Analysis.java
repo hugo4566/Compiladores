@@ -53,12 +53,15 @@ public interface Analysis extends Switch
     void caseAOrExpLogica(AOrExpLogica node);
     void caseAXorExpLogica(AXorExpLogica node);
     void caseAAndExpLogica(AAndExpLogica node);
+    void caseAAndNExpLogica(AAndNExpLogica node);
     void caseAEqualExpLogica(AEqualExpLogica node);
     void caseANotEqualExpLogica(ANotEqualExpLogica node);
     void caseALessEqExpLogica(ALessEqExpLogica node);
     void caseALessExpLogica(ALessExpLogica node);
     void caseAGreaterEqExpLogica(AGreaterEqExpLogica node);
     void caseAGreaterExpLogica(AGreaterExpLogica node);
+    void caseANegationExpLogica(ANegationExpLogica node);
+    void caseAExpExpLogica(AExpExpLogica node);
     void caseAPassoStep(APassoStep node);
 
     void caseTLPar(TLPar node);

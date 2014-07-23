@@ -411,25 +411,25 @@ public class Parser
                 push(goTo(17), list);
             }
             break;
-            case 37: /* reduce AAandexplogica31ExpLogica3 */
+            case 37: /* reduce AAndExpLogica3 */
             {
                 ArrayList<Object> list = new37();
                 push(goTo(18), list);
             }
             break;
-            case 38: /* reduce AAandexplogica32ExpLogica3 */
+            case 38: /* reduce AAndNExpLogica3 */
             {
                 ArrayList<Object> list = new38();
                 push(goTo(18), list);
             }
             break;
-            case 39: /* reduce AAexplogica4explogica31ExpLogica3 */
+            case 39: /* reduce AExpLogica4ExpLogica3 */
             {
                 ArrayList<Object> list = new39();
                 push(goTo(18), list);
             }
             break;
-            case 40: /* reduce AAexplogica4explogica32ExpLogica3 */
+            case 40: /* reduce AExpLogica4NExpLogica3 */
             {
                 ArrayList<Object> list = new40();
                 push(goTo(18), list);
@@ -658,12 +658,14 @@ public class Parser
         PPrograma pprogramaNode1;
         {
             // Block
-        PDeclaracaoStar pdeclaracaostarNode2;
-        PComandoStar pcomandostarNode3;
-        pdeclaracaostarNode2 = (PDeclaracaoStar)nodeArrayList4.get(0);
-        pcomandostarNode3 = (PComandoStar)nodeArrayList5.get(0);
+        TId tidNode2;
+        PDeclaracaoStar pdeclaracaostarNode3;
+        PComandoStar pcomandostarNode4;
+        tidNode2 = (TId)nodeArrayList2.get(0);
+        pdeclaracaostarNode3 = (PDeclaracaoStar)nodeArrayList4.get(0);
+        pcomandostarNode4 = (PComandoStar)nodeArrayList5.get(0);
 
-        pprogramaNode1 = new APrograma(pdeclaracaostarNode2, pcomandostarNode3);
+        pprogramaNode1 = new APrograma(tidNode2, pdeclaracaostarNode3, pcomandostarNode4);
         }
 	nodeList.add(pprogramaNode1);
         return nodeList;
@@ -1487,7 +1489,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new37() /* reduce AAandexplogica31ExpLogica3 */
+    ArrayList<Object> new37() /* reduce AAndExpLogica3 */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -1511,7 +1513,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new38() /* reduce AAandexplogica32ExpLogica3 */
+    ArrayList<Object> new38() /* reduce AAndNExpLogica3 */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -1527,7 +1529,7 @@ public class Parser
         pexplogicaNode2 = (PExpLogica)nodeArrayList1.get(0);
         pexplogicaNode3 = (PExpLogica)nodeArrayList4.get(0);
 
-        pexplogicaNode1 = new AAndExpLogica(pexplogicaNode2, pexplogicaNode3);
+        pexplogicaNode1 = new AAndNExpLogica(pexplogicaNode2, pexplogicaNode3);
         }
 	nodeList.add(pexplogicaNode1);
         return nodeList;
@@ -1536,7 +1538,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new39() /* reduce AAexplogica4explogica31ExpLogica3 */
+    ArrayList<Object> new39() /* reduce AExpLogica4ExpLogica3 */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -1550,14 +1552,20 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new40() /* reduce AAexplogica4explogica32ExpLogica3 */
+    ArrayList<Object> new40() /* reduce AExpLogica4NExpLogica3 */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
         PExpLogica pexplogicaNode1;
-        pexplogicaNode1 = (PExpLogica)nodeArrayList2.get(0);
+        {
+            // Block
+        PExpLogica pexplogicaNode2;
+        pexplogicaNode2 = (PExpLogica)nodeArrayList2.get(0);
+
+        pexplogicaNode1 = new ANegationExpLogica(pexplogicaNode2);
+        }
 	nodeList.add(pexplogicaNode1);
         return nodeList;
     }

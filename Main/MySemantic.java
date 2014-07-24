@@ -9,20 +9,92 @@ import analysis.*;
 public class MySemantic extends DepthFirstAdapter {
    
     // stores the identifiers being defined
-    Hashtable symbol_table = new Hashtable(); // create a new table
+    Hashtable symbol_table = new Hashtable<String, MySimbolo>(); // create a new table
+    Stack<String> pilha = new Stack<String>();
+    
     
     @Override
     public void outAVariableDeclaracao(AVariableDeclaracao node)
     {
-    	if(symbol_table.containsKey(node.getVar().toString())){
-            System.err.println("Variavel "+ node.getVar().toString() +"já definida.");
-            System.exit(0);
-        }
-        else {
-            symbol_table.put(node.getVar().toString(), node.getTipo().toString());
-            System.out.println("Variavel = "+node.getVar().toString()+" | tipo = "+node.getTipo().toString());
-        }
+    	String tipo = node.getTipo().toString();
+    	LinkedList<PVar> x = node.getVar();
+    	
+    	
+    	for (int i = 0; i < x.size(); i++) {
+    		String variavel = x.get(i).toString();
+			if(symbol_table.containsKey(variavel)){
+				System.err.println("Variavel "+ variavel +"já definida.");
+				System.exit(0);
+			}
+			else {
+				MySimbolo simbolo = new MySimbolo(tipo,null);
+				symbol_table.put(x.get(i).toString(), simbolo);
+			}
+    	}
+    }  
+    
+    @Override
+    public void outAConstantDeclaracao(AConstantDeclaracao node)
+    {
+    	
+    	if(symbol_table.containsKey(node.getId().toString())){
+			System.err.println("Variavel "+ node.getId().toString() +"já definida.");
+			System.exit(0);
+		}
+		else {
+			MySimbolo simbolo = new MySimbolo("CONSTANT",node.getValor().toString());
+			symbol_table.put(node.getId().toString(), simbolo);
+		}
     }
+    
+    @Override
+    public void inAPrograma(APrograma node)
+    {
+    	MySimbolo simbolo = new MySimbolo("PROGRAMA",null);
+		symbol_table.put(node.getId().toString(), simbolo);
+    }
+    
+    @Override
+    public void outStart(Start node)
+    {
+		System.out.println(symbol_table.toString());
+    }
+    
+    @Override
+    public void outAVarValueExp(AVarValueExp node){
+    	pilha.push(node.getVarValue().toString());
+    }
+    
+    @Override
+    public void outAAtribComando(AAtribComando node)
+    {
+    	String x = pilha.pop();
+    	
+    	if(!symbol_table.containsKey(node.getVar().toString())){
+    		System.out.println("Error: Unknown identifier.");
+    		System.exit(0);
+    	}else{
+    		MySimbolo simbolo = (MySimbolo) symbol_table.get(node.getVar().toString());
+    		simbolo.valor = x;
+    		if(!simbolo.getTipoValor().equals(simbolo.tipo)){
+    			System.out.println("Error: Dif. Type.");
+        		System.exit(0);
+    		}
+    	}
+    }
+    
+//    @Override
+//    public void outAAssignStatement(AAssignStatement node) {
+//        Tidentifier ident = node.getIdentifier();
+//        String key = ident.getText().toUpperCase();
+// 
+//        // Is the identifier in the table?
+//        // if not report error
+//        if (!symbol_table.containsKey(key)) {
+//            System.out.println("Error: [" + ident.getLine() + "," ident.getPos() + "] Unknown identifier.");
+//            System.exit(0);
+//        }
+//    }
 
     //public void outAVariableDeclaracao (A)
     /*

@@ -8,9 +8,7 @@ import analysis.*;
 public final class AAtribComando extends PComando
 {
     private PVar _var_;
-    private TIs _is_;
     private PExp _exp_;
-    private TSemiC _semiC_;
 
     public AAtribComando()
     {
@@ -19,18 +17,12 @@ public final class AAtribComando extends PComando
 
     public AAtribComando(
         @SuppressWarnings("hiding") PVar _var_,
-        @SuppressWarnings("hiding") TIs _is_,
-        @SuppressWarnings("hiding") PExp _exp_,
-        @SuppressWarnings("hiding") TSemiC _semiC_)
+        @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
         setVar(_var_);
 
-        setIs(_is_);
-
         setExp(_exp_);
-
-        setSemiC(_semiC_);
 
     }
 
@@ -39,9 +31,7 @@ public final class AAtribComando extends PComando
     {
         return new AAtribComando(
             cloneNode(this._var_),
-            cloneNode(this._is_),
-            cloneNode(this._exp_),
-            cloneNode(this._semiC_));
+            cloneNode(this._exp_));
     }
 
     @Override
@@ -75,31 +65,6 @@ public final class AAtribComando extends PComando
         this._var_ = node;
     }
 
-    public TIs getIs()
-    {
-        return this._is_;
-    }
-
-    public void setIs(TIs node)
-    {
-        if(this._is_ != null)
-        {
-            this._is_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._is_ = node;
-    }
-
     public PExp getExp()
     {
         return this._exp_;
@@ -125,39 +90,12 @@ public final class AAtribComando extends PComando
         this._exp_ = node;
     }
 
-    public TSemiC getSemiC()
-    {
-        return this._semiC_;
-    }
-
-    public void setSemiC(TSemiC node)
-    {
-        if(this._semiC_ != null)
-        {
-            this._semiC_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._semiC_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
             + toString(this._var_)
-            + toString(this._is_)
-            + toString(this._exp_)
-            + toString(this._semiC_);
+            + toString(this._exp_);
     }
 
     @Override
@@ -170,21 +108,9 @@ public final class AAtribComando extends PComando
             return;
         }
 
-        if(this._is_ == child)
-        {
-            this._is_ = null;
-            return;
-        }
-
         if(this._exp_ == child)
         {
             this._exp_ = null;
-            return;
-        }
-
-        if(this._semiC_ == child)
-        {
-            this._semiC_ = null;
             return;
         }
 
@@ -201,21 +127,9 @@ public final class AAtribComando extends PComando
             return;
         }
 
-        if(this._is_ == oldChild)
-        {
-            setIs((TIs) newChild);
-            return;
-        }
-
         if(this._exp_ == oldChild)
         {
             setExp((PExp) newChild);
-            return;
-        }
-
-        if(this._semiC_ == oldChild)
-        {
-            setSemiC((TSemiC) newChild);
             return;
         }
 

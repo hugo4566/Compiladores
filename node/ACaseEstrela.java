@@ -6,26 +6,22 @@ import java.util.*;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AElseColonOpcOpcionalElseColon extends POpcionalElseColon
+public final class ACaseEstrela extends PCaseEstrela
 {
-    private TElse _else_;
-    private TColon _colon_;
+    private PValor _valor_;
     private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
 
-    public AElseColonOpcOpcionalElseColon()
+    public ACaseEstrela()
     {
         // Constructor
     }
 
-    public AElseColonOpcOpcionalElseColon(
-        @SuppressWarnings("hiding") TElse _else_,
-        @SuppressWarnings("hiding") TColon _colon_,
+    public ACaseEstrela(
+        @SuppressWarnings("hiding") PValor _valor_,
         @SuppressWarnings("hiding") List<?> _comando_)
     {
         // Constructor
-        setElse(_else_);
-
-        setColon(_colon_);
+        setValor(_valor_);
 
         setComando(_comando_);
 
@@ -34,28 +30,27 @@ public final class AElseColonOpcOpcionalElseColon extends POpcionalElseColon
     @Override
     public Object clone()
     {
-        return new AElseColonOpcOpcionalElseColon(
-            cloneNode(this._else_),
-            cloneNode(this._colon_),
+        return new ACaseEstrela(
+            cloneNode(this._valor_),
             cloneList(this._comando_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAElseColonOpcOpcionalElseColon(this);
+        ((Analysis) sw).caseACaseEstrela(this);
     }
 
-    public TElse getElse()
+    public PValor getValor()
     {
-        return this._else_;
+        return this._valor_;
     }
 
-    public void setElse(TElse node)
+    public void setValor(PValor node)
     {
-        if(this._else_ != null)
+        if(this._valor_ != null)
         {
-            this._else_.parent(null);
+            this._valor_.parent(null);
         }
 
         if(node != null)
@@ -68,32 +63,7 @@ public final class AElseColonOpcOpcionalElseColon extends POpcionalElseColon
             node.parent(this);
         }
 
-        this._else_ = node;
-    }
-
-    public TColon getColon()
-    {
-        return this._colon_;
-    }
-
-    public void setColon(TColon node)
-    {
-        if(this._colon_ != null)
-        {
-            this._colon_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._colon_ = node;
+        this._valor_ = node;
     }
 
     public LinkedList<PComando> getComando()
@@ -126,8 +96,7 @@ public final class AElseColonOpcOpcionalElseColon extends POpcionalElseColon
     public String toString()
     {
         return ""
-            + toString(this._else_)
-            + toString(this._colon_)
+            + toString(this._valor_)
             + toString(this._comando_);
     }
 
@@ -135,15 +104,9 @@ public final class AElseColonOpcOpcionalElseColon extends POpcionalElseColon
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._else_ == child)
+        if(this._valor_ == child)
         {
-            this._else_ = null;
-            return;
-        }
-
-        if(this._colon_ == child)
-        {
-            this._colon_ = null;
+            this._valor_ = null;
             return;
         }
 
@@ -159,15 +122,9 @@ public final class AElseColonOpcOpcionalElseColon extends POpcionalElseColon
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._else_ == oldChild)
+        if(this._valor_ == oldChild)
         {
-            setElse((TElse) newChild);
-            return;
-        }
-
-        if(this._colon_ == oldChild)
-        {
-            setColon((TColon) newChild);
+            setValor((PValor) newChild);
             return;
         }
 

@@ -9,10 +9,7 @@ import analysis.*;
 public final class AVariableDeclaracao extends PDeclaracao
 {
     private PTipo _tipo_;
-    private TColon _colon_;
-    private final LinkedList<PVariavelComma> _variavelComma_ = new LinkedList<PVariavelComma>();
-    private PVar _var_;
-    private TSemiC _semiC_;
+    private final LinkedList<PVar> _var_ = new LinkedList<PVar>();
 
     public AVariableDeclaracao()
     {
@@ -21,21 +18,12 @@ public final class AVariableDeclaracao extends PDeclaracao
 
     public AVariableDeclaracao(
         @SuppressWarnings("hiding") PTipo _tipo_,
-        @SuppressWarnings("hiding") TColon _colon_,
-        @SuppressWarnings("hiding") List<?> _variavelComma_,
-        @SuppressWarnings("hiding") PVar _var_,
-        @SuppressWarnings("hiding") TSemiC _semiC_)
+        @SuppressWarnings("hiding") List<?> _var_)
     {
         // Constructor
         setTipo(_tipo_);
 
-        setColon(_colon_);
-
-        setVariavelComma(_variavelComma_);
-
         setVar(_var_);
-
-        setSemiC(_semiC_);
 
     }
 
@@ -44,10 +32,7 @@ public final class AVariableDeclaracao extends PDeclaracao
     {
         return new AVariableDeclaracao(
             cloneNode(this._tipo_),
-            cloneNode(this._colon_),
-            cloneList(this._variavelComma_),
-            cloneNode(this._var_),
-            cloneNode(this._semiC_));
+            cloneList(this._var_));
     }
 
     @Override
@@ -81,105 +66,30 @@ public final class AVariableDeclaracao extends PDeclaracao
         this._tipo_ = node;
     }
 
-    public TColon getColon()
+    public LinkedList<PVar> getVar()
     {
-        return this._colon_;
+        return this._var_;
     }
 
-    public void setColon(TColon node)
+    public void setVar(List<?> list)
     {
-        if(this._colon_ != null)
-        {
-            this._colon_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._colon_ = node;
-    }
-
-    public LinkedList<PVariavelComma> getVariavelComma()
-    {
-        return this._variavelComma_;
-    }
-
-    public void setVariavelComma(List<?> list)
-    {
-        for(PVariavelComma e : this._variavelComma_)
+        for(PVar e : this._var_)
         {
             e.parent(null);
         }
-        this._variavelComma_.clear();
+        this._var_.clear();
 
         for(Object obj_e : list)
         {
-            PVariavelComma e = (PVariavelComma) obj_e;
+            PVar e = (PVar) obj_e;
             if(e.parent() != null)
             {
                 e.parent().removeChild(e);
             }
 
             e.parent(this);
-            this._variavelComma_.add(e);
+            this._var_.add(e);
         }
-    }
-
-    public PVar getVar()
-    {
-        return this._var_;
-    }
-
-    public void setVar(PVar node)
-    {
-        if(this._var_ != null)
-        {
-            this._var_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._var_ = node;
-    }
-
-    public TSemiC getSemiC()
-    {
-        return this._semiC_;
-    }
-
-    public void setSemiC(TSemiC node)
-    {
-        if(this._semiC_ != null)
-        {
-            this._semiC_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._semiC_ = node;
     }
 
     @Override
@@ -187,10 +97,7 @@ public final class AVariableDeclaracao extends PDeclaracao
     {
         return ""
             + toString(this._tipo_)
-            + toString(this._colon_)
-            + toString(this._variavelComma_)
-            + toString(this._var_)
-            + toString(this._semiC_);
+            + toString(this._var_);
     }
 
     @Override
@@ -203,26 +110,8 @@ public final class AVariableDeclaracao extends PDeclaracao
             return;
         }
 
-        if(this._colon_ == child)
+        if(this._var_.remove(child))
         {
-            this._colon_ = null;
-            return;
-        }
-
-        if(this._variavelComma_.remove(child))
-        {
-            return;
-        }
-
-        if(this._var_ == child)
-        {
-            this._var_ = null;
-            return;
-        }
-
-        if(this._semiC_ == child)
-        {
-            this._semiC_ = null;
             return;
         }
 
@@ -239,19 +128,13 @@ public final class AVariableDeclaracao extends PDeclaracao
             return;
         }
 
-        if(this._colon_ == oldChild)
-        {
-            setColon((TColon) newChild);
-            return;
-        }
-
-        for(ListIterator<PVariavelComma> i = this._variavelComma_.listIterator(); i.hasNext();)
+        for(ListIterator<PVar> i = this._var_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
             {
                 if(newChild != null)
                 {
-                    i.set((PVariavelComma) newChild);
+                    i.set((PVar) newChild);
                     newChild.parent(this);
                     oldChild.parent(null);
                     return;
@@ -261,18 +144,6 @@ public final class AVariableDeclaracao extends PDeclaracao
                 oldChild.parent(null);
                 return;
             }
-        }
-
-        if(this._var_ == oldChild)
-        {
-            setVar((PVar) newChild);
-            return;
-        }
-
-        if(this._semiC_ == oldChild)
-        {
-            setSemiC((TSemiC) newChild);
-            return;
         }
 
         throw new RuntimeException("Not a child.");

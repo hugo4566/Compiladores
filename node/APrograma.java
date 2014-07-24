@@ -2,14 +2,15 @@
 
 package node;
 
+import java.util.*;
 import analysis.*;
 
 @SuppressWarnings("nls")
 public final class APrograma extends PPrograma
 {
     private TId _id_;
-    private PDeclaracaoStar _declaracaoStar_;
-    private PComandoStar _comandoStar_;
+    private final LinkedList<PDeclaracao> _declaracao_ = new LinkedList<PDeclaracao>();
+    private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
 
     public APrograma()
     {
@@ -18,15 +19,15 @@ public final class APrograma extends PPrograma
 
     public APrograma(
         @SuppressWarnings("hiding") TId _id_,
-        @SuppressWarnings("hiding") PDeclaracaoStar _declaracaoStar_,
-        @SuppressWarnings("hiding") PComandoStar _comandoStar_)
+        @SuppressWarnings("hiding") List<?> _declaracao_,
+        @SuppressWarnings("hiding") List<?> _comando_)
     {
         // Constructor
         setId(_id_);
 
-        setDeclaracaoStar(_declaracaoStar_);
+        setDeclaracao(_declaracao_);
 
-        setComandoStar(_comandoStar_);
+        setComando(_comando_);
 
     }
 
@@ -35,8 +36,8 @@ public final class APrograma extends PPrograma
     {
         return new APrograma(
             cloneNode(this._id_),
-            cloneNode(this._declaracaoStar_),
-            cloneNode(this._comandoStar_));
+            cloneList(this._declaracao_),
+            cloneList(this._comando_));
     }
 
     @Override
@@ -70,54 +71,56 @@ public final class APrograma extends PPrograma
         this._id_ = node;
     }
 
-    public PDeclaracaoStar getDeclaracaoStar()
+    public LinkedList<PDeclaracao> getDeclaracao()
     {
-        return this._declaracaoStar_;
+        return this._declaracao_;
     }
 
-    public void setDeclaracaoStar(PDeclaracaoStar node)
+    public void setDeclaracao(List<?> list)
     {
-        if(this._declaracaoStar_ != null)
+        for(PDeclaracao e : this._declaracao_)
         {
-            this._declaracaoStar_.parent(null);
+            e.parent(null);
         }
+        this._declaracao_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PDeclaracao e = (PDeclaracao) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._declaracao_.add(e);
         }
-
-        this._declaracaoStar_ = node;
     }
 
-    public PComandoStar getComandoStar()
+    public LinkedList<PComando> getComando()
     {
-        return this._comandoStar_;
+        return this._comando_;
     }
 
-    public void setComandoStar(PComandoStar node)
+    public void setComando(List<?> list)
     {
-        if(this._comandoStar_ != null)
+        for(PComando e : this._comando_)
         {
-            this._comandoStar_.parent(null);
+            e.parent(null);
         }
+        this._comando_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PComando e = (PComando) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._comando_.add(e);
         }
-
-        this._comandoStar_ = node;
     }
 
     @Override
@@ -125,8 +128,8 @@ public final class APrograma extends PPrograma
     {
         return ""
             + toString(this._id_)
-            + toString(this._declaracaoStar_)
-            + toString(this._comandoStar_);
+            + toString(this._declaracao_)
+            + toString(this._comando_);
     }
 
     @Override
@@ -139,15 +142,13 @@ public final class APrograma extends PPrograma
             return;
         }
 
-        if(this._declaracaoStar_ == child)
+        if(this._declaracao_.remove(child))
         {
-            this._declaracaoStar_ = null;
             return;
         }
 
-        if(this._comandoStar_ == child)
+        if(this._comando_.remove(child))
         {
-            this._comandoStar_ = null;
             return;
         }
 
@@ -164,16 +165,40 @@ public final class APrograma extends PPrograma
             return;
         }
 
-        if(this._declaracaoStar_ == oldChild)
+        for(ListIterator<PDeclaracao> i = this._declaracao_.listIterator(); i.hasNext();)
         {
-            setDeclaracaoStar((PDeclaracaoStar) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PDeclaracao) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
-        if(this._comandoStar_ == oldChild)
+        for(ListIterator<PComando> i = this._comando_.listIterator(); i.hasNext();)
         {
-            setComandoStar((PComandoStar) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PComando) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         throw new RuntimeException("Not a child.");

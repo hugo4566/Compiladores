@@ -6,23 +6,19 @@ import java.util.*;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AElseOpcOpcionalElse extends POpcionalElse
+public final class AOpElse extends POpElse
 {
-    private TElse _else_;
     private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
 
-    public AElseOpcOpcionalElse()
+    public AOpElse()
     {
         // Constructor
     }
 
-    public AElseOpcOpcionalElse(
-        @SuppressWarnings("hiding") TElse _else_,
+    public AOpElse(
         @SuppressWarnings("hiding") List<?> _comando_)
     {
         // Constructor
-        setElse(_else_);
-
         setComando(_comando_);
 
     }
@@ -30,40 +26,14 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
     @Override
     public Object clone()
     {
-        return new AElseOpcOpcionalElse(
-            cloneNode(this._else_),
+        return new AOpElse(
             cloneList(this._comando_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAElseOpcOpcionalElse(this);
-    }
-
-    public TElse getElse()
-    {
-        return this._else_;
-    }
-
-    public void setElse(TElse node)
-    {
-        if(this._else_ != null)
-        {
-            this._else_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._else_ = node;
+        ((Analysis) sw).caseAOpElse(this);
     }
 
     public LinkedList<PComando> getComando()
@@ -96,7 +66,6 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
     public String toString()
     {
         return ""
-            + toString(this._else_)
             + toString(this._comando_);
     }
 
@@ -104,12 +73,6 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._else_ == child)
-        {
-            this._else_ = null;
-            return;
-        }
-
         if(this._comando_.remove(child))
         {
             return;
@@ -122,12 +85,6 @@ public final class AElseOpcOpcionalElse extends POpcionalElse
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._else_ == oldChild)
-        {
-            setElse((TElse) newChild);
-            return;
-        }
-
         for(ListIterator<PComando> i = this._comando_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)

@@ -8,7 +8,6 @@ import analysis.*;
 public final class AExpComExprComma extends PExprComma
 {
     private PExp _exp_;
-    private TComma _comma_;
 
     public AExpComExprComma()
     {
@@ -16,13 +15,10 @@ public final class AExpComExprComma extends PExprComma
     }
 
     public AExpComExprComma(
-        @SuppressWarnings("hiding") PExp _exp_,
-        @SuppressWarnings("hiding") TComma _comma_)
+        @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
         setExp(_exp_);
-
-        setComma(_comma_);
 
     }
 
@@ -30,8 +26,7 @@ public final class AExpComExprComma extends PExprComma
     public Object clone()
     {
         return new AExpComExprComma(
-            cloneNode(this._exp_),
-            cloneNode(this._comma_));
+            cloneNode(this._exp_));
     }
 
     @Override
@@ -65,37 +60,11 @@ public final class AExpComExprComma extends PExprComma
         this._exp_ = node;
     }
 
-    public TComma getComma()
-    {
-        return this._comma_;
-    }
-
-    public void setComma(TComma node)
-    {
-        if(this._comma_ != null)
-        {
-            this._comma_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._comma_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._exp_)
-            + toString(this._comma_);
+            + toString(this._exp_);
     }
 
     @Override
@@ -105,12 +74,6 @@ public final class AExpComExprComma extends PExprComma
         if(this._exp_ == child)
         {
             this._exp_ = null;
-            return;
-        }
-
-        if(this._comma_ == child)
-        {
-            this._comma_ = null;
             return;
         }
 
@@ -124,12 +87,6 @@ public final class AExpComExprComma extends PExprComma
         if(this._exp_ == oldChild)
         {
             setExp((PExp) newChild);
-            return;
-        }
-
-        if(this._comma_ == oldChild)
-        {
-            setComma((TComma) newChild);
             return;
         }
 

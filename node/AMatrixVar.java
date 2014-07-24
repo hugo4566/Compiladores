@@ -8,9 +8,7 @@ import analysis.*;
 public final class AMatrixVar extends PVar
 {
     private TId _id_;
-    private TLBra _lBra_;
     private TNInt _nInt_;
-    private TRBra _rBra_;
 
     public AMatrixVar()
     {
@@ -19,18 +17,12 @@ public final class AMatrixVar extends PVar
 
     public AMatrixVar(
         @SuppressWarnings("hiding") TId _id_,
-        @SuppressWarnings("hiding") TLBra _lBra_,
-        @SuppressWarnings("hiding") TNInt _nInt_,
-        @SuppressWarnings("hiding") TRBra _rBra_)
+        @SuppressWarnings("hiding") TNInt _nInt_)
     {
         // Constructor
         setId(_id_);
 
-        setLBra(_lBra_);
-
         setNInt(_nInt_);
-
-        setRBra(_rBra_);
 
     }
 
@@ -39,9 +31,7 @@ public final class AMatrixVar extends PVar
     {
         return new AMatrixVar(
             cloneNode(this._id_),
-            cloneNode(this._lBra_),
-            cloneNode(this._nInt_),
-            cloneNode(this._rBra_));
+            cloneNode(this._nInt_));
     }
 
     @Override
@@ -75,31 +65,6 @@ public final class AMatrixVar extends PVar
         this._id_ = node;
     }
 
-    public TLBra getLBra()
-    {
-        return this._lBra_;
-    }
-
-    public void setLBra(TLBra node)
-    {
-        if(this._lBra_ != null)
-        {
-            this._lBra_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._lBra_ = node;
-    }
-
     public TNInt getNInt()
     {
         return this._nInt_;
@@ -125,39 +90,12 @@ public final class AMatrixVar extends PVar
         this._nInt_ = node;
     }
 
-    public TRBra getRBra()
-    {
-        return this._rBra_;
-    }
-
-    public void setRBra(TRBra node)
-    {
-        if(this._rBra_ != null)
-        {
-            this._rBra_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._rBra_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
             + toString(this._id_)
-            + toString(this._lBra_)
-            + toString(this._nInt_)
-            + toString(this._rBra_);
+            + toString(this._nInt_);
     }
 
     @Override
@@ -170,21 +108,9 @@ public final class AMatrixVar extends PVar
             return;
         }
 
-        if(this._lBra_ == child)
-        {
-            this._lBra_ = null;
-            return;
-        }
-
         if(this._nInt_ == child)
         {
             this._nInt_ = null;
-            return;
-        }
-
-        if(this._rBra_ == child)
-        {
-            this._rBra_ = null;
             return;
         }
 
@@ -201,21 +127,9 @@ public final class AMatrixVar extends PVar
             return;
         }
 
-        if(this._lBra_ == oldChild)
-        {
-            setLBra((TLBra) newChild);
-            return;
-        }
-
         if(this._nInt_ == oldChild)
         {
             setNInt((TNInt) newChild);
-            return;
-        }
-
-        if(this._rBra_ == oldChild)
-        {
-            setRBra((TRBra) newChild);
             return;
         }
 

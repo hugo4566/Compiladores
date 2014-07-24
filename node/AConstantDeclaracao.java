@@ -7,10 +7,8 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class AConstantDeclaracao extends PDeclaracao
 {
-    private TConstant _constant_;
     private TId _id_;
     private PValor _valor_;
-    private TSemiC _semiC_;
 
     public AConstantDeclaracao()
     {
@@ -18,19 +16,13 @@ public final class AConstantDeclaracao extends PDeclaracao
     }
 
     public AConstantDeclaracao(
-        @SuppressWarnings("hiding") TConstant _constant_,
         @SuppressWarnings("hiding") TId _id_,
-        @SuppressWarnings("hiding") PValor _valor_,
-        @SuppressWarnings("hiding") TSemiC _semiC_)
+        @SuppressWarnings("hiding") PValor _valor_)
     {
         // Constructor
-        setConstant(_constant_);
-
         setId(_id_);
 
         setValor(_valor_);
-
-        setSemiC(_semiC_);
 
     }
 
@@ -38,41 +30,14 @@ public final class AConstantDeclaracao extends PDeclaracao
     public Object clone()
     {
         return new AConstantDeclaracao(
-            cloneNode(this._constant_),
             cloneNode(this._id_),
-            cloneNode(this._valor_),
-            cloneNode(this._semiC_));
+            cloneNode(this._valor_));
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAConstantDeclaracao(this);
-    }
-
-    public TConstant getConstant()
-    {
-        return this._constant_;
-    }
-
-    public void setConstant(TConstant node)
-    {
-        if(this._constant_ != null)
-        {
-            this._constant_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._constant_ = node;
     }
 
     public TId getId()
@@ -125,51 +90,18 @@ public final class AConstantDeclaracao extends PDeclaracao
         this._valor_ = node;
     }
 
-    public TSemiC getSemiC()
-    {
-        return this._semiC_;
-    }
-
-    public void setSemiC(TSemiC node)
-    {
-        if(this._semiC_ != null)
-        {
-            this._semiC_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._semiC_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._constant_)
             + toString(this._id_)
-            + toString(this._valor_)
-            + toString(this._semiC_);
+            + toString(this._valor_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._constant_ == child)
-        {
-            this._constant_ = null;
-            return;
-        }
-
         if(this._id_ == child)
         {
             this._id_ = null;
@@ -182,12 +114,6 @@ public final class AConstantDeclaracao extends PDeclaracao
             return;
         }
 
-        if(this._semiC_ == child)
-        {
-            this._semiC_ = null;
-            return;
-        }
-
         throw new RuntimeException("Not a child.");
     }
 
@@ -195,12 +121,6 @@ public final class AConstantDeclaracao extends PDeclaracao
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._constant_ == oldChild)
-        {
-            setConstant((TConstant) newChild);
-            return;
-        }
-
         if(this._id_ == oldChild)
         {
             setId((TId) newChild);
@@ -210,12 +130,6 @@ public final class AConstantDeclaracao extends PDeclaracao
         if(this._valor_ == oldChild)
         {
             setValor((PValor) newChild);
-            return;
-        }
-
-        if(this._semiC_ == oldChild)
-        {
-            setSemiC((TSemiC) newChild);
             return;
         }
 

@@ -2,7 +2,7 @@
 
 package node;
 
-public abstract class POpcionalElseColon extends Node
+public abstract class POpElse extends Node
 {
     // Empty body
 }

@@ -90,164 +90,152 @@ Ignored Tokens
 
 Productions
 
-	programa {-> programa } = program id begin declaracao_star comando_star end {-> New programa(id,declaracao_star,comando_star)} ;
-
-	declaracao_star = {lista} declaracao declaracao_star
-	| {vazia} ;
-
-	comando_star = {lista} comando comando_star
-	| {vazio} ;
-
-	valor =
-		{string} 		string
-	|	{integer} 		n_int
-	|	{real} 			n_real;
-
-	tipo =
-		{real} 			real
-	|	{integer} 		integer
-	|	{char} 			character;
-
-	var =
-		{id} 			id
-	| 	{matrix} 		id l_bra n_int r_bra;
-
-	variavel_comma 		= {var_com} var comma;
-
-	declaracao  =
-		{variable} 		tipo colon variavel_comma* var semi_c
-	| 	{constant} 		constant id valor semi_c
+	programa {-> programa} = program id begin [decl]:declaracao* [cmd]:comando* end  {-> New programa (id,[decl.declaracao],[cmd.comando])}
 	;
 
 
-	expr_comma 	   		= {exp_com} exp comma
-							| {explog_com} exp_logica comma
-							;
-	opcional_else  		= {else_opc} else comando+;
-	case_estrela   		= {case_star} case valor colon comando+;
-	opcional_else_colon = {else_colon_opc} else colon comando+;
-
-
-	var_value =
-		{value}		 	valor
-	| 	{variable} 		var
+	valor {-> valor} =
+		{string} 		string 	{-> New valor.string(string)}
+	|	{integer} 		n_int 	{-> New valor.integer(n_int)}
+	|	{real} 			n_real	{-> New valor.real(n_real)}	
 	;
 
-	exp =
+	tipo {-> tipo} =
+		{real} 			real 		{-> New tipo.real(real)}
+	|	{integer} 		integer		{-> New tipo.integer(integer)}
+	|	{char} 			character	{-> New tipo.char(character)}
+	;
+
+	var {-> var} =
+		{id} 			id 						{-> New var.id(id)}
+	| 	{matrix} 		id l_bra n_int r_bra	{-> New var.matrix(id,n_int)}
+	;
+
+	var_list {-> var*} = {single}	[variable]:var 					{-> [variable.var]}
+						|{multiple} [arg]:var comma [rest]:var_list	{-> [arg.var,rest.var]}
+	;
+
+	declaracao {-> declaracao}  =
+		{variable} 		tipo colon [args]:var_list+ semi_c {-> New declaracao.variable(tipo,[args.var])}
+	| 	{constant} 		constant id valor semi_c {-> New declaracao.constant(id,valor)}
+	;
+
+	var_value {-> var_value} =
+		{value}		 	valor	{-> New var_value.value (valor)}
+	| 	{variable} 		var  {-> New var_value.variable (var)}
+	;
+
+	exp {-> exp} =
 	  {plus}  exp plus termo 	{-> New exp.plus(exp, termo.exp)  }
 	| {minus}  exp minus termo	{-> New exp.minus(exp, termo.exp)  }
-	| {termo} termo {-> termo.exp}
+	| {termo} termo 	{-> termo.exp }
 	;
 
 	termo {-> exp} =
-	  {mult} termo mult fator	{-> New exp.mult(termo.exp, fator.exp ) }
-	| {div} termo div fator		{-> New exp.div(termo.exp, fator.exp ) }
-	| {fator} fator {-> fator.exp  }
+	  {mult} termo mult fator {-> New exp.mult(termo.exp, fator.exp ) }
+	| {div} termo div fator	{-> New exp.div(termo.exp, fator.exp ) }	
+	| {fator} fator  {-> fator.exp}
 	;
 
 	fator {-> exp} =
-	  {l_exp_r} minus? l_par exp r_par 	{-> exp}
+	  {l_exp_r} minus? l_par exp r_par {-> exp}
 	| {var_value} var_value	{-> New exp.var_value(var_value)}
 	;
 
+/*
 	exp_logica =
-	  {or} exp_logica or exp_logica2 {-> New exp_logica.or(exp_logica, exp_logica2.exp_logica)  }
-	| {exp_logica2} exp_logica2  {-> exp_logica2.exp_logica}
+	  {or} exp_logica or exp_logica2
+	| {exp_logica2} exp_logica2
 	;
 
-	exp_logica2 {-> exp_logica} =
-	  {xor} exp_logica2 xor exp_logica3 {-> New exp_logica.xor(exp_logica2.exp_logica, exp_logica3.exp_logica)  }
-	| {exp_logica3} exp_logica3  {-> exp_logica3.exp_logica}
+	exp_logica2 =
+	  {xor} exp_logica2 xor exp_logica3
+	| {exp_logica3} exp_logica3 
 	;
 
-	exp_logica3 {-> exp_logica} =
-	  {and} exp_logica3 and exp_logica4 {-> New exp_logica.and(exp_logica3.exp_logica,exp_logica4.exp_logica)}
-	| {and_n} exp_logica3 and not exp_logica4 {-> New exp_logica.and_n(exp_logica3.exp_logica,exp_logica4.exp_logica)}
-	| {exp_logica4} exp_logica4 { -> exp_logica4.exp_logica}
-	| {exp_logica4_n} not exp_logica4 { -> New exp_logica.negation(exp_logica4.exp_logica)}
+	exp_logica3 =
+	  {and} exp_logica3 and not? exp_logica4 
+	| {exp_logica4} not? exp_logica4
 	;
 
-	exp_logica4 {-> exp_logica} =
-	  {equal} exp equal var_value {-> New exp_logica.equal(exp,var_value)}
-	| {not_equal} 		exp not_equal	var_value {-> New exp_logica.not_equal(exp,var_value)}
-	| {less_eq} 		exp less_eq		var_value {-> New exp_logica.less_eq(exp,var_value)}
-	| {less} 			exp less 		var_value {-> New exp_logica.less(exp,var_value)}
-	| {greater_eq} 		exp greater_eq  var_value {-> New exp_logica.greater_eq(exp,var_value)}
-	| {greater} 		exp greater     var_value {-> New exp_logica.greater(exp,var_value)}
-	|{par_exp} l_par exp_logica r_par {-> exp_logica}
+	exp_logica4 =
+	  {equal} exp equal var_value 
+	| {not_equal} 		exp not_equal	var_value 
+	| {less_eq} 		exp less_eq		var_value 
+	| {less} 			exp less 		var_value 
+	| {greater_eq} 		exp greater_eq  var_value 
+	| {greater} 		exp greater     var_value
+	|{par_exp} l_par exp_logica r_par 
+	;
+*/
+//	case_estrela {-> case_estrela}  = case valor colon comando+ {-> New case_estrela(valor,[comando])};
+
+//	opcional_else {-> op_else} = else comando+ {-> New op_else([comando])} ;
+
+//	op_else_co {-> op_else*} = else colon comando+ {-> New op_else([comando])};
+
+	expr_comma {-> expr_comma}= 
+	{exp_com} exp comma {-> New expr_comma.exp_com(exp)}
+//	| {explog_com} exp_logica comma {-> exp_logica}
 	;
 
-	step = {passo} pass n_int;
+//	step = {passo} pass n_int;
 
-	comando =
-	  	{atrib} 		var is exp semi_c
-	|	{atrib_log}		var is exp_logica semi_c
-	| 	{read}			read l_par variavel_comma+ r_par semi_c
-	| 	{write}			write l_par expr_comma+ r_par semi_c
-	| 	{if}			if l_par exp_logica r_par then comando+ opcional_else? end_if semi_c
-	| 	{evaluate}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e semi_c
-	|	{evaluate_log} 	evaluate l_par exp_logica r_par case_estrela* opcional_else_colon? end_e semi_c
-	| 	{while}			while l_par exp_logica r_par do comando+ end_w semi_c
-	| 	{repeat}		repeat comando+ until l_par exp_logica r_par semi_c
-	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando+ end_f semi_c
+	comando {-> comando} =
+	  	{atrib} 		var is exp semi_c {-> New comando.atrib(var,exp)}
+//	|	{atrib_log}		var is exp_logica semi_c {New comando.atrib_log(var,exp_logica)}	
+	| 	{read}			read l_par [arg]:var_list+ r_par semi_c {-> New comando.read([arg.var])}
+	| 	{write}			write l_par [arg]:expr_comma+ r_par semi_c {-> New comando.write([arg.expr_comma])}
+//	| 	{if}			if l_par exp_logica r_par then comando+ opcional_else? end_if semi_c
+//	| 	{evaluate}		evaluate l_par exp r_par case_estrela* [arg]:opcional_else? end_e semi_c {-> New comando.evaluate(exp,[case_estrela],[arg.op_else])}
+//	|	{evaluate_log} 	evaluate l_par exp_logica r_par case_estrela* opcional_else? end_e semi_c
+//	| 	{while}			while l_par exp_logica r_par do comando+ end_w semi_c
+//	| 	{repeat}		repeat comando+ until l_par exp_logica r_par semi_c
+//	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando+ end_f semi_c
 	;
+
 
 Abstract Syntax Tree
 
-	programa = id declaracao_star comando_star;
+	programa = id declaracao* comando*
+	;
 
-	declaracao_star = {lista} declaracao declaracao_star
-	| {vazia};
-
-	comando_star = {lista} comando comando_star
-	| {vazio};
-
-	expr_comma 	   		= {exp_com} exp comma
-							| {explog_com} exp_logica comma
-							;
-	opcional_else  		= {else_opc} else comando+;
-	case_estrela   		= {case_star} case valor colon comando+;
-	opcional_else_colon = {else_colon_opc} else colon comando+;
-
-	valor =
-		{string} 		string
-	|	{integer} 		n_int
-	|	{real} 			n_real;
+	declaracao =
+		{variable} 		tipo var+
+	| 	{constant} 		id valor
+	;
 
 	tipo =
 		{real} 			real
 	|	{integer} 		integer
 	|	{char} 			character;
 
+	valor =
+		{string} 		string
+	|	{integer} 		n_int
+	|	{real} 			n_real;
+
 	var =
 		{id} 			id
-	| 	{matrix} 		id l_bra n_int r_bra;
-
-	variavel_comma 		=
-		{var_com} var comma
-	;
-
-	declaracao =
-		{variable} 		tipo colon variavel_comma* var semi_c
-	| 	{constant} 		constant id valor semi_c
-	;
-
-	comando =
-		{atrib} 		var is exp semi_c
-	|	{atrib_log}		var is exp_logica semi_c
-	| 	{read}			read l_par variavel_comma+ r_par semi_c
-	| 	{write}			write l_par expr_comma+ r_par semi_c
-	| 	{if}			if l_par exp_logica r_par then comando+ opcional_else? end_if semi_c
-	| 	{evaluate}		evaluate l_par exp r_par case_estrela* opcional_else_colon? end_e semi_c
-	|	{evaluate_log} 	evaluate l_par exp_logica r_par case_estrela* opcional_else_colon? end_e semi_c
-	| 	{while}			while l_par exp_logica r_par do comando+ end_w semi_c
-	| 	{repeat}		repeat comando+ until l_par exp_logica r_par semi_c
-	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando+ end_f semi_c
-	;
+	| 	{matrix} 		id n_int;
 
 	var_value =
 		{value}		 	valor
 	| 	{variable} 		var;
+
+	comando =
+		{atrib} 		var exp 
+//	|	{atrib_log}		var exp_logica 
+	| 	{read}			var+ 
+	| 	{write}			expr_comma+ 
+//	| 	{if}			exp_logica comando+ op_else? 
+	| 	{evaluate}		exp case_estrela* op_else? 
+//	|	{evaluate_log} 	exp_logica case_estrela* op_else?
+//	| 	{while}			exp_logica comando+
+//	| 	{repeat}		comando+ exp_logica
+//	| 	{for_one}		var [start]:n_int [step]:n_int [stop]:n_int comando+
+	;
+
 
 	exp =
       {plus}   [l]:exp [r]:exp
@@ -257,6 +245,13 @@ Abstract Syntax Tree
 	| {var_value} var_value
     ;
 
+    expr_comma = {exp_com} exp
+	//| {explog_com} exp_logica
+	;
+
+	case_estrela   	= valor  comando+;
+	op_else  		= comando+;
+/*
     exp_logica=
       {or}			[l]:exp_logica [r]:exp_logica
     | {xor}			[l]:exp_logica [r]:exp_logica
@@ -272,4 +267,4 @@ Abstract Syntax Tree
 	| {exp}			exp
 	;
 
-	step = {passo} pass n_int;
+*/

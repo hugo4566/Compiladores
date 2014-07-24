@@ -8,15 +8,15 @@ public class AstPrinter extends DepthFirstAdapter {
 	
 	public void printIndent(){
 		for (int i = 0; i < indent; i++) {
-			System.out.print("t");
+			System.out.print("\u0009");
 		}
 	}
 	
 	public void printNode(Node node){
 		printIndent();
 		
-                System.out.print(node.getClass().toString().replaceAll("class node\\.T?", ""));
-		System.out.println(" "+node.toString() );
+        System.out.print(node.getClass().toString().replaceAll("class node\\.T?", ""));
+		System.out.println(" |  "+node.toString() );
 	}
 	
 	@Override

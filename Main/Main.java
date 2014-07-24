@@ -44,7 +44,9 @@ public class Main {
 			
 	            Parser parser = new Parser(lexer);
 	            Start ast = parser.parse();
-                    ast.apply(new AstPrinter());
+                ast.apply(new AstPrinter());
+                System.out.println("----------------------------------------------------------------");
+                ast.apply(new MySemantic());
 //	            ast.apply(new SemanticAnalyser());  
 //	            ast.apply(new ClassGenerator());
 	        }

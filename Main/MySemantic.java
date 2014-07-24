@@ -2,14 +2,30 @@ package Main;
 
  
 import java.util.*; // for the Hashtable
+
 import node.*;
 import analysis.*;
  
 public class MySemantic extends DepthFirstAdapter {
-   /*
+   
     // stores the identifiers being defined
     Hashtable symbol_table = new Hashtable(); // create a new table
- 
+    
+    @Override
+    public void outAVariableDeclaracao(AVariableDeclaracao node)
+    {
+    	if(symbol_table.containsKey(node.getVar().toString())){
+            System.err.println("Variavel "+ node.getVar().toString() +"já definida.");
+            System.exit(0);
+        }
+        else {
+            symbol_table.put(node.getVar().toString(), node.getTipo().toString());
+            System.out.println("Variavel = "+node.getVar().toString()+" | tipo = "+node.getTipo().toString());
+        }
+    }
+
+    //public void outAVariableDeclaracao (A)
+    /*
     // check if the identifier is already in the table and report an error
     // if it is
     public void outASingleIdentifierList(AidentifierList node) {

@@ -142,56 +142,59 @@ Productions
 	| {var_value} var_value	{-> New exp.var_value(var_value)}
 	;
 
-/*
-	exp_logica =
-	  {or} exp_logica or exp_logica2
-	| {exp_logica2} exp_logica2
+
+	exp_logica {-> exp_logica} =
+	  {or} exp_logica or exp_logica2 {-> New exp_logica.or(exp_logica,exp_logica2.exp_logica)}
+	| {exp_logica2} exp_logica2	{-> exp_logica2.exp_logica}
 	;
 
-	exp_logica2 =
-	  {xor} exp_logica2 xor exp_logica3
-	| {exp_logica3} exp_logica3 
+	exp_logica2 {-> exp_logica} =
+	  {xor} exp_logica2 xor exp_logica3 {-> New exp_logica.xor(exp_logica2.exp_logica, exp_logica3.exp_logica)}
+	| {exp_logica3} exp_logica3  {-> exp_logica3.exp_logica}
 	;
 
-	exp_logica3 =
-	  {and} exp_logica3 and not? exp_logica4 
-	| {exp_logica4} not? exp_logica4
+	exp_logica3 {-> exp_logica} =
+	  {and} exp_logica3 and exp_logica4 {-> New exp_logica.and(exp_logica3.exp_logica,exp_logica4.exp_logica)}
+	| {and_n} exp_logica3 and not exp_logica4 {-> New exp_logica.and_n(exp_logica3.exp_logica,exp_logica4.exp_logica)}
+	| {exp_logica4} exp_logica4 { -> exp_logica4.exp_logica}
+	| {exp_logica4_n} not exp_logica4 { -> New exp_logica.negation(exp_logica4.exp_logica)}
+	;
+	exp_logica4 {-> exp_logica} =
+	  {equal} exp equal var_value {-> New exp_logica.equal(exp,var_value)}
+	| {not_equal} 		exp not_equal	var_value {-> New exp_logica.not_equal(exp,var_value)}
+	| {less_eq} 		exp less_eq		var_value {-> New exp_logica.less_eq(exp,var_value)}
+	| {less} 			exp less 		var_value {-> New exp_logica.less(exp,var_value)}
+	| {greater_eq} 		exp greater_eq  var_value {-> New exp_logica.greater_eq(exp,var_value)}
+	| {greater} 		exp greater     var_value {-> New exp_logica.greater(exp,var_value)}
+	|{par_exp} l_par exp_logica r_par {-> exp_logica}
 	;
 
-	exp_logica4 =
-	  {equal} exp equal var_value 
-	| {not_equal} 		exp not_equal	var_value 
-	| {less_eq} 		exp less_eq		var_value 
-	| {less} 			exp less 		var_value 
-	| {greater_eq} 		exp greater_eq  var_value 
-	| {greater} 		exp greater     var_value
-	|{par_exp} l_par exp_logica r_par 
-	;
-*/
-//	case_estrela {-> case_estrela}  = case valor colon comando+ {-> New case_estrela(valor,[comando])};
+	case_estrela {-> case_estrela}  = case valor colon comando+ {-> New case_estrela(valor,[comando])} ;
 
-//	opcional_else {-> op_else} = else comando+ {-> New op_else([comando])} ;
+	opcional_else {-> op_else} = else [cmd]:comando+ {-> New op_else([cmd.comando])} ;
 
-//	op_else_co {-> op_else*} = else colon comando+ {-> New op_else([comando])};
+	op_else_co {-> op_else} = else colon comando+ {-> New op_else([comando])} ;
 
-	expr_comma {-> expr_comma}= 
+	expr_comma {-> expr_comma} = 
 	{exp_com} exp comma {-> New expr_comma.exp_com(exp)}
-//	| {explog_com} exp_logica comma {-> exp_logica}
+	| {explog_com} exp_logica comma {-> New expr_comma.explog_com(exp_logica)}
 	;
-
-//	step = {passo} pass n_int;
 
 	comando {-> comando} =
 	  	{atrib} 		var is exp semi_c {-> New comando.atrib(var,exp)}
-//	|	{atrib_log}		var is exp_logica semi_c {New comando.atrib_log(var,exp_logica)}	
+	|	{atrib_log}		var is exp_logica semi_c {-> New comando.atrib_log(var,exp_logica)}	
 	| 	{read}			read l_par [arg]:var_list+ r_par semi_c {-> New comando.read([arg.var])}
 	| 	{write}			write l_par [arg]:expr_comma+ r_par semi_c {-> New comando.write([arg.expr_comma])}
-//	| 	{if}			if l_par exp_logica r_par then comando+ opcional_else? end_if semi_c
-//	| 	{evaluate}		evaluate l_par exp r_par case_estrela* [arg]:opcional_else? end_e semi_c {-> New comando.evaluate(exp,[case_estrela],[arg.op_else])}
-//	|	{evaluate_log} 	evaluate l_par exp_logica r_par case_estrela* opcional_else? end_e semi_c
-//	| 	{while}			while l_par exp_logica r_par do comando+ end_w semi_c
-//	| 	{repeat}		repeat comando+ until l_par exp_logica r_par semi_c
-//	| 	{for_one}		for var from [start]:n_int step? until [stop]:n_int do comando+ end_f semi_c
+	| 	{if}			if l_par exp_logica r_par then comando+ end_if semi_c {-> New comando.if(exp_logica,[comando], Null)}
+	|	{if_else}		if l_par exp_logica r_par then comando+ opcional_else end_if semi_c {-> New comando.if(exp_logica,[comando],opcional_else.op_else)}
+	| 	{evaluate}		evaluate l_par exp r_par case_estrela* end_e semi_c {-> New comando.evaluate(exp,[case_estrela],Null)}
+	| 	{evaluate_else}	evaluate l_par exp r_par case_estrela* [arg]:op_else_co end_e semi_c {-> New comando.evaluate(exp,[case_estrela],arg.op_else)}
+	|	{evaluate_log} 	evaluate l_par exp_logica r_par case_estrela* end_e semi_c {-> New comando.evaluate_log(exp_logica,[case_estrela],Null)}
+	|	{evaluate_log_else} 	evaluate l_par exp_logica r_par case_estrela* [arg]:op_else_co end_e semi_c {-> New comando.evaluate_log(exp_logica,[case_estrela],arg.op_else)}
+	| 	{while}			while l_par [expl]:exp_logica r_par do [cmd]:comando+ end_w semi_c {-> New comando.while(expl.exp_logica,[cmd.comando])}
+	| 	{repeat}		repeat [cmd]:comando+ until l_par [expl]:exp_logica r_par semi_c {-> New comando.repeat([cmd.comando],expl.exp_logica)}
+	| 	{for_one}		for var from [start]:n_int until [stop]:n_int do [cmd]:comando+ end_f semi_c {-> New comando.for_one(var,start,Null,stop,[cmd.comando])}
+	| 	{for_step}		for var from [start]:n_int pass [step]:n_int until [stop]:n_int do [cmd]:comando+ end_f semi_c {-> New comando.for_one(var,start,step,stop,[cmd.comando])}
 	;
 
 
@@ -225,15 +228,15 @@ Abstract Syntax Tree
 
 	comando =
 		{atrib} 		var exp 
-//	|	{atrib_log}		var exp_logica 
+	|	{atrib_log}		var exp_logica 
 	| 	{read}			var+ 
 	| 	{write}			expr_comma+ 
-//	| 	{if}			exp_logica comando+ op_else? 
+	| 	{if}			exp_logica comando+ op_else? 
 	| 	{evaluate}		exp case_estrela* op_else? 
-//	|	{evaluate_log} 	exp_logica case_estrela* op_else?
-//	| 	{while}			exp_logica comando+
-//	| 	{repeat}		comando+ exp_logica
-//	| 	{for_one}		var [start]:n_int [step]:n_int [stop]:n_int comando+
+	|	{evaluate_log} 	exp_logica case_estrela* op_else?
+	| 	{while}			exp_logica comando+
+	| 	{repeat}		comando+ exp_logica
+	| 	{for_one}		var [start]:n_int [step]:n_int? [stop]:n_int comando+
 	;
 
 
@@ -246,12 +249,12 @@ Abstract Syntax Tree
     ;
 
     expr_comma = {exp_com} exp
-	//| {explog_com} exp_logica
+	| {explog_com} exp_logica
 	;
 
 	case_estrela   	= valor  comando+;
 	op_else  		= comando+;
-/*
+
     exp_logica=
       {or}			[l]:exp_logica [r]:exp_logica
     | {xor}			[l]:exp_logica [r]:exp_logica
@@ -263,8 +266,8 @@ Abstract Syntax Tree
 	| {less}		exp var_value
 	| {greater_eq}	exp var_value
 	| {greater}		exp var_value
-	| {negation}	exp_logica
 	| {exp}			exp
+	| {negation}   	exp_logica
 	;
 
-*/
+

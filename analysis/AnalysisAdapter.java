@@ -159,6 +159,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAAtribLogComando(AAtribLogComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAReadComando(AReadComando node)
     {
         defaultCase(node);
@@ -171,7 +177,37 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAIfComando(AIfComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAEvaluateComando(AEvaluateComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEvaluateLogComando(AEvaluateLogComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAWhileComando(AWhileComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseARepeatComando(ARepeatComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAForOneComando(AForOneComando node)
     {
         defaultCase(node);
     }
@@ -213,6 +249,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAExplogComExprComma(AExplogComExprComma node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseACaseEstrela(ACaseEstrela node)
     {
         defaultCase(node);
@@ -220,6 +262,78 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAOpElse(AOpElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAOrExpLogica(AOrExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAXorExpLogica(AXorExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAndExpLogica(AAndExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAndNExpLogica(AAndNExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEqualExpLogica(AEqualExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANotEqualExpLogica(ANotEqualExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALessEqExpLogica(ALessEqExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALessExpLogica(ALessExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAGreaterEqExpLogica(AGreaterEqExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAGreaterExpLogica(AGreaterExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAExpExpLogica(AExpExpLogica node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseANegationExpLogica(ANegationExpLogica node)
     {
         defaultCase(node);
     }

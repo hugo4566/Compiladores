@@ -1,0 +1,9 @@
+programa teste
+inicio
+	inteiro : i;
+	const y 'hello world';
+
+	i <- 2;
+	i <- i+1;
+
+fim.

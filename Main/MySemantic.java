@@ -53,8 +53,8 @@ public class MySemantic extends DepthFirstAdapter {
 	public void outStart(Start node) {
 		System.out.println(symbol_table.toString());
 	}
-	/** Exp - INICIO  		**/
 	
+	/** Variaveis & Valores - INICIO  		**/
 	@Override
 	public void outAVariableVarValue(AVariableVarValue node) {
 		pilha.push(node.getVar().toString().replaceAll("\\s+", ""));
@@ -64,7 +64,9 @@ public class MySemantic extends DepthFirstAdapter {
 	public void outAValueVarValue(AValueVarValue node) {
 		pilha.push(node.getValor().toString().replaceAll("\\s+", ""));
 	}
+	/** Variaveis & Valores - FIM  		**/
 	
+	/** Exp - INICIO  		**/
 	@Override
     public void outAPlusExp(APlusExp node)
     {	
@@ -114,6 +116,117 @@ public class MySemantic extends DepthFirstAdapter {
     }
 	/** Exp - FIM			**/
 	
+	/** Exp_Logica - INICIO  		**/
+	@Override
+    public void outAOrExpLogica(AOrExpLogica node)
+    {
+		String R = pilha.pop();
+        String L = pilha.pop();
+        L = verificaELimpa(L);
+        R = verificaELimpa(R);
+        
+        boolean bool = (Boolean.parseBoolean(L) || Boolean.parseBoolean(R));
+        pilha.push(""+bool);
+    }
+	
+	@Override
+    public void outAXorExpLogica(AXorExpLogica node)
+    {
+		String R = pilha.pop();
+        String L = pilha.pop();
+        L = verificaELimpa(L);
+        R = verificaELimpa(R);
+        
+        boolean bool = (Boolean.parseBoolean(L) ^ Boolean.parseBoolean(R));
+        pilha.push(""+bool);
+    }
+
+	@Override
+    public void outAAndExpLogica(AAndExpLogica node)
+    {
+		String R = pilha.pop();
+        String L = pilha.pop();
+        L = verificaELimpa(L);
+        R = verificaELimpa(R);
+        
+        boolean bool = (Boolean.parseBoolean(L) && Boolean.parseBoolean(R));
+        pilha.push(""+bool);
+    }
+	
+	@Override
+    public void outAEqualExpLogica(AEqualExpLogica node)
+    {
+		String R = pilha.pop();
+        String L = pilha.pop();
+        L = verificaELimpa(L);
+        R = verificaELimpa(R);
+        
+        boolean bool = (Integer.valueOf(L) ==Integer.valueOf(R));
+        pilha.push(""+bool);
+    }
+	
+	@Override
+	public void outANotEqualExpLogica(ANotEqualExpLogica node)
+    {
+		String R = pilha.pop();
+        String L = pilha.pop();
+        L = verificaELimpa(L);
+        R = verificaELimpa(R);
+        
+        boolean bool = (Integer.valueOf(L) != Integer.valueOf(R));
+        pilha.push(""+bool);
+    }
+	
+	@Override
+    public void outALessEqExpLogica(ALessEqExpLogica node)
+    {
+		String R = pilha.pop();
+        String L = pilha.pop();
+        L = verificaELimpa(L);
+        R = verificaELimpa(R);
+        
+        boolean bool = (Integer.valueOf(L) <= Integer.valueOf(R));
+        pilha.push(""+bool);
+    }
+	
+	@Override
+    public void outALessExpLogica(ALessExpLogica node)
+    {
+		String R = pilha.pop();
+        String L = pilha.pop();
+        L = verificaELimpa(L);
+        R = verificaELimpa(R);
+        
+        boolean bool = (Integer.valueOf(L) < Integer.valueOf(R));
+        pilha.push(""+bool);
+    }
+	
+	@Override
+    public void outAGreaterEqExpLogica(AGreaterEqExpLogica node)
+    {
+    	String R = pilha.pop();
+        String L = pilha.pop();
+        L = verificaELimpa(L);
+        R = verificaELimpa(R);
+        
+        boolean bool = (Integer.valueOf(L) >= Integer.valueOf(R));
+        pilha.push(""+bool);
+    }
+    
+	@Override
+    public void outAGreaterExpLogica(AGreaterExpLogica node)
+    {
+    	String R = pilha.pop();
+        String L = pilha.pop();
+        L = verificaELimpa(L);
+        R = verificaELimpa(R);
+        
+        boolean bool = (Integer.valueOf(L) > Integer.valueOf(R));
+        pilha.push(""+bool);
+    }
+	/** Exp_Logica - FIM  		**/
+	
+	/** Comando - INICIO			**/
 	@Override
 	public void outAAtribComando(AAtribComando node) {
 		String value = pilha.pop();
@@ -139,30 +252,6 @@ public class MySemantic extends DepthFirstAdapter {
 		System.out.println(symbol_table.toString());
 	}
 	
-	@Override
-    public void outAEqualExpLogica(AEqualExpLogica node)
-    {
-		String R = pilha.pop();
-        String L = pilha.pop();
-        L = verificaELimpa(L);
-        R = verificaELimpa(R);
-        
-        boolean bool = (Integer.valueOf(L) ==Integer.valueOf(R));
-        pilha.push(""+bool);
-    }
-	
-	@Override
-    public void outAAndExpLogica(AAndExpLogica node)
-    {
-		String R = pilha.pop();
-        String L = pilha.pop();
-        L = verificaELimpa(L);
-        R = verificaELimpa(R);
-        
-        boolean bool = (Boolean.parseBoolean(L) && Boolean.parseBoolean(R));
-        pilha.push(""+bool);
-    }
-    
     @Override
     public void caseAIfComando(AIfComando node)
     {
@@ -171,8 +260,10 @@ public class MySemantic extends DepthFirstAdapter {
         {
             node.getExpLogica().apply(this);
         }
+        
+        String resultado = pilha.pop();
         {
-        	if(pilha.pop().equals("true")){
+        	if(resultado.equals("true")){
 	            List<PComando> copy = new ArrayList<PComando>(node.getComando());
 	            for(PComando e : copy)
 	            {
@@ -180,12 +271,124 @@ public class MySemantic extends DepthFirstAdapter {
 	            }
         	}
         }
-        if(node.getOpElse() != null)
-        {
-            node.getOpElse().apply(this);
+        
+        if(!resultado.equals("true")){
+	        if(node.getOpElse() != null)
+	        {
+	            node.getOpElse().apply(this);
+	        }
         }
+        
         outAIfComando(node);
     }
+    
+    @Override
+    public void caseAWhileComando(AWhileComando node)
+    {
+    	boolean pararWhile = false;
+    	
+        inAWhileComando(node);
+        
+        while(!pararWhile){
+        	pararWhile = true;
+	        if(node.getExpLogica() != null)
+	        {
+	            node.getExpLogica().apply(this);
+	        }
+	        {
+	        	if(pilha.pop().equals("true")){
+	        		pararWhile = false;
+		            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+		            for(PComando e : copy)
+		            {
+		            		e.apply(this);
+		            }
+	        	}
+	        }
+        }
+        outAWhileComando(node);
+    }
+    
+    @Override
+    public void caseARepeatComando(ARepeatComando node)
+    {
+    	boolean pararRepeat = false;
+    	
+        inARepeatComando(node);
+        
+        while(!pararRepeat){
+        	pararRepeat = true;
+	        {
+	            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+	            for(PComando e : copy)
+	            {
+	                e.apply(this);
+	            }
+	        }
+	        if(node.getExpLogica() != null)
+	        {
+	            node.getExpLogica().apply(this);
+	        }
+	        if(pilha.pop().equals("true")){
+	        	pararRepeat = false;
+	        }
+        }
+        outARepeatComando(node);
+    }
+    
+    @Override
+    public void caseAForOneComando(AForOneComando node)
+    {
+    	String inicio ="";
+    	String step = "";
+    	String fim ="";
+    	
+    	int valorInicio = 0;
+    	int valorStep = 1;
+    	int valorFim = 0;
+    	
+        inAForOneComando(node);
+        if(node.getVar() != null)
+        {
+            node.getVar().apply(this);
+        }
+        if(node.getStart() != null)
+        {
+            node.getStart().apply(this);
+            inicio = node.getStart().getText();
+            valorInicio = Integer.valueOf(inicio);
+        }
+        if(node.getStep() != null)
+        {
+            node.getStep().apply(this);
+            step = node.getStep().getText();
+            valorStep = Integer.valueOf(step);
+        }
+        if(node.getStop() != null)
+        {
+            node.getStop().apply(this);
+            fim = node.getStop().getText();
+            valorFim = Integer.valueOf(fim);
+        }
+        
+        
+        {
+        	while(valorInicio != valorFim){
+	            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+	            for(PComando e : copy)
+	            {
+	                e.apply(this);
+	            }
+        		if(valorInicio < valorFim){
+        			valorInicio = valorInicio + valorStep;
+        		}else if(valorInicio > valorFim){
+        			valorInicio = valorInicio - valorStep;
+        		}
+        	}
+        }
+        outAForOneComando(node);
+    }
+    /** Comando - FIM			**/
     
 	//Metodo auxiliar
 	private String verificaELimpa(String X) {

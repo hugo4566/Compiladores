@@ -5,7 +5,7 @@ inicio
 
 	i <- 2;
 	i <- i+1;
-	se ((i = 3) e (i = 3)) entao
+	se (i <= 4) entao
 		i <- i+10;
 		i <- i-5;
 	fim se;

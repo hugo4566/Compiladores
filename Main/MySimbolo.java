@@ -15,20 +15,29 @@ public class MySimbolo {
 	}
 	
 	public String getType(String value){
-		if(value == null)
+		String valor = value.replaceAll("\\s+", "");
+		if(valor == null)
 			return "";
-		else if(value.contains("\'"))
+		else if(valor.contains("\'"))
 			return "STRING";
-		else if(value.matches("\\d+")){
+		else if(valor.matches("\\d+")){
 			return "inteiro";
 		}
 		return "";
 	}
 	
 	public boolean isCompativel(String value){
-		if(getType(value).equals(tipo))
+		if(getType(value).equals(tipo.replaceAll("\\s+", "")))
 			return true;
 		return false;
+	}
+	
+	public String getVariavelLimpa(){
+		String tipoDaVariavel = tipo.replaceAll("\\s+", "");
+		if(tipoDaVariavel.equals("inteiro")){
+			return "0";
+		}
+		return "";
 	}
 	
 	@Override

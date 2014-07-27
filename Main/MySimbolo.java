@@ -1,7 +1,5 @@
 package Main;
 
-import node.*;
-
 public class MySimbolo {
 	
 	String tipo;

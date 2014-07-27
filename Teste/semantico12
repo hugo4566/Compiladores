@@ -1,0 +1,23 @@
+programa teste
+inicio
+	inteiro : i,x;
+		
+	avalie (i+1)
+		caso 2:
+			x <- 2;
+		caso 3:
+			x <- 3;
+		senao :
+			x <- 1;
+			avalie (x+1)
+				caso 3:
+					i<-3;
+				caso 4:
+					i<-4;
+				caso 2:
+					i<-2;
+				senao :
+					i<-10;
+			fim avalie;
+	fim avalie;
+fim.

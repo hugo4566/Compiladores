@@ -9,6 +9,7 @@ public class MySemantic extends DepthFirstAdapter {
 
 	Hashtable<String, MySimbolo> symbol_table = new Hashtable<String, MySimbolo>();
 	Stack<String> pilha = new Stack<String>();
+	
 	/** Declaracao - INICIO  **/
 	@Override
 	public void outAVariableDeclaracao(AVariableDeclaracao node) {
@@ -228,6 +229,34 @@ public class MySemantic extends DepthFirstAdapter {
 	
 	/** Comando - INICIO			**/
 	@Override
+	public void outAWriteComando(AWriteComando node){
+		String resultado = pilha.pop();
+		System.out.println(verificaELimpa(resultado));
+	}
+	
+	@Override
+	public void outAReadComando(AReadComando node){
+		LinkedList<PVar> listaVar = node.getVar();
+		Scanner scanner = new Scanner(System.in);
+		
+		for (int i = 0; i < listaVar.size(); i++) {
+			String key = listaVar.get(i).toString().replaceAll("\\s+", "");
+			System.out.println(key);
+			String digitado = scanner.next();
+			if (symbol_table.containsKey(key)) {
+				symbol_table.get(key).valor = digitado;
+			} else {
+				System.err.println("Variavel " + key + " não foi definida.Para utiliza-la, vc precisa definir.");
+				System.exit(0);
+				
+			}
+		}
+		scanner.close();
+		System.out.println(symbol_table.toString());
+	}
+	
+	
+	@Override
 	public void outAAtribComando(AAtribComando node) {
 		String value = pilha.pop();
 		String key = node.getVar().toString().replaceAll("\\s+", "");
@@ -281,7 +310,57 @@ public class MySemantic extends DepthFirstAdapter {
         
         outAIfComando(node);
     }
-    
+   
+	@Override
+    public void caseACaseEstrela(ACaseEstrela node)
+    {
+        inACaseEstrela(node);
+        if(node.getValor() != null)
+        {
+            node.getValor().apply(this);
+        }
+        {
+        	String valorCase = node.getValor().toString().replaceAll("\\s+", "");
+        	String valor = pilha.peek();
+        	if(valorCase.equals(valor)){
+	            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+	            for(PComando e : copy)
+	            {
+	                e.apply(this);
+	            }
+	            pilha.pop();
+        	}
+        }
+        outACaseEstrela(node);
+    }
+	
+	@Override
+	public void caseAEvaluateComando(AEvaluateComando node)
+	    {
+	        inAEvaluateComando(node);
+	        if(node.getExp() != null)
+	        {
+	            node.getExp().apply(this);
+	        }
+	        {
+	        	if(!pilha.isEmpty()){
+		            List<PCaseEstrela> copy = new ArrayList<PCaseEstrela>(node.getCaseEstrela());
+		            for(PCaseEstrela e : copy)
+		            {
+		                e.apply(this);
+		            }
+	        	}
+	        }
+	        if(!pilha.isEmpty()){
+		        if(node.getOpElse() != null)
+		        {
+		        	pilha.pop();
+		            node.getOpElse().apply(this);
+		        }
+	        }
+	        outAEvaluateComando(node);
+	    }
+
     @Override
     public void caseAWhileComando(AWhileComando node)
     {

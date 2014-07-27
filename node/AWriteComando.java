@@ -9,6 +9,7 @@ import analysis.*;
 public final class AWriteComando extends PComando
 {
     private final LinkedList<PExprComma> _exprComma_ = new LinkedList<PExprComma>();
+    private PExp _exp_;
 
     public AWriteComando()
     {
@@ -16,10 +17,13 @@ public final class AWriteComando extends PComando
     }
 
     public AWriteComando(
-        @SuppressWarnings("hiding") List<?> _exprComma_)
+        @SuppressWarnings("hiding") List<?> _exprComma_,
+        @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
         setExprComma(_exprComma_);
+
+        setExp(_exp_);
 
     }
 
@@ -27,7 +31,8 @@ public final class AWriteComando extends PComando
     public Object clone()
     {
         return new AWriteComando(
-            cloneList(this._exprComma_));
+            cloneList(this._exprComma_),
+            cloneNode(this._exp_));
     }
 
     @Override
@@ -62,11 +67,37 @@ public final class AWriteComando extends PComando
         }
     }
 
+    public PExp getExp()
+    {
+        return this._exp_;
+    }
+
+    public void setExp(PExp node)
+    {
+        if(this._exp_ != null)
+        {
+            this._exp_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._exp_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._exprComma_);
+            + toString(this._exprComma_)
+            + toString(this._exp_);
     }
 
     @Override
@@ -75,6 +106,12 @@ public final class AWriteComando extends PComando
         // Remove child
         if(this._exprComma_.remove(child))
         {
+            return;
+        }
+
+        if(this._exp_ == child)
+        {
+            this._exp_ = null;
             return;
         }
 
@@ -101,6 +138,12 @@ public final class AWriteComando extends PComando
                 oldChild.parent(null);
                 return;
             }
+        }
+
+        if(this._exp_ == oldChild)
+        {
+            setExp((PExp) newChild);
+            return;
         }
 
         throw new RuntimeException("Not a child.");

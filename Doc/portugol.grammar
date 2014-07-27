@@ -184,7 +184,8 @@ Productions
 	  	{atrib} 		var is exp semi_c {-> New comando.atrib(var,exp)}
 	|	{atrib_log}		var is exp_logica semi_c {-> New comando.atrib_log(var,exp_logica)}	
 	| 	{read}			read l_par [arg]:var_list+ r_par semi_c {-> New comando.read([arg.var])}
-	| 	{write}			write l_par [arg]:expr_comma+ r_par semi_c {-> New comando.write([arg.expr_comma])}
+	| 	{write}			write l_par [arg]:expr_comma* exp r_par semi_c {-> New comando.write([arg.expr_comma],exp)}
+	| 	{write_log}		write l_par [arg]:expr_comma* exp_logica r_par semi_c {-> New comando.write_log([arg.expr_comma],exp_logica)}
 	| 	{if}			if l_par exp_logica r_par then comando+ end_if semi_c {-> New comando.if(exp_logica,[comando], Null)}
 	|	{if_else}		if l_par exp_logica r_par then comando+ opcional_else end_if semi_c {-> New comando.if(exp_logica,[comando],opcional_else.op_else)}
 	| 	{evaluate}		evaluate l_par exp r_par case_estrela* end_e semi_c {-> New comando.evaluate(exp,[case_estrela],Null)}
@@ -230,7 +231,8 @@ Abstract Syntax Tree
 		{atrib} 		var exp 
 	|	{atrib_log}		var exp_logica 
 	| 	{read}			var+ 
-	| 	{write}			expr_comma+ 
+	| 	{write}			expr_comma* exp
+	|   {write_log}		expr_comma* exp_logica 
 	| 	{if}			exp_logica comando+ op_else? 
 	| 	{evaluate}		exp case_estrela* op_else? 
 	|	{evaluate_log} 	exp_logica case_estrela* op_else?

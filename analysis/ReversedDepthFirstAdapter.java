@@ -430,6 +430,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAWriteComando(AWriteComando node)
     {
         inAWriteComando(node);
+        if(node.getExp() != null)
+        {
+            node.getExp().apply(this);
+        }
         {
             List<PExprComma> copy = new ArrayList<PExprComma>(node.getExprComma());
             Collections.reverse(copy);
@@ -439,6 +443,35 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             }
         }
         outAWriteComando(node);
+    }
+
+    public void inAWriteLogComando(AWriteLogComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAWriteLogComando(AWriteLogComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAWriteLogComando(AWriteLogComando node)
+    {
+        inAWriteLogComando(node);
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        {
+            List<PExprComma> copy = new ArrayList<PExprComma>(node.getExprComma());
+            Collections.reverse(copy);
+            for(PExprComma e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outAWriteLogComando(node);
     }
 
     public void inAIfComando(AIfComando node)

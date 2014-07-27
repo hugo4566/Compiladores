@@ -433,7 +433,39 @@ public class DepthFirstAdapter extends AnalysisAdapter
                 e.apply(this);
             }
         }
+        if(node.getExp() != null)
+        {
+            node.getExp().apply(this);
+        }
         outAWriteComando(node);
+    }
+
+    public void inAWriteLogComando(AWriteLogComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAWriteLogComando(AWriteLogComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAWriteLogComando(AWriteLogComando node)
+    {
+        inAWriteLogComando(node);
+        {
+            List<PExprComma> copy = new ArrayList<PExprComma>(node.getExprComma());
+            for(PExprComma e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        if(node.getExpLogica() != null)
+        {
+            node.getExpLogica().apply(this);
+        }
+        outAWriteLogComando(node);
     }
 
     public void inAIfComando(AIfComando node)

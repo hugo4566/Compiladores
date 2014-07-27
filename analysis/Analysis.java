@@ -29,6 +29,7 @@ public interface Analysis extends Switch
     void caseAAtribLogComando(AAtribLogComando node);
     void caseAReadComando(AReadComando node);
     void caseAWriteComando(AWriteComando node);
+    void caseAWriteLogComando(AWriteLogComando node);
     void caseAIfComando(AIfComando node);
     void caseAEvaluateComando(AEvaluateComando node);
     void caseAEvaluateLogComando(AEvaluateLogComando node);

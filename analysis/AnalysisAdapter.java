@@ -177,6 +177,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAWriteLogComando(AWriteLogComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAIfComando(AIfComando node)
     {
         defaultCase(node);

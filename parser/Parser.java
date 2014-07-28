@@ -333,13 +333,13 @@ public class Parser
                 push(goTo(8), list);
             }
             break;
-            case 24: /* reduce AAlexprfator1Fator */
+            case 24: /* reduce ALExpRFator */
             {
                 ArrayList<Object> list = new24();
                 push(goTo(9), list);
             }
             break;
-            case 25: /* reduce AAlexprfator2Fator */
+            case 25: /* reduce AMinusExpFator */
             {
                 ArrayList<Object> list = new25();
                 push(goTo(9), list);
@@ -1254,7 +1254,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new24() /* reduce AAlexprfator1Fator */
+    ArrayList<Object> new24() /* reduce ALExpRFator */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -1270,7 +1270,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new25() /* reduce AAlexprfator2Fator */
+    ArrayList<Object> new25() /* reduce AMinusExpFator */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -1279,7 +1279,13 @@ public class Parser
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
         PExp pexpNode1;
-        pexpNode1 = (PExp)nodeArrayList3.get(0);
+        {
+            // Block
+        PExp pexpNode2;
+        pexpNode2 = (PExp)nodeArrayList3.get(0);
+
+        pexpNode1 = new AMinusExpExp(pexpNode2);
+        }
 	nodeList.add(pexpNode1);
         return nodeList;
     }

@@ -70,8 +70,8 @@ Tokens
 
 	// Tipos de dados
 	{normal}	string 		 = '''(letter | ' ')*''';
-	{normal}	n_real		 = '-' ? digit+ ',' digit+;
-	{normal}	n_int		 = '_' ? digit+;
+	{normal}	n_real		 = '-' ? ' '* digit+ ',' digit+;
+	{normal}	n_int		 = '-' ? ' '* digit+;
 
 	// Comentários
 	{normal->comment, comment}	comment 			= '/*';
@@ -138,7 +138,8 @@ Productions
 	;
 
 	fator {-> exp} =
-	  {l_exp_r} minus? l_par exp r_par {-> exp}
+	  {l_exp_r} l_par exp r_par {-> exp}
+	| {minus_exp} minus l_par exp r_par {-> New exp.minus_exp(exp)}
 	| {var_value} var_value	{-> New exp.var_value(var_value)}
 	;
 
@@ -248,6 +249,7 @@ Abstract Syntax Tree
     | {div}    [l]:exp [r]:exp
     | {mult}   [l]:exp [r]:exp
 	| {var_value} var_value
+	| {minus_exp}  exp
     ;
 
     expr_comma = {exp_com} exp

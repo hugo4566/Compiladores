@@ -249,6 +249,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAMinusExpExp(AMinusExpExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAExpComExprComma(AExpComExprComma node)
     {
         defaultCase(node);

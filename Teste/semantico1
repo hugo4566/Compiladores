@@ -1,4 +1,5 @@
 programa p1
 inicio
 inteiro : x;
+x<- - (10 + 2);
 fim.

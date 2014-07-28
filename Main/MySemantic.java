@@ -249,7 +249,7 @@ public class MySemantic extends DepthFirstAdapter {
 			if (symbol_table.containsKey(key)) {
 				symbol_table.get(key).valor = digitado;
 			} else {
-				System.err.println("Variavel " + key + " não foi definida.Para utiliza-la, vc precisa definir.");
+				System.err.println("Variavel " + key + " nao foi definida.Para utiliza-la, vc precisa definir.");
 				System.exit(0);
 				
 			}

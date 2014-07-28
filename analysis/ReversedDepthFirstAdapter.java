@@ -793,6 +793,27 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAVarValueExp(node);
     }
 
+    public void inAMinusExpExp(AMinusExpExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMinusExpExp(AMinusExpExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMinusExpExp(AMinusExpExp node)
+    {
+        inAMinusExpExp(node);
+        if(node.getExp() != null)
+        {
+            node.getExp().apply(this);
+        }
+        outAMinusExpExp(node);
+    }
+
     public void inAExpComExprComma(AExpComExprComma node)
     {
         defaultIn(node);

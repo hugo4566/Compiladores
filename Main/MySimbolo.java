@@ -4,21 +4,28 @@ public class MySimbolo {
 	
 	String tipo;
 	String valor;
+	String capacidade;
 	
 	public MySimbolo(){}
 	
-	public MySimbolo(String tipo,String valor){
+	public MySimbolo(String tipo,String valor,String capacidade){
 		this.tipo = tipo;
 		this.valor = valor;
+		this.capacidade = capacidade;
 	}
 	
 	public String getType(String value){
 		String valor = value.replaceAll("\\s+", "");
 		if(valor == null)
 			return "";
-		else if(valor.contains("\'"))
-			return "STRING";
-		else if(valor.matches("\\d+")){
+		else if(valor.contains("\'")){
+			if(valor.length()-2 <= Integer.valueOf(capacidade))
+				return "caractere";
+			else{
+				System.err.println("Tentou colocar um conjunto de caracteres maior que o definido.");
+				System.exit(0);
+			}
+		}else if(valor.matches("(-)?\\d+")){
 			return "inteiro";
 		}
 		return "";
@@ -40,6 +47,6 @@ public class MySimbolo {
 	
 	@Override
 	public String toString() {
-		return "[Tipo :"+tipo+",Valor :"+valor+"]";
+		return "[Tipo :"+tipo+",Valor :"+valor+",Capacidade :"+capacidade+"]";
 	}
 }

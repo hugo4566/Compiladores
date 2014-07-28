@@ -17,12 +17,15 @@ public class MySemantic extends DepthFirstAdapter {
 		LinkedList<PVar> listaVar = node.getVar();
 		
 		for (int i = 0; i < listaVar.size(); i++) {
-			String key = listaVar.get(i).toString().replaceAll("\\s+", "");
+			String[] noh = listaVar.get(i).toString().split("\\s+");
+			String key = noh[0];
+			String tamanho = (noh.length > 1)  ? noh[1] : null ;
 			if (symbol_table.containsKey(key)) {
 				System.err.println("Variavel " + key + "ja definida.");
 				System.exit(0);
 			} else {
-				MySimbolo simbolo = new MySimbolo(tipo, null);
+				MySimbolo simbolo;
+				simbolo = new MySimbolo(tipo, null,tamanho);
 				symbol_table.put(key, simbolo);
 			}
 		}
@@ -36,7 +39,7 @@ public class MySemantic extends DepthFirstAdapter {
 			System.err.println("Variavel " + key+ "ja definida.");
 			System.exit(0);
 		} else {
-			MySimbolo simbolo = new MySimbolo("CONSTANT", node.getValor().toString());
+			MySimbolo simbolo = new MySimbolo("CONSTANT", node.getValor().toString(),null);
 			symbol_table.put(key, simbolo);
 		}
 		System.out.println(symbol_table.toString());
@@ -45,7 +48,7 @@ public class MySemantic extends DepthFirstAdapter {
 	
 	@Override
 	public void inAPrograma(APrograma node) {
-		MySimbolo simbolo = new MySimbolo("PROGRAMA", null);
+		MySimbolo simbolo = new MySimbolo("PROGRAMA", null,null);
 		symbol_table.put(node.getId().toString(), simbolo);
 		System.out.println(symbol_table.toString());
 	}
@@ -254,7 +257,6 @@ public class MySemantic extends DepthFirstAdapter {
 		scanner.close();
 		System.out.println(symbol_table.toString());
 	}
-	
 	
 	@Override
 	public void outAAtribComando(AAtribComando node) {

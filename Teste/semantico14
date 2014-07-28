@@ -1,0 +1,8 @@
+programa teste
+inicio
+	inteiro : i,x;
+	escreva(i-1);
+	i<-i-1;
+	escreva(i);
+	i<- -(10);
+fim.

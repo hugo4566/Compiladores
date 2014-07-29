@@ -237,6 +237,18 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseADivNExp(ADivNExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMultNExp(AMultNExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAMultExp(AMultExp node)
     {
         defaultCase(node);

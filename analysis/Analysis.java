@@ -39,6 +39,8 @@ public interface Analysis extends Switch
     void caseAPlusExp(APlusExp node);
     void caseAMinusExp(AMinusExp node);
     void caseADivExp(ADivExp node);
+    void caseADivNExp(ADivNExp node);
+    void caseAMultNExp(AMultNExp node);
     void caseAMultExp(AMultExp node);
     void caseAVarValueExp(AVarValueExp node);
     void caseAMinusExpExp(AMinusExpExp node);

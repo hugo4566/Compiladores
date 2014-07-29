@@ -735,6 +735,56 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outADivExp(node);
     }
 
+    public void inADivNExp(ADivNExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADivNExp(ADivNExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADivNExp(ADivNExp node)
+    {
+        inADivNExp(node);
+        if(node.getL() != null)
+        {
+            node.getL().apply(this);
+        }
+        if(node.getR() != null)
+        {
+            node.getR().apply(this);
+        }
+        outADivNExp(node);
+    }
+
+    public void inAMultNExp(AMultNExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMultNExp(AMultNExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMultNExp(AMultNExp node)
+    {
+        inAMultNExp(node);
+        if(node.getL() != null)
+        {
+            node.getL().apply(this);
+        }
+        if(node.getR() != null)
+        {
+            node.getR().apply(this);
+        }
+        outAMultNExp(node);
+    }
+
     public void inAMultExp(AMultExp node)
     {
         defaultIn(node);

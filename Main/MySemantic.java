@@ -244,6 +244,12 @@ public class MySemantic extends DepthFirstAdapter {
 	/** Exp_Logica - FIM  		**/
 	
 	/** Comando - INICIO			**/
+	
+    public void outAMinusExpExp(AMinusExpExp node)
+    {
+    		pilha.push(""+(0-Integer.valueOf(verificaELimpa(pilha.pop()))));
+    }
+	
 	@Override
 	public void outAWriteComando(AWriteComando node){
 		String resultado = pilha.pop();

@@ -1,0 +1,8 @@
+programa teste
+inicio
+	caractere : var_str [6];
+	var_str <- 'oi'+6;
+	escreva(var_str);
+	var_str <- var_str+' te';
+	escreva(var_str);
+fim.

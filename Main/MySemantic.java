@@ -66,7 +66,8 @@ public class MySemantic extends DepthFirstAdapter {
 	
 	@Override
 	public void outAValueVarValue(AValueVarValue node) {
-		pilha.push(node.getValor().toString().replaceAll("\\s+", ""));
+		String valor = node.getValor().toString();
+		pilha.push(valor.contains("\'") ? valor.substring(0, valor.length()-1) : valor.replaceAll("\\s+", ""));
 	}
 	/** Variaveis & Valores - FIM  		**/
 	
@@ -78,9 +79,14 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
-        
-        int plus = Integer.valueOf(L)+Integer.valueOf(R);
-        pilha.push(""+plus);
+        if(L.contains("\'") || R.contains("\'")){
+        	L = L.replaceAll("\'", "");
+        	R = R.replaceAll("\'", "");
+        	pilha.push("'"+L+R+"'");
+        }else{
+	        int plus = Integer.valueOf(L)+Integer.valueOf(R);
+	        pilha.push(""+plus);
+        }
     }
     
 	@Override

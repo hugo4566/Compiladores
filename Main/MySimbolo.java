@@ -42,7 +42,7 @@ public class MySimbolo {
 		if(tipoDaVariavel.equals("inteiro")){
 			return "0";
 		}
-		return "";
+		return "''";
 	}
 	
 	@Override

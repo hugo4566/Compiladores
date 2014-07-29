@@ -69,9 +69,9 @@ Tokens
 	{normal}	id 			 = ('_' | letter)('_'| letter | digit )*;
 
 	// Tipos de dados
-	{normal}	string 		 = '''(letter | ' ')*''';
-	{normal}	n_real		 = ' '* digit+ ',' digit+;
-	{normal}	n_int		 = ' '* digit+;
+	{normal}	string 		 = '''[all - ''']*''';
+	{normal}	n_real		 = digit+ ',' digit+;
+	{normal}	n_int		 = digit+;
 
 	// Comentários
 	{normal->comment, comment}	comment 			= '/*';

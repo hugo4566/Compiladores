@@ -455,19 +455,20 @@ public class MySemantic extends DepthFirstAdapter {
         if(node.getStart() != null)
         {
             node.getStart().apply(this);
-            inicio = node.getStart().getText();
+            inicio = node.getStart().getText().replaceAll("\\s+", "");
+            symbol_table.get(node.getVar().toString().replaceAll("\\s+", "")).valor = inicio;
             valorInicio = Integer.valueOf(inicio);
         }
         if(node.getStep() != null)
         {
             node.getStep().apply(this);
-            step = node.getStep().getText();
+            step = node.getStep().getText().replaceAll("\\s+", "");
             valorStep = Integer.valueOf(step);
         }
         if(node.getStop() != null)
         {
             node.getStop().apply(this);
-            fim = node.getStop().getText();
+            fim = node.getStop().getText().replaceAll("\\s+", "");
             valorFim = Integer.valueOf(fim);
         }
         
@@ -481,10 +482,18 @@ public class MySemantic extends DepthFirstAdapter {
 	            }
         		if(valorInicio < valorFim){
         			valorInicio = valorInicio + valorStep;
+        			symbol_table.get(node.getVar().toString().replaceAll("\\s+", "")).valor = ""+valorInicio;
         		}else if(valorInicio > valorFim){
         			valorInicio = valorInicio - valorStep;
+        			symbol_table.get(node.getVar().toString().replaceAll("\\s+", "")).valor = ""+valorInicio;
         		}
         	}
+        	symbol_table.get(node.getVar().toString().replaceAll("\\s+", "")).valor = ""+valorFim;
+            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+            for(PComando e : copy)
+            {
+                e.apply(this);
+            }
         }
         outAForOneComando(node);
     }

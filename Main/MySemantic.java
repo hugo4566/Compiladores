@@ -122,6 +122,13 @@ public class MySemantic extends DepthFirstAdapter {
 	
 	/** Exp_Logica - INICIO  		**/
 	@Override
+    public void outANegationExpLogica(ANegationExpLogica node)
+    {
+		boolean bool = !Boolean.parseBoolean(pilha.pop());
+		pilha.push(""+bool);
+    }
+	
+	@Override
     public void outAOrExpLogica(AOrExpLogica node)
     {
 		String R = pilha.pop();

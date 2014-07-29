@@ -133,15 +133,16 @@ Productions
 
 	termo {-> exp} =
 	  {mult} termo mult fator {-> New exp.mult(termo.exp, fator.exp ) }
-	| {mult_minus} termo mult minus fator {-> New exp.mult_n(termo.exp, fator.exp ) }
+	//| {mult_minus} termo mult minus fator {-> New exp.mult_n(termo.exp, fator.exp ) }
 	| {div} termo div fator	{-> New exp.div(termo.exp, fator.exp ) }
-	| {div_minus} termo div minus fator	{-> New exp.div_n(termo.exp, fator.exp ) }	
+	//| {div_minus} termo div minus fator	{-> New exp.div_n(termo.exp, fator.exp ) }	
 	| {fator} fator  {-> fator.exp}
-	| {fator_minus} minus fator  {-> New exp.minus_exp(fator.exp)}
+	//| {fator_minus} minus fator  {-> New exp.minus_exp(fator.exp)}
 	;
 
 	fator {-> exp} =
 	  {l_exp_r} l_par exp r_par {-> exp}
+	|  {minus_exp} minus l_par exp r_par {-> New exp.minus_exp(exp)}
 	| {var_value} var_value	{-> New exp.var_value(var_value)}
 	;
 

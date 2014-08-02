@@ -21,7 +21,7 @@ public class MySemantic extends DepthFirstAdapter {
 			String key = noh[0];
 			String tamanho = (noh.length > 1)  ? noh[1] : null ;
 			if (symbol_table.containsKey(key)) {
-				System.err.println("Variavel " + key + "ja definida.");
+				System.err.println("Variavel " + key + " ja definida.");
 				System.exit(0);
 			} else {
 				MySimbolo simbolo;
@@ -266,14 +266,19 @@ public class MySemantic extends DepthFirstAdapter {
 			System.out.println(key);
 			String digitado = scanner.next();
 			if (symbol_table.containsKey(key)) {
-				symbol_table.get(key).valor = digitado;
+				MySimbolo simbolo = (MySimbolo) symbol_table.get(key);
+				if(simbolo.isCompativel(digitado)){
+					symbol_table.get(key).valor = digitado;
+				}else{
+					System.err.println("Erro!! Tentou atribuir um tipo diferente a variavel : "+key);
+					System.exit(0);
+				}
 			} else {
 				System.err.println("Variavel " + key + " nao foi definida.Para utiliza-la, vc precisa definir.");
 				System.exit(0);
 				
 			}
 		}
-		scanner.close();
 		System.out.println(symbol_table.toString());
 	}
 	

@@ -1,0 +1,5 @@
+programa fatorial
+inicio
+	caractere : var_str [6];
+	leia(var_str);
+fim.

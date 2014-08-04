@@ -329,6 +329,8 @@ public class MySemantic extends DepthFirstAdapter {
 	public void outAAtribComando(AAtribComando node) {
 		String value = pilha.pop();
 		String key = node.getVar().toString().replaceAll("\\s+", "");
+		
+		try{
 
 		if (!symbol_table.containsKey(key)) {
 			System.err.println("Erro!! Identificador desconhecido");
@@ -357,7 +359,9 @@ public class MySemantic extends DepthFirstAdapter {
 				simbolo.valor = verificaELimpa(value);
 			}
 		}
-		
+		}catch(NumberFormatException e){
+			System.err.println("Erro!! Tentou atribuir um tipo diferente a variavel : "+key);
+		}
 		System.out.println(symbol_table.toString());
 	}
 	
@@ -489,7 +493,7 @@ public class MySemantic extends DepthFirstAdapter {
 	        {
 	            node.getExpLogica().apply(this);
 	        }
-	        if(pilha.pop().equals("true")){
+	        if(!pilha.pop().equals("true")){
 	        	pararRepeat = false;
 	        }
         }

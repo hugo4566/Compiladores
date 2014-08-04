@@ -5,6 +5,6 @@ inicio
 
 	c <- 2 ;
 	a <- c;
-	b <- 'foda se' ; // lembrar de corrigir `foda-se
+	b <- 'Vire-se' ; // lembrar de corrigir
 
 fim.

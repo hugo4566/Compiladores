@@ -1,0 +1,7 @@
+programa semantico_real
+inicio
+	real : x;
+	inteiro : y;
+	x <- - 5,0;
+	x <- 4,5 + 4 - 2;
+fim.

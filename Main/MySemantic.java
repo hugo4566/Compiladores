@@ -84,7 +84,9 @@ public class MySemantic extends DepthFirstAdapter {
         	R = R.replaceAll("\'", "");
         	pilha.push("'"+L+R+"'");
         }else{
-	        int plus = Integer.valueOf(L)+Integer.valueOf(R);
+			L = L.replaceAll(",",".");
+			R = R.replaceAll(",",".");
+	        double plus = Double.valueOf(L)+Double.valueOf(R);
 	        pilha.push(""+plus);
         }
     }
@@ -97,7 +99,9 @@ public class MySemantic extends DepthFirstAdapter {
         L = verificaELimpa(L);
         R = verificaELimpa(R);
         
-        int minus = Integer.valueOf(L)-Integer.valueOf(R);
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
+        Double minus = Double.valueOf(L)-Double.valueOf(R);
         pilha.push(""+minus);
     }
 	
@@ -108,8 +112,10 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
-        
-        int div = Integer.valueOf(L)/Integer.valueOf(R);
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
+        Double div = Double.valueOf(L)/Double.valueOf(R);
         pilha.push(""+div);
     }
 	
@@ -120,8 +126,11 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
         
-        int mult = Integer.valueOf(L)*Integer.valueOf(R);
+        Double mult = Double.valueOf(L)*Double.valueOf(R);
         pilha.push(""+mult);
     }
 	/** Exp - FIM			**/
@@ -142,6 +151,9 @@ public class MySemantic extends DepthFirstAdapter {
         L = verificaELimpa(L);
         R = verificaELimpa(R);
         
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
+
         boolean bool = (Boolean.parseBoolean(L) || Boolean.parseBoolean(R));
         pilha.push(""+bool);
     }
@@ -153,6 +165,9 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
         
         boolean bool = (Boolean.parseBoolean(L) ^ Boolean.parseBoolean(R));
         pilha.push(""+bool);
@@ -165,6 +180,9 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
         
         boolean bool = (Boolean.parseBoolean(L) && Boolean.parseBoolean(R));
         pilha.push(""+bool);
@@ -177,8 +195,11 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
         
-        boolean bool = (Integer.valueOf(L) ==Integer.valueOf(R));
+        boolean bool = (Double.valueOf(L) ==Double.valueOf(R));
         pilha.push(""+bool);
     }
 	
@@ -189,8 +210,11 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
-        
-        boolean bool = (Integer.valueOf(L) != Integer.valueOf(R));
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
+       
+        boolean bool = (Double.valueOf(L) != Double.valueOf(R));
         pilha.push(""+bool);
     }
 	
@@ -201,8 +225,11 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
         
-        boolean bool = (Integer.valueOf(L) <= Integer.valueOf(R));
+        boolean bool = (Double.valueOf(L) <= Double.valueOf(R));
         pilha.push(""+bool);
     }
 	
@@ -213,8 +240,11 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
         
-        boolean bool = (Integer.valueOf(L) < Integer.valueOf(R));
+        boolean bool = (Double.valueOf(L) < Double.valueOf(R));
         pilha.push(""+bool);
     }
 	
@@ -225,8 +255,11 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
         
-        boolean bool = (Integer.valueOf(L) >= Integer.valueOf(R));
+        boolean bool = (Double.valueOf(L) >= Double.valueOf(R));
         pilha.push(""+bool);
     }
     
@@ -237,8 +270,11 @@ public class MySemantic extends DepthFirstAdapter {
         String L = pilha.pop();
         L = verificaELimpa(L);
         R = verificaELimpa(R);
+
+        L = L.replaceAll(",",".");
+		R = R.replaceAll(",",".");
         
-        boolean bool = (Integer.valueOf(L) > Integer.valueOf(R));
+        boolean bool = (Double.valueOf(L) > Double.valueOf(R));
         pilha.push(""+bool);
     }
 	/** Exp_Logica - FIM  		**/
@@ -246,8 +282,10 @@ public class MySemantic extends DepthFirstAdapter {
 	/** Comando - INICIO			**/
 	
     public void outAMinusExpExp(AMinusExpExp node)
-    {
-    		pilha.push(""+(0-Integer.valueOf(verificaELimpa(pilha.pop()))));
+    {		
+    		String valor = pilha.pop();
+    		valor = valor.replaceAll(",",".");
+    		pilha.push(""+(0-Double.valueOf(verificaELimpa(valor))));
     }
 	
 	@Override
@@ -274,7 +312,7 @@ public class MySemantic extends DepthFirstAdapter {
 					System.exit(0);
 				}
 			} else {
-				System.err.println("Variavel " + key + " nao foi definida.Para utiliza-la, vc precisa definir.");
+				System.err.println("Variavel " + key + " nao foi definida. Para utiliza-la, voce precisa defini-la antes.");
 				System.exit(0);
 				
 			}
@@ -293,9 +331,20 @@ public class MySemantic extends DepthFirstAdapter {
 		} else {
 			MySimbolo simbolo = (MySimbolo) symbol_table.get(key);
 			if(!symbol_table.containsKey(value)){
+				
+				if (!simbolo.getType(value).equals("caractere")){
+					if (simbolo.tipo.equals("inteiro ")){
+						value = ""+Double.valueOf(value).intValue();
+					}
+					value = value.replaceAll("\\.",",");
+				}
+
 				if(simbolo.isCompativel(value)){
 					simbolo.valor = value;
 				}else{
+					System.err.println(simbolo.tipo);
+					System.err.println(simbolo.getType(value));
+					System.err.println(value);
 					System.err.println("Erro!! Tentou atribuir um tipo diferente a variavel : "+key);
 					System.exit(0);
 				}
@@ -347,8 +396,9 @@ public class MySemantic extends DepthFirstAdapter {
         }
         {
         	String valorCase = node.getValor().toString().replaceAll("\\s+", "");
-        	String valor = pilha.peek();
-        	if(valorCase.equals(valor)){
+        	String valor = (pilha.size() >0 ? pilha.peek() : null);
+
+        	if(Double.valueOf(valorCase).toString().equals(valor)){
 	            List<PComando> copy = new ArrayList<PComando>(node.getComando());
 	            for(PComando e : copy)
 	            {

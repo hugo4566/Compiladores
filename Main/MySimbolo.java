@@ -27,6 +27,8 @@ public class MySimbolo {
 			}
 		}else if(valor.matches("(-)?\\d+")){
 			return "inteiro";
+		}else if(valor.matches("(-)?\\d+,\\d+")){
+			return "real";
 		}
 		return "";
 	}
@@ -39,7 +41,7 @@ public class MySimbolo {
 	
 	public String getVariavelLimpa(){
 		String tipoDaVariavel = tipo.replaceAll("\\s+", "");
-		if(tipoDaVariavel.equals("inteiro")){
+		if(tipoDaVariavel.equals("inteiro") || tipoDaVariavel.equals("real")){
 			return "0";
 		}
 		return "''";

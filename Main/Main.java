@@ -15,15 +15,12 @@ public class Main {
 
 		long start_time, stop_time;
 
-		if(args.length < 1){
-			System.out.println("Passe algum arquivo, como parametro, para testar");
-		}else{
-
-	        try {
-	            start_time = System.currentTimeMillis();
-	            MyLexer lexer = new MyLexer (new PushbackReader(new BufferedReader(new FileReader(args[0])), 1024));
-	            System.out.println();
-	            /*while (true) {
+		try {
+			start_time = System.currentTimeMillis();
+			MyLexer lexer = new MyLexer (new PushbackReader(new BufferedReader(new FileReader(args.length >0 ? args[0] : "Teste/semantico12")), 1024));
+			System.out.println(args.length >0 ? args[0] : "Teste/semantico12");
+			System.out.println();
+			/*while (true) {
 	            	Token t = lexer.next();
 	            	String newline = t.toString();
 	            	//System.out.println(t.getClass().toString());
@@ -39,21 +36,20 @@ public class Main {
 	            		break;
 	            	}
 	        	}*/
-	            stop_time = System.currentTimeMillis();
-	            System.out.println("Tempo de execução :"+( stop_time - start_time)+"ms\n");
 			
-	            Parser parser = new Parser(lexer);
-	            Start ast = parser.parse();
-                ast.apply(new AstPrinter());
-                System.out.println("----------------------------------------------------------------");
-                ast.apply(new MySemantic());
-//	            ast.apply(new SemanticAnalyser());  
-//	            ast.apply(new ClassGenerator());
-	        }
-	        catch (Exception e) {
-	            System.out.println(e);
-	        }
+
+			Parser parser = new Parser(lexer);
+			Start ast = parser.parse();
+			ast.apply(new AstPrinter());
+			System.out.println("----------------------------------------------------------------");
+			ast.apply(new MySemantic());
+			stop_time = System.currentTimeMillis();
+			System.out.println("Tempo de execução :"+( stop_time - start_time)+"ms\n");
+			//	            ast.apply(new SemanticAnalyser());  
+			//	            ast.apply(new ClassGenerator());
+		}
+		catch (Exception e) {
+			System.out.println(e);
 		}
 	}
-
 }

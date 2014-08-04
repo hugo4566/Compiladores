@@ -16,6 +16,8 @@ inicio
 					i<-4;
 				caso 2:
 					i<-2;
+				caso 1:
+					i<-99;
 				senao :
 					i<-10;
 			fim avalie;

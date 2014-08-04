@@ -1,5 +1,7 @@
 programa fatorial
 inicio
-	caractere : var_str [6];
-	leia(var_str);
+	//caractere : var_str [6];
+	//leia(var_str);
+	inteiro : x;
+	x <- 1+ 1;
 fim.

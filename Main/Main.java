@@ -4,15 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PushbackReader;
+import java.util.Scanner;
 
 import parser.Parser;
 import node.Start;
 
 
 public class Main {
-
+	
 	public static void main(String[] args) throws IOException {
-
 		long start_time, stop_time;
 
 		try {

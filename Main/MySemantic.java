@@ -6,6 +6,10 @@ import node.*;
 import analysis.*;
 
 public class MySemantic extends DepthFirstAdapter {
+	
+	static String TIPO_INTEIRO = "inteiro";
+	static String TIPO_REAL = "real";
+	static String TIPO_CHARACTER = "character";
 
 	Hashtable<String, MySimbolo> symbol_table = new Hashtable<String, MySimbolo>();
 	Stack<String> pilha = new Stack<String>();
@@ -199,7 +203,7 @@ public class MySemantic extends DepthFirstAdapter {
         L = L.replaceAll(",",".");
 		R = R.replaceAll(",",".");
         
-        boolean bool = (Double.valueOf(L) ==Double.valueOf(R));
+        boolean bool = (Double.valueOf(L).doubleValue() == Double.valueOf(R).doubleValue());
         pilha.push(""+bool);
     }
 	
@@ -214,7 +218,7 @@ public class MySemantic extends DepthFirstAdapter {
         L = L.replaceAll(",",".");
 		R = R.replaceAll(",",".");
        
-        boolean bool = (Double.valueOf(L) != Double.valueOf(R));
+        boolean bool = (Double.valueOf(L).doubleValue() != Double.valueOf(R).doubleValue());
         pilha.push(""+bool);
     }
 	
@@ -229,7 +233,7 @@ public class MySemantic extends DepthFirstAdapter {
         L = L.replaceAll(",",".");
 		R = R.replaceAll(",",".");
         
-        boolean bool = (Double.valueOf(L) <= Double.valueOf(R));
+        boolean bool = (Double.valueOf(L).doubleValue() <= Double.valueOf(R).doubleValue());
         pilha.push(""+bool);
     }
 	
@@ -244,7 +248,7 @@ public class MySemantic extends DepthFirstAdapter {
         L = L.replaceAll(",",".");
 		R = R.replaceAll(",",".");
         
-        boolean bool = (Double.valueOf(L) < Double.valueOf(R));
+        boolean bool = (Double.valueOf(L).doubleValue() < Double.valueOf(R).doubleValue());
         pilha.push(""+bool);
     }
 	
@@ -259,7 +263,7 @@ public class MySemantic extends DepthFirstAdapter {
         L = L.replaceAll(",",".");
 		R = R.replaceAll(",",".");
         
-        boolean bool = (Double.valueOf(L) >= Double.valueOf(R));
+        boolean bool = (Double.valueOf(L).doubleValue() >= Double.valueOf(R).doubleValue());
         pilha.push(""+bool);
     }
     
@@ -274,7 +278,7 @@ public class MySemantic extends DepthFirstAdapter {
         L = L.replaceAll(",",".");
 		R = R.replaceAll(",",".");
         
-        boolean bool = (Double.valueOf(L) > Double.valueOf(R));
+        boolean bool = (Double.valueOf(L).doubleValue() > Double.valueOf(R).doubleValue());
         pilha.push(""+bool);
     }
 	/** Exp_Logica - FIM  		**/
@@ -285,7 +289,7 @@ public class MySemantic extends DepthFirstAdapter {
     {		
     		String valor = pilha.pop();
     		valor = valor.replaceAll(",",".");
-    		pilha.push(""+(0-Double.valueOf(verificaELimpa(valor))));
+    		pilha.push(""+(0-Double.valueOf(verificaELimpa(valor)).doubleValue()));
     }
 	
 	@Override
@@ -305,6 +309,7 @@ public class MySemantic extends DepthFirstAdapter {
 			String digitado = scanner.next();
 			if (symbol_table.containsKey(key)) {
 				MySimbolo simbolo = (MySimbolo) symbol_table.get(key);
+				digitado = leitor(digitado,simbolo.tipo);
 				if(simbolo.isCompativel(digitado)){
 					symbol_table.get(key).valor = digitado;
 				}else{
@@ -398,7 +403,7 @@ public class MySemantic extends DepthFirstAdapter {
         	String valorCase = node.getValor().toString().replaceAll("\\s+", "");
         	String valor = (pilha.size() >0 ? pilha.peek() : null);
 
-        	if(Double.valueOf(valorCase).toString().equals(valor)){
+        	if(valor != null && myEquals(valorCase,valor)){
 	            List<PComando> copy = new ArrayList<PComando>(node.getComando());
 	            for(PComando e : copy)
 	            {
@@ -565,4 +570,29 @@ public class MySemantic extends DepthFirstAdapter {
         }
 		return X;
 	}
+	
+	public static String leitor(String digitado,String tipo){
+		String resultado = "";
+		if(digitado.matches("-?\\d+")){
+			resultado = "inteiro";
+		}else if(digitado.matches("-?\\d+,\\d+")){
+			resultado = "real";
+		}else 
+			resultado ="character";
+		
+		if(resultado.equals(TIPO_CHARACTER))
+			return "'"+digitado.replaceAll("\'", "")+"'";
+		if(resultado.equals(TIPO_INTEIRO))
+			return tipo.equals(TIPO_REAL) ? digitado+".0" : Integer.valueOf(digitado).toString();
+		if(resultado.equals(TIPO_REAL))
+			return digitado.replaceAll(",", ".");
+		return resultado;
+	}
+	
+	public boolean myEquals(String myCase,String valor){
+	      if(!myCase.contains("\'") && !valor.contains("\'"))
+	          return Double.valueOf(myCase).equals(Double.valueOf(valor));
+	      else
+	          return myCase.equals(valor);	
+	    }
 }

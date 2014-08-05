@@ -33,7 +33,7 @@ public class MySemantic extends DepthFirstAdapter {
 				symbol_table.put(key, simbolo);
 			}
 		}
-		System.out.println(symbol_table.toString());
+		//System.out.println(symbol_table.toString());
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class MySemantic extends DepthFirstAdapter {
 			MySimbolo simbolo = new MySimbolo("CONSTANT", node.getValor().toString(),null,true);
 			symbol_table.put(key, simbolo);
 		}
-		System.out.println(symbol_table.toString());
+		//System.out.println(symbol_table.toString());
 	}
 	/** Declaracao - FIM  	**/
 	
@@ -54,7 +54,7 @@ public class MySemantic extends DepthFirstAdapter {
 	public void inAPrograma(APrograma node) {
 		MySimbolo simbolo = new MySimbolo("PROGRAMA", null,null,true);
 		symbol_table.put(node.getId().toString(), simbolo);
-		System.out.println(symbol_table.toString());
+		//System.out.println(symbol_table.toString());
 	}
 
 	@Override
@@ -321,7 +321,7 @@ public class MySemantic extends DepthFirstAdapter {
 		
 		for (int i = 0; i < listaVar.size(); i++) {
 			String key = listaVar.get(i).toString().replaceAll("\\s+", "");
-			System.out.println(key);
+			//System.out.println(key);
 			String digitado = scanner.next();
 			if (symbol_table.containsKey(key)) {
 				MySimbolo simbolo = (MySimbolo) symbol_table.get(key);
@@ -338,7 +338,7 @@ public class MySemantic extends DepthFirstAdapter {
 				
 			}
 		}
-		System.out.println(symbol_table.toString());
+		//System.out.println(symbol_table.toString());
 	}
 	
 	@Override
@@ -353,6 +353,10 @@ public class MySemantic extends DepthFirstAdapter {
 			System.exit(0);
 		} else {
 			MySimbolo simbolo = (MySimbolo) symbol_table.get(key);
+			if (simbolo.constante){
+				System.err.println("Erro!! Tentou atribuir um valor a constante : "+key);
+				System.exit(0);
+			}
 			if(!symbol_table.containsKey(value)){
 				
 				if (!simbolo.getType(value).equals("caractere")){
@@ -365,9 +369,9 @@ public class MySemantic extends DepthFirstAdapter {
 				if(simbolo.isCompativel(value)){
 					simbolo.valor = value;
 				}else{
-					System.err.println(simbolo.tipo);
-					System.err.println(simbolo.getType(value));
-					System.err.println(value);
+					//System.err.println(simbolo.tipo);
+					//System.err.println(simbolo.getType(value));
+					//System.err.println(value);
 					System.err.println("Erro!! Tentou atribuir um tipo diferente a variavel : "+key);
 					System.exit(0);
 				}
@@ -378,7 +382,7 @@ public class MySemantic extends DepthFirstAdapter {
 		}catch(NumberFormatException e){
 			System.err.println("Erro!! Tentou atribuir um tipo diferente a variavel : "+key);
 		}
-		System.out.println(symbol_table.toString());
+		//System.out.println(symbol_table.toString());
 	}
 	
     @Override

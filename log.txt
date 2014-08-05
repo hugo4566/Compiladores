@@ -4,8 +4,7 @@ Start |  comentario
 	APrograma |  comentario 
 ----------------------------------------------------------------
 {comentario =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{comentario =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-Tempo de execução :79ms
+Tempo de execução :85ms
 
 Teste/estranho
 
@@ -28,11 +27,8 @@ Start |  p1 inteiro x x 10 2
 						AValueVarValue |  2 
 							AIntegerValor |  2 
 ----------------------------------------------------------------
-{p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
 {x=[Tipo :inteiro ,Valor :-12,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :-12,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-Tempo de execução :89ms
+Tempo de execução :99ms
 
 Teste/semantico10
 
@@ -73,15 +69,11 @@ Start |  teste inteiro i z i 2 z 4 i 1 i z i
 				AVariableVarValue |  i 
 					AIdVar |  i 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
 3.0
 6.0
 2
 {i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
-Tempo de execução :92ms
+Tempo de execução :98ms
 
 Teste/semantico11
 
@@ -98,22 +90,16 @@ Start |  teste inteiro a b c a b c d
 			AIdVar |  c 
 			AIdVar |  d 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{b=[Tipo :inteiro ,Valor :null,Capacidade :null], a=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], c=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-a
-b
-c
-d
 Variavel d nao foi definida. Para utiliza-la, voce precisa defini-la antes.
 Teste/semantico12
 
-Start |  teste inteiro i x i 1 2 x 2 3 x 3 x 1 x 1 3 i 3 4 i 4 2 i 2 i 10  
-	APrograma |  teste inteiro i x i 1 2 x 2 3 x 3 x 1 x 1 3 i 3 4 i 4 2 i 2 i 10 
+Start |  teste inteiro i x i 1 2 x 2 3 x 3 x 1 x 1 3 i 3 4 i 4 2 i 2 1 i 99 i 10  
+	APrograma |  teste inteiro i x i 1 2 x 2 3 x 3 x 1 x 1 3 i 3 4 i 4 2 i 2 1 i 99 i 10 
 		AVariableDeclaracao |  inteiro i x 
 			AIntegerTipo |  inteiro 
 			AIdVar |  i 
 			AIdVar |  x 
-		AEvaluateComando |  i 1 2 x 2 3 x 3 x 1 x 1 3 i 3 4 i 4 2 i 2 i 10 
+		AEvaluateComando |  i 1 2 x 2 3 x 3 x 1 x 1 3 i 3 4 i 4 2 i 2 1 i 99 i 10 
 			APlusExp |  i 1 
 				AVarValueExp |  i 
 					AVariableVarValue |  i 
@@ -135,13 +121,13 @@ Start |  teste inteiro i x i 1 2 x 2 3 x 3 x 1 x 1 3 i 3 4 i 4 2 i 2 i 10
 					AVarValueExp |  3 
 						AValueVarValue |  3 
 							AIntegerValor |  3 
-			AOpElse |  x 1 x 1 3 i 3 4 i 4 2 i 2 i 10 
+			AOpElse |  x 1 x 1 3 i 3 4 i 4 2 i 2 1 i 99 i 10 
 				AAtribComando |  x 1 
 					AIdVar |  x 
 					AVarValueExp |  1 
 						AValueVarValue |  1 
 							AIntegerValor |  1 
-				AEvaluateComando |  x 1 3 i 3 4 i 4 2 i 2 i 10 
+				AEvaluateComando |  x 1 3 i 3 4 i 4 2 i 2 1 i 99 i 10 
 					APlusExp |  x 1 
 						AVarValueExp |  x 
 							AVariableVarValue |  x 
@@ -170,6 +156,13 @@ Start |  teste inteiro i x i 1 2 x 2 3 x 3 x 1 x 1 3 i 3 4 i 4 2 i 2 i 10
 							AVarValueExp |  2 
 								AValueVarValue |  2 
 									AIntegerValor |  2 
+					ACaseEstrela |  1 i 99 
+						AIntegerValor |  1 
+						AAtribComando |  i 99 
+							AIdVar |  i 
+							AVarValueExp |  99 
+								AValueVarValue |  99 
+									AIntegerValor |  99 
 					AOpElse |  i 10 
 						AAtribComando |  i 10 
 							AIdVar |  i 
@@ -177,12 +170,8 @@ Start |  teste inteiro i x i 1 2 x 2 3 x 3 x 1 x 1 3 i 3 4 i 4 2 i 2 i 10
 								AValueVarValue |  10 
 									AIntegerValor |  10 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :1,Capacidade :null], i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :1,Capacidade :null], i=[Tipo :inteiro ,Valor :10,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :1,Capacidade :null], i=[Tipo :inteiro ,Valor :10,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-Tempo de execução :104ms
+{x=[Tipo :inteiro ,Valor :1,Capacidade :null], i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
+Tempo de execução :112ms
 
 Teste/semantico13
 
@@ -225,14 +214,8 @@ Start |  teste caractere var_str 3 var_str 'oi' var_str 'oie' var_str var_str ''
 				AValueVarValue |  'oiee' 
 					AStringValor |  'oiee' 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :3]}
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'oi',Capacidade :3]}
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'oie',Capacidade :3]}
 'oie'
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'',Capacidade :3]}
 ''
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'o',Capacidade :3]}
 Tentou colocar um conjunto de caracteres maior que o definido.
 Teste/semantico14
 
@@ -276,15 +259,10 @@ Start |  teste inteiro i x i 1 i i 1 i i 10 i i
 					AVariableVarValue |  i 
 						AIdVar |  i 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
 -1.0
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :-1,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
 -1
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :-10,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
 {x=[Tipo :inteiro ,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :10,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :10,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-Tempo de execução :97ms
+Tempo de execução :101ms
 
 Teste/semantico15
 
@@ -316,12 +294,8 @@ Start |  teste inteiro i i 2 i 3 i i 10
 						AValueVarValue |  10 
 							AIntegerValor |  10 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
 {i=[Tipo :inteiro ,Valor :12,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :12,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-Tempo de execução :93ms
+Tempo de execução :96ms
 
 Teste/semantico16
 
@@ -357,14 +331,10 @@ Start |  teste caractere var_str 6 var_str 'oi' 6 var_str var_str var_str ' te' 
 				AVariableVarValue |  var_str 
 					AIdVar |  var_str 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :6]}
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'oi6',Capacidade :6]}
 'oi6'
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'oi6 te',Capacidade :6]}
 'oi6 te'
 {teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'oi6 te',Capacidade :6]}
-Tempo de execução :91ms
+Tempo de execução :100ms
 
 Teste/semantico17
 
@@ -400,19 +370,15 @@ Start |  teste caractere var_str 6 var_str 'oi' 6 var_str var_str var_str ' te' 
 				AVariableVarValue |  var_str 
 					AIdVar |  var_str 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :6]}
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'oi6',Capacidade :6]}
 'oi6'
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'oi6 te',Capacidade :6]}
 'oi6 te'
 {teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :'oi6 te',Capacidade :6]}
-Tempo de execução :92ms
+Tempo de execução :93ms
 
 Teste/semantico18
 
-Start |  fatorial inteiro fat i fat 1 i 1 3 fat fat i 'Fatorial de ' 3 ' = ' fat i 'I = ' i  
-	APrograma |  fatorial inteiro fat i fat 1 i 1 3 fat fat i 'Fatorial de ' 3 ' = ' fat i 'I = ' i 
+Start |  fatorial inteiro fat i fat 1 i 1 3 fat fat i 'Fatorial de ' 3 ' = ' fat  
+	APrograma |  fatorial inteiro fat i fat 1 i 1 3 fat fat i 'Fatorial de ' 3 ' = ' fat 
 		AVariableDeclaracao |  inteiro fat i 
 			AIntegerTipo |  inteiro 
 			AIdVar |  fat 
@@ -449,44 +415,31 @@ Start |  fatorial inteiro fat i fat 1 i 1 3 fat fat i 'Fatorial de ' 3 ' = ' fat
 				AVarValueExp |  fat 
 					AVariableVarValue |  fat 
 						AIdVar |  fat 
-		AReadComando |  i 
-			AIdVar |  i 
-		AWriteComando |  'I = ' i 
-			APlusExp |  'I = ' i 
-				AVarValueExp |  'I = ' 
-					AValueVarValue |  'I = ' 
-						AStringValor |  'I = ' 
-				AVarValueExp |  i 
-					AVariableVarValue |  i 
-						AIdVar |  i 
 ----------------------------------------------------------------
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :null,Capacidade :null], fat=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :null,Capacidade :null], fat=[Tipo :inteiro ,Valor :1,Capacidade :null]}
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :1,Capacidade :null], fat=[Tipo :inteiro ,Valor :1,Capacidade :null]}
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :2,Capacidade :null], fat=[Tipo :inteiro ,Valor :2,Capacidade :null]}
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :3,Capacidade :null], fat=[Tipo :inteiro ,Valor :6,Capacidade :null]}
 'Fatorial de 3 = 6'
-i
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :6,Capacidade :null], fat=[Tipo :inteiro ,Valor :6,Capacidade :null]}
-'I = 6'
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :6,Capacidade :null], fat=[Tipo :inteiro ,Valor :6,Capacidade :null]}
-Tempo de execução :922ms
+{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :3,Capacidade :null], fat=[Tipo :inteiro ,Valor :6,Capacidade :null]}
+Tempo de execução :105ms
 
 Teste/semantico19
 
-Start |  fatorial caractere var_str 6 var_str  
-	APrograma |  fatorial caractere var_str 6 var_str 
-		AVariableDeclaracao |  caractere var_str 6 
-			ACharTipo |  caractere 
-			AMatrixVar |  var_str 6 
-		AReadComando |  var_str 
-			AIdVar |  var_str 
+Start |  fatorial inteiro x x 1 1  
+	APrograma |  fatorial inteiro x x 1 1 
+		AVariableDeclaracao |  inteiro x 
+			AIntegerTipo |  inteiro 
+			AIdVar |  x 
+		AAtribComando |  x 1 1 
+			AIdVar |  x 
+			APlusExp |  1 1 
+				AVarValueExp |  1 
+					AValueVarValue |  1 
+						AIntegerValor |  1 
+				AVarValueExp |  1 
+					AValueVarValue |  1 
+						AIntegerValor |  1 
 ----------------------------------------------------------------
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :6]}
-var_str
-Erro!! Tentou atribuir um tipo diferente a variavel : var_str
+{x=[Tipo :inteiro ,Valor :2,Capacidade :null], fatorial =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
+Tempo de execução :87ms
+
 Teste/semantico2
 
 Start |  p1 inteiro x real x  
@@ -498,19 +451,18 @@ Start |  p1 inteiro x real x
 			ARealTipo |  real 
 			AIdVar |  x 
 ----------------------------------------------------------------
-{p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
 Variavel x ja definida.
 Teste/semantico20
 
-Start |  semantico_real real x inteiro y x 5,0 x 4,5 4 2  
-	APrograma |  semantico_real real x inteiro y x 5,0 x 4,5 4 2 
+Start |  semantico_real real x inteiro y i x 5,0 x 4,5 4 2 i 2 i 2 2 y 0  
+	APrograma |  semantico_real real x inteiro y i x 5,0 x 4,5 4 2 i 2 i 2 2 y 0 
 		AVariableDeclaracao |  real x 
 			ARealTipo |  real 
 			AIdVar |  x 
-		AVariableDeclaracao |  inteiro y 
+		AVariableDeclaracao |  inteiro y i 
 			AIntegerTipo |  inteiro 
 			AIdVar |  y 
+			AIdVar |  i 
 		AAtribComando |  x 5,0 
 			AIdVar |  x 
 			AMinusExpExp |  5,0 
@@ -530,15 +482,76 @@ Start |  semantico_real real x inteiro y x 5,0 x 4,5 4 2
 				AVarValueExp |  2 
 					AValueVarValue |  2 
 						AIntegerValor |  2 
+		AWriteComando |  i 2 
+			APlusExp |  i 2 
+				AVarValueExp |  i 
+					AVariableVarValue |  i 
+						AIdVar |  i 
+				AVarValueExp |  2 
+					AValueVarValue |  2 
+						AIntegerValor |  2 
+		AIfComando |  i 2 2 y 0 
+			AEqualExpLogica |  i 2 2 
+				APlusExp |  i 2 
+					AVarValueExp |  i 
+						AVariableVarValue |  i 
+							AIdVar |  i 
+					AVarValueExp |  2 
+						AValueVarValue |  2 
+							AIntegerValor |  2 
+				AValueVarValue |  2 
+					AIntegerValor |  2 
+			AAtribComando |  y 0 
+				AIdVar |  y 
+				AVarValueExp |  0 
+					AValueVarValue |  0 
+						AIntegerValor |  0 
 ----------------------------------------------------------------
-{semantico_real =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :real ,Valor :null,Capacidade :null], semantico_real =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :real ,Valor :null,Capacidade :null], semantico_real =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{x=[Tipo :real ,Valor :-5,0,Capacidade :null], semantico_real =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{x=[Tipo :real ,Valor :6,5,Capacidade :null], semantico_real =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{x=[Tipo :real ,Valor :6,5,Capacidade :null], semantico_real =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-Tempo de execução :89ms
+2.0
+{x=[Tipo :real ,Valor :6,5,Capacidade :null], semantico_real =[Tipo :PROGRAMA,Valor :null,Capacidade :null], i=[Tipo :inteiro ,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :0,Capacidade :null]}
+Tempo de execução :103ms
 
+Teste/semantico21
+
+Start |  semantico_real inteiro y y 2 'oi' 2 y 0  
+	APrograma |  semantico_real inteiro y y 2 'oi' 2 y 0 
+		AVariableDeclaracao |  inteiro y 
+			AIntegerTipo |  inteiro 
+			AIdVar |  y 
+		AAtribComando |  y 2 
+			AIdVar |  y 
+			AVarValueExp |  2 
+				AValueVarValue |  2 
+					AIntegerValor |  2 
+		AIfComando |  'oi' 2 y 0 
+			AEqualExpLogica |  'oi' 2 
+				AVarValueExp |  'oi' 
+					AValueVarValue |  'oi' 
+						AStringValor |  'oi' 
+				AValueVarValue |  2 
+					AIntegerValor |  2 
+			AAtribComando |  y 0 
+				AIdVar |  y 
+				AVarValueExp |  0 
+					AValueVarValue |  0 
+						AIntegerValor |  0 
+----------------------------------------------------------------
+{semantico_real =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :2,Capacidade :null]}
+Tempo de execução :93ms
+
+Teste/semantico22
+
+Start |  semantico22 y 'oi' y 'tchau'  
+	APrograma |  semantico22 y 'oi' y 'tchau' 
+		AConstantDeclaracao |  y 'oi' 
+			AStringValor |  'oi' 
+		AAtribComando |  y 'tchau' 
+			AIdVar |  y 
+			AVarValueExp |  'tchau' 
+				AValueVarValue |  'tchau' 
+					AStringValor |  'tchau' 
+----------------------------------------------------------------
+Erro!! Tentou atribuir um valor a constante : y
 Teste/semantico3
 
 Start |  p1 inteiro x y real z caractere var_str 3  
@@ -554,10 +567,6 @@ Start |  p1 inteiro x y real z caractere var_str 3
 			ACharTipo |  caractere 
 			AMatrixVar |  var_str 3 
 ----------------------------------------------------------------
-{p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :real ,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :3], z=[Tipo :real ,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :null,Capacidade :null]}
 {x=[Tipo :inteiro ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :3], z=[Tipo :real ,Valor :null,Capacidade :null], y=[Tipo :inteiro ,Valor :null,Capacidade :null]}
 Tempo de execução :84ms
 
@@ -624,15 +633,8 @@ Start |  teste inteiro i caractere var_str 3 i 2 i 10 2 i 1 2 2 i i i 12 2 2 1
 					AValueVarValue |  1 
 						AIntegerValor |  1 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :3]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :3]}
-{i=[Tipo :inteiro ,Valor :12,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :3]}
-{i=[Tipo :inteiro ,Valor :12,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :3]}
 {i=[Tipo :inteiro ,Valor :8,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :3]}
-{i=[Tipo :inteiro ,Valor :8,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], var_str=[Tipo :caractere ,Valor :null,Capacidade :3]}
-Tempo de execução :103ms
+Tempo de execução :106ms
 
 Teste/semantico5
 
@@ -683,15 +685,8 @@ Start |  teste inteiro i y 'hello world' i 2 i i 1 i 4 i i 10 i i 5
 						AValueVarValue |  5 
 							AIntegerValor |  5 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :3,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :13,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
 {i=[Tipo :inteiro ,Valor :8,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :8,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
-Tempo de execução :96ms
+Tempo de execução :103ms
 
 Teste/semantico6
 
@@ -771,13 +766,8 @@ Start |  teste inteiro i i 2 i i 1 i 3 i i 10 i 3 i i 1 i 3 i i 2 i 10
 										AValueVarValue |  10 
 											AIntegerValor |  10 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :3,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :13,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :13,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-Tempo de execução :112ms
+{i=[Tipo :inteiro ,Valor :1,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
+Tempo de execução :115ms
 
 Teste/semantico7
 
@@ -814,19 +804,13 @@ Start |  teste inteiro i z i 2 z 4 i z i i 1
 						AValueVarValue |  1 
 							AIntegerValor |  1 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :3,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
 {i=[Tipo :inteiro ,Valor :4,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :4,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
-Tempo de execução :94ms
+Tempo de execução :101ms
 
 Teste/semantico8
 
-Start |  teste inteiro i z i 2 z 4 i i 1 i z  
-	APrograma |  teste inteiro i z i 2 z 4 i i 1 i z 
+Start |  teste inteiro i z i 2 z 5 i i 1 i z  
+	APrograma |  teste inteiro i z i 2 z 5 i i 1 i z 
 		AVariableDeclaracao |  inteiro i z 
 			AIntegerTipo |  inteiro 
 			AIdVar |  i 
@@ -836,11 +820,11 @@ Start |  teste inteiro i z i 2 z 4 i i 1 i z
 			AVarValueExp |  2 
 				AValueVarValue |  2 
 					AIntegerValor |  2 
-		AAtribComando |  z 4 
+		AAtribComando |  z 5 
 			AIdVar |  z 
-			AVarValueExp |  4 
-				AValueVarValue |  4 
-					AIntegerValor |  4 
+			AVarValueExp |  5 
+				AValueVarValue |  5 
+					AIntegerValor |  5 
 		ARepeatComando |  i i 1 i z 
 			AAtribComando |  i i 1 
 				AIdVar |  i 
@@ -858,14 +842,8 @@ Start |  teste inteiro i z i 2 z 4 i i 1 i z
 				AVariableVarValue |  z 
 					AIdVar |  z 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :3,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :4,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :4,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
-Tempo de execução :95ms
+{i=[Tipo :inteiro ,Valor :3,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :5,Capacidade :null]}
+Tempo de execução :99ms
 
 Teste/semantico9
 
@@ -908,10 +886,6 @@ Start |  teste inteiro i z i 2 z 4 x 1 5 z z 1 x 1 2 5 z z 1
 						AValueVarValue |  1 
 							AIntegerValor |  1 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], z=[Tipo :inteiro ,Valor :4,Capacidade :null]}
 java.lang.NullPointerException
 Teste/strings
 
@@ -934,13 +908,8 @@ Start |  p1 inteiro x y 'oi' real z 9 k t caractere array 20
 			ACharTipo |  caractere 
 			AMatrixVar |  array 20 
 ----------------------------------------------------------------
-{p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'oi' ,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], k=[Tipo :real ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null], t=[Tipo :real ,Valor :null,Capacidade :null], z=[Tipo :real ,Valor :null,Capacidade :9], y=[Tipo :CONSTANT,Valor :'oi' ,Capacidade :null]}
 {x=[Tipo :inteiro ,Valor :null,Capacidade :null], k=[Tipo :real ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null], t=[Tipo :real ,Valor :null,Capacidade :null], z=[Tipo :real ,Valor :null,Capacidade :9], array=[Tipo :caractere ,Valor :null,Capacidade :20], y=[Tipo :CONSTANT,Valor :'oi' ,Capacidade :null]}
-{x=[Tipo :inteiro ,Valor :null,Capacidade :null], k=[Tipo :real ,Valor :null,Capacidade :null], p1 =[Tipo :PROGRAMA,Valor :null,Capacidade :null], t=[Tipo :real ,Valor :null,Capacidade :null], z=[Tipo :real ,Valor :null,Capacidade :9], array=[Tipo :caractere ,Valor :null,Capacidade :20], y=[Tipo :CONSTANT,Valor :'oi' ,Capacidade :null]}
-Tempo de execução :87ms
+Tempo de execução :94ms
 
 Teste/teste2
 
@@ -1002,13 +971,9 @@ Start |  teste inteiro i y 'hello world' i 2 i i 1 i 3 i 'HUE' i 3 i 3 z 2
 					AValueVarValue |  2 
 						AIntegerValor |  2 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
+Erro!! Tentou atribuir um tipo diferente a variavel : i
 {i=[Tipo :inteiro ,Valor :3,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
-{i=[Tipo :inteiro ,Valor :3,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], y=[Tipo :CONSTANT,Valor :'hello world' ,Capacidade :null]}
-Tempo de execução :100ms
+Tempo de execução :106ms
 
 Teste/teste4
 
@@ -1037,9 +1002,7 @@ Start |  teste inteiro c real a b c 2 a c b 'Vire-se'
 				AValueVarValue |  'Vire-se' 
 					AStringValor |  'Vire-se' 
 ----------------------------------------------------------------
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null]}
-{teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], c=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{b=[Tipo :real ,Valor :null,Capacidade :null], a=[Tipo :real ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], c=[Tipo :inteiro ,Valor :null,Capacidade :null]}
-{b=[Tipo :real ,Valor :null,Capacidade :null], a=[Tipo :real ,Valor :null,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], c=[Tipo :inteiro ,Valor :2,Capacidade :null]}
+Erro!! Tentou atribuir um tipo diferente a variavel : b
 {b=[Tipo :real ,Valor :null,Capacidade :null], a=[Tipo :real ,Valor :2,Capacidade :null], teste =[Tipo :PROGRAMA,Valor :null,Capacidade :null], c=[Tipo :inteiro ,Valor :2,Capacidade :null]}
-java.lang.NumberFormatException: null
+Tempo de execução :91ms
+

@@ -13,4 +13,8 @@ inicio
 		z <- z-1;
 	fim para;
 
+/*
+ Saída esperada: erro pois a variável x ainda não foi definida.
+*/
+
 fim.

@@ -1,0 +1,11 @@
+programa semantico22
+inicio
+	const y 'oi';
+	y <- 'tchau';
+
+
+/* 
+Saída esperada: Erro, tentativa de mudar uma constante.
+*/
+
+fim.

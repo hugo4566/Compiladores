@@ -8,4 +8,9 @@ inicio
 		i <- i+1;
 	fim enquanto;
 
+
+	/*
+		Saída esperada: i = 4, z = 4
+	*/
+
 fim.

@@ -24,3 +24,7 @@ fim comentario 3 */
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 fim.
+
+/*
+	Saída esperada: programa compilado e executado, nenhuma ação feita.
+*/

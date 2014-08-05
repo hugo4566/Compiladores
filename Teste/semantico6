@@ -18,4 +18,9 @@ inicio
 		fim se;
 	fim se;
 
+
+	/*
+		Saída esperada: i = 1
+	*/
+
 fim.

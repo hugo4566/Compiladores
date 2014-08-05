@@ -8,4 +8,9 @@ inicio
 		i<- i+1;
 	ate (i<z);
 
+
+	/*
+		Saída esperada: i = 3
+	*/
+
 fim.

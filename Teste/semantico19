@@ -1,7 +1,12 @@
-programa fatorial
+programa teste
 inicio
 	//caractere : var_str [6];
 	//leia(var_str);
 	inteiro : x;
 	x <- 1+ 1;
+
+
+	/*
+		Saída esperada: x = 2
+	*/
 fim.

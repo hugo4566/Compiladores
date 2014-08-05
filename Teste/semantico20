@@ -8,4 +8,12 @@ inicio
 	se (i+2 = 2) entao
 		y <- 0;
 	fim se;
+
+
+	/*
+		Saída esperada: x = 6,5
+		print1 -> 8,5
+		y = 0
+		i = 0
+	*/
 fim.

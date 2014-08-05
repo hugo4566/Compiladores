@@ -8,4 +8,9 @@ inicio
 	escreva(var_str);
 	var_str <- 'o';
 	var_str <- 'oiee';
+
+
+	/*
+		Saída esperada: Erro (linha 10), a string tem tamanho maior do que a variável pode suportar.
+	*/
 fim.

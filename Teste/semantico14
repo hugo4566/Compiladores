@@ -6,4 +6,11 @@ inicio
 	escreva(i);
 	i<- -10;
 	i<- -i;
+
+
+	/*
+		Saída esperada: print1 -> -1 (as variáveis são inicializadas com o valor zero.)
+		print2 -> -1 
+		i termina com o valor 10
+	*/
 fim.

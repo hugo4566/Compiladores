@@ -3,4 +3,10 @@ inicio
 	inteiro : a,b,c;
 	
 	leia(a,b,c,d);
+
+
+	/*
+		Saída esperada: leitura e armazenamento dos valores nas variáveis, erro caso 
+		sejam escritos valores que não sejam inteiros
+	*/
 fim.

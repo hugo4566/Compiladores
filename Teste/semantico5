@@ -10,4 +10,9 @@ inicio
 		i <- i-5;
 	fim se;
 
+
+	/*
+		Saída esperada: i = 8;
+	*/
+
 fim.

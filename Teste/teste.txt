@@ -5,3 +5,7 @@ const y 'oi';
 real : z[9],k,t;
 caractere : array[20];
 fim.
+
+/*
+	Saída esperada: declaração de todas as variáveis e constantes.
+*/

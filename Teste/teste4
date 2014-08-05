@@ -7,4 +7,8 @@ inicio
 	a <- c;
 	b <- 'Vire-se' ; // lembrar de corrigir
 
+
+	/*
+		Saída esperada: Erro, tentativa de atribuir um array de char (linha 8) a uma variável real.
+	*/
 fim.

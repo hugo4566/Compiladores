@@ -8,4 +8,9 @@ inicio
 	fim para;
 	
 	escreva('Fatorial de '+3+' = '+fat);
+
+
+	/*
+		Saída esperada: fat = 6, i = 3
+	*/
 fim.

@@ -2,4 +2,9 @@ programa p1
 inicio
 inteiro : x;
 real : x;
+
+
+	/*
+		Saída esperada: Erro, variável x já definida.
+	*/
 fim.

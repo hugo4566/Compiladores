@@ -4,3 +4,7 @@ teste
 // teste
 'a'
 'aa'
+
+/*
+	Saída esperada: erro, token programa esperado.
+*/

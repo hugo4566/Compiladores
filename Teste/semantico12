@@ -22,4 +22,9 @@ inicio
 					i<-10;
 			fim avalie;
 	fim avalie;
+
+
+	/*
+		Saída esperada: x = 1, i =2
+	*/
 fim.

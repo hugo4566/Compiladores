@@ -3,4 +3,9 @@ inicio
 inteiro : x,y;
 real : z;
 caractere : var_str [3];
+
+
+	/*
+		Saída esperada: variáveis declaradas, sem nenhum erro.
+	*/
 fim.

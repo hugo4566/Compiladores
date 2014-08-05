@@ -5,4 +5,9 @@ inicio
 	escreva(var_str);
 	var_str <- var_str+' te';
 	escreva(var_str);
+
+
+	/*
+		Saída esperada: var_str = 'oi6 te'
+	*/
 fim.

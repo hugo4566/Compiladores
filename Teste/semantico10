@@ -8,4 +8,14 @@ inicio
 	escreva(i+1);
 	escreva(i+z);
 	escreva(i);
+
+
+	/*
+		Saída esperada: 
+
+		print1 -> 3.0 -- imprimir expressões aritméticas faz com que os números sejam impressos como double
+		print2 -> 6.0
+		print3 -> 2 -- imprimir a variável diretamente imprime o valor no formato da variável
+	*/
+
 fim.

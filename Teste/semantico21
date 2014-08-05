@@ -1,8 +1,13 @@
-programa semantico_real
+programa teste
 inicio
 	inteiro : y;
 	y <- 2;
 	se ('oi' = 2) entao
 		y <- 0;
 	fim se;
+
+
+	/*
+		Saída esperada: y = 2
+	*/
 fim.

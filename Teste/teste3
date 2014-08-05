@@ -12,4 +12,9 @@ inicio
 		z <- 2;
 	fim se;
 
+	/*
+		Saída esperada: Erro1, tentativa de atribuir um array de char (linha 9) a uma variável inteira.
+		Erro2, variável z não foi declarada. 
+	*/
+
 fim.

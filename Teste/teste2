@@ -12,4 +12,8 @@ inicio
 		z <- 2;
 	fim se
 
+
+/*
+	Saída esperada: Erro na linha 11, expressão aritmética é recebida no lugar de uma expressão lógica.
+*/
 fim.

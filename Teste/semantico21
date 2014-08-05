@@ -1,0 +1,8 @@
+programa semantico_real
+inicio
+	inteiro : y;
+	y <- 2;
+	se ('oi' = 2) entao
+		y <- 0;
+	fim se;
+fim.

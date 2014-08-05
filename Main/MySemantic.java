@@ -195,31 +195,47 @@ public class MySemantic extends DepthFirstAdapter {
 	@Override
     public void outAEqualExpLogica(AEqualExpLogica node)
     {
-		String R = pilha.pop();
-        String L = pilha.pop();
-        L = verificaELimpa(L);
-        R = verificaELimpa(R);
+		try{
+			String R = pilha.pop();
+			String L = pilha.pop();
+			L = verificaELimpa(L);
+			R = verificaELimpa(R);
 
-        L = L.replaceAll(",",".");
-		R = R.replaceAll(",",".");
-        
-        boolean bool = (Double.valueOf(L).doubleValue() == Double.valueOf(R).doubleValue());
-        pilha.push(""+bool);
+			L = L.replaceAll(",",".");
+			R = R.replaceAll(",",".");
+
+			boolean bool;
+			if(L.contains("\'") && R.contains("\'"))
+				bool = L.equals(R);
+			else
+				bool = (Double.valueOf(L).doubleValue() == Double.valueOf(R).doubleValue());
+			pilha.push(""+bool);
+		}catch(NumberFormatException e){
+			pilha.push(""+false);
+		}
     }
 	
 	@Override
 	public void outANotEqualExpLogica(ANotEqualExpLogica node)
     {
-		String R = pilha.pop();
-        String L = pilha.pop();
-        L = verificaELimpa(L);
-        R = verificaELimpa(R);
+		try{
+			String R = pilha.pop();
+			String L = pilha.pop();
+			L = verificaELimpa(L);
+			R = verificaELimpa(R);
 
-        L = L.replaceAll(",",".");
-		R = R.replaceAll(",",".");
-       
-        boolean bool = (Double.valueOf(L).doubleValue() != Double.valueOf(R).doubleValue());
-        pilha.push(""+bool);
+			L = L.replaceAll(",",".");
+			R = R.replaceAll(",",".");
+
+			boolean bool;
+			if(L.contains("\'") && R.contains("\'"))
+				bool = L.equals(R);
+			else
+				bool = (Double.valueOf(L).doubleValue() != Double.valueOf(R).doubleValue());
+			pilha.push(""+bool);
+		}catch(NumberFormatException e){
+			pilha.push(""+false);
+		}
     }
 	
 	@Override
@@ -552,12 +568,14 @@ public class MySemantic extends DepthFirstAdapter {
         			symbol_table.get(node.getVar().toString().replaceAll("\\s+", "")).valor = ""+valorInicio;
         		}
         	}
-        	symbol_table.get(node.getVar().toString().replaceAll("\\s+", "")).valor = ""+valorFim;
-            List<PComando> copy = new ArrayList<PComando>(node.getComando());
-            for(PComando e : copy)
-            {
-                e.apply(this);
-            }
+        	if(valorInicio == valorFim){
+	        	symbol_table.get(node.getVar().toString().replaceAll("\\s+", "")).valor = ""+valorFim;
+	            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+	            for(PComando e : copy)
+	            {
+	                e.apply(this);
+	            }
+        	}
         }
         outAForOneComando(node);
     }

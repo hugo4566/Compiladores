@@ -4,10 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PushbackReader;
-import java.util.Scanner;
 
-import parser.Parser;
 import node.Start;
+import parser.Parser;
 
 
 public class Main {

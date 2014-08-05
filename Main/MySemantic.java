@@ -29,7 +29,7 @@ public class MySemantic extends DepthFirstAdapter {
 				System.exit(0);
 			} else {
 				MySimbolo simbolo;
-				simbolo = new MySimbolo(tipo, null,tamanho);
+				simbolo = new MySimbolo(tipo, null,tamanho,false);
 				symbol_table.put(key, simbolo);
 			}
 		}
@@ -43,7 +43,7 @@ public class MySemantic extends DepthFirstAdapter {
 			System.err.println("Variavel " + key+ "ja definida.");
 			System.exit(0);
 		} else {
-			MySimbolo simbolo = new MySimbolo("CONSTANT", node.getValor().toString(),null);
+			MySimbolo simbolo = new MySimbolo("CONSTANT", node.getValor().toString(),null,true);
 			symbol_table.put(key, simbolo);
 		}
 		System.out.println(symbol_table.toString());
@@ -52,7 +52,7 @@ public class MySemantic extends DepthFirstAdapter {
 	
 	@Override
 	public void inAPrograma(APrograma node) {
-		MySimbolo simbolo = new MySimbolo("PROGRAMA", null,null);
+		MySimbolo simbolo = new MySimbolo("PROGRAMA", null,null,true);
 		symbol_table.put(node.getId().toString(), simbolo);
 		System.out.println(symbol_table.toString());
 	}

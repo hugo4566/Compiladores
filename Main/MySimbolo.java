@@ -5,13 +5,15 @@ public class MySimbolo {
 	String tipo;
 	String valor;
 	String capacidade;
+	Boolean constante;
 	
 	public MySimbolo(){}
 	
-	public MySimbolo(String tipo,String valor,String capacidade){
+	public MySimbolo(String tipo,String valor,String capacidade,Boolean constante){
 		this.tipo = tipo;
 		this.valor = valor;
 		this.capacidade = capacidade;
+		this.constante = constante;
 	}
 	
 	public String getType(String value){

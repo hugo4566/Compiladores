@@ -1,0 +1,13 @@
+programa teste
+inicio
+	inteiro : i;
+	const y 'hello world';
+
+	i <- 2;
+	i <- i+1;
+	se (i <= 4) entao
+		i <- i+10;
+		i <- i-5;
+	fim se;
+
+fim.

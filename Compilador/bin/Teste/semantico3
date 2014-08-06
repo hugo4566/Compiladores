@@ -1,0 +1,6 @@
+programa p1
+inicio
+inteiro : x,y;
+real : z;
+caractere : var_str [3];
+fim.

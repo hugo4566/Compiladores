@@ -1,0 +1,11 @@
+programa teste
+inicio
+	caractere : var_str [3];
+	var_str <- 'oi';
+	var_str <- 'oie';
+	escreva(var_str);
+	var_str <- '';
+	escreva(var_str);
+	var_str <- 'o';
+	var_str <- 'oiee';
+fim.

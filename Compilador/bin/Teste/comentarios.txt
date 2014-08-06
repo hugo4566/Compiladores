@@ -1,0 +1,26 @@
+
+programa comentario
+inicio
+/* comentario 1 */
+
+/*
+ comentario 2 
+	blah
+*/
+
+/* comentario 3
+
+/* comentario aninhado
+	blahblah	
+	fim comentario aninhado */
+
+fim comentario 3 */
+
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+fim.

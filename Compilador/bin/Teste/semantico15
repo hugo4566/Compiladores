@@ -1,0 +1,10 @@
+programa teste
+inicio
+	inteiro : i;
+
+	i <- 2;
+	se (nao i=3) entao
+		i <- i+10;
+	fim se;
+
+fim.

@@ -1,0 +1,21 @@
+programa teste
+inicio
+	inteiro : i;
+
+	i <- 2;
+	i <- i+1;
+	se (i <> 3) entao
+		i <- i+10;
+	senao 
+		se (i < 3) entao
+			i <- i-1;
+		senao
+			se (i = 3) entao
+				i <- i-2;
+			senao
+				i <- 10;
+			fim se;
+		fim se;
+	fim se;
+
+fim.

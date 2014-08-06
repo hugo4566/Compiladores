@@ -1,0 +1,11 @@
+programa teste
+inicio
+	inteiro : i,z;
+
+	i <- 2;
+	z <- 4;
+	
+	escreva(i+1);
+	escreva(i+z);
+	escreva(i);
+fim.

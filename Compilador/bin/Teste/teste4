@@ -1,0 +1,10 @@
+programa teste
+inicio
+	inteiro: c;
+	real : a , b;
+
+	c <- 2 ;
+	a <- c;
+	b <- 'Vire-se' ; // lembrar de corrigir
+
+fim.

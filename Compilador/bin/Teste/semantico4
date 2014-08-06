@@ -1,0 +1,9 @@
+programa teste
+inicio
+	inteiro : i;
+	caractere : var_str [3];
+	i <- 2;
+	i <- 10/2+i+1+2*2;
+	i <- i;
+	i <- ((12+2)/2+1);
+fim.

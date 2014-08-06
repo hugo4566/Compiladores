@@ -1,0 +1,11 @@
+programa semantico_real
+inicio
+	real : x;
+	inteiro : y,i;
+	x <- - 5,0;
+	x <- 4,5 + 4 - 2;
+	escreva(i+2);
+	se (i+2 = 2) entao
+		y <- 0;
+	fim se;
+fim.

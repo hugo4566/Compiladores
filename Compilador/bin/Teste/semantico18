@@ -1,0 +1,11 @@
+programa fatorial
+inicio
+	inteiro : fat,i;
+	fat<-1;
+	
+	para i de 1 ate 3 faca
+		fat <- fat*i;
+	fim para;
+	
+	escreva('Fatorial de '+3+' = '+fat);
+fim.

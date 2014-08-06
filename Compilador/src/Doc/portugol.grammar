@@ -1,0 +1,282 @@
+Helpers
+	all			 = [0 .. 0xffff];
+	letter		 = [['a'..'z']+['A'..'Z']];
+	digit 		 = ['0'..'9'];
+
+States
+	normal, comment;
+
+Tokens
+
+	// Símbolos
+
+	{normal}	l_par        = '(';
+	{normal}	r_par        = ')';
+	{normal}	l_bra		 = '[';
+	{normal}	r_bra		 = ']';
+	{normal}	colon		 = ':';
+	{normal}	semi_c		 = ';';
+	{normal}	comma		 = ',';
+	{normal}	dot			 = '.';
+	{normal}	blank        = (' '| 9 | 10 | 13)+;
+	{normal}	is	  		 = '<-';
+
+	// Operadores
+	{normal}	not	  		 = 'nao';
+	{normal}	and	  		 = 'e';
+	{normal}	or	  		 = 'ou';
+	{normal}	xor  		 = 'xor';
+	{normal}	equal 		 = '=';
+	{normal}	not_equal 	 = '<>';
+	{normal}	less_eq 	 = '<=';
+	{normal}	greater_eq   = '>=';
+	{normal}	less 		 = '<';
+	{normal}	greater 	 = '>';
+	{normal}	plus 		 = '+';
+	{normal}	minus 		 = '-';
+	{normal}	mult         = '*';
+	{normal}	div          = '/';
+	{normal}	mod          = '%';
+
+	// Palavras reservadas
+	{normal}	program 	= 'programa';
+	{normal}	begin 		= 'inicio';
+	{normal}	end 		= 'fim.';
+	{normal}	while		= 'enquanto';
+	{normal}	end_w		= 'fim enquanto';
+	{normal}	for			= 'para';
+	{normal}	until		= 'ate';
+	{normal}	from		= 'de';
+	{normal}	end_f 		= 'fim para';
+	{normal}	if			= 'se';
+	{normal}	else		= 'senao';
+	{normal}	end_if		= 'fim se';
+	{normal}	do			= 'faca';
+	{normal}	real 		= 'real';
+	{normal}	integer 	= 'inteiro';
+	{normal}	character	= 'caractere';
+	{normal}	constant	= 'const';
+	{normal}	read 		= 'leia';
+	{normal}	write 		= 'escreva';
+	{normal}	then 		= 'entao';
+	{normal}	case 		= 'caso';
+	{normal}	repeat		= 'repita';
+	{normal}	pass		= 'passo';
+	{normal}	evaluate 	= 'avalie';
+	{normal}	end_e		= 'fim avalie';
+
+	// Identificador
+	{normal}	id 			 = ('_' | letter)('_'| letter | digit )*;
+
+	// Tipos de dados
+	{normal}	string 		 = '''[all - ''']*''';
+	{normal}	n_real		 = digit+ ',' digit+;
+	{normal}	n_int		 = digit+;
+
+	// Comentários
+	{normal->comment, comment}	comment 			= '/*';
+	{comment}					comment_end 		= '*/';
+	{comment} 					comment_body 		= [all - ['*' + '/']]*;
+	{comment}					star 				= '*';
+	{comment}					slash				= '/';
+	{normal}					line_comment		= '//'[all-10]*10;
+
+Ignored Tokens
+	blank ,
+	comment ,
+	comment_end ,
+	comment_body ,
+	line_comment;
+
+Productions
+
+	programa {-> programa} = program id begin [decl]:declaracao* [cmd]:comando* end  {-> New programa (id,[decl.declaracao],[cmd.comando])}
+	;
+
+
+	valor {-> valor} =
+		{string} 		string 	{-> New valor.string(string)}
+	|	{integer} 		n_int 	{-> New valor.integer(n_int)}
+	|	{real} 			n_real	{-> New valor.real(n_real)}	
+	;
+
+	tipo {-> tipo} =
+		{real} 			real 		{-> New tipo.real(real)}
+	|	{integer} 		integer		{-> New tipo.integer(integer)}
+	|	{char} 			character	{-> New tipo.char(character)}
+	;
+
+	var {-> var} =
+		{id} 			id 						{-> New var.id(id)}
+	| 	{matrix} 		id l_bra n_int r_bra	{-> New var.matrix(id,n_int)}
+	;
+
+	var_list {-> var*} = {single}	[variable]:var 					{-> [variable.var]}
+						|{multiple} [arg]:var comma [rest]:var_list	{-> [arg.var,rest.var]}
+	;
+
+	declaracao {-> declaracao}  =
+		{variable} 		tipo colon [args]:var_list+ semi_c {-> New declaracao.variable(tipo,[args.var])}
+	| 	{constant} 		constant id valor semi_c {-> New declaracao.constant(id,valor)}
+	;
+
+	var_value {-> var_value} =
+		{value}		 	valor	{-> New var_value.value (valor)}
+	| 	{variable} 		var  {-> New var_value.variable (var)}
+	;
+
+	exp {-> exp} =
+	  {plus}  exp plus termo 	{-> New exp.plus(exp, termo.exp)  }
+	| {minus}  exp minus termo	{-> New exp.minus(exp, termo.exp)  }
+	| {termo} termo 	{-> termo.exp }
+	;
+
+	termo {-> exp} =
+	  {mult} termo mult fator {-> New exp.mult(termo.exp, fator.exp ) }
+	| {mult_minus} termo mult minus fator {-> New exp.mult_n(termo.exp, fator.exp ) }
+	| {div} termo div fator	{-> New exp.div(termo.exp, fator.exp ) }
+	| {div_minus} termo div minus fator	{-> New exp.div_n(termo.exp, fator.exp ) }	
+	| {fator} fator  {-> fator.exp}
+	| {fator_minus} minus fator  {-> New exp.minus_exp(fator.exp)}
+	;
+
+	fator {-> exp} =
+	  {l_exp_r} l_par exp r_par {-> exp}
+	//|  {minus_exp} minus l_par exp r_par {-> New exp.minus_exp(exp)}
+	| {var_value} var_value	{-> New exp.var_value(var_value)}
+	;
+
+
+	exp_logica {-> exp_logica} =
+	  {or} exp_logica or exp_logica2 {-> New exp_logica.or(exp_logica,exp_logica2.exp_logica)}
+	| {exp_logica2} exp_logica2	{-> exp_logica2.exp_logica}
+	;
+
+	exp_logica2 {-> exp_logica} =
+	  {xor} exp_logica2 xor exp_logica3 {-> New exp_logica.xor(exp_logica2.exp_logica, exp_logica3.exp_logica)}
+	| {exp_logica3} exp_logica3  {-> exp_logica3.exp_logica}
+	;
+
+	exp_logica3 {-> exp_logica} =
+	  {and} exp_logica3 and exp_logica4 {-> New exp_logica.and(exp_logica3.exp_logica,exp_logica4.exp_logica)}
+	| {and_n} exp_logica3 and not exp_logica4 {-> New exp_logica.and_n(exp_logica3.exp_logica,exp_logica4.exp_logica)}
+	| {exp_logica4} exp_logica4 { -> exp_logica4.exp_logica}
+	| {exp_logica4_n} not exp_logica4 { -> New exp_logica.negation(exp_logica4.exp_logica)}
+	;
+	exp_logica4 {-> exp_logica} =
+	  {equal} exp equal var_value {-> New exp_logica.equal(exp,var_value)}
+	| {not_equal} 		exp not_equal	var_value {-> New exp_logica.not_equal(exp,var_value)}
+	| {less_eq} 		exp less_eq		var_value {-> New exp_logica.less_eq(exp,var_value)}
+	| {less} 			exp less 		var_value {-> New exp_logica.less(exp,var_value)}
+	| {greater_eq} 		exp greater_eq  var_value {-> New exp_logica.greater_eq(exp,var_value)}
+	| {greater} 		exp greater     var_value {-> New exp_logica.greater(exp,var_value)}
+	|{par_exp} l_par exp_logica r_par {-> exp_logica}
+	;
+
+	case_estrela {-> case_estrela}  = case valor colon comando+ {-> New case_estrela(valor,[comando])} ;
+
+	opcional_else {-> op_else} = else [cmd]:comando+ {-> New op_else([cmd.comando])} ;
+
+	op_else_co {-> op_else} = else colon comando+ {-> New op_else([comando])} ;
+
+	expr_comma {-> expr_comma} = 
+	{exp_com} exp comma {-> New expr_comma.exp_com(exp)}
+	| {explog_com} exp_logica comma {-> New expr_comma.explog_com(exp_logica)}
+	;
+
+	comando {-> comando} =
+	  	{atrib} 		var is exp semi_c {-> New comando.atrib(var,exp)}
+	|	{atrib_log}		var is exp_logica semi_c {-> New comando.atrib_log(var,exp_logica)}	
+	| 	{read}			read l_par [arg]:var_list+ r_par semi_c {-> New comando.read([arg.var])}
+	| 	{write}			write l_par [arg]:expr_comma* exp r_par semi_c {-> New comando.write([arg.expr_comma],exp)}
+	| 	{write_log}		write l_par [arg]:expr_comma* exp_logica r_par semi_c {-> New comando.write_log([arg.expr_comma],exp_logica)}
+	| 	{if}			if l_par exp_logica r_par then comando+ end_if semi_c {-> New comando.if(exp_logica,[comando], Null)}
+	|	{if_else}		if l_par exp_logica r_par then comando+ opcional_else end_if semi_c {-> New comando.if(exp_logica,[comando],opcional_else.op_else)}
+	| 	{evaluate}		evaluate l_par exp r_par case_estrela* end_e semi_c {-> New comando.evaluate(exp,[case_estrela],Null)}
+	| 	{evaluate_else}	evaluate l_par exp r_par case_estrela* [arg]:op_else_co end_e semi_c {-> New comando.evaluate(exp,[case_estrela],arg.op_else)}
+	|	{evaluate_log} 	evaluate l_par exp_logica r_par case_estrela* end_e semi_c {-> New comando.evaluate_log(exp_logica,[case_estrela],Null)}
+	|	{evaluate_log_else} 	evaluate l_par exp_logica r_par case_estrela* [arg]:op_else_co end_e semi_c {-> New comando.evaluate_log(exp_logica,[case_estrela],arg.op_else)}
+	| 	{while}			while l_par [expl]:exp_logica r_par do [cmd]:comando+ end_w semi_c {-> New comando.while(expl.exp_logica,[cmd.comando])}
+	| 	{repeat}		repeat [cmd]:comando+ until l_par [expl]:exp_logica r_par semi_c {-> New comando.repeat([cmd.comando],expl.exp_logica)}
+	| 	{for_one}		for var from [start]:n_int until [stop]:n_int do [cmd]:comando+ end_f semi_c {-> New comando.for_one(var,start,Null,stop,[cmd.comando])}
+	| 	{for_step}		for var from [start]:n_int pass [step]:n_int until [stop]:n_int do [cmd]:comando+ end_f semi_c {-> New comando.for_one(var,start,step,stop,[cmd.comando])}
+	;
+
+
+Abstract Syntax Tree
+
+	programa = id declaracao* comando*
+	;
+
+	declaracao =
+		{variable} 		tipo var+
+	| 	{constant} 		id valor
+	;
+
+	tipo =
+		{real} 			real
+	|	{integer} 		integer
+	|	{char} 			character;
+
+	valor =
+		{string} 		string
+	|	{integer} 		n_int
+	|	{real} 			n_real;
+
+	var =
+		{id} 			id
+	| 	{matrix} 		id n_int;
+
+	var_value =
+		{value}		 	valor
+	| 	{variable} 		var;
+
+	comando =
+		{atrib} 		var exp 
+	|	{atrib_log}		var exp_logica 
+	| 	{read}			var+ 
+	| 	{write}			expr_comma* exp
+	|   {write_log}		expr_comma* exp_logica 
+	| 	{if}			exp_logica comando+ op_else? 
+	| 	{evaluate}		exp case_estrela* op_else? 
+	|	{evaluate_log} 	exp_logica case_estrela* op_else?
+	| 	{while}			exp_logica comando+
+	| 	{repeat}		comando+ exp_logica
+	| 	{for_one}		var [start]:n_int [step]:n_int? [stop]:n_int comando+
+	;
+
+
+	exp =
+      {plus}   [l]:exp [r]:exp
+    | {minus}  [l]:exp [r]:exp
+    | {div}    [l]:exp [r]:exp
+    | {div_n}  [l]:exp [r]:exp
+    | {mult_n} [l]:exp [r]:exp
+    | {mult}   [l]:exp [r]:exp
+	| {var_value} var_value
+	| {minus_exp}  exp
+    ;
+
+    expr_comma = {exp_com} exp
+	| {explog_com} exp_logica
+	;
+
+	case_estrela   	= valor  comando+;
+	op_else  		= comando+;
+
+    exp_logica=
+      {or}			[l]:exp_logica [r]:exp_logica
+    | {xor}			[l]:exp_logica [r]:exp_logica
+    | {and}			[l]:exp_logica [r]:exp_logica
+    | {and_n}		[l]:exp_logica [r]:exp_logica
+    | {equal}		exp var_value
+	| {not_equal}	exp var_value
+	| {less_eq}		exp var_value
+	| {less}		exp var_value
+	| {greater_eq}	exp var_value
+	| {greater}		exp var_value
+	| {exp}			exp
+	| {negation}   	exp_logica
+	;
+
+
